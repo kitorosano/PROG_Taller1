@@ -2,6 +2,8 @@ package main.java.taller1.Presentacion;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -10,5 +12,7 @@ public class Main {
                 .systemProperties()
                 .load();
 
+        JFrame frame = new Dashboard("Corona Tickets UY");
+        frame.setVisible(true);
     }
 }

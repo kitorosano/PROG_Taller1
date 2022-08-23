@@ -1,2 +1,5 @@
 #Archivo de configuracion
 .env
+
+#compilado
+out/

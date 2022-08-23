@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class ConexionDB {
     public static Connection getConnection() {
         Connection connection = null;
-        String url = System.getProperty("GESTOREMPLEADOS_DB_URL");
-        String user = System.getProperty("GESTOREMPLEADOS_DB_USER");
-        String password = System.getProperty("GESTOREMPLEADOS_DB_PASS");
+        String url = System.getProperty("GDB_URL");
+        String user = System.getProperty("DB_USER");
+        String password = System.getProperty("DB_PASS");
         try {
             connection = DriverManager.getConnection(url, user, password);
             if (connection != null)

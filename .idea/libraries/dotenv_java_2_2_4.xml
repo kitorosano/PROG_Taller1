@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="dotenv-java-2.2.4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/dotenv-java-2.2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jgoodies-common-1.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/jgoodies-forms-1.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/mysql-connector-java-8.0.30.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

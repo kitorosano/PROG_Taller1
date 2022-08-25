@@ -36,9 +36,13 @@ public class FormularioPlataforma extends JFrame{
                         JOptionPane.showMessageDialog(null,"El nombre ingresado ya existe");
                     }else{
                         String nombre=tfNombre.getText(),descripcion=tfDescripcion.getText(),url=tfURL.getText();
-                        Fabrica.getInstance().getIEspectaculo().altaPlataforma(new Plataforma(nombre,descripcion,url));
-                        JOptionPane.showMessageDialog(null,"Plataforma agregada con exito");
-                        cerrarFormulario(e);
+                        try{
+                            Fabrica.getInstance().getIEspectaculo().altaPlataforma(new Plataforma(nombre,descripcion,url));
+                            JOptionPane.showMessageDialog(null,"Plataforma agregada con exito");
+                            cerrarFormulario(e);
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null,ex);
+                        }
                     }
                 }
             }

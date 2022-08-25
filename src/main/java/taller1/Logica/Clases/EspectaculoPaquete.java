@@ -1,13 +1,13 @@
 package main.java.taller1.Logica.Clases;
 
-public class EspectaculoPaquetes {
+public class EspectaculoPaquete {
     private String nombrePaquete;
     private String nombreEspectaculo;
 
-    public EspectaculoPaquetes() {
+    public EspectaculoPaquete() {
     }
 
-    public EspectaculoPaquetes(String nombrePaquete, String nombreEspectaculo) {
+    public EspectaculoPaquete(String nombrePaquete, String nombreEspectaculo) {
         this.nombrePaquete = nombrePaquete;
         this.nombreEspectaculo = nombreEspectaculo;
     }

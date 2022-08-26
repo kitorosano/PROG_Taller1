@@ -5,6 +5,8 @@ import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -73,6 +75,15 @@ public class DetalleUsuario{
 
         }
 
+        table1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if(e.getClickCount()==2){
+                    JOptionPane.showMessageDialog(panel1,"contenido seleccionado: "+table1.getValueAt(table1.getSelectedRow(),0));
+                }
+            }
+        });
     }
 
 

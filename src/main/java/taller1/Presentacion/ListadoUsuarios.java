@@ -12,7 +12,6 @@ import java.util.Map;
 public class ListadoUsuarios {
     private DefaultListModel<String> model = new DefaultListModel<String>();
 
-    String datos[] = {"prueba1", "prueba2", "prueba3", "prueba4", "prueba5", "prueba6"};
     private JList listaUsuarios;
     private JPanel Panel;
 
@@ -23,9 +22,9 @@ public class ListadoUsuarios {
     public ListadoUsuarios(){
         listaUsuarios.setModel(model);
         //cargarLista();                    Hay que descomentar esto una vez esté finalizado el obtenerUsuario()
-        model.addElement("prueba1");
-        model.addElement("prueba2");
-        model.addElement("prueba3");
+        model.addElement("prueba1");        //borrar esto (es para probar)
+        model.addElement("prueba2");        //borrar esto (es para probar)
+        model.addElement("prueba3");        //borrar esto (es para probar)
         listaUsuarios.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {

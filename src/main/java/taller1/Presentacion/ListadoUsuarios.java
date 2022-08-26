@@ -6,6 +6,8 @@ import main.java.taller1.Logica.Fabrica;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,10 +27,15 @@ public class ListadoUsuarios {
         model.addElement("prueba1");        //borrar esto (es para probar)
         model.addElement("prueba2");        //borrar esto (es para probar)
         model.addElement("prueba3");        //borrar esto (es para probar)
-        listaUsuarios.addListSelectionListener(new ListSelectionListener() {
+
+        listaUsuarios.addMouseListener(new MouseAdapter() {
             @Override
-            public void valueChanged(ListSelectionEvent e) {
-                //DetalleUsuario();             Hay que descomentar esto una vez esté finalizado el DetalleUsuario()
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (e.getClickCount()==2){
+                    System.out.println("hola");
+                    //DetalleUsuario()          Hay que descomentar esto una vez esté finalizado el DetalleUsuario()
+                }
             }
         });
     }

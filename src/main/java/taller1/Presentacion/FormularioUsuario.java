@@ -122,7 +122,7 @@ public class FormularioUsuario extends JFrame {
         return false;
     }
     public boolean comprobarDatosUnicos(String nickname, String correo){            //Devuelve true si los datos ya existen
-        Map<String,Usuario> usuarios=new HashMap<String,Usuario>();
+        /*Map<String,Usuario> usuarios=new HashMap<String,Usuario>();
         Usuario usuario1=new Usuario("paulo","hola","paulocorreo",LocalDate.now());
         Usuario usuario2=new Usuario("paulo1","hola","paulocorreo2",LocalDate.now());
         Usuario usuario3=new Usuario("paulo2","hola","paulocorreo3",LocalDate.now());
@@ -130,8 +130,8 @@ public class FormularioUsuario extends JFrame {
         usuarios.put("paulo",usuario1);
         usuarios.put("paulo1",usuario2);
         usuarios.put("paulo2",usuario3);
-        usuarios.put("paulo3",usuario4);
-        //Map<String, Usuario> usuarios=Fabrica.getInstance().getIUsuario().obtenerUsuarios();
+        usuarios.put("paulo3",usuario4);*/
+        Map<String, Usuario> usuarios=Fabrica.getInstance().getIUsuario().obtenerUsuarios();
         for (Usuario usu : usuarios.values()) {
             if(usu.getNickname().equals(nickname)){
                 JOptionPane.showMessageDialog(null, "El nickname ingresado ya existe");

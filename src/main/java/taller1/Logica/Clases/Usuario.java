@@ -5,14 +5,17 @@ import java.time.LocalDate;
 public class Usuario {
     private String nickname;
     private String nombre;
+
+    private String apellido;
     private String correo;
     private LocalDate fechaNacimiento;
 
     public Usuario(){}
 
-    public Usuario(String nickname, String nombre, String correo, LocalDate fechaNacimiento) {
+    public Usuario(String nickname, String nombre,String apellido, String correo, LocalDate fechaNacimiento) {
         this.nickname = nickname;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
     }
@@ -31,6 +34,14 @@ public class Usuario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getCorreo() {

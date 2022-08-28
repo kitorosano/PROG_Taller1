@@ -2,9 +2,10 @@ package main.java.taller1.Logica.Clases;
 
 import java.time.LocalDateTime;
 
+
 public class EspectadorRegistradoAFuncion {
-    private String nickname;
-    private String nombreFuncion;
+    private Espectador espectador;
+    private Funcion funcion;
     private boolean canjeado;
     private double costo;
     private LocalDateTime fechaRegistro;
@@ -12,28 +13,28 @@ public class EspectadorRegistradoAFuncion {
     public EspectadorRegistradoAFuncion() {
     }
 
-    public EspectadorRegistradoAFuncion(String nickname, String nombreFuncion, boolean canjeado, double costo, LocalDateTime fechaRegistro) {
-        this.nickname = nickname;
-        this.nombreFuncion = nombreFuncion;
+    public EspectadorRegistradoAFuncion(Espectador espectador, Funcion funcion, boolean canjeado, double costo, LocalDateTime fechaRegistro) {
+        this.espectador = espectador;
+        this.funcion = funcion;
         this.canjeado = canjeado;
         this.costo = costo;
         this.fechaRegistro = fechaRegistro;
     }
 
-    public String getEspectador() {
-        return nickname;
+    public Espectador getEspectador() {
+        return espectador;
     }
 
-    public void setEspectador(String nickname) {
-        this.nickname = nickname;
+    public void setEspectador(Espectador espectador) {
+        this.espectador = espectador;
     }
 
-    public String getFuncion() {
-        return nombreFuncion;
+    public Funcion getFuncion() {
+        return funcion;
     }
 
-    public void setFuncion(String nombreFuncion) {
-        this.nombreFuncion = nombreFuncion;
+    public void setFuncion(Funcion funcion) {
+        this.funcion = funcion;
     }
 
     public boolean isCanjeado() {
@@ -63,8 +64,8 @@ public class EspectadorRegistradoAFuncion {
     @Override
     public String toString() {
         return "EspectadorRegistradoAFuncion{" +
-                "nickname=" + nickname +
-                ", nombreFuncion=" + nombreFuncion +
+                "espectador=" + espectador +
+                ", funcion=" + funcion +
                 ", canjeado=" + canjeado +
                 ", costo=" + costo +
                 ", fechaRegistro=" + fechaRegistro +

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DetalleUsuario{
+public class DetalleUsuario extends JFrame {
 
     private JPanel mainPanel;
     private JTextArea nicknameTextArea;
@@ -33,20 +33,19 @@ public class DetalleUsuario{
     private JTextArea sitioWebTextArea;
     private JTextArea sitioWebContenido;
 
-     Usuario usuario;
+    Usuario usuario;
 
-    Map<String,EspectadorRegistradoAFuncion>funcionesRegistradasDelEspectador;
+    Map<String, EspectadorRegistradoAFuncion> funcionesRegistradasDelEspectador;
 
-    Map<String,Espectaculo>espectaculosArtista;
-
-
-    public  JPanel getMainPanel(){return mainPanel;}
-    public DetalleUsuario(Usuario usuario){
-
-       this.usuario=usuario;
+    Map<String, Espectaculo> espectaculosArtista;
 
 
-
+    public DetalleUsuario(String title, Usuario usuario) {
+        super(title);
+        setContentPane(mainPanel);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        pack();
+        this.usuario = usuario;
 
         nicknameContenido.setText(usuario.getNickname());
         nombreContenido.setText(usuario.getNombre());
@@ -54,15 +53,14 @@ public class DetalleUsuario{
         correoContenido.setText(usuario.getCorreo());
         fechaNContenido.setText(usuario.getFechaNacimiento().toString());
 
-        if (this.usuario instanceof Artista){
+        if (this.usuario instanceof Artista) {
             createUIComponents(1);
             cargarTablaArtista();
             descripcionContenido.setText(((Artista) usuario).getDescripcion());
             biografiaContenido.setText(((Artista) usuario).getBiografia());
             sitioWebContenido.setText(((Artista) usuario).getSitioWeb());
 
-        }
-        else{
+        } else {
             createUIComponents(2);
             cargarTablaEspectador();
             descripcionTextArea.setEnabled(false);
@@ -88,16 +86,15 @@ public class DetalleUsuario{
                 super.mouseClicked(e);
                 String valor;
 
-                if(e.getClickCount()==2){
+                if (e.getClickCount() == 2) {
 
-                    valor=table1.getValueAt(table1.getSelectedRow(),0).toString();
+                    valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
                     System.out.println(valor);
-                    if(usuario instanceof Artista){
+                    if (usuario instanceof Artista) {
 
-                        DetalleEspectaculo.crearDetalleEspectaculo(espectaculosArtista.get(table1.getValueAt(table1.getSelectedRow(),0).toString()));
-                    }
-                    else{
-                        DetalleFuncion.crearDetalleFuncion(funcionesRegistradasDelEspectador.get(table1.getValueAt(table1.getSelectedRow(),1).toString()).getFuncion());
+                        DetalleEspectaculo.crearDetalleEspectaculo(espectaculosArtista.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()));
+                    } else {
+                        DetalleFuncion.crearDetalleFuncion(funcionesRegistradasDelEspectador.get(table1.getValueAt(table1.getSelectedRow(), 1).toString()).getFuncion());
                     }
 
 
@@ -109,70 +106,49 @@ public class DetalleUsuario{
 
     private void createUIComponents(int tipo) { //tipo 1:Artista , tipo 2:espectador
         // TODO: place custom component creation code here
-            String[]espectaculo={"Nombre Espectaculo","Costo"};
-            String[]funcion={"Nickname Espectador","Nombre Funcion"};
-            String[]titulos={};
-            if(tipo==1)
-                titulos=espectaculo;
-            else
-                titulos=funcion;
-            table1.setModel(new DefaultTableModel(null, titulos){
-                                @Override
-                                public boolean isCellEditable(int row, int column) {
-                                    return false;
-                                }
+        String[] espectaculo = {"Nombre Espectaculo", "Costo"};
+        String[] funcion = {"Nickname Espectador", "Nombre Funcion"};
+        String[] titulos = {};
+        if (tipo == 1)
+            titulos = espectaculo;
+        else
+            titulos = funcion;
+        table1.setModel(new DefaultTableModel(null, titulos) {
+                            @Override
+                            public boolean isCellEditable(int row, int column) {
+                                return false;
                             }
-            );
-            table1.getTableHeader().setReorderingAllowed(false);
-            table1.getTableHeader().setResizingAllowed(false);
+                        }
+        );
+        table1.getTableHeader().setReorderingAllowed(false);
+        table1.getTableHeader().setResizingAllowed(false);
 
     }
-    private void cargarTablaEspectador(){
+
+    private void cargarTablaEspectador() {
 
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
-            this.funcionesRegistradasDelEspectador=Fabrica.getInstance().getIUsuario().obtenerFuncionesRegistradasDelEspectador(this.usuario.getNickname());
-            LocalDateTime ldt = LocalDateTime.now();
-            Funcion funcion1=new Funcion("Show_circo","circo",ldt,ldt);
-            Espectador espectador = ((Espectador) this.usuario);
-            EspectadorRegistradoAFuncion erf= new EspectadorRegistradoAFuncion( espectador, funcion1, true,2500,ldt);
-
-            funcionesRegistradasDelEspectador.put(funcion1.getNombre(),erf);
-            for (Map.Entry<String,EspectadorRegistradoAFuncion> entry :this.funcionesRegistradasDelEspectador.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getEspectador().getNickname(),entry.getValue().getFuncion().getNombre()});
+            this.funcionesRegistradasDelEspectador = Fabrica.getInstance().getIUsuario().obtenerFuncionesRegistradasDelEspectador(this.usuario.getNickname());
+            for (Map.Entry<String, EspectadorRegistradoAFuncion> entry : this.funcionesRegistradasDelEspectador.entrySet()) {
+                model.addRow(new Object[]{entry.getValue().getEspectador().getNickname(), entry.getValue().getFuncion().getNombre()});
             }
-        }
-        catch(Exception exc){
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());
         }
     }
-    private void cargarTablaArtista(){
+
+    private void cargarTablaArtista() {
 
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
-            this.espectaculosArtista=Fabrica.getInstance().getIUsuario().obtenerEspectaculosArtista(this.usuario.getNickname());
-            LocalDateTime ldt = LocalDateTime.now();
-            Espectaculo circo= new Espectaculo("circo","muy buen espectaculo",2,4,10,"http//..",2500,ldt,"Plataforma","Duki");
-            espectaculosArtista.put(circo.getNombre(),circo);
-
+            this.espectaculosArtista = Fabrica.getInstance().getIUsuario().obtenerEspectaculosArtista(this.usuario.getNickname());
             for (Map.Entry<String, Espectaculo> entry : espectaculosArtista.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getCosto()});
             }
-        }
-        catch(Exception exc){
+        } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());
         }
     }
-    public static void crearDetalleUsuario(Usuario usuario){
 
-
-        DetalleUsuario detalleUsuario = new DetalleUsuario(usuario);
-        JPanel rootPanel= detalleUsuario.getMainPanel();
-        JFrame frame = new JFrame("Detalle Usuario");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setContentPane(rootPanel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
 }

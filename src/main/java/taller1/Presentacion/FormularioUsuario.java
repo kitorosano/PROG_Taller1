@@ -55,9 +55,11 @@ public class FormularioUsuario extends JFrame {
                         }else{
                             LocalDate fechanac = LocalDate.parse(tfFechaNac.getText());
                             if (seleccionado.equals("Artista")) {
-                                String descripcion = tfDescripcion.getText(), biografia = tfBiografia.getText(), url = tfURL.getText();
+                                String descripcion = tfDescripcion.getText(),
+                                        biografia = tfBiografia.getText(),
+                                        url = tfURL.getText();
                                 try {
-                                    Fabrica.getInstance().getIUsuario().altaUsuario(new Artista(nickname, nombre, correo, fechanac, descripcion, biografia, url));
+                                    Fabrica.getInstance().getIUsuario().altaUsuario(new Artista(nickname, nombre, apellido, correo, fechanac, descripcion, biografia, url));
                                     JOptionPane.showMessageDialog(null,"Artista creado con exito");
                                     dispose();
                                 } catch (Exception ex) {
@@ -65,7 +67,7 @@ public class FormularioUsuario extends JFrame {
                                 }
                             } else {
                                 try {
-                                    Fabrica.getInstance().getIUsuario().altaUsuario(new Espectador(nickname, nombre, correo, fechanac));
+                                    Fabrica.getInstance().getIUsuario().altaUsuario(new Espectador(nickname, nombre, apellido, correo, fechanac));
                                     JOptionPane.showMessageDialog(null,"Espectador creado con exito");
                                     dispose();
                                 } catch (Exception ex) {
@@ -121,16 +123,7 @@ public class FormularioUsuario extends JFrame {
         }
         return false;
     }
-    public boolean comprobarDatosUnicos(String nickname, String correo){            //Devuelve true si los datos ya existen
-        /*Map<String,Usuario> usuarios=new HashMap<String,Usuario>();
-        Usuario usuario1=new Usuario("paulo","hola","paulocorreo",LocalDate.now());
-        Usuario usuario2=new Usuario("paulo1","hola","paulocorreo2",LocalDate.now());
-        Usuario usuario3=new Usuario("paulo2","hola","paulocorreo3",LocalDate.now());
-        Usuario usuario4=new Usuario("paulo3","hola","paulocorreo4",LocalDate.now());
-        usuarios.put("paulo",usuario1);
-        usuarios.put("paulo1",usuario2);
-        usuarios.put("paulo2",usuario3);
-        usuarios.put("paulo3",usuario4);*/
+    public boolean comprobarDatosUnicos(String nickname, String correo){ //Devuelve true si los datos ya existen
         Map<String, Usuario> usuarios=Fabrica.getInstance().getIUsuario().obtenerUsuarios();
         for (Usuario usu : usuarios.values()) {
             if(usu.getNickname().equals(nickname)){

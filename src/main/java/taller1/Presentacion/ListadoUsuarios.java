@@ -13,17 +13,17 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ListadoUsuarios {
+public class ListadoUsuarios extends JFrame {
     private DefaultListModel<String> model = new DefaultListModel<String>();
 
     private JList listaUsuarios;
     private JPanel Panel;
 
-    public JPanel getPanel() {
-        return Panel;
-    }
-
-    public ListadoUsuarios(){
+    public ListadoUsuarios(String title){
+        super(title);
+        setContentPane(Panel);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        pack();
         listaUsuarios.setModel(model);
         cargarLista();
         listaUsuarios.addMouseListener(new MouseAdapter() {
@@ -56,9 +56,9 @@ public class ListadoUsuarios {
 
         try {
             usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
-            Usuario seleccionado = usuarios.get(listaUsuarios.getSelectedValue());  //Guardo el usuario seleccionado buscando en la lista por su nickname
-            JFrame detalle = new DetalleUsuario(seleccionado);        //Descomentar linea
-            detalle.setVisible(true);                                 //Descomentar linea
+            Usuario usuario = usuarios.get(listaUsuarios.getSelectedValue());  //Guardo el usuario seleccionado buscando en la lista por su nickname
+            JFrame detalle = new DetalleUsuario("Detalle usuario", usuario);
+            detalle.setVisible(true);
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al llamar al detalle usuario" + e.toString());
         }

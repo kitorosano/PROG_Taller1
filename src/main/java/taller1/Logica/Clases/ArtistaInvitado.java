@@ -1,13 +1,13 @@
 package main.java.taller1.Logica.Clases;
 
-public class ArtistasInvitados {
+public class ArtistaInvitado {
     private String nickname;
     private String nombreFuncion;
 
-    public ArtistasInvitados() {
+    public ArtistaInvitado() {
     }
 
-    public ArtistasInvitados(String nickname, String nombreFuncion) {
+    public ArtistaInvitado(String nickname, String nombreFuncion) {
         this.nickname = nickname;
         this.nombreFuncion = nombreFuncion;
     }

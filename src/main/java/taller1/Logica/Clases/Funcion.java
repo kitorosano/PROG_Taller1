@@ -4,16 +4,16 @@ import java.time.LocalDateTime;
 
 public class Funcion {
     private String nombre;
-    private String espectaculoAsociado;
+    private Espectaculo espectaculo;
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaRegistro;
 
     public Funcion() {
     }
 
-    public Funcion(String nombre, String espectaculoAsociado, LocalDateTime fechaHoraInicio, LocalDateTime fechaRegistro) {
+    public Funcion(String nombre, Espectaculo espectaculo, LocalDateTime fechaHoraInicio, LocalDateTime fechaRegistro) {
         this.nombre = nombre;
-        this.espectaculoAsociado = espectaculoAsociado;
+        this.espectaculo = espectaculo;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaRegistro = fechaRegistro;
     }
@@ -26,12 +26,12 @@ public class Funcion {
         this.nombre = nombre;
     }
 
-    public String getEspectaculoAsociado() {
-        return espectaculoAsociado;
+    public Espectaculo getEspectaculo() {
+        return espectaculo;
     }
 
-    public void setEspectaculoAsociado(String espectaculoAsociado) {
-        this.espectaculoAsociado = espectaculoAsociado;
+    public void setEspectaculo(Espectaculo espectaculo) {
+        this.espectaculo = espectaculo;
     }
 
     public LocalDateTime getFechaHoraInicio() {
@@ -54,7 +54,7 @@ public class Funcion {
     public String toString() {
         return "Funcion{" +
                 "nombre='" + nombre + '\'' +
-                ", espectaculoAsociado=" + espectaculoAsociado +
+                ", espectaculo=" + espectaculo +
                 ", fechaHoraInicio=" + fechaHoraInicio +
                 ", fechaRegistro=" + fechaRegistro +
                 '}';

@@ -2,6 +2,7 @@ package main.java.taller1.Logica.Clases;
 
 import java.time.LocalDateTime;
 
+
 public class EspectadorRegistradoAFuncion {
     private Espectador espectador;
     private Funcion funcion;

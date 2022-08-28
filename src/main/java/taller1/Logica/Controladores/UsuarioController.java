@@ -148,7 +148,6 @@ public class UsuarioController implements IUsuario {
             }
         }
     }
-
     @Override
     public Map<String, Espectaculo> obtenerEspectaculosArtista(String nickname) {
         Map<String, Espectaculo> espectaculos = new HashMap<>();

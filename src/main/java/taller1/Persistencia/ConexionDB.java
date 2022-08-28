@@ -16,7 +16,7 @@ public class ConexionDB {
                 System.out.println("Conexion a la base de datos establecida");
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error al conectar con la base de datos", e);
+            throw new RuntimeException("Error al conectar a la base de datos", e);
         }
         return connection;
     }

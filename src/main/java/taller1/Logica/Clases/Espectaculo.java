@@ -11,13 +11,13 @@ public class Espectaculo {
     private String url;
     private double costo;
     private LocalDateTime fechaRegistro;
-    private String nombrePlataforma; //identificador de la nombrePlataforma
-    private String artistaOrganizador; //identificador del artista
+    private Plataforma plataforma;
+    private Artista artista;
 
     public Espectaculo() {
     }
 
-    public Espectaculo(String nombre, String descripcion, double duracion, int minEspectadores, int maxEspectadores, String url, double costo, LocalDateTime fechaRegistro, String nombrePlataforma, String artistaOrganizador) {
+    public Espectaculo(String nombre, String descripcion, double duracion, int minEspectadores, int maxEspectadores, String url, double costo, LocalDateTime fechaRegistro, Plataforma plataforma, Artista artistaOrganizador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -26,8 +26,8 @@ public class Espectaculo {
         this.url = url;
         this.costo = costo;
         this.fechaRegistro = fechaRegistro;
-        this.nombrePlataforma = nombrePlataforma;
-        this.artistaOrganizador = artistaOrganizador;
+        this.plataforma = plataforma;
+        this.artista = artistaOrganizador;
     }
 
     public String getNombre() {
@@ -94,20 +94,20 @@ public class Espectaculo {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public String getPlataforma() {
-        return nombrePlataforma;
+    public Plataforma getPlataforma() {
+        return plataforma;
     }
 
-    public void setPlataforma(String nombrePlataforma) {
-        this.nombrePlataforma = nombrePlataforma;
+    public void setPlataforma(Plataforma nombrePlataforma) {
+        this.plataforma = nombrePlataforma;
     }
 
-    public String getArtistaOrganizador() {
-        return artistaOrganizador;
+    public Artista getArtista() {
+        return artista;
     }
 
-    public void setArtistaOrganizador(String artistaOrganizador) {
-        this.artistaOrganizador = artistaOrganizador;
+    public void setArtista(Artista artista) {
+        this.artista = artista;
     }
 
     @Override
@@ -121,8 +121,8 @@ public class Espectaculo {
                 ", url='" + url + '\'' +
                 ", costo=" + costo +
                 ", fechaRegistro=" + fechaRegistro +
-                ", nombrePlataforma=" + nombrePlataforma +
-                ", artistaOrganizador=" + artistaOrganizador +
+                ", plataforma=" + plataforma +
+                ", arganizador=" + artista +
                 '}';
     }
 }

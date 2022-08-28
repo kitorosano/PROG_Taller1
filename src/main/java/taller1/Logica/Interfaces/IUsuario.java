@@ -1,9 +1,6 @@
 package main.java.taller1.Logica.Interfaces;
 
-import main.java.taller1.Logica.Clases.Espectaculo;
-import main.java.taller1.Logica.Clases.Espectador;
-import main.java.taller1.Logica.Clases.Funcion;
-import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.Clases.*;
 
 import java.util.Map;
 
@@ -13,6 +10,6 @@ public interface IUsuario {
     void modificarUsuario(Usuario usuarioModificado);
 
     Map<String, Espectaculo> obtenerEspectaculosArtista(String nickname);
-    Map<String, Funcion> obtenerFuncionesEspectador(String nickname);
-    Map<String, Espectador> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion);
+    Map<String, EspectadorRegistradoAFuncion> obtenerFuncionesRegistradasDelEspectador(String nickname);
+    Map<String, EspectadorRegistradoAFuncion> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion);
 }

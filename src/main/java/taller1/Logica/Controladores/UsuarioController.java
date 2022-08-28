@@ -1,7 +1,5 @@
 package main.java.taller1.Logica.Controladores;
-import main.java.taller1.Logica.Clases.Espectador;
-import main.java.taller1.Logica.Clases.Funcion;
-import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.Interfaces.IUsuario;
 
 import java.util.HashMap;
@@ -35,9 +33,10 @@ public class UsuarioController implements IUsuario {
     public void modificarUsuario(Usuario usuarioModificado) {
 
     }
-
     @Override
-    public Map<String, Funcion> obtenerFuncionesEspectador(String nickname) {
+    public Map<String, Espectaculo> obtenerEspectaculosArtista(String nickname) {return new HashMap<>();}
+    @Override
+    public Map<String, EspectadorRegistradoAFuncion> obtenerFuncionesRegistradasDelEspectador(String nickname) {
         return new HashMap<>();
     }
 

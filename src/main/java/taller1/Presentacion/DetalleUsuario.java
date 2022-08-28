@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class DetalleUsuario{
 
-    private JPanel panel1;
+    private JPanel mainPanel;
     private JTextArea nicknameTextArea;
     private JTextArea nombreTextArea;
     private JTextArea apellidoTextArea;
@@ -33,10 +33,17 @@ public class DetalleUsuario{
     private JTextArea sitioWebTextArea;
     private JTextArea sitioWebContenido;
 
-    public  JPanel getMainPanel(){return panel1;}
+     Usuario usuario;
+
+    Map<String,EspectadorRegistradoAFuncion>funcionesRegistradasDelEspectador;
+
+    Map<String,Espectaculo>espectaculosArtista;
+
+
+    public  JPanel getMainPanel(){return mainPanel;}
     public DetalleUsuario(Usuario usuario){
 
-        Map<String,Espectaculo>espectaculos=new HashMap<>();
+       this.usuario=usuario;
 
 
 
@@ -47,7 +54,7 @@ public class DetalleUsuario{
         correoContenido.setText(usuario.getCorreo());
         fechaNContenido.setText(usuario.getFechaNacimiento().toString());
 
-        if (usuario instanceof Artista){
+        if (this.usuario instanceof Artista){
             createUIComponents(1);
             cargarTablaArtista();
             descripcionContenido.setText(((Artista) usuario).getDescripcion());
@@ -79,8 +86,21 @@ public class DetalleUsuario{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                String valor;
+
                 if(e.getClickCount()==2){
-                    JOptionPane.showMessageDialog(panel1,"contenido seleccionado: "+table1.getValueAt(table1.getSelectedRow(),0));
+
+                    valor=table1.getValueAt(table1.getSelectedRow(),0).toString();
+                    System.out.println(valor);
+                    if(usuario instanceof Artista){
+
+                        DetalleEspectaculo.crearDetalleEspectaculo(espectaculosArtista.get(table1.getValueAt(table1.getSelectedRow(),0).toString()));
+                    }
+                    else{
+                        DetalleFuncion.crearDetalleFuncion(funcionesRegistradasDelEspectador.get(table1.getValueAt(table1.getSelectedRow(),1).toString()).getFuncion());
+                    }
+
+
                 }
             }
         });
@@ -90,7 +110,7 @@ public class DetalleUsuario{
     private void createUIComponents(int tipo) { //tipo 1:Artista , tipo 2:espectador
         // TODO: place custom component creation code here
             String[]espectaculo={"Nombre Espectaculo","Costo"};
-            String[]funcion={"Nombre Funcion","Espectaculo Asociado"};
+            String[]funcion={"Nickname Espectador","Nombre Funcion"};
             String[]titulos={};
             if(tipo==1)
                 titulos=espectaculo;
@@ -108,27 +128,51 @@ public class DetalleUsuario{
 
     }
     private void cargarTablaEspectador(){
-        //Fabrica fabrica=  Fabrica.getInstance();
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
-        LocalDateTime ldt = LocalDateTime.now();
-        Map<String,Funcion>funciones=new HashMap<>();
-        Funcion funcion1=new Funcion("Show_circo","circo",ldt,ldt);
-        funciones.put(funcion1.getNombre(),funcion1);
 
-        for (Map.Entry<String,Funcion> entry : funciones.entrySet()) {
-            model.addRow(new Object[]{entry.getValue().getNombre(),entry.getValue().getEspectaculoAsociado()});
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        try {
+            this.funcionesRegistradasDelEspectador=Fabrica.getInstance().getIUsuario().obtenerFuncionesRegistradasDelEspectador(this.usuario.getNickname());
+            LocalDateTime ldt = LocalDateTime.now();
+            Funcion funcion1=new Funcion("Show_circo","circo",ldt,ldt);
+            Espectador espectador = ((Espectador) this.usuario);
+            EspectadorRegistradoAFuncion erf= new EspectadorRegistradoAFuncion( espectador, funcion1, true,2500,ldt);
+
+            funcionesRegistradasDelEspectador.put(funcion1.getNombre(),erf);
+            for (Map.Entry<String,EspectadorRegistradoAFuncion> entry :this.funcionesRegistradasDelEspectador.entrySet()) {
+                model.addRow(new Object[]{entry.getValue().getEspectador().getNickname(),entry.getValue().getFuncion().getNombre()});
+            }
+        }
+        catch(Exception exc){
+            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
         }
     }
     private void cargarTablaArtista(){
-        Fabrica fabrica=  Fabrica.getInstance();
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
-        LocalDateTime ldt = LocalDateTime.now();
-        Map<String,Espectaculo>espectaculos=new HashMap<>();
-        Espectaculo circo= new Espectaculo("circo","muy buen espectaculo",2,4,10,"http//..",2500,ldt,"Plataforma","Duki");
-        espectaculos.put(circo.getNombre(),circo);
 
-        for (Map.Entry<String, Espectaculo> entry : espectaculos.entrySet()) {
-            model.addRow(new Object[]{entry.getValue().getNombre(),entry.getValue().getCosto()});
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        try {
+            this.espectaculosArtista=Fabrica.getInstance().getIUsuario().obtenerEspectaculosArtista(this.usuario.getNickname());
+            LocalDateTime ldt = LocalDateTime.now();
+            Espectaculo circo= new Espectaculo("circo","muy buen espectaculo",2,4,10,"http//..",2500,ldt,"Plataforma","Duki");
+            espectaculosArtista.put(circo.getNombre(),circo);
+
+            for (Map.Entry<String, Espectaculo> entry : espectaculosArtista.entrySet()) {
+                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getCosto()});
+            }
         }
+        catch(Exception exc){
+            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        }
+    }
+    public static void crearDetalleUsuario(Usuario usuario){
+
+
+        DetalleUsuario detalleUsuario = new DetalleUsuario(usuario);
+        JPanel rootPanel= detalleUsuario.getMainPanel();
+        JFrame frame = new JFrame("Detalle Usuario");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setContentPane(rootPanel);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

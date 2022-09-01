@@ -1,22 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="main.java.taller1.Presentacion.DetalleFuncion">
   <grid id="27dc6" binding="mainPanel" layout-manager="FormLayout">
-    <rowspec value="center:d:grow"/>
-    <colspec value="fill:d:grow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:24px:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:22px:noGrow"/>
+    <rowspec value="top:7dlu:noGrow"/>
+    <rowspec value="center:24px:noGrow"/>
+    <rowspec value="top:5dlu:noGrow"/>
+    <rowspec value="center:17px:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:349px:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <colspec value="fill:max(d;4px):noGrow"/>
+    <colspec value="left:54dlu:noGrow"/>
+    <colspec value="fill:145px:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:128px:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:174px:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:148px:noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="769" height="543"/>
     </constraints>
-    <properties/>
+    <properties>
+      <preferredSize width="800" height="570"/>
+    </properties>
     <border type="none"/>
     <children>
-      <component id="a54df" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
+      <component id="a2e8e" class="javax.swing.JTextArea" binding="textArea1" default-binding="true">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="2" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
+        <properties>
+          <editable value="false"/>
+          <text value="Nombre"/>
+        </properties>
+      </component>
+      <component id="35cff" class="javax.swing.JTextArea" binding="nombreContenido">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+        </properties>
+      </component>
+      <component id="7d711" class="javax.swing.JTextArea" binding="espectaculoContenido">
+        <constraints>
+          <grid row="6" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+        </properties>
+      </component>
+      <component id="647b3" class="javax.swing.JTextArea" binding="fechaHoraDeInicioContenido">
+        <constraints>
+          <grid row="6" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+        </properties>
+      </component>
+      <component id="b4906" class="javax.swing.JTextArea" binding="fechaDeRegistroContenido">
+        <constraints>
+          <grid row="6" column="8" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+        </properties>
+      </component>
+      <component id="52a98" class="javax.swing.JTextArea" binding="espectaculoTextArea" default-binding="true">
+        <constraints>
+          <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="2" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <text value="Espectaculo"/>
+        </properties>
+      </component>
+      <component id="2a009" class="javax.swing.JTextArea" binding="fechaYHoraDeTextArea" default-binding="true">
+        <constraints>
+          <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="2" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <text value="Fecha y Hora de Inicio"/>
+        </properties>
+      </component>
+      <component id="e2a2a" class="javax.swing.JTextArea" binding="fechaDeRegistroTextArea" default-binding="true">
+        <constraints>
+          <grid row="4" column="8" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="2" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <text value="Fecha De Registro"/>
+        </properties>
+      </component>
+      <scrollpane id="3c351" binding="scrollPane1">
+        <constraints>
+          <grid row="10" column="2" row-span="1" col-span="7" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
         <properties/>
+        <border type="none"/>
+        <children>
+          <component id="180d7" class="javax.swing.JTable" binding="table1" default-binding="true">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="a9229" class="javax.swing.JTextArea" binding="detalleDeFuncionTextArea" default-binding="true">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="10" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <text value="Detalle De Funcion"/>
+        </properties>
+      </component>
+      <component id="ed975" class="javax.swing.JTextArea" binding="espectadoresTextArea" default-binding="true">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="10" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <editable value="false"/>
+          <text value="Espectadores"/>
+        </properties>
+      </component>
+      <component id="bf4e5" class="javax.swing.JButton" binding="registrarEspectadoresButton" default-binding="true">
+        <constraints>
+          <grid row="12" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Registrar Espectadores"/>
+        </properties>
       </component>
     </children>
   </grid>

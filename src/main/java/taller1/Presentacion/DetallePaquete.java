@@ -54,8 +54,8 @@ public class DetallePaquete extends JFrame{
 
                 if (e.getClickCount() == 2) {
                     valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
-                    System.out.println(valor);
-                    DetalleEspectaculo.crearDetalleEspectaculo(EspectaculosPaquete.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()));
+                    Espectaculo espectaculo= EspectaculosPaquete.get(table1.getValueAt(table1.getSelectedRow(), 0).toString());
+                    JFrame detalleEspectaculo= new DetalleEspectaculo("Detalle de espectaculo",espectaculo);
                 }
             }
         });

@@ -25,9 +25,9 @@ public class Main {
         //Usuario artista =new Artista("Duki","Mauro","Lombardo","duki@mail.com",fecha,"un gran artista","bio","url");
         //DetalleUsuario.crearDetalleUsuario(espectador);
             Paquete paquete=new Paquete("Paquete1", LocalDateTime.now(),"Esto es una descrpcion",2500,LocalDateTime.now());
-            DetallePaquete.crearDetallePaquete(paquete);
+            JFrame frame = new DetallePaquete("Detalle de paquete",paquete);
         //JFrame frame = new Dashboard("Corona Tickets UY");
-        //frame.setVisible(true);
+        frame.setVisible(true);
     }
 
 }

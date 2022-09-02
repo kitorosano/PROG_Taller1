@@ -91,9 +91,9 @@ public class DetalleFuncion extends JFrame{
 
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
-            for (Map.Entry<String, EspectadorRegistradoAFuncion> entry :Fabrica.getInstance().getIUsuario().obtenerEspectadoresRegistradosAFuncion(this.funcion.getNombre()) .entrySet()) {
+            this.espectadoresDeFuncion = Fabrica.getInstance().getIUsuario().obtenerEspectadoresRegistradosAFuncion(this.funcion.getNombre());
+            for (Map.Entry<String, EspectadorRegistradoAFuncion> entry : espectadoresDeFuncion.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getEspectador().getNickname(),entry.getValue().getEspectador().getCorreo()});
-                this.espectadoresDeFuncion.put(entry.getValue().getEspectador().getNickname(),entry.getValue()); // creo mi map para poder buscar ahora con el nickname del espectador
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());

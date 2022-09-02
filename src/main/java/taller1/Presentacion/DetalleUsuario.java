@@ -91,12 +91,12 @@ public class DetalleUsuario extends JFrame {
                     valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
                     System.out.println(valor);
                     if (usuario instanceof Artista) {
-
-                        DetalleEspectaculo.crearDetalleEspectaculo(espectaculosArtista.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()));
+                        Espectaculo espectaculo=espectaculosArtista.get(table1.getValueAt(table1.getSelectedRow(), 0).toString());
+                        JFrame detalleEspectaculo = new DetalleEspectaculo("Detalle Espectaculo",espectaculo);
                     } else {
 
                         Funcion funcion=funcionesRegistradasDelEspectador.get(table1.getValueAt(table1.getSelectedRow(), 1).toString()).getFuncion();
-                        JFrame detalle = new DetalleFuncion("Detalle Funcion",funcion);
+                        JFrame detalleFuncion = new DetalleFuncion("Detalle Funcion",funcion);
                     }
 
 

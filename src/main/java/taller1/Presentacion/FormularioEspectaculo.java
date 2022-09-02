@@ -11,8 +11,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.ParseException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,7 +45,7 @@ public class FormularioEspectaculo extends JFrame {
                 if(!comprobarErrorEnCampos()){
                     if(!comprobarNombreUnico(plataforma,tfNombre.getText())){
                         try {
-                            Fabrica.getInstance().getIEspectaculo().altaEspectaculo(plataforma, crearEspectaculo());
+                            //Fabrica.getInstance().getIEspectaculo().altaEspectaculo(crearEspectaculo());
                             JOptionPane.showMessageDialog(null, "Espectaculo agregado con exito");
                             dispose();
                         } catch (Exception ex) {

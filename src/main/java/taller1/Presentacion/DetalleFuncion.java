@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Map;
 
-public class DetalleFuncion {
+public class DetalleFuncion extends JFrame{
     private JPanel mainPanel;
     private JTextArea textArea1;
     private JTextArea nombreContenido;
@@ -27,7 +27,12 @@ public class DetalleFuncion {
     Funcion funcion;
 
     Map<String, EspectadorRegistradoAFuncion> espectadoresDeFuncion;
-    public DetalleFuncion(Funcion funcion){
+    public DetalleFuncion(String title,Funcion funcion){
+        super(title);
+        setContentPane(mainPanel);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        pack();
+
         this.funcion=funcion;
         nombreContenido.setText(this.funcion.getNombre());
         espectaculoContenido.setText(this.funcion.getEspectaculo().getNombre());
@@ -38,9 +43,9 @@ public class DetalleFuncion {
     }
     public  JPanel getMainPanel(){return mainPanel;}
 
-    public static void crearDetalleFuncion(Funcion funcion){
+    public static void crearDetalleFuncion(String title, Funcion funcion){
 
-        DetalleFuncion detalleFuncion = new DetalleFuncion(funcion);
+        DetalleFuncion detalleFuncion = new DetalleFuncion("Detalle Funcion",funcion);
         JPanel rootPanel= detalleFuncion.getMainPanel();
         JFrame frame = new JFrame("Detalle Funcion");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -18,7 +18,7 @@ public class Main {
                 .filename(".env")
                 .systemProperties()
                 .load();
-        
+
         JFrame frame = new Dashboard("Corona Tickets UY");
         frame.setVisible(true);
     }

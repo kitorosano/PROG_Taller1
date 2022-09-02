@@ -94,7 +94,9 @@ public class DetalleUsuario extends JFrame {
 
                         DetalleEspectaculo.crearDetalleEspectaculo(espectaculosArtista.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()));
                     } else {
-                        DetalleFuncion.crearDetalleFuncion(funcionesRegistradasDelEspectador.get(table1.getValueAt(table1.getSelectedRow(), 1).toString()).getFuncion());
+
+                        Funcion funcion=funcionesRegistradasDelEspectador.get(table1.getValueAt(table1.getSelectedRow(), 1).toString()).getFuncion();
+                        JFrame detalle = new DetalleFuncion("Detalle Funcion",funcion);
                     }
 
 

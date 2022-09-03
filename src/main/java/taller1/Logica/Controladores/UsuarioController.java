@@ -33,8 +33,8 @@ public class UsuarioController implements IUsuario {
         Connection connection = null;
         Statement statement = null;
         ResultSet resultSet = null;
-        String selectEspectadores = "SELECT * FROM espectadores ORDER BY nickname";
-        String selectArtistas = "SELECT * FROM artistas ORDER BY nickname";
+        String selectEspectadores = "SELECT * FROM espectadores ORDER BY ue_nickname";
+        String selectArtistas = "SELECT * FROM artistas ORDER BY ua_nickname";
         try {
             connection = ConexionDB.getConnection();
 
@@ -42,11 +42,11 @@ public class UsuarioController implements IUsuario {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(selectEspectadores);
             while (resultSet.next()) {
-                String nickname = resultSet.getString("nickname");
-                String nombre = resultSet.getString("nombre");
-                String apellido = resultSet.getString("apellido");
-                String correo = resultSet.getString("correo");
-                LocalDate fechaNacimiento = resultSet.getDate("fechaNacimiento").toLocalDate();
+                String nickname = resultSet.getString("ue_nickname");
+                String nombre = resultSet.getString("ue_nombre");
+                String apellido = resultSet.getString("ue_apellido");
+                String correo = resultSet.getString("ue_correo");
+                LocalDate fechaNacimiento = resultSet.getDate("ue_fechaNacimiento").toLocalDate();
 
                 Usuario usuario = new Espectador(nickname, nombre, apellido, correo, fechaNacimiento);
                 usuarios.put(nickname, usuario);
@@ -56,14 +56,14 @@ public class UsuarioController implements IUsuario {
             statement = connection.createStatement();
             resultSet = statement.executeQuery(selectArtistas);
             while (resultSet.next()) {
-                String nickname = resultSet.getString("nickname");
-                String nombre = resultSet.getString("nombre");
-                String apellido = resultSet.getString("apellido");
-                String correo = resultSet.getString("correo");
-                LocalDate fechaNacimiento = resultSet.getDate("fechaNacimiento").toLocalDate();
-                String descripcion = resultSet.getString("descripcion");
-                String biografia = resultSet.getString("biografia");
-                String sitioWeb = resultSet.getString("sitioWeb");
+                String nickname = resultSet.getString("ua_nickname");
+                String nombre = resultSet.getString("ua_nombre");
+                String apellido = resultSet.getString("ua_apellido");
+                String correo = resultSet.getString("ua_correo");
+                LocalDate fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
+                String descripcion = resultSet.getString("ua_descripcion");
+                String biografia = resultSet.getString("ua_biografia");
+                String sitioWeb = resultSet.getString("ua_sitioWeb");
 
                 Usuario artista = new Artista(nickname, nombre, apellido, correo, fechaNacimiento, descripcion, biografia, sitioWeb);
                 usuarios.put(nickname, artista);
@@ -93,9 +93,9 @@ public class UsuarioController implements IUsuario {
         Statement statement = null;
         String insertUsuario = "";
         if (usuario instanceof Espectador)
-            insertUsuario = "INSERT INTO espectadores (nickname, nombre, apellido, correo, fechaNacimiento) VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "')";
+            insertUsuario = "INSERT INTO espectadores (ue_nickname, ue_nombre, ue_apellido, ue_correo, ue_fechaNacimiento) VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "')";
         else if (usuario instanceof Artista)
-            insertUsuario = "INSERT INTO artistas (nickname, nombre, apellido, correo, fechaNacimiento, descripcion, biografia, sitioWeb) VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "', '" + ((Artista) usuario).getDescripcion() + "', '" + ((Artista) usuario).getBiografia() + "', '" + ((Artista) usuario).getSitioWeb() + "')";
+            insertUsuario = "INSERT INTO artistas (ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_descripcion, ua_biografia, ua_sitioWeb) VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "', '" + ((Artista) usuario).getDescripcion() + "', '" + ((Artista) usuario).getBiografia() + "', '" + ((Artista) usuario).getSitioWeb() + "')";
 
         try {
             connection = ConexionDB.getConnection();
@@ -124,9 +124,9 @@ public class UsuarioController implements IUsuario {
         Statement statement = null;
         String updateUsuario = "";
         if (usuario instanceof Espectador)
-            updateUsuario = "UPDATE espectadores SET nombre = '" + usuario.getNombre() + "', apellido = '" + usuario.getApellido() + "', correo = '" + usuario.getCorreo() + "', fechaNacimiento = '" + usuario.getFechaNacimiento() + "' WHERE nickname = '" + usuario.getNickname() + "'";
+            updateUsuario = "UPDATE espectadores SET ue_nombre = '" + usuario.getNombre() + "', ue_apellido = '" + usuario.getApellido() + "', ue_correo = '" + usuario.getCorreo() + "', ue_fechaNacimiento = '" + usuario.getFechaNacimiento() + "' WHERE ue_nickname = '" + usuario.getNickname() + "'";
         else if (usuario instanceof Artista)
-            updateUsuario = "UPDATE artistas SET nombre = '" + usuario.getNombre() + "', apellido = '" + usuario.getApellido() + "', correo = '" + usuario.getCorreo() + "', fechaNacimiento = '" + usuario.getFechaNacimiento() + "', descripcion = '" + ((Artista) usuario).getDescripcion() + "', biografia = '" + ((Artista) usuario).getBiografia() + "', sitioWeb = '" + ((Artista) usuario).getSitioWeb() + "' WHERE nickname = '" + usuario.getNickname() + "'";
+            updateUsuario = "UPDATE artistas SET ua_nombre = '" + usuario.getNombre() + "', ua_apellido = '" + usuario.getApellido() + "', ua_correo = '" + usuario.getCorreo() + "', ua_fechaNacimiento = '" + usuario.getFechaNacimiento() + "', ua_descripcion = '" + ((Artista) usuario).getDescripcion() + "', ua_biografia = '" + ((Artista) usuario).getBiografia() + "', ua_sitioWeb = '" + ((Artista) usuario).getSitioWeb() + "' WHERE ua_nickname = '" + usuario.getNickname() + "'";
 
         try {
             connection = ConexionDB.getConnection();
@@ -148,6 +148,7 @@ public class UsuarioController implements IUsuario {
             }
         }
     }
+
     @Override
     public Map<String, Espectaculo> obtenerEspectaculosArtista(String nickname) {
         Map<String, Espectaculo> espectaculos = new HashMap<>();

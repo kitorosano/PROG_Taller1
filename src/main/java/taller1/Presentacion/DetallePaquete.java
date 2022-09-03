@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-public class DetallePaquete {
+public class DetallePaquete extends JFrame{
     private JPanel mainPanel;
     private JTextArea nombreTextArea;
     private JTextArea descripcionTextArea;
@@ -33,7 +33,11 @@ public class DetallePaquete {
 
     Map<String, Espectaculo> EspectaculosPaquete;
     public  JPanel getMainPanel(){return mainPanel;}
-    public DetallePaquete(Paquete paquete){
+    public DetallePaquete(String title,Paquete paquete){
+        super(title);
+        setContentPane(mainPanel);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        pack();
         this.paquete=paquete;
         nombreContenido.setText(paquete.getNombre());
         fechaDeExpiracionContenido.setText(paquete.getFechaExpiracion().toString());
@@ -50,8 +54,8 @@ public class DetallePaquete {
 
                 if (e.getClickCount() == 2) {
                     valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
-                    System.out.println(valor);
-                    DetalleEspectaculo.crearDetalleEspectaculo(EspectaculosPaquete.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()));
+                    Espectaculo espectaculo= EspectaculosPaquete.get(table1.getValueAt(table1.getSelectedRow(), 0).toString());
+                    JFrame detalleEspectaculo= new DetalleEspectaculo("Detalle de espectaculo",espectaculo);
                 }
             }
         });
@@ -82,15 +86,5 @@ public class DetallePaquete {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());
         }
     }
-    public static void crearDetallePaquete(Paquete paquete){
 
-        DetallePaquete detallePaquete = new DetallePaquete(paquete);
-        JPanel rootPanel= detallePaquete.getMainPanel();
-        JFrame frame = new JFrame("Detalle Paquete");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setContentPane(rootPanel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
 }

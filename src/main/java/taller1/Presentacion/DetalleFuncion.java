@@ -101,5 +101,3 @@ public class DetalleFuncion extends JFrame{
     }
 }
 
-
-

@@ -22,5 +22,4 @@ public class Main {
       JFrame frame = new Dashboard("Corona Tickets UY");
       frame.setVisible(true);
     }
-
 }

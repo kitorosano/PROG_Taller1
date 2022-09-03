@@ -8,8 +8,6 @@ import javax.swing.*;
 public class DetalleEspectaculo extends JFrame {
     private JPanel mainPanel;
 
-    public DetalleEspectaculo(String title ,Espectaculo espectaculo){}
-
-
+    public DetalleEspectaculo(String title, Espectaculo espectaculo){}
 
 }

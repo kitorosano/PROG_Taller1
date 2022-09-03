@@ -19,15 +19,7 @@ public class Main {
                 .systemProperties()
                 .load();
 
-        //LocalDate fecha = LocalDate.now();
-        //LocalDateTime ldt = LocalDateTime.now();
-        //Usuario espectador =new Espectador("Ramiro11","Ramiro","Fernandez","ramiro11@mail.com",fecha);
-        //Usuario artista =new Artista("Duki","Mauro","Lombardo","duki@mail.com",fecha,"un gran artista","bio","url");
-        //DetalleUsuario.crearDetalleUsuario(espectador);
-            Paquete paquete=new Paquete("Paquete1", LocalDateTime.now(),"Esto es una descrpcion",2500,LocalDateTime.now());
-            JFrame frame = new DetallePaquete("Detalle de paquete",paquete);
-        //JFrame frame = new Dashboard("Corona Tickets UY");
-        frame.setVisible(true);
+      JFrame frame = new Dashboard("Corona Tickets UY");
+      frame.setVisible(true);
     }
-
 }

@@ -45,9 +45,9 @@ CREATE TABLE espectaculos (
   es_nombrePlataforma VARCHAR(30) NOT NULL,
   es_artistaOrganizador VARCHAR(30) NOT NULL,
 
-  PRIMARY KEY (es_nombre),
   FOREIGN KEY (es_nombrePlataforma) REFERENCES plataformas (pl_nombre) ON DELETE CASCADE,
-  FOREIGN KEY (es_artistaOrganizador) REFERENCES artistas (ua_nickname) ON DELETE CASCADE
+  FOREIGN KEY (es_artistaOrganizador) REFERENCES artistas (ua_nickname) ON DELETE CASCADE,
+  PRIMARY KEY (es_nombre, es_nombrePlataforma)
 );
 CREATE TABLE funciones (
   fn_nombre VARCHAR(50) NOT NULL,
@@ -61,9 +61,9 @@ CREATE TABLE funciones (
 
 CREATE TABLE paquetes (
   paq_nombre VARCHAR(50) NOT NULL,
-  paq_fechaExpiracion DATETIME NOT NULL,
   paq_descripcion VARCHAR(100) NOT NULL,
   paq_descuento DOUBLE NOT NULL,
+  paq_fechaExpiracion DATETIME NOT NULL,
   paq_fechaRegistro DATETIME NOT NULL,
 
   PRIMARY KEY (paq_nombre)

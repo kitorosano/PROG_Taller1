@@ -73,7 +73,7 @@ public class DetallePaquete {
 
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
-            this.EspectaculosPaquete = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPaquete(this.paquete.getNombre());
+            this.EspectaculosPaquete = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosDePaquete(this.paquete.getNombre());
             this.EspectaculosPaquete.put("Show",new Espectaculo("Show", "descripcion del espectaculo",2500,2,3, "url",4000, LocalDateTime.now(),new Plataforma(),new Artista()));
             for (Map.Entry<String, Espectaculo> entry : this.EspectaculosPaquete.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getDescripcion(),entry.getValue().getCosto()});

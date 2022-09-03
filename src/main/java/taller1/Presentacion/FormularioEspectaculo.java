@@ -35,17 +35,18 @@ public class FormularioEspectaculo extends JFrame {
         setContentPane(panel1);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
+
         soloNumero(tfDuracion);
         soloNumero(tfCosto);
         cargarDatosComboBox();
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                String plataforma=(String) cbPlataforma.getSelectedItem();
-                if(!comprobarErrorEnCampos()){
-                    if(!comprobarNombreUnico(plataforma,tfNombre.getText())){
+                String plataforma = (String) cbPlataforma.getSelectedItem();
+                if (!comprobarErrorEnCampos()) {
+                    if (!comprobarNombreUnico(plataforma, tfNombre.getText())) {
                         try {
-                            //Fabrica.getInstance().getIEspectaculo().altaEspectaculo(crearEspectaculo());
+                            Fabrica.getInstance().getIEspectaculo().altaEspectaculo(crearEspectaculo());
                             JOptionPane.showMessageDialog(null, "Espectaculo agregado con exito");
                             dispose();
                         } catch (Exception ex) {
@@ -62,11 +63,13 @@ public class FormularioEspectaculo extends JFrame {
             }
         });
     }
-    public void cargarDatosComboBox(){
-        Map<String, Plataforma> plataformas=Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
-        Map<String, Usuario> usuarios=Fabrica.getInstance().getIUsuario().obtenerUsuarios();
 
-        for(Plataforma p:plataformas.values()){
+    public void cargarDatosComboBox() {
+        // TODO: PONER EN UN TRY CATCH Y QUIZAS ¿GUARDARLO EN UNA VARIABLE PARA NO TENER QUE VOLVER A CONSULTARLOS?
+        Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+        Map<String, Usuario> usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
+
+        for (Plataforma p : plataformas.values()) {
             cbPlataforma.addItem(p.getNombre());
         }
         for (Usuario usu : usuarios.values()) {
@@ -75,66 +78,67 @@ public class FormularioEspectaculo extends JFrame {
             }
         }
     }
-    public boolean comprobarErrorEnCampos(){                //Devuelve true si hay error
-        if(tfNombre.getText().isEmpty()||tfDuracion.getText().isEmpty()||tfDescripcion.getText().isEmpty()||tfCosto.getText().isEmpty()||tfURL.getText().isEmpty()){    //Comprobar campos nulos
+
+    public boolean comprobarErrorEnCampos() {                //Devuelve true si hay error
+        if (tfNombre.getText().isEmpty() || tfDuracion.getText().isEmpty() || tfDescripcion.getText().isEmpty() || tfCosto.getText().isEmpty() || tfURL.getText().isEmpty()) {    //Comprobar campos nulos
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios");
             return true;
-        }else if((int)spEspMinimos.getValue()< 0){                                                              //Comprueba el valor de los spiners de espectadores
+        } else if ((int) spEspMinimos.getValue() < 0) {                                                              //Comprueba el valor de los spiners de espectadores
             JOptionPane.showMessageDialog(null, "El valor de espectadores no puede ser menor a 0");
             return true;
-        }else if ((int) spEspMinimos.getValue() >= (int) spEspMaximos.getValue()) {
+        } else if ((int) spEspMinimos.getValue() >= (int) spEspMaximos.getValue()) {
             JOptionPane.showMessageDialog(null, "Los espectadores maximos deben ser mas que los minimos");
             return true;
         }
         return false;
     }
 
-    public boolean comprobarNombreUnico(String plataforma, String nombreEspectaculo){       //Devuelve true si hay error
-        //Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(plataforma);    Descomentar cuando esté la funcion obtenerEspectaculos
-        Map<String,Espectaculo> espectaculos=new HashMap<>();
-        for(Espectaculo esp: espectaculos.values()){
-            if(esp.getNombre().equals(nombreEspectaculo)){
+    public boolean comprobarNombreUnico(String nombrePlataforma, String nombreEspectaculo) {       //Devuelve true si hay error
+        Map<String,Espectaculo> espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(nombrePlataforma);
+        for (Espectaculo esp : espectaculos.values()) {
+            if (esp.getNombre().equals(nombreEspectaculo)) {
                 JOptionPane.showMessageDialog(null, "El nombre elegido ya existe en la plataforma");
                 return true;
             }
         }
         return false;
     }
-    public Espectaculo crearEspectaculo(){
-        String nombre=tfNombre.getText(),descripcion=tfDescripcion.getText(),url=tfURL.getText();
-        int minEspec=(int)spEspMinimos.getValue(),maxEspec=(int)spEspMaximos.getValue();
-        double duracion= Double.parseDouble(tfDuracion.getText()),costo= Double.parseDouble(tfCosto.getText());
+
+    public Espectaculo crearEspectaculo() {
+        String nombre = tfNombre.getText(), descripcion = tfDescripcion.getText(), url = tfURL.getText();
+        int minEspec = (int) spEspMinimos.getValue(), maxEspec = (int) spEspMaximos.getValue();
+        double duracion = Double.parseDouble(tfDuracion.getText()), costo = Double.parseDouble(tfCosto.getText());
         Plataforma plataforma = null;
-        Artista artista=null;
-        Map<String,Plataforma>plataformas=Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
-        Map<String,Usuario>usuarios=Fabrica.getInstance().getIUsuario().obtenerUsuarios();
-        for(Plataforma p:plataformas.values()){
-            if(p.getNombre().equals((String) cbPlataforma.getSelectedItem())){
-                plataforma=p;
+        Artista artista = null;
+        Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+        Map<String, Usuario> usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
+        for (Plataforma p : plataformas.values()) {
+            if (p.getNombre().equals((String) cbPlataforma.getSelectedItem())) {
+                plataforma = p;
                 break;
             }
         }
         for (Usuario usu : usuarios.values()) {
             if (usu instanceof Artista) {
-                if(usu.getNombre().equals((String) cbArtista.getSelectedItem())){
-                    artista=(Artista) usu;
+                if (usu.getNombre().equals((String) cbArtista.getSelectedItem())) {
+                    artista = (Artista) usu;
                     break;
                 }
             }
         }
-        Espectaculo nuevo=new Espectaculo(nombre,descripcion,duracion,minEspec,maxEspec,url,costo, LocalDateTime.now(),plataforma,artista);
+        Espectaculo nuevo = new Espectaculo(nombre, descripcion, duracion, minEspec, maxEspec, url, costo, LocalDateTime.now(), plataforma, artista);
         return nuevo;
     }
 
-    private void soloNumero(JTextField tf){         //Impide que se ingresen caracteres no numericos
+    private void soloNumero(JTextField tf) {         //Impide que se ingresen caracteres no numericos
         tf.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
-                char c=e.getKeyChar();
-                if(!Character.isDigit(c)&&c!='.'){
+                char c = e.getKeyChar();
+                if (!Character.isDigit(c) && c != '.') {
                     e.consume();
                 }
-                if(c=='.'&& tf.getText().contains(".")){
+                if (c == '.' && tf.getText().contains(".")) {
                     e.consume();
                 }
             }

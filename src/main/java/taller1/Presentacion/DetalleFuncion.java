@@ -11,7 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
 
-public class DetalleFuncion extends JFrame{
+public class DetalleFuncion extends JFrame {
     private JPanel mainPanel;
     private JTextArea textArea1;
     private JTextArea nombreContenido;
@@ -28,28 +28,32 @@ public class DetalleFuncion extends JFrame{
     private JButton registrarEspectadoresButton;
 
     Funcion funcion;
-
     Map<String, EspectadorRegistradoAFuncion> espectadoresDeFuncion;
-    public DetalleFuncion(String title,Funcion funcion){
+
+    public DetalleFuncion(String title, Funcion funcion) {
         super(title);
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
 
-        this.funcion=funcion;
+        this.funcion = funcion;
+
         nombreContenido.setText(this.funcion.getNombre());
         espectaculoContenido.setText(this.funcion.getEspectaculo().getNombre());
         fechaHoraDeInicioContenido.setText(this.funcion.getFechaHoraInicio().toString());
         fechaDeRegistroContenido.setText(this.funcion.getFechaRegistro().toString());
         createUIComponents();
         cargarTabla();
+
         table1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
-                    Espectador espectador=espectadoresDeFuncion.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()).getEspectador();
-                    JFrame detalleEspectador= new DetalleUsuario("Detalle Usuario",espectador);
+                    Espectador espectador = espectadoresDeFuncion.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()).getEspectador();
+
+                    JFrame detalleEspectador = new DetalleUsuario("Detalle Usuario", espectador);
+                    detalleEspectador.setVisible(true);
                 }
             }
         });
@@ -57,27 +61,14 @@ public class DetalleFuncion extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                JFrame formularioRegistroEspectador = new FormularioRegistroEspectadorAFuncion("Formulario de registro de espectador a funcion",funcion);
+                JFrame formularioRegistroEspectador = new FormularioRegistroEspectadorAFuncion("Formulario de registro de espectador a funcion", funcion);
+                formularioRegistroEspectador.setVisible(true);
             }
         });
     }
-    public  JPanel getMainPanel(){return mainPanel;}
-
-    public static void crearDetalleFuncion(String title, Funcion funcion){
-
-        DetalleFuncion detalleFuncion = new DetalleFuncion("Detalle Funcion",funcion);
-        JPanel rootPanel= detalleFuncion.getMainPanel();
-        JFrame frame = new JFrame("Detalle Funcion");
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setContentPane(rootPanel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
 
     private void createUIComponents() {
-        // TODO: place custom component creation code here
-        table1.setModel(new DefaultTableModel(null, new String[]{"Nickname","Correo"}) {
+        table1.setModel(new DefaultTableModel(null, new String[]{"Nickname", "Correo"}) {
                             @Override
                             public boolean isCellEditable(int row, int column) {
                                 return false;
@@ -87,13 +78,13 @@ public class DetalleFuncion extends JFrame{
         table1.getTableHeader().setReorderingAllowed(false);
         table1.getTableHeader().setResizingAllowed(false);
     }
-    private void cargarTabla() {
 
+    private void cargarTabla() {
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
             this.espectadoresDeFuncion = Fabrica.getInstance().getIUsuario().obtenerEspectadoresRegistradosAFuncion(this.funcion.getNombre());
             for (Map.Entry<String, EspectadorRegistradoAFuncion> entry : espectadoresDeFuncion.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getEspectador().getNickname(),entry.getValue().getEspectador().getCorreo()});
+                model.addRow(new Object[]{entry.getValue().getEspectador().getNickname(), entry.getValue().getEspectador().getCorreo()});
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());

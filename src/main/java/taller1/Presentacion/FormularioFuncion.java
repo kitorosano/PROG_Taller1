@@ -41,6 +41,7 @@ public class FormularioFuncion extends JFrame {
         System.out.println(LocalDateTime.now());
         setContentPane(panel1);
 
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         listaAinvitar.setModel(modelAInvitar);

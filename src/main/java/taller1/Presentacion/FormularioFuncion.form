@@ -131,7 +131,7 @@
               <text value="Fecha"/>
             </properties>
           </component>
-          <component id="49754" class="javax.swing.JTextField" binding="tfHora">
+          <component id="49754" class="javax.swing.JFormattedTextField" binding="tfHora">
             <constraints>
               <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
@@ -210,13 +210,13 @@
               <text value="Agregar artista"/>
             </properties>
           </component>
-          <component id="57da9" class="javax.swing.JButton" binding="eliminarArtistaButton" default-binding="true">
+          <component id="57da9" class="javax.swing.JButton" binding="eliminarInvitadoButton" default-binding="true">
             <constraints>
               <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
               <forms/>
             </constraints>
             <properties>
-              <text value="Eliminar artista"/>
+              <text value="Eliminar invitado"/>
             </properties>
           </component>
           <component id="ae44a" class="javax.swing.JLabel">

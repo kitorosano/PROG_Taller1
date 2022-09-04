@@ -12,7 +12,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Map;
 
 public class FormularioPaquete extends JFrame{
@@ -22,7 +24,6 @@ public class FormularioPaquete extends JFrame{
     private JButton ingresarButton;
     private JTextField tfDescripcion;
     private JTextField tfDescuento;
-    private JTextField tfFechaLanz;
     private JTextField tfFechaVenc;
 
     public FormularioPaquete(String title) {
@@ -37,9 +38,12 @@ public class FormularioPaquete extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 if(!comprobarErrorEnCampos()){
                     if(!comprobarNombreUnico(tfNombre.getText())){
+                        LocalDateTime fechaVencimiento= LocalDateTime.of(LocalDate.parse(tfFechaVenc.getText()), LocalTime.parse("00:00:00"));
                         try{
-                            Fabrica.getInstance().getIEspectaculo().altaPaquete(new Paquete(tfNombre.getText(), LocalDateTime.parse(tfFechaVenc.getText()+" 00:00:00"),
+                            Fabrica.getInstance().getIEspectaculo().altaPaquete(new Paquete(tfNombre.getText(), fechaVencimiento,
                                     tfDescripcion.getText(),Double.parseDouble(tfDescuento.getText()),LocalDateTime.now()));
+                            JOptionPane.showMessageDialog(null,"Paquete agregado exitosamente");
+                            dispose();
                         } catch (NumberFormatException ex) {
                             JOptionPane.showMessageDialog(null,ex);
                         }
@@ -47,14 +51,20 @@ public class FormularioPaquete extends JFrame{
                 }
             }
         });
+        cancelarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+            }
+        });
     }
 
 
     public boolean comprobarErrorEnCampos() {                //Devuelve true si hay error
-        if (tfNombre.getText().isEmpty() || tfDescripcion.getText().isEmpty() || tfDescuento.getText().isEmpty() || tfFechaLanz.getText().isEmpty() || tfFechaVenc.getText().isEmpty()) {    //Comprobar campos nulos
+        if (tfNombre.getText().isEmpty() || tfDescripcion.getText().isEmpty() || tfDescuento.getText().isEmpty() || tfFechaVenc.getText().isEmpty()) {    //Comprobar campos nulos
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios");
             return true;
-        } else if (!validarFechas(tfFechaLanz.getText(),tfFechaVenc.getText())){
+        } else if (!validarFechas(tfFechaVenc.getText())){
             return true;
         }
         return false;
@@ -90,25 +100,13 @@ public class FormularioPaquete extends JFrame{
         });
     }
 
-    public boolean validarFechas(String fechaInicio,String fechaFinal) {             //Devuelve true si la fecha es correcta
+    public boolean validarFechas(String fechaFinal) {             //Devuelve true si la fecha es correcta
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            formatoFecha.setLenient(false);
-            formatoFecha.parse(fechaInicio);
-        } catch (ParseException e) {
-            JOptionPane.showMessageDialog(null,"Formato de fecha de inicio no valido");
-            return false;
-        }
         try {
             formatoFecha.setLenient(false);
             formatoFecha.parse(fechaFinal);
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(null,"Formato de fecha final no valido");
-            return false;
-        }
-
-        if(fechaInicio.compareTo(fechaFinal)!=-1){
-            JOptionPane.showMessageDialog(null,"La fecha de inicio no puede ser mayor que la de vencimiento");
             return false;
         }
         return true;

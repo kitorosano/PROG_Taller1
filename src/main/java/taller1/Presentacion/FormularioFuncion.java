@@ -134,6 +134,8 @@ public class FormularioFuncion extends JFrame {
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios");
             return true;
         }
+
+        //TODO:COMPROBAR NOMBRE
         if(!validarFecha(tfFecha.getText())){
             JOptionPane.showMessageDialog(null, "El formato de fecha no es valido");
             return true;

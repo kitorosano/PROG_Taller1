@@ -36,14 +36,13 @@ public class FormularioFuncion extends JFrame {
 
     private String seleccionado;
 
-    public FormularioFuncion(String title) {
+    public FormularioFuncion(String title, Espectaculo elegido) {
         super(title);
         System.out.println(LocalDateTime.now());
         setContentPane(panel1);
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
-        cargarDatosComboBox();
         listaAinvitar.setModel(modelAInvitar);
         listaInvitados.setModel(modelInvitados);
         cargarDatosListas();
@@ -63,23 +62,30 @@ public class FormularioFuncion extends JFrame {
                 }
             }
         });
-        cbPlataforma.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getSource()==cbPlataforma) {
-                    seleccionado=(String)cbPlataforma.getSelectedItem();
-                    try{
-                        //Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
-                        Map<String,Espectaculo> espectaculos = new HashMap<>();
-                        for (Espectaculo esp : espectaculos.values()) {
-                            cbEspectaculo.addItem(esp.getNombre());
+        if(elegido!=null){
+            Plataforma plataforma=elegido.getPlataforma();
+            cbPlataforma.addItem(plataforma.getNombre());
+            cbEspectaculo.addItem(elegido.getNombre());
+        }else{
+            cargarDatosComboBox();
+            cbPlataforma.addItemListener(new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    if (e.getSource()==cbPlataforma) {
+                        seleccionado=(String)cbPlataforma.getSelectedItem();
+                        try{
+                            //Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
+                            Map<String,Espectaculo> espectaculos = new HashMap<>();
+                            for (Espectaculo esp : espectaculos.values()) {
+                                cbEspectaculo.addItem(esp.getNombre());
+                            }
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null,ex);
                         }
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null,ex);
                     }
                 }
-            }
-        });
+            });
+        }
         agregarArtistaButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -151,14 +157,19 @@ public class FormularioFuncion extends JFrame {
         return false;
     }
     public boolean comprobarNombreUnico(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {       //Devuelve true si no hay error
-        //Map<String,Funcion> funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(nombrePlataforma,nombreEspectaculo);
-        Map<String,Funcion> funciones=new HashMap<>();
-        for (Funcion fun : funciones.values()) {
-            if (fun.getNombre().equals(nombreFuncion)) {
-                return false;
+        try {
+            //Map<String,Funcion> funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(nombrePlataforma,nombreEspectaculo);
+            Map<String, Funcion> funciones = new HashMap<>();
+            for (Funcion fun : funciones.values()) {
+                if (fun.getNombre().equals(nombreFuncion)) {
+                    return false;
+                }
             }
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+            return false;
         }
-        return true;
     }
 
     public boolean validarFecha(String fecha) {             //Devuelve true si la fecha es correcta

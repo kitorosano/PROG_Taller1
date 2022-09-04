@@ -129,13 +129,16 @@ public class FormularioFuncion extends JFrame {
         }
         //HAY QUE VER COMO CARGAR LA LISTA DE INVITADOS
     }
-    public boolean comprobarErrorencampos(){
+    public boolean comprobarErrorencampos(){                    //Devuelve true si hay error
+        String plataforma=cbPlataforma.getSelectedItem().toString(),espectaculo=cbEspectaculo.getSelectedItem().toString();
         if(tfNombre.getText().isEmpty()||tfFecha.getText().isEmpty()||tfHora.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios");
             return true;
         }
-
-        //TODO:COMPROBAR NOMBRE
+        if(!comprobarNombreUnico(plataforma,espectaculo,tfNombre.getText())){
+            JOptionPane.showMessageDialog(null, "El nombre elegido ya existe");
+            return true;
+        }
         if(!validarFecha(tfFecha.getText())){
             JOptionPane.showMessageDialog(null, "El formato de fecha no es valido");
             return true;
@@ -146,6 +149,16 @@ public class FormularioFuncion extends JFrame {
         }
 
         return false;
+    }
+    public boolean comprobarNombreUnico(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {       //Devuelve true si no hay error
+        //Map<String,Funcion> funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(nombrePlataforma,nombreEspectaculo);
+        Map<String,Funcion> funciones=new HashMap<>();
+        for (Funcion fun : funciones.values()) {
+            if (fun.getNombre().equals(nombreFuncion)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean validarFecha(String fecha) {             //Devuelve true si la fecha es correcta

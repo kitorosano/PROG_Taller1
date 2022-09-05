@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public class DetalleEspectaculo extends JFrame {
@@ -60,23 +61,43 @@ public class DetalleEspectaculo extends JFrame {
         urlContenido.setText(this.espectaculo.getUrl());
         costoContenido.setText(String.valueOf(this.espectaculo.getCosto()));
         fechaDeRegistroContenido.setText(this.espectaculo.getFechaRegistro().toString());
+        plataformaContenido.setText(this.espectaculo.getPlataforma().getNombre());
         artistaOrganizadorContenido.setText(this.espectaculo.getArtista().getNickname());
+        plataformaContenido.setText(this.espectaculo.getPlataforma().getNombre().toString());
+        createUIComponents();
+        cargarTablaFunciones();
+        cargarTablaPaquetes();
         tablaFunciones.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
                     Funcion funcion=FuncionesDelEspectaculo.get(tablaFunciones.getValueAt(tablaFunciones.getSelectedRow(), 0).toString());
-                    JFrame detalleFuncion = new DetalleFuncion("Detalle Funcion",funcion);
+                    JFrame detalleFuncion = new DetalleFuncion("Detalle de funcion",funcion);
+                    detalleFuncion.setVisible(true);
                 }
             }
         });
+        tablaPaquetes.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (e.getClickCount() == 2) {
+                    Paquete paquete=PaquetesDelEspectaculo.get(tablaPaquetes.getValueAt(tablaPaquetes.getSelectedRow(), 0).toString());
+                    JFrame detallePaquete = new DetallePaquete("Detalle de paquete",paquete);
+                    detallePaquete.setVisible(true);
+                }
+            }
+        });
+
         agregarFuncionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                JFrame formularioFuncion = new FormularioFuncion("Formulario de Funcion",espectaculo);
+                formularioFuncion.setVisible(true);
             }
         });
+
     }
 
 
@@ -112,7 +133,7 @@ public class DetalleEspectaculo extends JFrame {
                 model.addRow(new Object[]{entry.getValue().getNombre(),entry.getValue().getFechaHoraInicio()});
             }
         } catch (Exception exc) {
-            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+           JOptionPane.showMessageDialog(null, "Error" + exc.toString());
         }
     }
     private void cargarTablaPaquetes() {
@@ -120,6 +141,7 @@ public class DetalleEspectaculo extends JFrame {
         DefaultTableModel model = (DefaultTableModel) tablaPaquetes.getModel();
         try {
             this.PaquetesDelEspectaculo = Fabrica.getInstance().getIEspectaculo().obtenerPaquetesDeEspectaculo(this.espectaculo.getNombre());
+
 
             for (Map.Entry<String,Paquete> entry : this.PaquetesDelEspectaculo.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre(),entry.getValue().getFechaExpiracion()});

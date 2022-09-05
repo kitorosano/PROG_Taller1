@@ -306,7 +306,7 @@ public class UsuarioController implements IUsuario {
                 "    AND FN.fn_espectaculoAsociado = ES.es_nombre\n" +
                 "    AND ES.es_nombrePlataforma = PL.pl_nombre\n" +
                 "    AND ES.es_artistaOrganizador = UA.ua_nickname\n" +
-                "    AND ES_FN.ue_fn_nombreFuncion = '" + nombreFuncion + "'";
+                "    AND ES_FN.ue_fn_nombreFuncion = '" + nombreFuncion + "'";              //CAMBIAR ES_FN A UE_FN
         try {
             connection = ConexionDB.getConnection();
             statement = connection.createStatement();

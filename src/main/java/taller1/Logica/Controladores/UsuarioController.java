@@ -253,7 +253,7 @@ public class UsuarioController implements IUsuario {
                 String es_url = resultSet.getString("es_url");
                 Double es_costo = resultSet.getDouble("es_costo");
                 LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
-                Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_fechaRegistro, pl , ua);
+                Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_fechaRegistro, pl, ua);
 
                 String fn_nombre = resultSet.getString("fn_nombre");
                 LocalDateTime fn_fechaHoraInicio = resultSet.getTimestamp("fn_fechaHoraInicio").toLocalDateTime();
@@ -300,13 +300,13 @@ public class UsuarioController implements IUsuario {
         Statement statement = null;
         ResultSet resultSet = null;
         String selectEspectadores = "SELECT *\n" +
-                                    "FROM espectadores_funciones as UE_FN, espectadores as UE, funciones as FN, espectaculos as ES, plataformas as PL, artistas as UA\n" +
-                                    "WHERE UE_FN.ue_fn_nickname = UE.ue_nickname\n" +
-                                    "  \tAND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre\n" +
-                                    "    AND FN.fn_espectaculoAsociado = ES.es_nombre\n" +
-                                    "    AND ES.es_nombrePlataforma = PL.pl_nombre\n" +
-                                    "    AND ES.es_artistaOrganizador = UA.ua_nickname\n" +
-                                    "    AND ES_FN.ue_fn_nombreFuncion = '" + nombreFuncion + "'";
+                "FROM espectadores_funciones as UE_FN, espectadores as UE, funciones as FN, espectaculos as ES, plataformas as PL, artistas as UA\n" +
+                "WHERE UE_FN.ue_fn_nickname = UE.ue_nickname\n" +
+                "  \tAND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre\n" +
+                "    AND FN.fn_espectaculoAsociado = ES.es_nombre\n" +
+                "    AND ES.es_nombrePlataforma = PL.pl_nombre\n" +
+                "    AND ES.es_artistaOrganizador = UA.ua_nickname\n" +
+                "    AND ES_FN.ue_fn_nombreFuncion = '" + nombreFuncion + "'";
         try {
             connection = ConexionDB.getConnection();
             statement = connection.createStatement();
@@ -335,7 +335,7 @@ public class UsuarioController implements IUsuario {
                 String es_url = resultSet.getString("es_url");
                 Double es_costo = resultSet.getDouble("es_costo");
                 LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
-                Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_fechaRegistro, pl , ua);
+                Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_fechaRegistro, pl, ua);
 
                 String fn_nombre = resultSet.getString("fn_nombre");
                 LocalDateTime fn_fechaHoraInicio = resultSet.getTimestamp("fn_fechaHoraInicio").toLocalDateTime();

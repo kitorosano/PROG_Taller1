@@ -7,11 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class FormularioPlataforma extends JFrame{
+public class FormularioPlataforma extends JFrame {
     private JPanel panel1;
     private JTextField tfNombre;
     private JButton volverButton;
@@ -20,7 +19,7 @@ public class FormularioPlataforma extends JFrame{
     private JButton ingresarButton;
     private JButton cancelarButton;
 
-    public FormularioPlataforma(String title){
+    public FormularioPlataforma(String title) {
         super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
@@ -29,19 +28,19 @@ public class FormularioPlataforma extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(tfNombre.getText().isEmpty()||tfDescripcion.getText().isEmpty()||tfURL.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Los campos no pueden estar vacios");
-                }else{
-                    if(comprobarNombre(tfNombre.getText())){
-                        JOptionPane.showMessageDialog(null,"El nombre ingresado ya existe");
-                    }else{
-                        String nombre=tfNombre.getText(),descripcion=tfDescripcion.getText(),url=tfURL.getText();
-                        try{
-                            Fabrica.getInstance().getIEspectaculo().altaPlataforma(new Plataforma(nombre,descripcion,url));
-                            JOptionPane.showMessageDialog(null,"Plataforma agregada con exito");
+                if (tfNombre.getText().isEmpty() || tfDescripcion.getText().isEmpty() || tfURL.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios");
+                } else {
+                    if (comprobarNombre(tfNombre.getText())) {
+                        JOptionPane.showMessageDialog(null, "El nombre ingresado ya existe");
+                    } else {
+                        String nombre = tfNombre.getText(), descripcion = tfDescripcion.getText(), url = tfURL.getText();
+                        try {
+                            Fabrica.getInstance().getIEspectaculo().altaPlataforma(new Plataforma(nombre, descripcion, url));
+                            JOptionPane.showMessageDialog(null, "Plataforma agregada con exito");
                             cerrarFormulario(e);
                         } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null,ex);
+                            JOptionPane.showMessageDialog(null, ex);
                         }
                     }
                 }
@@ -56,16 +55,17 @@ public class FormularioPlataforma extends JFrame{
         });
     }
 
-    public boolean comprobarNombre(String nombre){          //Devuelve true si el nombre ya existe
-        Map<String, Plataforma> plataformas=Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
-        Set<String> keys=plataformas.keySet();
-        for(String key:keys){
-            if(key.equals(nombre))
+    public boolean comprobarNombre(String nombre) {          //Devuelve true si el nombre ya existe
+        Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+        Set<String> keys = plataformas.keySet();
+        for (String key : keys) {
+            if (key.equals(nombre))
                 return true;
         }
         return false;
     }
-    public void cerrarFormulario(MouseEvent e){
+
+    public void cerrarFormulario(MouseEvent e) {
         JComponent comp = (JComponent) e.getSource();
         Window win = SwingUtilities.getWindowAncestor(comp);
         win.dispose();

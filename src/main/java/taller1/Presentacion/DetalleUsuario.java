@@ -7,9 +7,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 
 public class DetalleUsuario extends JFrame {
@@ -84,17 +81,19 @@ public class DetalleUsuario extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                String valor;
 
                 if (e.getClickCount() == 2) {
-
-                    valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
-                    System.out.println(valor);
+                    String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
                     if (usuario instanceof Artista) {
+                        Espectaculo espectaculo = espectaculosArtista.get(valor);
 
-                        DetalleEspectaculo.crearDetalleEspectaculo(espectaculosArtista.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()));
+                        JFrame detalleEspectaculo = new DetalleEspectaculo("Detalle Espectaculo", espectaculo);
+                        detalleEspectaculo.setVisible(true);
                     } else {
-                        DetalleFuncion.crearDetalleFuncion(funcionesRegistradasDelEspectador.get(table1.getValueAt(table1.getSelectedRow(), 1).toString()).getFuncion());
+                        Funcion funcion = funcionesRegistradasDelEspectador.get(valor).getFuncion();
+
+                        JFrame detalleFuncion = new DetalleFuncion("Detalle Funcion", funcion);
+                        detalleFuncion.setVisible(true);
                     }
 
 
@@ -109,17 +108,14 @@ public class DetalleUsuario extends JFrame {
         String[] espectaculo = {"Nombre Espectaculo", "Costo"};
         String[] funcion = {"Nickname Espectador", "Nombre Funcion"};
         String[] titulos = {};
-        if (tipo == 1)
-            titulos = espectaculo;
-        else
-            titulos = funcion;
+        if (tipo == 1) titulos = espectaculo;
+        else titulos = funcion;
         table1.setModel(new DefaultTableModel(null, titulos) {
-                            @Override
-                            public boolean isCellEditable(int row, int column) {
-                                return false;
-                            }
-                        }
-        );
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        });
         table1.getTableHeader().setReorderingAllowed(false);
         table1.getTableHeader().setResizingAllowed(false);
 

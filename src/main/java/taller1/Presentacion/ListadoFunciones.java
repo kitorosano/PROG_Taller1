@@ -10,7 +10,7 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ListadoFunciones {
+public class ListadoFunciones extends JFrame {
     private JPanel Panel;
     private JComboBox cmbPlataforma;
     private JComboBox cmbEspectaculo;
@@ -22,13 +22,11 @@ public class ListadoFunciones {
     private DefaultListModel<String> model = new DefaultListModel<String>();
 
     public ListadoFunciones(String title){
-        /*          *DESCOMENTAR*
         super(title);
         setContentPane(Panel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         setSize(600,500);
-        */
         cargarPlataformas();
         listaFunciones.setModel(model);
         listaFunciones.addMouseListener(new MouseAdapter() {
@@ -105,9 +103,5 @@ public class ListadoFunciones {
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al llamar al detalle funcion" + e.toString());
         }
-    }
-
-    public JPanel getPanel() {
-        return Panel;
     }
 }

@@ -10,7 +10,7 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ListadoEspectaculos {
+public class ListadoEspectaculos extends JFrame {
     private JPanel Panel;
     private JComboBox cmbBox;
     private JList lista;
@@ -20,13 +20,11 @@ public class ListadoEspectaculos {
     private DefaultListModel<String> model = new DefaultListModel<String>();
 
     public ListadoEspectaculos(String title){
-        /*          *DESCOMENTAR*
         super(title);
         setContentPane(Panel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         setSize(400,500);
-        */
         cargarCmbBox();
         lista.setModel(model);
         lista.addMouseListener(new MouseAdapter() {
@@ -83,9 +81,5 @@ public class ListadoEspectaculos {
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al llamar al detalle espectaculo" + e.toString());
         }
-    }
-
-    public JPanel getPanel() {
-        return Panel;
     }
 }

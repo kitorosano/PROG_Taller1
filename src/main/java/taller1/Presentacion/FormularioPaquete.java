@@ -24,7 +24,7 @@ public class FormularioPaquete extends JFrame{
     private JButton ingresarButton;
     private JTextField tfDescripcion;
     private JTextField tfDescuento;
-    private JTextField tfFechaVenc;
+    private JTextField tfFechaVenc; //TODO: Implementar JCalendar
 
     public FormularioPaquete(String title) {
         super(title);

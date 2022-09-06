@@ -31,7 +31,7 @@ public class FormularioFuncion extends JFrame {
     private JButton agregarFuncionButton;
     private JButton cancelarButton;
     private JList listaInvitados;
-    private JTextField tfFecha;
+    private JTextField tfFecha; //TODO: Implementar JCalendar
     private JTextField tfHora;
 
     private String seleccionado;
@@ -53,8 +53,7 @@ public class FormularioFuncion extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 if(!comprobarErrorencampos()){
                     try{
-                        //Fabrica.getInstance().getIEspectaculo().altaFuncion(crearFuncion());
-                        Fabrica.getInstance().getIEspectaculo().altaFuncion("a","a",crearFuncion());
+                        Fabrica.getInstance().getIEspectaculo().altaFuncion(crearFuncion());
                         JOptionPane.showMessageDialog(null,"Funcion creada con exito");
                         dispose();
                     } catch (Exception ex) {
@@ -75,8 +74,7 @@ public class FormularioFuncion extends JFrame {
                     if (e.getSource()==cbPlataforma) {
                         seleccionado=(String)cbPlataforma.getSelectedItem();
                         try{
-                            //Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
-                            Map<String,Espectaculo> espectaculos = new HashMap<>();
+                            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
                             for (Espectaculo esp : espectaculos.values()) {
                                 cbEspectaculo.addItem(esp.getNombre());
                             }
@@ -159,8 +157,7 @@ public class FormularioFuncion extends JFrame {
     }
     public boolean comprobarNombreUnico(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {       //Devuelve true si no hay error
         try {
-            //Map<String,Funcion> funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(nombrePlataforma,nombreEspectaculo);
-            Map<String, Funcion> funciones = new HashMap<>();
+            Map<String,Funcion> funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(nombrePlataforma,nombreEspectaculo);
             for (Funcion fun : funciones.values()) {
                 if (fun.getNombre().equals(nombreFuncion)) {
                     return false;
@@ -199,8 +196,7 @@ public class FormularioFuncion extends JFrame {
         LocalDateTime fechahora= LocalDateTime.of(LocalDate.parse(tfFecha.getText()), LocalTime.parse(tfHora.getText()));
         Espectaculo espectaculo = null;
         try {
-            //Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
-            Map<String, Espectaculo> espectaculos = new HashMap<>();
+            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
             for (Espectaculo esp : espectaculos.values()) {
                 if(esp.getNombre().equals((String)cbEspectaculo.getSelectedItem())){
                     espectaculo=esp;

@@ -18,7 +18,7 @@ public class FormularioUsuario extends JFrame {
     private JTextField tfNombre;
     private JTextField tfApellido;
     private JTextField tfCorreo;
-    private JTextField tfFechaNac;
+    private JTextField tfFechaNac;  //TODO: Implementar JCalendar
     private JButton ingresarButton;
     private JTextField tfDescripcion;
     private JTextField tfBiografia;

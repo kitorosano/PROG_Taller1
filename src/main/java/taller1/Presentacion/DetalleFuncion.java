@@ -1,14 +1,15 @@
 package main.java.taller1.Presentacion;
 
-import main.java.taller1.Logica.Clases.Espectador;
-import main.java.taller1.Logica.Clases.EspectadorRegistradoAFuncion;
-import main.java.taller1.Logica.Clases.Funcion;
+import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 
 public class DetalleFuncion extends JFrame {
@@ -50,9 +51,8 @@ public class DetalleFuncion extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
-                    Espectador espectador = espectadoresDeFuncion.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()).getEspectador();
-
-                    JFrame detalleEspectador = new DetalleUsuario("Detalle Usuario", espectador);
+                    Espectador espectador=espectadoresDeFuncion.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()).getEspectador();
+                    JFrame detalleEspectador= new DetalleUsuario("Detalle Usuario",espectador);
                     detalleEspectador.setVisible(true);
                 }
             }
@@ -61,7 +61,7 @@ public class DetalleFuncion extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                JFrame formularioRegistroEspectador = new FormularioRegistroEspectadorAFuncion("Formulario de registro de espectador a funcion", funcion);
+                JFrame formularioRegistroEspectador = new FormularioRegistroEspectadorAFuncion("Formulario de registro de espectador a funcion",funcion);
                 formularioRegistroEspectador.setVisible(true);
             }
         });
@@ -81,8 +81,10 @@ public class DetalleFuncion extends JFrame {
 
     private void cargarTabla() {
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
+
         try {
             this.espectadoresDeFuncion = Fabrica.getInstance().getIUsuario().obtenerEspectadoresRegistradosAFuncion(this.funcion.getNombre());
+
             for (Map.Entry<String, EspectadorRegistradoAFuncion> entry : espectadoresDeFuncion.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getEspectador().getNickname(), entry.getValue().getEspectador().getCorreo()});
             }

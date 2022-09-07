@@ -30,7 +30,9 @@ public class ListadoUsuarios extends JFrame {
         listaEspectadores.setModel(modelEspectadores);
         listaArtistas.setModel(modelArtistas);
         cargarLista();
-        setSize(600,500);
+        setResizable(false );
+
+
         listaEspectadores.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

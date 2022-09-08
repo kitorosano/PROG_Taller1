@@ -3,27 +3,31 @@
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="FormLayout">
     <rowspec value="center:d:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="center:d:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="center:d:noGrow"/>
+    <colspec value="fill:10px:noGrow"/>
+    <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:d:grow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:10px:noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="435"/>
+      <xy x="20" y="20" width="528" height="366"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <grid id="5d83a" layout-manager="FormLayout">
-        <rowspec value="center:d:grow"/>
+        <rowspec value="center:40px:noGrow"/>
         <colspec value="fill:d:noGrow"/>
         <colspec value="left:4dlu:noGrow"/>
-        <colspec value="fill:max(d;4px):noGrow"/>
-        <colspec value="left:46dlu:noGrow"/>
+        <colspec value="fill:max(d;4px):grow"/>
+        <colspec value="left:40dlu:noGrow"/>
         <colspec value="fill:max(d;4px):noGrow"/>
         <colspec value="left:4dlu:noGrow"/>
-        <colspec value="fill:max(d;4px):noGrow"/>
+        <colspec value="fill:max(d;4px):grow"/>
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties/>
@@ -45,15 +49,6 @@
             </constraints>
             <properties/>
           </component>
-          <component id="b5955" class="javax.swing.JLabel">
-            <constraints>
-              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <forms/>
-            </constraints>
-            <properties>
-              <text value="Artista organizador"/>
-            </properties>
-          </component>
           <component id="fccba" class="javax.swing.JComboBox" binding="cbArtista">
             <constraints>
               <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
@@ -67,10 +62,19 @@
               <forms defaultalign-horz="false"/>
             </constraints>
           </hspacer>
+          <component id="b5955" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Artista organizador"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="42327" layout-manager="FormLayout">
-        <rowspec value="center:34px:noGrow"/>
+        <rowspec value="center:d:noGrow"/>
         <rowspec value="top:4dlu:noGrow"/>
         <rowspec value="center:max(d;4px):noGrow"/>
         <rowspec value="top:4dlu:noGrow"/>
@@ -87,7 +91,7 @@
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:d:grow"/>
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties/>
@@ -218,7 +222,7 @@
         </children>
       </grid>
       <grid id="70548" layout-manager="FormLayout">
-        <rowspec value="center:126px:noGrow"/>
+        <rowspec value="center:50px:noGrow"/>
         <colspec value="fill:d:grow"/>
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:max(d;4px):noGrow"/>
@@ -227,7 +231,7 @@
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:d:grow"/>
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties/>
@@ -265,6 +269,18 @@
           </hspacer>
         </children>
       </grid>
+      <hspacer id="b453d">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+      </hspacer>
+      <hspacer id="3b79e">
+        <constraints>
+          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+      </hspacer>
     </children>
   </grid>
 </form>

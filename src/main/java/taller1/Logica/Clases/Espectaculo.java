@@ -122,7 +122,7 @@ public class Espectaculo {
                 ", costo=" + costo +
                 ", fechaRegistro=" + fechaRegistro +
                 ", plataforma=" + plataforma +
-                ", arganizador=" + artista +
+                ", artistaOganizador=" + artista +
                 '}';
     }
 }

@@ -12,7 +12,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 
 public class FormularioEspectaculo extends JFrame {
@@ -30,11 +29,14 @@ public class FormularioEspectaculo extends JFrame {
     private JSpinner spEspMaximos;
     private JSpinner spEspMinimos;
 
+    //TODO: QUE EL TITULO SE TRAIGA DE UNA PROPIEDAD STATIC DEL DASHBOARD, Y QUE DESDE ESTA PANTALLA SE AGREGUE " - NUEVO ESPECTACULO"
     public FormularioEspectaculo(String title) {
-        super(title);
+        super(title + " - Nuevo Espectaculo");
         setContentPane(panel1);
+        setSize(500, 325);
+        setResizable(false);
+        setLocationRelativeTo(null); //Centrar la ventana
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        pack();
 
         soloNumero(tfDuracion);
         soloNumero(tfCosto);
@@ -105,9 +107,13 @@ public class FormularioEspectaculo extends JFrame {
     }
 
     public Espectaculo crearEspectaculo() {
-        String nombre = tfNombre.getText(), descripcion = tfDescripcion.getText(), url = tfURL.getText();
-        int minEspec = (int) spEspMinimos.getValue(), maxEspec = (int) spEspMaximos.getValue();
-        double duracion = Double.parseDouble(tfDuracion.getText()), costo = Double.parseDouble(tfCosto.getText());
+        String nombre = tfNombre.getText(),
+               descripcion = tfDescripcion.getText(),
+               url = tfURL.getText();
+        int minEspec = (int) spEspMinimos.getValue(),
+            maxEspec = (int) spEspMaximos.getValue();
+        double duracion = Double.parseDouble(tfDuracion.getText()),
+               costo = Double.parseDouble(tfCosto.getText());
         Plataforma plataforma = null;
         Artista artista = null;
         Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();

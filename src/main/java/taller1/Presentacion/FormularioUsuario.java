@@ -31,11 +31,15 @@ public class FormularioUsuario extends JFrame {
 
     private String seleccionado;
 
+    //TODO: QUE EL TITULO SE TRAIGA DE UNA PROPIEDAD STATIC DEL DASHBOARD, Y QUE DESDE ESTA PANTALLA SE AGREGUE " - NUEVO USUARIO"
     public FormularioUsuario(String title) {
-        super(title);
+        super(title + " - Nuevo Usuario");
         setContentPane(panel1);
+        setSize(360, 350);
+        setResizable(false);
+        setLocationRelativeTo(null); //Centrar la ventana
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        pack();
+
         comboBoxTipo.addItem("Artista");
         comboBoxTipo.addItem("Espectador");
         ingresarButton.addMouseListener(new MouseAdapter() {
@@ -91,6 +95,7 @@ public class FormularioUsuario extends JFrame {
                         lblBiografia.setVisible(false);
                         lblURL.setVisible(false);
                         lbDescripcion.setVisible(false);
+                        setSize(360, 280);
                     } else {
                         tfDescripcion.setVisible(true);
                         tfURL.setVisible(true);
@@ -98,6 +103,7 @@ public class FormularioUsuario extends JFrame {
                         lblBiografia.setVisible(true);
                         lblURL.setVisible(true);
                         lbDescripcion.setVisible(true);
+                        setSize(360, 350);
                     }
                 }
             }

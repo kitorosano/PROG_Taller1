@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="FormLayout">
     <rowspec value="center:d:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:134px:noGrow"/>
+    <rowspec value="center:166px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:85px:noGrow"/>
     <colspec value="fill:d:grow"/>
@@ -67,6 +67,10 @@
       </grid>
       <grid id="5333c" layout-manager="FormLayout">
         <rowspec value="center:104px:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:31px:noGrow"/>
+        <rowspec value="top:4dlu:noGrow"/>
+        <rowspec value="center:max(d;4px):noGrow"/>
         <colspec value="fill:d:grow"/>
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:max(d;4px):noGrow"/>
@@ -107,6 +111,24 @@
               </component>
             </children>
           </scrollpane>
+          <component id="1df95" class="javax.swing.JButton" binding="agregarAlPaqueteButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Agregar al paquete"/>
+            </properties>
+          </component>
+          <component id="7c83d" class="javax.swing.JButton" binding="eliminarDelPaqueteButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Eliminar del paquete"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="640fb" layout-manager="FormLayout">

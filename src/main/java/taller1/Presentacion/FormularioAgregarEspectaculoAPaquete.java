@@ -8,6 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.Map;
 
 public class FormularioAgregarEspectaculoAPaquete extends JFrame{
@@ -18,9 +19,13 @@ public class FormularioAgregarEspectaculoAPaquete extends JFrame{
     private JList lstEspectIngresados;
     private JButton cancelarButton;
     private JButton ingresarButton;
+    private JButton agregarAlPaqueteButton;
+    private JButton eliminarDelPaqueteButton;
 
     DefaultListModel<String> modelAAgregar = new DefaultListModel<String>();
     DefaultListModel<String> modelAgregados = new DefaultListModel<String>();
+
+    Map<String,Espectaculo> espectaculosNuevos= new HashMap<>();
     public FormularioAgregarEspectaculoAPaquete(String title) {
         super(title);
         setContentPane(panel1);
@@ -48,9 +53,43 @@ public class FormularioAgregarEspectaculoAPaquete extends JFrame{
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (e.getSource()==cbPaquete) {
+                    espectaculosNuevos.clear();
                     cargarDatosListaAIngresar();
                     cargarDatosListaIngresados();
                 }
+            }
+        });
+        agregarAlPaqueteButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Map<String, Espectaculo>espectaculos;
+                String elegido;
+                elegido=(String) lstEspectAingresar.getSelectedValue();
+                espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos((String)cbPlataforma.getSelectedItem());
+                Espectaculo nuevo = espectaculos.get(elegido);
+                espectaculosNuevos.put(nuevo.getNombre(),nuevo);
+                modelAgregados.addElement(elegido);
+                modelAAgregar.remove(lstEspectAingresar.getSelectedIndex());
+            }
+        });
+        eliminarDelPaqueteButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                espectaculosNuevos.remove((String)lstEspectIngresados.getSelectedValue());
+                modelAAgregar.addElement((String)lstEspectIngresados.getSelectedValue());
+                modelAgregados.remove(lstEspectIngresados.getSelectedIndex());
+            }
+        });
+        ingresarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //Enviar a la base de datos los paquetes
+            }
+        });
+        cancelarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
             }
         });
     }
@@ -96,6 +135,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JFrame{
                 if(modelAAgregar.contains(esp.getNombre())){
                     modelAAgregar.removeElement(esp.getNombre());
                 }
+                espectaculos.put(esp.getNombre(),esp);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.toString());

@@ -10,7 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
 
-public class DetallePaquete extends JFrame {
+public class DetallePaquete extends JInternalFrame {
     private JPanel mainPanel;
     private JTextArea nombreTextArea;
     private JTextArea descripcionTextArea;
@@ -53,7 +53,10 @@ public class DetallePaquete extends JFrame {
                     String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
                     Espectaculo espectaculo = EspectaculosPaquete.get(valor);
 
-                    JFrame detalleEspectaculo = new DetalleEspectaculo("Detalle de espectaculo", espectaculo);
+                    JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle de espectaculo", espectaculo);
+                    detalleEspectaculo.setIconifiable(true);
+                    detalleEspectaculo.setClosable(true);
+                    Dashboard.getInstance().getDashboardJDesktopPane().add(detalleEspectaculo);
                     detalleEspectaculo.setVisible(true);
                 }
             }

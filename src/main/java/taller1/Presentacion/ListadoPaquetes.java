@@ -1,4 +1,7 @@
 package main.java.taller1.Presentacion;
 
-public class ListadoPaquetes {
+import javax.swing.*;
+
+public class ListadoPaquetes extends JInternalFrame {
+    public ListadoPaquetes(String title){}
 }

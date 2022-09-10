@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Map;
 
-public class FormularioUsuario extends JFrame {
+public class FormularioUsuario extends JInternalFrame {
     private JPanel panel1;
     private JTextField tfNickname;
     private JTextField tfNombre;

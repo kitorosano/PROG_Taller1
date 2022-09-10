@@ -10,7 +10,7 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ListadoEspectaculos extends JFrame {
+public class ListadoEspectaculos extends JInternalFrame {
     private JPanel Panel;
     private JComboBox cmbBox;
     private JList lista;
@@ -76,7 +76,10 @@ public class ListadoEspectaculos extends JFrame {
         try {
             espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(cmbBox.getSelectedItem().toString());
             Espectaculo espectaculo = espectaculos.get(lista.getSelectedValue());  //Guardo el espectaculo seleccionado buscando en la lista por su nickname
-            JFrame detalle = new DetalleEspectaculo("Detalle espectaculo", espectaculo);
+            JInternalFrame detalle = new DetalleEspectaculo("Detalle espectaculo", espectaculo);
+            detalle.setIconifiable(true);
+            detalle.setClosable(true);
+            Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
             detalle.setVisible(true);
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al llamar al detalle espectaculo" + e.toString());

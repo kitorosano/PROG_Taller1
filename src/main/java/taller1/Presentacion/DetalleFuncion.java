@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DetalleFuncion extends JFrame {
+public class DetalleFuncion extends JInternalFrame {
     private JPanel mainPanel;
     private JTextArea textArea1;
     private JTextArea nombreContenido;
@@ -52,8 +52,11 @@ public class DetalleFuncion extends JFrame {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
                     Espectador espectador=espectadoresDeFuncion.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()).getEspectador();
-                    JFrame detalleEspectador= new DetalleUsuario("Detalle Usuario",espectador);
-                    detalleEspectador.setVisible(true);
+                    JInternalFrame detalle= new DetalleUsuario("Detalle Usuario",espectador);
+                    detalle.setIconifiable(true);
+                    detalle.setClosable(true);
+                    Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
+                    detalle.setVisible(true);
                 }
             }
         });
@@ -61,7 +64,7 @@ public class DetalleFuncion extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                JFrame formularioRegistroEspectador = new FormularioRegistroEspectadorAFuncion("Formulario de registro de espectador a funcion",funcion);
+                JInternalFrame formularioRegistroEspectador = new FormularioRegistroEspectadorAFuncion("Formulario de registro de espectador a funcion",funcion);
                 formularioRegistroEspectador.setVisible(true);
             }
         });

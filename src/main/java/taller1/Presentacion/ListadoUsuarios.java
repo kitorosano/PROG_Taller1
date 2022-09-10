@@ -4,12 +4,15 @@ import main.java.taller1.Logica.Clases.Usuario;
 import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ListadoUsuarios extends JFrame {
+public class ListadoUsuarios extends JInternalFrame {
     private DefaultListModel<String> model = new DefaultListModel<String>();
 
     private JList listaUsuarios;
@@ -31,6 +34,7 @@ public class ListadoUsuarios extends JFrame {
                 }
             }
         });
+
     }
 
     private void cargarLista() {
@@ -53,7 +57,10 @@ public class ListadoUsuarios extends JFrame {
         try {
             usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
             Usuario usuario = usuarios.get(listaUsuarios.getSelectedValue());  //Guardo el usuario seleccionado buscando en la lista por su nickname
-            JFrame detalle = new DetalleUsuario("Detalle usuario", usuario);
+            JInternalFrame detalle = new DetalleUsuario("Detalle usuario", usuario);
+            detalle.setIconifiable(true);
+            detalle.setClosable(true);
+            Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
             detalle.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al llamar al detalle usuario" + e.toString());

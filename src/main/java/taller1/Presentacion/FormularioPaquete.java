@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Map;
 
-public class FormularioPaquete extends JFrame{
+public class FormularioPaquete extends JInternalFrame{
     private JPanel panel1;
     private JTextField tfNombre;
     private JButton cancelarButton;

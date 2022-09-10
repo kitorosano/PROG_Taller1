@@ -1,4 +1,7 @@
 package main.java.taller1.Presentacion;
 
-public class FormularioAgregarEspectaculoAPaquete {
+import javax.swing.*;
+
+public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame {
+    public FormularioAgregarEspectaculoAPaquete(String title){}
 }

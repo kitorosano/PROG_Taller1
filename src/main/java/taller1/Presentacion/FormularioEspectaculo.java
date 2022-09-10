@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FormularioEspectaculo extends JFrame {
+public class FormularioEspectaculo extends JInternalFrame {
 
     private JPanel panel1;
     private JComboBox cbPlataforma;

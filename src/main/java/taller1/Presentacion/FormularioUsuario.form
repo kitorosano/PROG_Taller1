@@ -11,7 +11,9 @@
     <constraints>
       <xy x="20" y="20" width="500" height="450"/>
     </constraints>
-    <properties/>
+    <properties>
+      <preferredSize width="600" height="500"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="ea6c" layout-manager="FormLayout">

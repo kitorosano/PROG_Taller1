@@ -18,6 +18,7 @@ public class ListadoFunciones extends JFrame {
     private JLabel lblPlataforma;
     private JLabel lblEspectaculo;
     private JLabel lblFunciones;
+    private JTextField txtFunciones;
 
     private DefaultListModel<String> model = new DefaultListModel<String>();
 
@@ -26,9 +27,9 @@ public class ListadoFunciones extends JFrame {
         setContentPane(Panel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
-        setSize(600,500);
         cargarPlataformas();
         listaFunciones.setModel(model);
+        setResizable(false);
         listaFunciones.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -48,6 +49,43 @@ public class ListadoFunciones extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cargarFunciones();
+            }
+        });
+        txtFunciones.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {//Se ejecuta cuando se libera una tecla
+                JTextField textField = (JTextField) e.getSource();
+                //obtiene contenido del textfield
+                String text = textField.getText();
+                if (text.trim().length() > 0) {
+                    //nuevo Model temporal
+                    DefaultListModel<String> tmp = new DefaultListModel();
+                    for (int i = 0; i < model.getSize(); i++) {//recorre Model original
+                        //si encuentra coincidencias agrega a model temporal
+                        if (model.getElementAt(i).toLowerCase().contains(text.toLowerCase())) {
+                            tmp.addElement(model.getElementAt(i));
+                        }
+                    }
+                    //agrega nuevo modelo a JList
+                    listaFunciones.setModel(tmp);
+                } else {//si esta vacio muestra el Model original
+                    listaFunciones.setModel(model);
+                }
+            }
+        });
+        txtFunciones.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                txtFunciones.setText("");
+            }
+        });
+        txtFunciones.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusGained(e);
+                txtFunciones.setText("Buscar funcion...");
+                listaFunciones.setModel(model);
             }
         });
     }

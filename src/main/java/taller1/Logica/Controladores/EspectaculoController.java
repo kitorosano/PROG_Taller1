@@ -385,9 +385,9 @@ public class EspectaculoController implements IEspectaculo {
         Statement statement = null;
         ResultSet resultSet = null;
         String selectEspectaculosByPaquete = "SELECT *\n" +
-                "FROM espectaculos_paquetes ES_PAQ, espectaculos ES, artistas UA, plataformas PL\\n\" +\n" +
+                "FROM espectaculos_paquetes ES_PAQ, espectaculos ES, artistas UA, plataformas PL\n" +
                 "WHERE ES_PAQ.es_paq_nombreEspectaculo = ES.es_nombre \n" +
-                "AND ES.es_nombreArtista = UA.ua_nombre\n" +
+                "AND ES.es_artistaOrganizador = UA.ua_nickname\n" +           //CAMBIAR ES.es_nombreArtista por ES.es_artistaOrganizador y UA.ua_nombre por nickname
                 "AND ES.es_nombrePlataforma = PL.pl_nombre\n" +
                 "AND ES_PAQ.es_paq_nombrePaquete = '" + nombrePaquete + "'\n" +
                 "ORDER BY ES.es_fechaRegistro DESC";

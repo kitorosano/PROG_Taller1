@@ -19,7 +19,7 @@ public class Main {
                 .systemProperties()
                 .load();
 
-        JFrame frame = new FormularioRegistroEspectadorAFuncion("Corona Tickets UY",null);
+        JFrame frame = new Dashboard("Corona Tickets UY");
         frame.setVisible(true);
     }
 }

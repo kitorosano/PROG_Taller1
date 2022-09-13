@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.Map;
 import java.util.Set;
 
-public class FormularioPlataforma extends JFrame {
+public class FormularioPlataforma extends JInternalFrame {
     private JPanel panel1;
     private JTextField tfNombre;
     private JButton volverButton;
@@ -21,7 +21,7 @@ public class FormularioPlataforma extends JFrame {
 
     public FormularioPlataforma(String title) {
         super(title);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         setContentPane(panel1);
         ingresarButton.addMouseListener(new MouseAdapter() {
@@ -66,8 +66,8 @@ public class FormularioPlataforma extends JFrame {
     }
 
     public void cerrarFormulario(MouseEvent e) {
-        JComponent comp = (JComponent) e.getSource();
-        Window win = SwingUtilities.getWindowAncestor(comp);
-        win.dispose();
+    //    JComponent comp = (JComponent) e.getSource();
+    //    Window win = SwingUtilities.getWindowAncestor(comp);
+    //    win.dispose();
     }
 }

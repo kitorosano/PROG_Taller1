@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FormularioRegistroEspectadorAFuncion extends JFrame {
+public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
     private JPanel panel1;
     private JComboBox cbPlataforma;
     private JComboBox cbEspectaculo;

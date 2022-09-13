@@ -10,7 +10,7 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ListadoFunciones extends JFrame {
+public class ListadoFunciones extends JInternalFrame {
     private JPanel Panel;
     private JComboBox cmbPlataforma;
     private JComboBox cmbEspectaculo;
@@ -135,7 +135,10 @@ public class ListadoFunciones extends JFrame {
         try {
             funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(cmbPlataforma.getSelectedItem().toString(), cmbEspectaculo.getSelectedItem().toString());
             Funcion funcion = funciones.get(listaFunciones.getSelectedValue());  //Guardo la funcion seleccionada buscando en la lista por su nombre
-            JFrame detalle = new DetalleFuncion("Detalle funcion", funcion);
+            JInternalFrame detalle = new DetalleFuncion("Detalle funcion", funcion);
+            detalle.setIconifiable(true);
+            detalle.setClosable(true);
+            Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
             detalle.setVisible(true);
 
         }catch (Exception e){

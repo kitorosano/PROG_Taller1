@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
 
-public class DetalleUsuario extends JFrame {
+public class DetalleUsuario extends JInternalFrame {
 
     private JPanel mainPanel;
     private JTextArea nicknameTextArea;
@@ -87,13 +87,18 @@ public class DetalleUsuario extends JFrame {
                     if (usuario instanceof Artista) {
                         Espectaculo espectaculo = espectaculosArtista.get(valor);
 
-                        JFrame detalleEspectaculo = new DetalleEspectaculo("Detalle Espectaculo", espectaculo);
+                        JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle Espectaculo", espectaculo);
+                        detalleEspectaculo.setIconifiable(true);
+                        detalleEspectaculo.setClosable(true);
+                        Dashboard.getInstance().getDashboardJDesktopPane().add(detalleEspectaculo);
                         detalleEspectaculo.setVisible(true);
                     } else {
                         Funcion funcion = funcionesRegistradasDelEspectador.get(valor).getFuncion();
 
-                        JFrame detalleFuncion = new DetalleFuncion("Detalle Funcion", funcion);
-                        detalleFuncion.setVisible(true);
+                        JInternalFrame detalle = new DetalleFuncion("Detalle Funcion", funcion);
+                        detalle.setIconifiable(true);
+                        Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
+                        detalle.setVisible(true);
                     }
 
 

@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FormularioAgregarEspectaculoAPaquete extends JFrame{
+public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
     private JPanel panel1;
     private JComboBox cbPaquete;
     private JComboBox cbPlataforma;

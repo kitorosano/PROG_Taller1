@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-public class DetalleEspectaculo extends JFrame {
+public class DetalleEspectaculo extends JInternalFrame {
     private JPanel mainPanel;
     private JTextArea nombreTextArea;
     private JTextArea descripcionTextArea;
@@ -73,8 +73,11 @@ public class DetalleEspectaculo extends JFrame {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
                     Funcion funcion=FuncionesDelEspectaculo.get(tablaFunciones.getValueAt(tablaFunciones.getSelectedRow(), 0).toString());
-                    JFrame detalleFuncion = new DetalleFuncion("Detalle de funcion",funcion);
-                    detalleFuncion.setVisible(true);
+                    JInternalFrame detalle = new DetalleFuncion("Detalle de funcion",funcion);
+                    detalle.setIconifiable(true);
+                    detalle.setClosable(true);
+                    Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
+                    detalle.setVisible(true);
                 }
             }
         });
@@ -84,7 +87,10 @@ public class DetalleEspectaculo extends JFrame {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
                     Paquete paquete=PaquetesDelEspectaculo.get(tablaPaquetes.getValueAt(tablaPaquetes.getSelectedRow(), 0).toString());
-                    JFrame detallePaquete = new DetallePaquete("Detalle de paquete",paquete);
+                    JInternalFrame detallePaquete = new DetallePaquete("Detalle de paquete",paquete);
+                    detallePaquete.setIconifiable(true);
+                    detallePaquete.setClosable(true);
+                    Dashboard.getInstance().getDashboardJDesktopPane().add(detallePaquete);
                     detallePaquete.setVisible(true);
                 }
             }
@@ -93,7 +99,10 @@ public class DetalleEspectaculo extends JFrame {
         agregarFuncionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame formularioFuncion = new FormularioFuncion("Formulario de Funcion",espectaculo);
+                JInternalFrame formularioFuncion = new FormularioFuncion("Formulario de Funcion",espectaculo);
+                formularioFuncion.setIconifiable(true);
+                formularioFuncion.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(formularioFuncion);
                 formularioFuncion.setVisible(true);
             }
         });

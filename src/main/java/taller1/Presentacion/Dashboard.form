@@ -2,24 +2,199 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="main.java.taller1.Presentacion.Dashboard">
   <grid id="27dc6" binding="panelDashboard" layout-manager="FormLayout">
     <rowspec value="center:d:noGrow"/>
-    <colspec value="fill:d:grow"/>
+    <rowspec value="center:686px:noGrow"/>
+    <colspec value="fill:1414px:noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="1508" height="832"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <toolbar id="316ba" binding="barraNavegacion">
+      <grid id="e7bec" class="javax.swing.JMenuBar" binding="menuBar" layout-manager="FormLayout">
+        <rowspec value="center:d:noGrow"/>
+        <colspec value="fill:max(d;4px):noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:max(d;4px):noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:max(d;4px):noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:max(d;4px):noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:max(d;4px):noGrow"/>
+        <colspec value="left:4dlu:noGrow"/>
+        <colspec value="fill:max(d;4px):noGrow"/>
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="-1" height="20"/>
-          </grid>
-          <forms defaultalign-horz="false"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
         </constraints>
         <properties/>
         <border type="none"/>
-        <children/>
-      </toolbar>
+        <children>
+          <grid id="8e8a9" class="javax.swing.JMenu" binding="altasJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Altas"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="62d0a" class="javax.swing.JMenuItem" binding="altaDeUsuarioJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Alta de usuario"/>
+                </properties>
+              </component>
+              <component id="d763" class="javax.swing.JMenuItem" binding="altaDeEspectaculoJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Alta de espectaculo"/>
+                </properties>
+              </component>
+              <component id="de87e" class="javax.swing.JMenuItem" binding="altaDeFuncionJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Alta de funcion"/>
+                </properties>
+              </component>
+              <component id="44d45" class="javax.swing.JMenuItem" binding="altaDePaqueteJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Alta de paquete"/>
+                </properties>
+              </component>
+              <component id="524b" class="javax.swing.JMenuItem" binding="altaDePlataformaJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Alta de plataforma"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="23ea5" class="javax.swing.JMenu" binding="consultasJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+            <constraints>
+              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Consultas"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="39d7e" class="javax.swing.JMenuItem" binding="consultaDeUsuarioJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Consulta de usuario"/>
+                </properties>
+              </component>
+              <component id="3d2e9" class="javax.swing.JMenuItem" binding="consultaDeEspectaculoJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Consulta de espectaculo"/>
+                </properties>
+              </component>
+              <component id="f10f3" class="javax.swing.JMenuItem" binding="consultaDeFuncionJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Consulta de Funcion"/>
+                </properties>
+              </component>
+              <component id="8184b" class="javax.swing.JMenuItem" binding="consultaDePaqueteJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Consulta de paquete"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="7108e" class="javax.swing.JMenu" binding="inicioJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Inicio"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="5317a" class="javax.swing.JMenuItem" binding="cargarDatosJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Cargar datos de prueba"/>
+                </properties>
+              </component>
+              <component id="bdf67" class="javax.swing.JMenuItem" binding="cerrarJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Cerrar"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="e18d7" class="javax.swing.JMenu" binding="registrosJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+            <constraints>
+              <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Registros"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="7dc27" class="javax.swing.JMenuItem" binding="registroAFuncionJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Registro a funcion"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="5d335" class="javax.swing.JMenu" binding="agregarJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+            <constraints>
+              <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <text value="Agregar"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="d5395" class="javax.swing.JMenuItem" binding="agregarEspAPaqueteJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Agregar espectaculo a paquete"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+          <grid id="de48c" class="javax.swing.JMenu" binding="modificarJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+            <constraints>
+              <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms/>
+            </constraints>
+            <properties>
+              <text value="Modificar"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="c62a0" class="javax.swing.JMenuItem" binding="modificarDatosDeUsuarioJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Modificar datos de usuario"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <component id="bb3c1" class="javax.swing.JDesktopPane" binding="dashboardJDesktopPane">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+      </component>
     </children>
   </grid>
 </form>

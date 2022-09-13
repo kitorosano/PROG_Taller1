@@ -9,7 +9,7 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ListadoPaquetes extends JFrame{
+public class ListadoPaquetes extends JInternalFrame{
 
     private DefaultListModel<String> model = new DefaultListModel<String>();
     private JPanel Panel;
@@ -99,5 +99,4 @@ public class ListadoPaquetes extends JFrame{
             JOptionPane.showMessageDialog(null, "Error al llamar al detalle paquete" + e.toString());
         }
     }
-
 }

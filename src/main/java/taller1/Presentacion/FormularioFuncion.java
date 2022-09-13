@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FormularioFuncion extends JFrame {
+public class FormularioFuncion extends JInternalFrame {
     private DefaultListModel<String> modelAInvitar = new DefaultListModel<String>();
     private DefaultListModel<String> modelInvitados = new DefaultListModel<String>();
     private JPanel panel1;

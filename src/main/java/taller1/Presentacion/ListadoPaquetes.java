@@ -93,7 +93,11 @@ public class ListadoPaquetes extends JInternalFrame{
         try {
             Paquetes = Fabrica.getInstance().getIEspectaculo().obtenerPaquetes();
             Paquete paquete = Paquetes.get(listaPaquetes.getSelectedValue());  //Guardo el paquete seleccionada buscando en la lista por su nombre
-            JFrame detalle = new DetallePaquete("Detalle paquete", paquete);
+            JInternalFrame detalle = new DetallePaquete("Detalle paquete", paquete);
+            detalle.setIconifiable(true);
+            detalle.setClosable(true);
+            Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
+            detalle.setVisible(true);
             detalle.setVisible(true);
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al llamar al detalle paquete" + e.toString());

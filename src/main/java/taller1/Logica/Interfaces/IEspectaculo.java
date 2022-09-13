@@ -19,4 +19,5 @@ public interface IEspectaculo {
     Map<String, Paquete> obtenerPaquetes();
     Map<String, Espectaculo> obtenerEspectaculosDePaquete(String nombrePaquete);
     Map<String, Paquete> obtenerPaquetesDeEspectaculo(String nombreEspectaculo);
+    void altaEspectaculosAPaquete(Map<String, Espectaculo> espectaculos, String nombrePaquete);
 }

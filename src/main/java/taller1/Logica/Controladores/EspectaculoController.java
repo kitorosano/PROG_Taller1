@@ -485,4 +485,34 @@ public class EspectaculoController implements IEspectaculo {
         }
         return paquetes;
     }
+
+    @Override
+    public void altaEspectaculosAPaquete(Map<String, Espectaculo> espectaculos, String nombrePaquete) {
+        Connection connection = null;
+        Statement statement = null;
+        String insertEspectaculosPaquetes = "INSERT INTO espectaculos_paquetes (es_paq_nombreEspectaculo, es_paq_nombrePaquete) VALUES ";
+        for (Espectaculo espectaculo : espectaculos.values()) {
+            insertEspectaculosPaquetes += "('" + espectaculo.getNombre() + "', '" + nombrePaquete + "'), ";
+        }
+        insertEspectaculosPaquetes = insertEspectaculosPaquetes.substring(0, insertEspectaculosPaquetes.length() - 2);
+        try {
+            connection = ConexionDB.getConnection();
+            statement = connection.createStatement();
+            statement.executeUpdate(insertEspectaculosPaquetes);
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Error al conectar con la base de datos", e);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Error al dar de alta los espectáculos al paquete", e);
+        } finally {
+            try {
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+            }
+        }
+    }
 }

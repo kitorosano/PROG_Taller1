@@ -11,7 +11,7 @@ public class Main {
                 .systemProperties()
                 .load();
 
-        JFrame frame = new FormularioUsuario("Corona Tickets UY");
+        JFrame frame = new FormularioEspectaculo("Corona Tickets UY");
         frame.setVisible(true);
     }
 }

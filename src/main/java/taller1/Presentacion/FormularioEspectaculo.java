@@ -33,7 +33,7 @@ public class FormularioEspectaculo extends JFrame {
     public FormularioEspectaculo(String title) {
         super(title + " - Nuevo Espectaculo");
         setContentPane(panel1);
-        setSize(500, 325);
+        setSize(500, 280);
         setResizable(false);
         setLocationRelativeTo(null); //Centrar la ventana
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -268,8 +268,7 @@
         </constraints>
         <properties>
           <editable value="false"/>
-          <text value="Artista Organizador"/>
-        </properties>
+          <text value="Artista Organizador"/>        </properties>
       </component>
       <component id="82439" class="javax.swing.JTextArea" binding="artistaOrganizadorContenido">
         <constraints>

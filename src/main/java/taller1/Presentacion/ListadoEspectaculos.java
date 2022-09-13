@@ -2,7 +2,6 @@ package main.java.taller1.Presentacion;
 
 import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Plataforma;
-import main.java.taller1.Logica.Clases.Usuario;
 import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
@@ -16,6 +15,7 @@ public class ListadoEspectaculos extends JInternalFrame {
     private JList lista;
     private JLabel lblPlataforma;
     private JLabel lblEspectaculos;
+    private JTextField txtEspectaculo;
 
     private DefaultListModel<String> model = new DefaultListModel<String>();
 
@@ -24,9 +24,10 @@ public class ListadoEspectaculos extends JInternalFrame {
         setContentPane(Panel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
-        setSize(400,500);
         cargarCmbBox();
         lista.setModel(model);
+        setResizable(false);
+
         lista.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -40,6 +41,42 @@ public class ListadoEspectaculos extends JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cargarLista();
+            }
+        });
+        txtEspectaculo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {//Se ejecuta cuando se libera una tecla
+                JTextField textField = (JTextField) e.getSource();
+                //obtiene contenido del textfield
+                String text = textField.getText();
+                if (text.trim().length() > 0) {
+                    //nuevo Model temporal
+                    DefaultListModel<String> tmp = new DefaultListModel();
+                    for (int i = 0; i < model.getSize(); i++) {//recorre Model original
+                        //si encuentra coincidencias agrega a model temporal
+                        if (model.getElementAt(i).toLowerCase().contains(text.toLowerCase())) {
+                            tmp.addElement(model.getElementAt(i));
+                        }
+                    }
+                    //agrega nuevo modelo a JList
+                    lista.setModel(tmp);
+                } else {//si esta vacio muestra el Model original
+                    lista.setModel(model);
+                }
+            }
+        });
+        txtEspectaculo.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+                txtEspectaculo.setText("");
+            }
+        });
+        txtEspectaculo.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                super.focusLost(e);
+                txtEspectaculo.setText("Buscar espectaculo...");
             }
         });
     }

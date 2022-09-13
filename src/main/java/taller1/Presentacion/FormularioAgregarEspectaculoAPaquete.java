@@ -83,7 +83,9 @@ public class FormularioAgregarEspectaculoAPaquete extends JFrame{
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //Enviar a la base de datos los paquetes
+                //altaEspectaculosAPaquete(espectaculosNuevos, (String)cbPaquete.getSelectedItem());
+                JOptionPane.showMessageDialog(null,"Espectadores agregados con exito");
+                dispose();
             }
         });
         cancelarButton.addMouseListener(new MouseAdapter() {

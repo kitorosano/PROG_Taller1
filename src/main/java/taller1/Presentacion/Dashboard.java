@@ -1,12 +1,18 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.Fabrica;
+import main.java.taller1.Persistencia.ConexionDB;
+import org.apache.ibatis.jdbc.ScriptRunner;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class Dashboard extends JFrame {
     private JPanel panelDashboard;
@@ -34,6 +40,7 @@ public class Dashboard extends JFrame {
     private JMenuItem nosotrosJMenuItem;
     private JMenuItem githubJMenuItem;
     private JMenuItem registroTrabajoJMenuItem;
+    private JMenuItem vaciarDatosJMenuItem;
 
     public JDesktopPane getDashboardJDesktopPane(){
         return this.dashboardJDesktopPane;
@@ -52,10 +59,29 @@ public class Dashboard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
 
+        vaciarDatosJMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Fabrica.getInstance().getIEspectaculo().vaciarDatos();
+                    Fabrica.getInstance().getIUsuario().vaciarDatos();
+                    JOptionPane.showMessageDialog(null, "Datos vaciados correctamente");
+                } catch (Exception exception) {
+                    JOptionPane.showMessageDialog(null, "Error al vaciar los datos");
+                }
+            }
+        });
+
         cargarDatosJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //pendiente
+                try {
+                    Fabrica.getInstance().getIEspectaculo().cargarDatosPrueba();
+                    Fabrica.getInstance().getIUsuario().cargarDatosPrueba();
+                    JOptionPane.showMessageDialog(null, "Datos cargados correctamente");
+                } catch (RuntimeException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
             }
         });
 

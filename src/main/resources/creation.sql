@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS PROG_Taller1;
+
 CREATE DATABASE PROG_Taller1;
 
 USE PROG_Taller1;
@@ -98,4 +100,4 @@ CREATE TABLE espectadores_funciones (
   PRIMARY KEY (ue_fn_nickname, ue_fn_nombreFuncion),
   FOREIGN KEY (ue_fn_nickname) REFERENCES espectadores (ue_nickname) ON DELETE CASCADE,
   FOREIGN KEY (ue_fn_nombreFuncion) REFERENCES funciones (fn_nombre) ON DELETE CASCADE
-)
+);

@@ -18,12 +18,8 @@ public class Main {
                 .systemProperties()
                 .load();
 
-//        try {
-            JFrame frame = Dashboard.getInstance();
-            frame.setResizable(false);
-            frame.setVisible(true);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        JFrame frame = Dashboard.getInstance();
+        frame.setResizable(false);
+        frame.setVisible(true);
     }
 }

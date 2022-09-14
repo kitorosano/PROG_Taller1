@@ -6,6 +6,7 @@ import main.java.taller1.Logica.Clases.Usuario;
 import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +22,7 @@ public class FormularioUsuario extends JInternalFrame {
     private JTextField tfFechaNac;  //TODO: Implementar JCalendar
     private JButton ingresarButton;
     private JTextArea tfDescripcion;
-    private JTextField tfBiografia;
+    private JTextArea tfBiografia;
     private JTextField tfURL;
     private JComboBox<String> comboBoxTipo;
     private JButton cancelarButton;
@@ -37,6 +38,8 @@ public class FormularioUsuario extends JInternalFrame {
         setContentPane(panel1);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
+        tfDescripcion.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        tfBiografia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         comboBoxTipo.addItem("Artista");
         comboBoxTipo.addItem("Espectador");
         ingresarButton.addMouseListener(new MouseAdapter() {

@@ -2,18 +2,18 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="main.java.taller1.Presentacion.Dashboard">
   <grid id="27dc6" binding="panelDashboard" layout-manager="FormLayout">
     <rowspec value="center:d:noGrow"/>
-    <rowspec value="center:686px:noGrow"/>
+    <rowspec value="center:754px:noGrow"/>
     <colspec value="fill:1414px:noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="1508" height="832"/>
+      <xy x="20" y="20" width="1508" height="830"/>
     </constraints>
-    <properties/>
+    <properties>
+      <preferredSize width="1414" height="780"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="e7bec" class="javax.swing.JMenuBar" binding="menuBar" layout-manager="FormLayout">
         <rowspec value="center:d:noGrow"/>
-        <colspec value="fill:max(d;4px):noGrow"/>
-        <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:max(d;4px):noGrow"/>
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:max(d;4px):noGrow"/>
@@ -164,24 +164,6 @@
                 <constraints/>
                 <properties>
                   <text value="Agregar espectaculo a paquete"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
-          <grid id="de48c" class="javax.swing.JMenu" binding="modificarJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
-            <constraints>
-              <grid row="0" column="10" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-              <forms/>
-            </constraints>
-            <properties>
-              <text value="Modificar"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="c62a0" class="javax.swing.JMenuItem" binding="modificarDatosDeUsuarioJMenuItem">
-                <constraints/>
-                <properties>
-                  <text value="Modificar datos de usuario"/>
                 </properties>
               </component>
             </children>

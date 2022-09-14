@@ -84,7 +84,8 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 //altaEspectaculosAPaquete(espectaculosNuevos, (String)cbPaquete.getSelectedItem());
-                JOptionPane.showMessageDialog(null,"Espectadores agregados con exito");
+                Fabrica.getInstance().getIEspectaculo().altaEspectaculosAPaquete(espectaculosNuevos, (String)cbPaquete.getSelectedItem());
+                JOptionPane.showMessageDialog(null,"Espectaculos agregados con exito");
                 dispose();
             }
         });

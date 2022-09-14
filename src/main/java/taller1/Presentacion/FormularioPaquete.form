@@ -6,17 +6,23 @@
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
+    <colspec value="fill:max(d;4px):noGrow"/>
+    <colspec value="left:7dlu:noGrow"/>
     <colspec value="fill:d:grow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:max(d;4px):noGrow"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="400"/>
+      <xy x="20" y="20" width="500" height="223"/>
     </constraints>
-    <properties/>
+    <properties>
+      <preferredSize width="400" height="180"/>
+    </properties>
     <border type="none"/>
     <children>
       <grid id="5e6c6" layout-manager="FormLayout">
         <rowspec value="center:d:grow"/>
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties/>
@@ -39,7 +45,7 @@
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:max(d;4px):noGrow"/>
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties/>
@@ -142,7 +148,7 @@
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:d:grow"/>
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties/>

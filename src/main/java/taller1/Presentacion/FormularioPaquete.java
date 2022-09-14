@@ -18,7 +18,7 @@ public class FormularioPaquete extends JInternalFrame{
     private JTextField tfNombre;
     private JButton cancelarButton;
     private JButton ingresarButton;
-    private JTextField tfDescripcion;
+    private JTextArea tfDescripcion;
     private JTextField tfDescuento;
     private JTextField tfFechaVenc; //TODO: Implementar JCalendar
     private JButton btnConsulta;
@@ -28,6 +28,8 @@ public class FormularioPaquete extends JInternalFrame{
         setContentPane(panel1);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
+        tfDescripcion.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        tfDescripcion.setLineWrap(true);
 
         soloNumero(tfDescuento);
         ingresarButton.addMouseListener(new MouseAdapter() {

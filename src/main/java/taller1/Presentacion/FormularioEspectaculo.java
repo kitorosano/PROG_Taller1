@@ -8,6 +8,11 @@ import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -17,7 +22,7 @@ public class FormularioEspectaculo extends JInternalFrame {
     private JComboBox cbPlataforma;
     private JComboBox cbArtista;
     private JTextField tfNombre;
-    private JTextField tfDescripcion;
+    private JTextArea tfDescripcion;
     private JFormattedTextField tfDuracion;
     private JTextField tfCosto;
     private JTextField tfURL;
@@ -27,11 +32,15 @@ public class FormularioEspectaculo extends JInternalFrame {
     private JSpinner spEspMinimos;
     private JButton btnConsulta;
 
+    private String regexURL = "(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})";
+
     public FormularioEspectaculo(String title) {
         super(title);
         setContentPane(panel1);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
+        tfDescripcion.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        tfDescripcion.setLineWrap(true);
 
         soloNumero(tfDuracion);
         soloNumero(tfCosto);
@@ -90,11 +99,18 @@ public class FormularioEspectaculo extends JInternalFrame {
         if (tfNombre.getText().isEmpty() || tfDuracion.getText().isEmpty() || tfDescripcion.getText().isEmpty() || tfCosto.getText().isEmpty() || tfURL.getText().isEmpty()) {    //Comprobar campos nulos
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios");
             return true;
-        } else if ((int) spEspMinimos.getValue() < 0) {                                                              //Comprueba el valor de los spiners de espectadores
+        }
+        if ((int) spEspMinimos.getValue() < 0) {                                                              //Comprueba el valor de los spiners de espectadores
             JOptionPane.showMessageDialog(null, "El valor de espectadores no puede ser menor a 0");
             return true;
-        } else if ((int) spEspMinimos.getValue() >= (int) spEspMaximos.getValue()) {
+        }
+        if ((int) spEspMinimos.getValue() >= (int) spEspMaximos.getValue()) {
             JOptionPane.showMessageDialog(null, "Los espectadores maximos deben ser mas que los minimos");
+            return true;
+        }
+        //validate url with regex
+        if (!tfURL.getText().matches(regexURL)) {
+            JOptionPane.showMessageDialog(null, "La URL no es valida");
             return true;
         }
         return false;

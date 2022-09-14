@@ -138,6 +138,12 @@
                   <text value="Cargar datos de prueba"/>
                 </properties>
               </component>
+              <component id="8906f" class="javax.swing.JMenuItem" binding="vaciarDatosJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Vaciar base de datos"/>
+                </properties>
+              </component>
               <component id="bdf67" class="javax.swing.JMenuItem" binding="cerrarJMenuItem">
                 <constraints/>
                 <properties>

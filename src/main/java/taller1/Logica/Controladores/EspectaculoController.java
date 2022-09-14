@@ -3,7 +3,12 @@ package main.java.taller1.Logica.Controladores;
 import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.Interfaces.IEspectaculo;
 import main.java.taller1.Persistencia.ConexionDB;
+import org.apache.ibatis.jdbc.ScriptRunner;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +29,58 @@ public class EspectaculoController implements IEspectaculo {
             instance = new EspectaculoController();
         }
         return instance;
+    }
+
+    @Override
+    public void vaciarDatos(){
+        Connection connection = null;
+        Statement statement = null;
+        String query = "DELETE FROM plataformas;";
+        try {
+            connection = ConexionDB.getConnection();
+            statement = connection.createStatement();
+            statement.executeUpdate(query);
+            System.out.println("Todos los datos relacionados a los espectaculos (plataforma, funciones, paquetes y registros) han sido eliminados.");
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Error al conectar con la base de datos", e);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Error al vaciar los datos de los espectaculos", e);
+        } finally {
+            try {
+                if (statement != null) statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+            }
+        }
+    }
+
+    @Override
+    public void cargarDatosPrueba(){
+        Connection connection = null;
+        try {
+            connection = ConexionDB.getConnection();
+            ScriptRunner sr = new ScriptRunner(connection);
+            Reader reader = new BufferedReader(new FileReader("src/main/resources/plataformas.sql"));
+            sr.runScript(reader);
+            reader = new BufferedReader(new FileReader("src/main/resources/espectaculos.sql"));
+            sr.runScript(reader);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (RuntimeException ex) {
+            System.out.println(ex.getMessage());
+            throw new RuntimeException("Error al insertar los datos de prueba de usuarios", ex);
+        } finally {
+            try {
+                if (connection != null) connection.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                throw new RuntimeException("Error al cerrar la conexión a la base de datos", ex);
+            }
+        }
     }
 
     @Override

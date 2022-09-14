@@ -1,0 +1,2 @@
+INSERT INTO `espectaculos` (`es_nombre`, `es_descripcion`, `es_duracion`, `es_minEspectadores`, `es_maxEspectadores`, `es_url`, `es_costo`, `es_fechaRegistro`, `es_nombrePlataforma`, `es_artistaOrganizador`) VALUES
+('La Ópera Metropolitana de Nueva York', 'Es uno de los más importantes de la ópera mundial, con un elenco de estrellas internacionales.', 3, 3, 20, 'www.operametropolitana.com', 3999.99, '2022-09-07 19:29:52', 'Meta', 'Transcof');

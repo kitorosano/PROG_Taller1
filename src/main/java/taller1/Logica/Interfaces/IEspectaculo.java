@@ -5,6 +5,11 @@ import main.java.taller1.Logica.Clases.*;
 import java.util.Map;
 
 public interface IEspectaculo {
+    //CARGAR DATOS PRUEBA
+    void cargarDatosPrueba();
+    void vaciarDatos();
+
+    // METODOS
     void altaPlataforma(Plataforma nuevaPlataforma);
     Map<String, Plataforma> obtenerPlataformas();
 

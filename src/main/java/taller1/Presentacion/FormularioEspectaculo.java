@@ -7,6 +7,7 @@ import main.java.taller1.Logica.Clases.Usuario;
 import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -21,7 +22,7 @@ public class FormularioEspectaculo extends JInternalFrame {
     private JComboBox cbPlataforma;
     private JComboBox cbArtista;
     private JTextField tfNombre;
-    private JTextField tfDescripcion;
+    private JTextArea tfDescripcion;
     private JFormattedTextField tfDuracion;
     private JTextField tfCosto;
     private JTextField tfURL;
@@ -37,6 +38,7 @@ public class FormularioEspectaculo extends JInternalFrame {
         setContentPane(panel1);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
+        tfDescripcion.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         soloNumero(tfDuracion);
         soloNumero(tfCosto);

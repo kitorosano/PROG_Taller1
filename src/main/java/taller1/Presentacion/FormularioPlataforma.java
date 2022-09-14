@@ -37,7 +37,7 @@ public class FormularioPlataforma extends JInternalFrame {
                         try {
                             Fabrica.getInstance().getIEspectaculo().altaPlataforma(new Plataforma(nombre, descripcion, url));
                             JOptionPane.showMessageDialog(null, "Plataforma agregada con exito");
-                            cerrarFormulario(e);
+                            dispose();
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null, ex);
                         }
@@ -49,7 +49,7 @@ public class FormularioPlataforma extends JInternalFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                cerrarFormulario(e);
+                dispose();
             }
         });
     }
@@ -64,9 +64,4 @@ public class FormularioPlataforma extends JInternalFrame {
         return false;
     }
 
-    public void cerrarFormulario(MouseEvent e) {
-    //    JComponent comp = (JComponent) e.getSource();
-    //    Window win = SwingUtilities.getWindowAncestor(comp);
-    //    win.dispose();
-    }
 }

@@ -77,7 +77,9 @@ public class ListadoEspectaculos extends JInternalFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                txtEspectaculo.setText("Buscar espectaculo...");
+                if(txtEspectaculo.getText().equals("")) {
+                    txtEspectaculo.setText("Buscar espectaculo...");
+                }
             }
         });
     }

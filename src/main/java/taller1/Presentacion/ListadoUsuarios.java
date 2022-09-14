@@ -101,6 +101,7 @@ public class ListadoUsuarios extends JInternalFrame {
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
                 txtEsp.setText("");
+                listaEspectadores.setModel(modelEspectadores);
             }
         });
         txtArt.addFocusListener(new FocusAdapter() {
@@ -108,6 +109,7 @@ public class ListadoUsuarios extends JInternalFrame {
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
                 txtArt.setText("");
+                listaArtistas.setModel(modelArtistas);
             }
         });
 
@@ -116,16 +118,20 @@ public class ListadoUsuarios extends JInternalFrame {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                txtEsp.setText("Buscar nickname...");
-                listaEspectadores.setModel(modelEspectadores);
+                if(txtEsp.getText().equals("")) {
+                    txtEsp.setText("Buscar nickname...");
+                    listaEspectadores.setModel(modelEspectadores);
+                }
             }
         });
         txtArt.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                txtArt.setText("Buscar nickname...");
-                listaArtistas.setModel(modelArtistas);
+                if(txtArt.getText().equals("")) {
+                    txtArt.setText("Buscar nickname...");
+                    listaArtistas.setModel(modelArtistas);
+                }
             }
         });
     }

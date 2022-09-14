@@ -34,6 +34,8 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
 
     private Funcion funcionPredefinida;
 
+    private int maximo;
+
     private Map<String,EspectadorRegistradoAFuncion> espectadores=new HashMap<>();
 
     private DefaultListModel<String> modelAInvitar = new DefaultListModel<String>();
@@ -63,7 +65,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 Map<String, Espectaculo> espectaculos;
-                if (e.getSource() == cbPlataforma) {
+                if (e.getSource() == cbPlataforma && funcion==null) {
                     plataformaSelect = (String) cbPlataforma.getSelectedItem();
                     try{
                         cbEspectaculo.removeAllItems();
@@ -108,8 +110,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         agregarEspectadorButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Espectaculo espectaculo=funciones.get(nombreFuncion).getEspectaculo();
-                if(modelInvitados.getSize()>=espectaculo.getMaxEspectadores()){
+                if(modelInvitados.getSize()>=maximo){
                     JOptionPane.showMessageDialog(null,"No se puede agregar, capacidad maxima alcanzada");
                 }else{
                     AgregarEspectadorAMapa();
@@ -197,6 +198,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
                 JOptionPane.showMessageDialog(null, ex);
             }
         }else{
+            funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(plataformaSelect, espectaculoSelect);
             model.addRow(new Object[]{funcionPredefinida.getNombre(),funcionPredefinida.getEspectaculo().getNombre(),funcionPredefinida.getFechaHoraInicio()});
         }
     }
@@ -208,11 +210,10 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         try {
             usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
             invitados=Fabrica.getInstance().getIUsuario().obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
-            for(EspectadorRegistradoAFuncion esp: invitados.values()){
-                modelInvitados.addElement(esp.getEspectador().getNickname());
-            }
+            Espectaculo espectaculo=funciones.get(nombreFuncion).getEspectaculo();
+            maximo=espectaculo.getMaxEspectadores()-invitados.size();
             for(Usuario u:usuarios.values()){
-                if(u instanceof Espectador && !modelInvitados.contains(u.getNickname())){
+                if(u instanceof Espectador && !invitados.containsKey(u.getNickname())){
                     modelAInvitar.addElement(u.getNickname());
                 }
             }

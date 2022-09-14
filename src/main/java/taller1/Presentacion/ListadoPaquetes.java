@@ -63,13 +63,17 @@ public class ListadoPaquetes extends JInternalFrame{
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
                 txtPaquete.setText("");
+                listaPaquetes.setModel(model);
             }
         });
         txtPaquete.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
-                txtPaquete.setText("Buscar paquete...");
+                if(txtPaquete.getText().equals("")) {
+                    txtPaquete.setText("Buscar paquete...");
+                    listaPaquetes.setModel(model);
+                }
             }
         });
     }

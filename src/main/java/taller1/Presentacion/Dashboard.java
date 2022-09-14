@@ -1,26 +1,26 @@
 package main.java.taller1.Presentacion;
 
-import main.java.taller1.Logica.Clases.Usuario;
-
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class Dashboard extends JFrame {
     private JPanel panelDashboard;
+    private JDesktopPane dashboardJDesktopPane;
 
     private JMenuBar menuBar;
     private JMenu inicioJMenu;
     private JMenu altasJMenu;
-    private JMenu registrosJMenu;
     private JMenu consultasJMenu;
-    private JMenu agregarJMenu;
+    private JMenu acercaDeJMenu;
 
     private JMenuItem cargarDatosJMenuItem;
     private JMenuItem cerrarJMenuItem;
     private JMenuItem altaDeUsuarioJMenuItem;
-
     private JMenuItem altaDeEspectaculoJMenuItem;
     private JMenuItem altaDeFuncionJMenuItem;
     private JMenuItem altaDePaqueteJMenuItem;
@@ -31,7 +31,9 @@ public class Dashboard extends JFrame {
     private JMenuItem consultaDePaqueteJMenuItem;
     private JMenuItem registroAFuncionJMenuItem;
     private JMenuItem agregarEspAPaqueteJMenuItem;
-    private JDesktopPane dashboardJDesktopPane;
+    private JMenuItem nosotrosJMenuItem;
+    private JMenuItem githubJMenuItem;
+    private JMenuItem registroTrabajoJMenuItem;
 
     public JDesktopPane getDashboardJDesktopPane(){
         return this.dashboardJDesktopPane;
@@ -48,10 +50,7 @@ public class Dashboard extends JFrame {
         super(title);
         setContentPane(panelDashboard);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setExtendedState(6);
         pack();
-
-
 
         cargarDatosJMenuItem.addActionListener(new ActionListener() {
             @Override
@@ -191,14 +190,33 @@ public class Dashboard extends JFrame {
             }
         });
 
+        nosotrosJMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Sistema de gestión de espectáculos y funciones desarrollado por el grupo 1\nde la materia Programación de Aplicaciones del 4to semestre de la carrera\nTecnólogo en Informatica de la UTEC.\n\n* Joaquin Maidana\n* Esteban Rosano\n* Sebastian Stelmaj\n* Paulo Ruiz", "Acerca de nosotros", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
 
-    }
-    public void crearDetalleUsuario(Usuario usuario){
-        //JInternalFrame detalle = new DetalleUsuario("Detalle usuario", new Usuario("nickname","nombre","apellido","correo", LocalDate.now()));
-        JInternalFrame detalle = new DetalleUsuario("Detalle usuario",usuario);
-        detalle.setIconifiable(true);
-        detalle.setClosable(true);
-        dashboardJDesktopPane.add(detalle);
-        detalle.setVisible(true);
+        githubJMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://github.com/kitorosano/PROG_Taller1"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
+
+        registroTrabajoJMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Desktop.getDesktop().browse(new URI("https://docs.google.com/spreadsheets/d/1i7XLnFGHvmSshEgGcsPPKZafQhNJ_Iyd71NhYCn9I1E"));
+                } catch (IOException | URISyntaxException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
     }
 }

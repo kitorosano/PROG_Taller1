@@ -21,8 +21,6 @@
         <colspec value="fill:max(d;4px):noGrow"/>
         <colspec value="left:4dlu:noGrow"/>
         <colspec value="fill:max(d;4px):noGrow"/>
-        <colspec value="left:4dlu:noGrow"/>
-        <colspec value="fill:max(d;4px):noGrow"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
@@ -68,6 +66,22 @@
                 <constraints/>
                 <properties>
                   <text value="Alta de plataforma"/>
+                </properties>
+              </component>
+              <component id="26589" class="javax.swing.JSeparator">
+                <constraints/>
+                <properties/>
+              </component>
+              <component id="7dc27" class="javax.swing.JMenuItem" binding="registroAFuncionJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Registro a funcion"/>
+                </properties>
+              </component>
+              <component id="d5395" class="javax.swing.JMenuItem" binding="agregarEspAPaqueteJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Agregar espectaculo a paquete"/>
                 </properties>
               </component>
             </children>
@@ -132,38 +146,33 @@
               </component>
             </children>
           </grid>
-          <grid id="e18d7" class="javax.swing.JMenu" binding="registrosJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+          <grid id="d14e3" class="javax.swing.JMenu" binding="acercaDeJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
             <constraints>
               <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
               <forms/>
             </constraints>
             <properties>
-              <text value="Registros"/>
+              <text value="Acerca de"/>
             </properties>
             <border type="none"/>
             <children>
-              <component id="7dc27" class="javax.swing.JMenuItem" binding="registroAFuncionJMenuItem">
+              <component id="4c4b3" class="javax.swing.JMenuItem" binding="nosotrosJMenuItem">
                 <constraints/>
                 <properties>
-                  <text value="Registro a funcion"/>
+                  <text value="Nosotros"/>
                 </properties>
               </component>
-            </children>
-          </grid>
-          <grid id="5d335" class="javax.swing.JMenu" binding="agregarJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
-            <constraints>
-              <grid row="0" column="8" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-              <forms defaultalign-horz="false"/>
-            </constraints>
-            <properties>
-              <text value="Agregar"/>
-            </properties>
-            <border type="none"/>
-            <children>
-              <component id="d5395" class="javax.swing.JMenuItem" binding="agregarEspAPaqueteJMenuItem">
+              <component id="a1aa6" class="javax.swing.JMenuItem" binding="githubJMenuItem">
                 <constraints/>
                 <properties>
-                  <text value="Agregar espectaculo a paquete"/>
+                  <text value="GitHub"/>
+                </properties>
+              </component>
+              <component id="761fa" class="javax.swing.JMenuItem" binding="registroTrabajoJMenuItem">
+                <constraints/>
+                <properties>
+                  <selected value="false"/>
+                  <text value="Registro de trabajo"/>
                 </properties>
               </component>
             </children>

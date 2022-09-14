@@ -39,13 +39,13 @@ public class UsuarioController implements IUsuario {
         Connection connection = null;
         Statement statement = null;
         String deleteArtistas = "DELETE FROM artistas";
-        String deleteEspectaculos = "DELETE FROM espectaculos";
+        String deleteEspectadores = "DELETE FROM espectadores";
         try {
             connection = ConexionDB.getConnection();
             statement = connection.createStatement();
             statement.executeUpdate(deleteArtistas);
             System.out.println("Datos artistas vaciados");
-            statement.executeUpdate(deleteEspectaculos);
+            statement.executeUpdate(deleteEspectadores);
             System.out.println("Datos espectaculos vaciados");
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
@@ -73,10 +73,6 @@ public class UsuarioController implements IUsuario {
             Reader reader = new BufferedReader(new FileReader("src/main/resources/artistas.sql"));
             sr.runScript(reader);
             reader = new BufferedReader(new FileReader("src/main/resources/espectadores.sql"));
-            sr.runScript(reader);
-            reader = new BufferedReader(new FileReader("src/main/resources/artistas_funciones.sql"));
-            sr.runScript(reader);
-            reader = new BufferedReader(new FileReader("src/main/resources/espectadores_funciones.sql"));
             sr.runScript(reader);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();

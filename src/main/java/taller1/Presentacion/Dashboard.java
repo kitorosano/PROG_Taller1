@@ -76,8 +76,8 @@ public class Dashboard extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Fabrica.getInstance().getIEspectaculo().cargarDatosPrueba();
                     Fabrica.getInstance().getIUsuario().cargarDatosPrueba();
+                    Fabrica.getInstance().getIEspectaculo().cargarDatosPrueba();
                     JOptionPane.showMessageDialog(null, "Datos cargados correctamente");
                 } catch (RuntimeException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());

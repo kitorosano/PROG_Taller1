@@ -35,11 +35,11 @@ public class EspectaculoController implements IEspectaculo {
     public void vaciarDatos(){
         Connection connection = null;
         Statement statement = null;
-        String query = "DELETE FROM plataformas;";
+        String deleteQuery = "DELETE FROM plataformas;";
         try {
             connection = ConexionDB.getConnection();
             statement = connection.createStatement();
-            statement.executeUpdate(query);
+            statement.executeUpdate(deleteQuery);
             System.out.println("Todos los datos relacionados a los espectaculos (plataforma, funciones, paquetes y registros) han sido eliminados.");
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
@@ -67,6 +67,16 @@ public class EspectaculoController implements IEspectaculo {
             Reader reader = new BufferedReader(new FileReader("src/main/resources/plataformas.sql"));
             sr.runScript(reader);
             reader = new BufferedReader(new FileReader("src/main/resources/espectaculos.sql"));
+            sr.runScript(reader);
+            reader = new BufferedReader(new FileReader("src/main/resources/funciones.sql"));
+            sr.runScript(reader);
+            reader = new BufferedReader(new FileReader("src/main/resources/paquetes.sql"));
+            sr.runScript(reader);
+            reader = new BufferedReader(new FileReader("src/main/resources/espectaculos_paquetes.sql"));
+            sr.runScript(reader);
+            reader = new BufferedReader(new FileReader("src/main/resources/artistas_funciones.sql"));
+            sr.runScript(reader);
+            reader = new BufferedReader(new FileReader("src/main/resources/espectadores_funciones.sql"));
             sr.runScript(reader);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();

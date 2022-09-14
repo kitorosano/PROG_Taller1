@@ -28,6 +28,7 @@ public class FormularioUsuario extends JInternalFrame {
     private JLabel lbDescripcion;
     private JLabel lblBiografia;
     private JLabel lblURL;
+    private JLabel LabelDescripcion;
 
     private String seleccionado;
 
@@ -91,6 +92,7 @@ public class FormularioUsuario extends JInternalFrame {
                         lblBiografia.setVisible(false);
                         lblURL.setVisible(false);
                         lbDescripcion.setVisible(false);
+                        LabelDescripcion.setVisible(false);
                     } else {
                         tfDescripcion.setVisible(true);
                         tfURL.setVisible(true);
@@ -98,6 +100,7 @@ public class FormularioUsuario extends JInternalFrame {
                         lblBiografia.setVisible(true);
                         lblURL.setVisible(true);
                         lbDescripcion.setVisible(true);
+                        LabelDescripcion.setVisible(true);
                     }
                 }
             }

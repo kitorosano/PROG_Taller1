@@ -28,6 +28,7 @@ public class FormularioUsuario extends JInternalFrame {
     private JLabel lbDescripcion;
     private JLabel lblBiografia;
     private JLabel lblURL;
+    private JButton btnConsulta;
 
     private String seleccionado;
 
@@ -108,6 +109,16 @@ public class FormularioUsuario extends JInternalFrame {
                 dispose();
             }
         });
+        btnConsulta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame alta = new ListadoUsuarios("Listado usuarios");
+                alta.setIconifiable(true);
+                alta.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(alta);
+                alta.setVisible(true);
+            }
+        });
     }
 
     public boolean comprobarCamposNulos() {                //Devuelve true si hay campos nulos
@@ -147,5 +158,9 @@ public class FormularioUsuario extends JInternalFrame {
         } catch (ParseException e) {
             return false;
         }
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

@@ -7,7 +7,6 @@ import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +21,7 @@ public class ListadoUsuarios extends JInternalFrame {
     private JLabel lblEspectadore;
     private JTextField txtEsp;
     private JTextField txtArt;
+    private JButton btnAlta;
 
     public ListadoUsuarios(String title) {
         super(title);
@@ -132,6 +132,16 @@ public class ListadoUsuarios extends JInternalFrame {
                     txtArt.setText("Buscar nickname...");
                     listaArtistas.setModel(modelArtistas);
                 }
+            }
+        });
+        btnAlta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame alta = new FormularioUsuario("Alta usuario");
+                alta.setIconifiable(true);
+                alta.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(alta);
+                alta.setVisible(true);
             }
         });
     }

@@ -7,12 +7,8 @@ import main.java.taller1.Logica.Clases.Usuario;
 import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 
 public class FormularioEspectaculo extends JInternalFrame {
@@ -29,6 +25,7 @@ public class FormularioEspectaculo extends JInternalFrame {
     private JButton cancelarButton;
     private JSpinner spEspMaximos;
     private JSpinner spEspMinimos;
+    private JButton btnConsulta;
 
     public FormularioEspectaculo(String title) {
         super(title);
@@ -60,6 +57,16 @@ public class FormularioEspectaculo extends JInternalFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
+            }
+        });
+        btnConsulta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame consulta = new ListadoEspectaculos("Listado espectaculo");
+                consulta.setIconifiable(true);
+                consulta.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(consulta);
+                consulta.setVisible(true);
             }
         });
     }

@@ -8,7 +8,7 @@
     <rowspec value="center:max(d;4px):noGrow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
-      <xy x="20" y="20" width="466" height="623"/>
+      <xy x="20" y="20" width="493" height="623"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -108,6 +108,15 @@
             </constraints>
             <properties>
               <text value="Espectaculos"/>
+            </properties>
+          </component>
+          <component id="de825" class="javax.swing.JButton" binding="btnAlta">
+            <constraints>
+              <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <text value="Espectaculo nuevo"/>
             </properties>
           </component>
         </children>

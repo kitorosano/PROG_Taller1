@@ -16,6 +16,7 @@ public class ListadoEspectaculos extends JInternalFrame {
     private JLabel lblPlataforma;
     private JLabel lblEspectaculos;
     private JTextField txtEspectaculo;
+    private JButton btnAlta;
 
     private DefaultListModel<String> model = new DefaultListModel<String>();
 
@@ -80,6 +81,16 @@ public class ListadoEspectaculos extends JInternalFrame {
                 if(txtEspectaculo.getText().equals("")) {
                     txtEspectaculo.setText("Buscar espectaculo...");
                 }
+            }
+        });
+        btnAlta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame alta = new FormularioEspectaculo("Alta espectaculo");
+                alta.setIconifiable(true);
+                alta.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(alta);
+                alta.setVisible(true);
             }
         });
     }

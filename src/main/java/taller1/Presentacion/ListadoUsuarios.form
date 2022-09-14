@@ -10,9 +10,11 @@
     <rowspec value="center:325px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
-      <xy x="20" y="20" width="531" height="481"/>
+      <xy x="20" y="20" width="537" height="481"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -123,7 +125,7 @@
         <rowspec value="center:d:noGrow"/>
         <colspec value="fill:d:noGrow"/>
         <constraints>
-          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties/>
@@ -175,6 +177,15 @@
           </component>
         </children>
       </grid>
+      <component id="5f9b9" class="javax.swing.JButton" binding="btnAlta">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <text value="Usuario nuevo"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

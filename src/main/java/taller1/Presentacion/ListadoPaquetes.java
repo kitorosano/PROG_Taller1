@@ -1,6 +1,5 @@
 package main.java.taller1.Presentacion;
 
-import main.java.taller1.Logica.Clases.Funcion;
 import main.java.taller1.Logica.Clases.Paquete;
 import main.java.taller1.Logica.Fabrica;
 
@@ -16,6 +15,7 @@ public class ListadoPaquetes extends JInternalFrame{
     private JList listaPaquetes;
     private JLabel lblPaquete;
     private JTextField txtPaquete;
+    private JButton btnAlta;
 
     public ListadoPaquetes(String title) {
         super(title);
@@ -74,6 +74,16 @@ public class ListadoPaquetes extends JInternalFrame{
                     txtPaquete.setText("Buscar paquete...");
                     listaPaquetes.setModel(model);
                 }
+            }
+        });
+        btnAlta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame alta = new FormularioPaquete("Alta paquete");
+                alta.setIconifiable(true);
+                alta.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(alta);
+                alta.setVisible(true);
             }
         });
     }

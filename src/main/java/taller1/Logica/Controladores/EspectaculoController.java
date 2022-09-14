@@ -66,17 +66,17 @@ public class EspectaculoController implements IEspectaculo {
             ScriptRunner sr = new ScriptRunner(connection);
             Reader reader = new BufferedReader(new FileReader("src/main/resources/plataformas.sql"));
             sr.runScript(reader);
+            reader = new BufferedReader(new FileReader("src/main/resources/paquetes.sql"));
+            sr.runScript(reader);
             reader = new BufferedReader(new FileReader("src/main/resources/espectaculos.sql"));
             sr.runScript(reader);
             reader = new BufferedReader(new FileReader("src/main/resources/funciones.sql"));
             sr.runScript(reader);
-            reader = new BufferedReader(new FileReader("src/main/resources/paquetes.sql"));
-            sr.runScript(reader);
             reader = new BufferedReader(new FileReader("src/main/resources/espectaculos_paquetes.sql"));
             sr.runScript(reader);
-            reader = new BufferedReader(new FileReader("src/main/resources/artistas_funciones.sql"));
-            sr.runScript(reader);
             reader = new BufferedReader(new FileReader("src/main/resources/espectadores_funciones.sql"));
+            sr.runScript(reader);
+            reader = new BufferedReader(new FileReader("src/main/resources/artistas_funciones.sql"));
             sr.runScript(reader);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();

@@ -120,6 +120,7 @@ public class Dashboard extends JFrame {
                 iFrame.setIconifiable(true);
                 iFrame.setClosable(true);
                 dashboardJDesktopPane.add(iFrame);
+                iFrame.setSize(600,400);
                 iFrame.setVisible(true);
             }
         });

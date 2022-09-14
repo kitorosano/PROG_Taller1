@@ -18,6 +18,8 @@ public class FormularioPlataforma extends JInternalFrame {
     private JButton ingresarButton;
     private JButton cancelarButton;
 
+    private String regexURL = "(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})";
+
     public FormularioPlataforma(String title) {
         super(title);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -26,10 +28,7 @@ public class FormularioPlataforma extends JInternalFrame {
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if (tfNombre.getText().isEmpty() || tfDescripcion.getText().isEmpty() || tfURL.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios");
-                } else {
+                if (!comprobarErrorEnCampos()) {
                     if (comprobarNombre(tfNombre.getText())) {
                         JOptionPane.showMessageDialog(null, "El nombre ingresado ya existe");
                     } else {
@@ -52,6 +51,20 @@ public class FormularioPlataforma extends JInternalFrame {
                 dispose();
             }
         });
+    }
+
+
+    public boolean comprobarErrorEnCampos() {                //Devuelve true si hay error
+        if (tfNombre.getText().isEmpty() || tfDescripcion.getText().isEmpty() || tfURL.getText().isEmpty()) {    //Comprobar campos nulos
+            JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios");
+            return true;
+        }
+        //validate url with regex
+        if (!tfURL.getText().matches(regexURL)) {
+            JOptionPane.showMessageDialog(null, "La URL no es valida");
+            return true;
+        }
+        return false;
     }
 
     public boolean comprobarNombre(String nombre) {          //Devuelve true si el nombre ya existe

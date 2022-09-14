@@ -69,6 +69,7 @@ public class FormularioFuncion extends JInternalFrame {
             seleccionado=(String)cbPlataforma.getSelectedItem();
         }else{
             cargarDatosComboBox();
+            cargarEspectaculos();
             cbPlataforma.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {

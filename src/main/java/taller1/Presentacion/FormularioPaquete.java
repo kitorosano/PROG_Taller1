@@ -22,7 +22,7 @@ public class FormularioPaquete extends JInternalFrame{
     private JTextField tfNombre;
     private JButton cancelarButton;
     private JButton ingresarButton;
-    private JTextField tfDescripcion;
+    private JTextArea tfDescripcion;
     private JTextField tfDescuento;
     private JTextField tfFechaVenc; //TODO: Implementar JCalendar
 

@@ -20,7 +20,7 @@ public class FormularioUsuario extends JInternalFrame {
     private JTextField tfCorreo;
     private JTextField tfFechaNac;  //TODO: Implementar JCalendar
     private JButton ingresarButton;
-    private JTextField tfDescripcion;
+    private JTextArea tfDescripcion;
     private JTextField tfBiografia;
     private JTextField tfURL;
     private JComboBox<String> comboBoxTipo;

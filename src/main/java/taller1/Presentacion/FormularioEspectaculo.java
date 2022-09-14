@@ -21,7 +21,7 @@ public class FormularioEspectaculo extends JInternalFrame {
     private JComboBox cbPlataforma;
     private JComboBox cbArtista;
     private JTextField tfNombre;
-    private JTextField tfDescripcion;
+    private JTextArea tfDescripcion;
     private JFormattedTextField tfDuracion;
     private JTextField tfCosto;
     private JTextField tfURL;

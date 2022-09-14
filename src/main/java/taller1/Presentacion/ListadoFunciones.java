@@ -19,6 +19,7 @@ public class ListadoFunciones extends JInternalFrame {
     private JLabel lblEspectaculo;
     private JLabel lblFunciones;
     private JTextField txtFunciones;
+    private JButton btnAlta;
 
     private DefaultListModel<String> model = new DefaultListModel<String>();
 
@@ -91,6 +92,16 @@ public class ListadoFunciones extends JInternalFrame {
                     txtFunciones.setText("Buscar nickname...");
                     listaFunciones.setModel(model);
                 }
+            }
+        });
+        btnAlta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame alta = new FormularioFuncion("Alta funcion", null);
+                alta.setIconifiable(true);
+                alta.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(alta);
+                alta.setVisible(true);
             }
         });
     }

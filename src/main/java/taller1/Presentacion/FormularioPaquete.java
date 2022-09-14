@@ -1,15 +1,11 @@
 package main.java.taller1.Presentacion;
 
-import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Paquete;
 import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -25,6 +21,7 @@ public class FormularioPaquete extends JInternalFrame{
     private JTextArea tfDescripcion;
     private JTextField tfDescuento;
     private JTextField tfFechaVenc; //TODO: Implementar JCalendar
+    private JButton btnConsulta;
 
     public FormularioPaquete(String title) {
         super(title);
@@ -57,6 +54,16 @@ public class FormularioPaquete extends JInternalFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
+            }
+        });
+        btnConsulta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame consulta = new ListadoPaquetes("Listado paquetes");
+                consulta.setIconifiable(true);
+                consulta.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(consulta);
+                consulta.setVisible(true);
             }
         });
     }

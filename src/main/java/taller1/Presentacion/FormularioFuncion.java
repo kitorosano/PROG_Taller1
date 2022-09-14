@@ -4,18 +4,12 @@ import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
-import javax.swing.text.MaskFormatter;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.Map;
 
 public class FormularioFuncion extends JInternalFrame {
@@ -33,6 +27,7 @@ public class FormularioFuncion extends JInternalFrame {
     private JList listaInvitados;
     private JTextField tfFecha; //TODO: Implementar JCalendar
     private JTextField tfHora;
+    private JButton btnConsulta;
 
     private String seleccionado;
 
@@ -97,6 +92,16 @@ public class FormularioFuncion extends JInternalFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
+            }
+        });
+        btnConsulta.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame alta = new ListadoFunciones("Listado funciones");
+                alta.setIconifiable(true);
+                alta.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(alta);
+                alta.setVisible(true);
             }
         });
     }

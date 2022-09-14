@@ -43,6 +43,15 @@
               </component>
             </children>
           </scrollpane>
+          <component id="1a0e6" class="javax.swing.JButton" binding="btnAlta">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <forms defaultalign-horz="false"/>
+            </constraints>
+            <properties>
+              <text value="Paquete nuevo"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="ad0ac" layout-manager="FormLayout">

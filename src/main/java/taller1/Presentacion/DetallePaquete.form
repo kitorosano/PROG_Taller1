@@ -74,18 +74,6 @@
           </component>
         </children>
       </scrollpane>
-      <component id="7b73b" class="javax.swing.JLabel" binding="detalleDePaqueteLabel" default-binding="true">
-        <constraints>
-          <grid row="1" column="2" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="10" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-          <forms defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <font size="18"/>
-          <text value="Detalle De Paquete"/>
-        </properties>
-      </component>
       <component id="398" class="javax.swing.JLabel" binding="fechaDeExpiracionLabel" default-binding="true">
         <constraints>
           <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -179,7 +167,7 @@
       </component>
       <component id="e6aad" class="javax.swing.JLabel" binding="descripcionContenido">
         <constraints>
-          <grid row="8" column="5" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="8" column="5" row-span="1" col-span="7" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>

@@ -37,7 +37,6 @@ public class DetalleEspectaculo extends JInternalFrame {
     private JLabel paquetesDelEspectaculoTitulo;
     private JButton agregarFuncionButton;
     private JTable tablaFunciones;
-    private JLabel detalleDelEspectaculoTitulo;
     private JTable tablaPaquetes;
     private JButton actualizarFuncionesButton;
 

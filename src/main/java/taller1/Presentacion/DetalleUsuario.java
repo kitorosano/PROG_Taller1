@@ -5,6 +5,8 @@ import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
@@ -29,6 +31,7 @@ public class DetalleUsuario extends JInternalFrame {
     private JLabel biografiaContenido;
     private JLabel sitioWebLabel;
     private JLabel sitioWebContenido;
+    private JButton modificarUsuarioButton;
 
     Usuario usuario;
 
@@ -106,6 +109,16 @@ public class DetalleUsuario extends JInternalFrame {
 
 
                 }
+            }
+        });
+        modificarUsuarioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame modificar_usuario = new ModificarUsuario("Modificar Usuario", usuario);
+                modificar_usuario.setIconifiable(true);
+                modificar_usuario.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(modificar_usuario);
+                modificar_usuario.setVisible(true);
             }
         });
     }

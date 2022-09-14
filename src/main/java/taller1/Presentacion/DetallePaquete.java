@@ -23,7 +23,6 @@ public class DetallePaquete extends JInternalFrame {
     private JLabel descuentoContenido;
     private JLabel fechaDeRegistroContenido;
     private JTable table1;
-    private JLabel detalleDePaqueteLabel;
     private JLabel espectaculosLabel;
 
     Paquete paquete;

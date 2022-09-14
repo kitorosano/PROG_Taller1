@@ -32,6 +32,7 @@ public class FormularioPaquete extends JInternalFrame{
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         tfDescripcion.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        tfDescripcion.setLineWrap(true);
 
         soloNumero(tfDescuento);
         ingresarButton.addMouseListener(new MouseAdapter() {

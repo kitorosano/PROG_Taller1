@@ -80,14 +80,17 @@ public class ListadoFunciones extends JInternalFrame {
             public void focusGained(FocusEvent e) {
                 super.focusGained(e);
                 txtFunciones.setText("");
+                listaFunciones.setModel(model);
             }
         });
         txtFunciones.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                super.focusGained(e);
-                txtFunciones.setText("Buscar funcion...");
-                listaFunciones.setModel(model);
+                super.focusLost(e);
+                if(txtFunciones.getText().equals("")) {
+                    txtFunciones.setText("Buscar nickname...");
+                    listaFunciones.setModel(model);
+                }
             }
         });
     }

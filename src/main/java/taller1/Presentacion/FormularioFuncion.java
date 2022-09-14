@@ -72,17 +72,7 @@ public class FormularioFuncion extends JInternalFrame {
             cbPlataforma.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
-                    if (e.getSource()==cbPlataforma) {
-                        seleccionado=(String)cbPlataforma.getSelectedItem();
-                        try{
-                            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
-                            for (Espectaculo esp : espectaculos.values()) {
-                                cbEspectaculo.addItem(esp.getNombre());
-                            }
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null,ex);
-                        }
-                    }
+                    cargarEspectaculos();
                 }
             });
         }
@@ -209,4 +199,18 @@ public class FormularioFuncion extends JInternalFrame {
             throw new RuntimeException(e);
         }
     }
+
+    private void cargarEspectaculos(){
+        seleccionado=(String)cbPlataforma.getSelectedItem();
+        try{
+            cbEspectaculo.removeAllItems();
+            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
+            for (Espectaculo esp : espectaculos.values()) {
+                    cbEspectaculo.addItem(esp.getNombre());
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,ex);
+        }
+    }
 }
+

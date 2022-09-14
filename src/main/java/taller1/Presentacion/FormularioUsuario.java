@@ -42,6 +42,8 @@ public class FormularioUsuario extends JInternalFrame {
         pack();
         tfDescripcion.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         tfBiografia.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        tfDescripcion.setLineWrap(true);
+        tfBiografia.setLineWrap(true);
         comboBoxTipo.addItem("Artista");
         comboBoxTipo.addItem("Espectador");
         ingresarButton.addMouseListener(new MouseAdapter() {

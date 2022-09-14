@@ -39,6 +39,7 @@ public class FormularioEspectaculo extends JInternalFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         tfDescripcion.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        tfDescripcion.setLineWrap(true);
 
         soloNumero(tfDuracion);
         soloNumero(tfCosto);

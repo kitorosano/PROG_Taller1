@@ -31,6 +31,8 @@ public class FormularioUsuario extends JInternalFrame {
 
     private String seleccionado;
 
+    private String regexURL = "(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})";
+
     public FormularioUsuario(String title) {
         super(title);
         setContentPane(panel1);
@@ -49,27 +51,32 @@ public class FormularioUsuario extends JInternalFrame {
                         String nickname = tfNickname.getText(), nombre = tfNombre.getText(), apellido = tfApellido.getText(), correo = tfCorreo.getText();
                         if (!validarFecha(tfFechaNac.getText())) {
                             JOptionPane.showMessageDialog(null, "El formato de fecha no es valido");
-                        } else {
-                            LocalDate fechanac = LocalDate.parse(tfFechaNac.getText());
-                            if (seleccionado.equals("Artista")) {
-                                String descripcion = tfDescripcion.getText(),
-                                        biografia = tfBiografia.getText(),
-                                        url = tfURL.getText();
-                                try {
-                                    Fabrica.getInstance().getIUsuario().altaUsuario(new Artista(nickname, nombre, apellido, correo, fechanac, descripcion, biografia, url));
-                                    JOptionPane.showMessageDialog(null, "Artista creado con exito");
-                                    dispose();
-                                } catch (Exception ex) {
-                                    JOptionPane.showMessageDialog(null, ex);
-                                }
-                            } else {
-                                try {
-                                    Fabrica.getInstance().getIUsuario().altaUsuario(new Espectador(nickname, nombre, apellido, correo, fechanac));
-                                    JOptionPane.showMessageDialog(null, "Espectador creado con exito");
-                                    dispose();
-                                } catch (Exception ex) {
-                                    JOptionPane.showMessageDialog(null, ex);
-                                }
+                            return;
+                        }
+                        LocalDate fechanac = LocalDate.parse(tfFechaNac.getText());
+                        //validate url with regex
+                        if (!tfURL.getText().matches(regexURL)) {
+                            JOptionPane.showMessageDialog(null, "La URL no es valida");
+                            return;
+                        }
+                        if (seleccionado.equals("Artista")) {
+                            String descripcion = tfDescripcion.getText(),
+                                    biografia = tfBiografia.getText(),
+                                    url = tfURL.getText();
+                            try {
+                                Fabrica.getInstance().getIUsuario().altaUsuario(new Artista(nickname, nombre, apellido, correo, fechanac, descripcion, biografia, url));
+                                JOptionPane.showMessageDialog(null, "Artista creado con exito");
+                                dispose();
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, ex);
+                            }
+                        } else { // equal Espectador
+                            try {
+                                Fabrica.getInstance().getIUsuario().altaUsuario(new Espectador(nickname, nombre, apellido, correo, fechanac));
+                                JOptionPane.showMessageDialog(null, "Espectador creado con exito");
+                                dispose();
+                            } catch (Exception ex) {
+                                JOptionPane.showMessageDialog(null, ex);
                             }
                         }
                     }

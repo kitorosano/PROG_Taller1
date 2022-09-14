@@ -34,6 +34,8 @@ public class ModificarUsuario extends JInternalFrame {
     private JButton btnAplicar;
     private JButton btnCancelar;
 
+    private String regexURL = "(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})";
+
     public ModificarUsuario(String title, Usuario usuario){
         super(title);
         setContentPane(mainPanel);
@@ -56,15 +58,24 @@ public class ModificarUsuario extends JInternalFrame {
             public void actionPerformed(ActionEvent e) {
                 if (comprobarCamposNulos(usuario)) {
                     JOptionPane.showMessageDialog(null, "Los campos obligatorios no pueden estar vacios");
-                }else if (comprobarExistencia(usuario.getNickname(),usuario.getCorreo()) == false) {
-                    JOptionPane.showMessageDialog(null, "El usuario que desea modificar no existe");
-                }else if (validarFecha(txtFechaNac.getText())==true){
-                    ActualizarUsuario(usuario);
-                    JOptionPane.showMessageDialog(null, "Usuario modificado.");
-                    dispose();
-                }else{
-                    JOptionPane.showMessageDialog(null, "La fecha no es valida. El formato es (año-mes-dia)");
+                    return;
                 }
+                if (comprobarExistencia(usuario.getNickname(),usuario.getCorreo()) == false) {
+                    JOptionPane.showMessageDialog(null, "El usuario que desea modificar no existe");
+                    return;
+                }
+                if (!validarFecha(txtFechaNac.getText())){
+                    JOptionPane.showMessageDialog(null, "La fecha no es valida. El formato es (año-mes-dia)");
+                    return;
+                }
+                //validate url with regex
+                if (!txtURL.getText().matches(regexURL)) {
+                    JOptionPane.showMessageDialog(null, "La URL no es valida");
+                    return;
+                }
+                ActualizarUsuario(usuario);
+                JOptionPane.showMessageDialog(null, "Usuario modificado.");
+                dispose();
             }
         });
         btnCancelar.addActionListener(new ActionListener() {

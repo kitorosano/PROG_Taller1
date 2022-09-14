@@ -16,6 +16,7 @@ public interface IUsuario {
     void modificarUsuario(Usuario usuarioModificado);
 
     Map<String, Espectaculo> obtenerEspectaculosArtista(String nickname);
+//    Map<String, Artista> obtenerArtistasInvitados(String nombreFuncion);
     Map<String, EspectadorRegistradoAFuncion> obtenerFuncionesRegistradasDelEspectador(String nickname);
     Map<String, EspectadorRegistradoAFuncion> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion);
 }

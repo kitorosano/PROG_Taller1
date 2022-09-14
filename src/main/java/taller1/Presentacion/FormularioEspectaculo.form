@@ -205,7 +205,9 @@
               </grid>
               <forms defaultalign-horz="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <text value=""/>
+            </properties>
           </component>
           <component id="8d924" class="javax.swing.JSpinner" binding="spEspMaximos">
             <constraints>

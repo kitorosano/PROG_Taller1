@@ -30,6 +30,8 @@ public class FormularioEspectaculo extends JInternalFrame {
     private JSpinner spEspMaximos;
     private JSpinner spEspMinimos;
 
+    private String regexURL = "(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})";
+
     public FormularioEspectaculo(String title) {
         super(title);
         setContentPane(panel1);
@@ -83,11 +85,18 @@ public class FormularioEspectaculo extends JInternalFrame {
         if (tfNombre.getText().isEmpty() || tfDuracion.getText().isEmpty() || tfDescripcion.getText().isEmpty() || tfCosto.getText().isEmpty() || tfURL.getText().isEmpty()) {    //Comprobar campos nulos
             JOptionPane.showMessageDialog(null, "Los campos no pueden estar vacios");
             return true;
-        } else if ((int) spEspMinimos.getValue() < 0) {                                                              //Comprueba el valor de los spiners de espectadores
+        }
+        if ((int) spEspMinimos.getValue() < 0) {                                                              //Comprueba el valor de los spiners de espectadores
             JOptionPane.showMessageDialog(null, "El valor de espectadores no puede ser menor a 0");
             return true;
-        } else if ((int) spEspMinimos.getValue() >= (int) spEspMaximos.getValue()) {
+        }
+        if ((int) spEspMinimos.getValue() >= (int) spEspMaximos.getValue()) {
             JOptionPane.showMessageDialog(null, "Los espectadores maximos deben ser mas que los minimos");
+            return true;
+        }
+        //validate url with regex
+        if (!tfURL.getText().matches(regexURL)) {
+            JOptionPane.showMessageDialog(null, "La URL no es valida");
             return true;
         }
         return false;

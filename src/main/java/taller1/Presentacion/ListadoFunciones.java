@@ -28,6 +28,8 @@ public class ListadoFunciones extends JInternalFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         cargarPlataformas();
+        cargarEspectaculos();
+        cargarFunciones();
         listaFunciones.setModel(model);
         setResizable(false);
         listaFunciones.addMouseListener(new MouseAdapter() {

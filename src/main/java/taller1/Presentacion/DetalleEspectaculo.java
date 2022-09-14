@@ -9,37 +9,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDateTime;
 import java.util.Map;
 
 public class DetalleEspectaculo extends JInternalFrame {
     private JPanel mainPanel;
-    private JTextArea nombreTextArea;
-    private JTextArea descripcionTextArea;
-    private JTextArea duracionTextArea;
-    private JTextArea minEspectadoresTextArea;
-    private JTextArea nombreContenido;
-    private JTextArea descripcionContenido;
-    private JTextArea duracionContenido;
-    private JTextArea minEspectadoresContenido;
-    private JTextArea maxEspectadoresTextArea;
-    private JTextArea maxEspectadoresContenido;
-    private JTextArea urlTextArea;
-    private JTextArea urlContenido;
-    private JTextArea costoTextArea;
-    private JTextArea costoContenido;
-    private JTextArea fechaDeRegistroTextArea;
-    private JTextArea fechaDeRegistroContenido;
-    private JTextArea plataformaTextArea;
-    private JTextArea plataformaContenido;
-    private JTextArea artistaOrganizadorTextArea;
-    private JTextArea artistaOrganizadorContenido;
-    private JTextArea funcionesDelEspectaculoTitulo;
-    private JTextArea paquetesDelEspectaculoTitulo;
+    private JLabel nombreLabel;
+    private JLabel descripcionLabel;
+    private JLabel duracionLabel;
+    private JLabel minEspectadoresLabel;
+    private JLabel nombreContenido;
+    private JLabel descripcionContenido;
+    private JLabel duracionContenido;
+    private JLabel minEspectadoresContenido;
+    private JLabel maxEspectadoresLabel;
+    private JLabel maxEspectadoresContenido;
+    private JLabel urlLabel;
+    private JLabel urlContenido;
+    private JLabel costoLabel;
+    private JLabel costoContenido;
+    private JLabel fechaDeRegistroLabel;
+    private JLabel fechaDeRegistroContenido;
+    private JLabel nombreDePlataformaLabel;
+    private JLabel plataformaContenido;
+    private JLabel artistaOrganizadorLabel;
+    private JLabel artistaOrganizadorContenido;
+    private JLabel funcionesDelEspectaculoTitulo;
+    private JLabel paquetesDelEspectaculoTitulo;
     private JButton agregarFuncionButton;
     private JTable tablaFunciones;
-    private JTextArea detalleDelEspectaculoTitulo;
     private JTable tablaPaquetes;
+    private JButton actualizarFuncionesButton;
 
     Map<String, Paquete> PaquetesDelEspectaculo;
     Map<String, Funcion> FuncionesDelEspectaculo;
@@ -107,6 +106,13 @@ public class DetalleEspectaculo extends JInternalFrame {
             }
         });
 
+        actualizarFuncionesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limpiartablaFunciones();
+                cargarTablaFunciones();
+            }
+        });
     }
 
 
@@ -157,6 +163,14 @@ public class DetalleEspectaculo extends JInternalFrame {
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        }
+    }
+    public void limpiartablaFunciones() {
+        DefaultTableModel temp = (DefaultTableModel) tablaFunciones.getModel();
+        int filas = tablaFunciones.getRowCount();
+
+        for (int a = 0; filas > a; a++) {
+            temp.removeRow(0);
         }
     }
 }

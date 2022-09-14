@@ -16,7 +16,6 @@ public class Dashboard extends JFrame {
     private JMenu registrosJMenu;
     private JMenu consultasJMenu;
     private JMenu agregarJMenu;
-    private JMenu modificarJMenu;
 
     private JMenuItem cargarDatosJMenuItem;
     private JMenuItem cerrarJMenuItem;
@@ -32,7 +31,6 @@ public class Dashboard extends JFrame {
     private JMenuItem consultaDePaqueteJMenuItem;
     private JMenuItem registroAFuncionJMenuItem;
     private JMenuItem agregarEspAPaqueteJMenuItem;
-    private JMenuItem modificarDatosDeUsuarioJMenuItem;
     private JDesktopPane dashboardJDesktopPane;
 
     public JDesktopPane getDashboardJDesktopPane(){
@@ -86,6 +84,7 @@ public class Dashboard extends JFrame {
                 JInternalFrame iFrame = new FormularioEspectaculo("Formulario de Espectaculo");
                 iFrame.setIconifiable(true);
                 iFrame.setClosable(true);
+                iFrame.setSize(580,360);
                 dashboardJDesktopPane.add(iFrame);
                 iFrame.setVisible(true);
             }
@@ -119,6 +118,7 @@ public class Dashboard extends JFrame {
                 JInternalFrame iFrame = new FormularioPlataforma("Formulario de plataforma");
                 iFrame.setIconifiable(true);
                 iFrame.setClosable(true);
+                iFrame.setSize(500,310);
                 dashboardJDesktopPane.add(iFrame);
                 iFrame.setSize(600,400);
                 iFrame.setVisible(true);
@@ -191,12 +191,7 @@ public class Dashboard extends JFrame {
             }
         });
 
-        modificarDatosDeUsuarioJMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //?
-            }
-        });
+
     }
     public void crearDetalleUsuario(Usuario usuario){
         //JInternalFrame detalle = new DetalleUsuario("Detalle usuario", new Usuario("nickname","nombre","apellido","correo", LocalDate.now()));

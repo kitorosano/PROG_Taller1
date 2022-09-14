@@ -12,19 +12,18 @@ import java.util.Map;
 
 public class DetallePaquete extends JInternalFrame {
     private JPanel mainPanel;
-    private JTextArea nombreTextArea;
-    private JTextArea descripcionTextArea;
-    private JTextArea fechaDeExpiracionTextArea;
-    private JTextArea descuentoTextArea;
-    private JTextArea fechaDeRegistroTextArea;
-    private JTextArea nombreContenido;
-    private JTextArea descripcionContenido;
-    private JTextArea fechaDeExpiracionContenido;
-    private JTextArea descuentoContenido;
-    private JTextArea fechaDeRegistroContenido;
+    private JLabel nombreLabel;
+    private JLabel descripcionLabel;
+    private JLabel fechaDeExpiracionLabel;
+    private JLabel descuentoLabel;
+    private JLabel fechaDeRegistroLabel;
+    private JLabel nombreContenido;
+    private JLabel descripcionContenido;
+    private JLabel fechaDeExpiracionContenido;
+    private JLabel descuentoContenido;
+    private JLabel fechaDeRegistroContenido;
     private JTable table1;
-    private JTextArea detalleDePaqueteTextArea;
-    private JTextArea espectaculosTextArea;
+    private JLabel espectaculosLabel;
 
     Paquete paquete;
 

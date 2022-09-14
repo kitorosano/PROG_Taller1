@@ -98,7 +98,6 @@ public class ListadoPaquetes extends JInternalFrame{
             detalle.setClosable(true);
             Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
             detalle.setVisible(true);
-            detalle.setVisible(true);
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al llamar al detalle paquete" + e.toString());
         }

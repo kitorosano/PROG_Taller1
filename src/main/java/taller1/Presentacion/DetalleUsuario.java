@@ -5,6 +5,8 @@ import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Map;
@@ -12,23 +14,24 @@ import java.util.Map;
 public class DetalleUsuario extends JInternalFrame {
 
     private JPanel mainPanel;
-    private JTextArea nicknameTextArea;
-    private JTextArea nombreTextArea;
-    private JTextArea apellidoTextArea;
-    private JTextArea correoTextArea;
-    private JTextArea fechaNacimientoTextArea;
-    private JTextArea descripcionTextArea;
-    private JTextArea nicknameContenido;
-    private JTextArea nombreContenido;
-    private JTextArea apellidoContenido;
+    private JLabel nicknameLabel;
+    private JLabel nombreLabel;
+    private JLabel apellidoLabel;
+    private JLabel correoLabel;
+    private JLabel fechaNacimientoLabel;
+    private JLabel descripcionLabel;
+    private JLabel nicknameContenido;
+    private JLabel nombreContenido;
+    private JLabel apellidoContenido;
     private JTable table1;
-    private JTextArea biografiaTextArea;
-    private JTextArea correoContenido;
-    private JTextArea fechaNContenido;
-    private JTextArea descripcionContenido;
-    private JTextArea biografiaContenido;
-    private JTextArea sitioWebTextArea;
-    private JTextArea sitioWebContenido;
+    private JLabel biografiaLabel;
+    private JLabel correoContenido;
+    private JLabel fechaNContenido;
+    private JLabel descripcionContenido;
+    private JLabel biografiaContenido;
+    private JLabel sitioWebLabel;
+    private JLabel sitioWebContenido;
+    private JButton modificarUsuarioButton;
 
     Usuario usuario;
 
@@ -54,25 +57,25 @@ public class DetalleUsuario extends JInternalFrame {
             createUIComponents(1);
             cargarTablaArtista();
             descripcionContenido.setText(((Artista) usuario).getDescripcion());
-            biografiaContenido.setText(((Artista) usuario).getBiografia());
+            biografiaContenido.setText(strToHtml(((Artista) usuario).getBiografia()));
             sitioWebContenido.setText(((Artista) usuario).getSitioWeb());
 
         } else {
             createUIComponents(2);
             cargarTablaEspectador();
-            descripcionTextArea.setEnabled(false);
-            descripcionTextArea.setVisible(false);
+            descripcionLabel.setEnabled(false);
+            descripcionLabel.setVisible(false);
             descripcionContenido.setEnabled(false);
             descripcionContenido.setVisible(false);
 
-            biografiaTextArea.setEnabled(false);
-            biografiaTextArea.setVisible(false);
+            biografiaLabel.setEnabled(false);
+            biografiaLabel.setVisible(false);
             biografiaContenido.setEnabled(false);
             biografiaContenido.setVisible(false);
 
-            sitioWebTextArea.setEnabled(false);
-            sitioWebTextArea.setVisible(false);
-            sitioWebTextArea.setEnabled(false);
+            sitioWebLabel.setEnabled(false);
+            sitioWebLabel.setVisible(false);
+            sitioWebLabel.setEnabled(false);
             sitioWebContenido.setVisible(false);
 
         }
@@ -83,8 +86,9 @@ public class DetalleUsuario extends JInternalFrame {
                 super.mouseClicked(e);
 
                 if (e.getClickCount() == 2) {
-                    String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
+
                     if (usuario instanceof Artista) {
+                        String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
                         Espectaculo espectaculo = espectaculosArtista.get(valor);
 
                         JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle Espectaculo", espectaculo);
@@ -93,16 +97,28 @@ public class DetalleUsuario extends JInternalFrame {
                         Dashboard.getInstance().getDashboardJDesktopPane().add(detalleEspectaculo);
                         detalleEspectaculo.setVisible(true);
                     } else {
+                        String valor = table1.getValueAt(table1.getSelectedRow(), 1).toString();
                         Funcion funcion = funcionesRegistradasDelEspectador.get(valor).getFuncion();
 
                         JInternalFrame detalle = new DetalleFuncion("Detalle Funcion", funcion);
                         detalle.setIconifiable(true);
+                        detalle.setClosable(true);
                         Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
                         detalle.setVisible(true);
                     }
 
 
                 }
+            }
+        });
+        modificarUsuarioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame modificar_usuario = new ModificarUsuario("Modificar Usuario", usuario);
+                modificar_usuario.setIconifiable(true);
+                modificar_usuario.setClosable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(modificar_usuario);
+                modificar_usuario.setVisible(true);
             }
         });
     }
@@ -150,6 +166,10 @@ public class DetalleUsuario extends JInternalFrame {
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());
         }
+    }
+
+    private String strToHtml(String text){
+        return "<html><p>"+text +"</p></html>";
     }
 
 }

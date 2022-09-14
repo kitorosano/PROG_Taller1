@@ -20,6 +20,7 @@ public class Main {
                 .load();
 
         JFrame frame = Dashboard.getInstance();
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 }

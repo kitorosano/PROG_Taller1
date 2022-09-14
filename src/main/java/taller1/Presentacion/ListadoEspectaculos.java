@@ -27,6 +27,7 @@ public class ListadoEspectaculos extends JInternalFrame {
         cargarCmbBox();
         lista.setModel(model);
         setResizable(false);
+        cargarLista();
 
         lista.addMouseListener(new MouseAdapter() {
             @Override

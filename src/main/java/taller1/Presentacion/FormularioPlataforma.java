@@ -13,7 +13,6 @@ import java.util.Set;
 public class FormularioPlataforma extends JInternalFrame {
     private JPanel panel1;
     private JTextField tfNombre;
-    private JButton volverButton;
     private JTextField tfURL;
     private JTextField tfDescripcion;
     private JButton ingresarButton;

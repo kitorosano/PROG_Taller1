@@ -5,28 +5,28 @@ import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 
 public class DetalleFuncion extends JInternalFrame {
     private JPanel mainPanel;
-    private JTextArea textArea1;
-    private JTextArea nombreContenido;
-    private JTextArea espectaculoContenido;
-    private JTextArea fechaHoraDeInicioContenido;
-    private JTextArea fechaDeRegistroContenido;
-    private JTextArea espectaculoTextArea;
-    private JTextArea fechaYHoraDeTextArea;
-    private JTextArea fechaDeRegistroTextArea;
-    private JTextArea detalleDeFuncionTextArea;
+    private JLabel nombreLabel;
+    private JLabel nombreContenido;
+    private JLabel espectaculoContenido;
+    private JLabel fechaHoraDeInicioContenido;
+    private JLabel fechaDeRegistroContenido;
+    private JLabel nombreDeEspectaculoLabel;
+    private JLabel fechaYHoraDeLabel;
+    private JLabel fechaDeRegistroLabel;
+    private JLabel detalleDeFuncionLabel;
     private JTable table1;
-    private JTextArea espectadoresTextArea;
+    private JLabel espectadoresLabel;
     private JScrollPane scrollPane1;
     private JButton registrarEspectadoresButton;
+    private JButton actualizarEspectadoresButton;
 
     Funcion funcion;
     Map<String, EspectadorRegistradoAFuncion> espectadoresDeFuncion;
@@ -65,7 +65,18 @@ public class DetalleFuncion extends JInternalFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 JInternalFrame formularioRegistroEspectador = new FormularioRegistroEspectadorAFuncion("Formulario de registro de espectador a funcion",funcion);
+                formularioRegistroEspectador.setClosable(true);
+                formularioRegistroEspectador.setIconifiable(true);
+                Dashboard.getInstance().getDashboardJDesktopPane().add(formularioRegistroEspectador);
                 formularioRegistroEspectador.setVisible(true);
+
+            }
+        });
+        actualizarEspectadoresButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limpiartablaEspectadores();
+                cargarTabla();
             }
         });
     }
@@ -93,6 +104,15 @@ public class DetalleFuncion extends JInternalFrame {
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        }
+    }
+
+    private void limpiartablaEspectadores() {
+        DefaultTableModel temp = (DefaultTableModel) table1.getModel();
+        int filas = table1.getRowCount();
+
+        for (int a = 0; filas > a; a++) {
+            temp.removeRow(0);
         }
     }
 }

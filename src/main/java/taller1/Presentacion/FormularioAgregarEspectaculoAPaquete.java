@@ -34,6 +34,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
         lstEspectAingresar.setModel(modelAAgregar);
         lstEspectIngresados.setModel(modelAgregados);
         cargarDatosComboBox();
+        cargarDatosListaIngresados();
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -45,7 +46,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
             public void itemStateChanged(ItemEvent e) {
                 if (e.getSource()==cbPlataforma) {
                     cargarDatosListaAIngresar();
-                    cargarDatosListaIngresados();
+//                    cargarDatosListaIngresados(); //Es necesario? Lo saque para podes agregar espectaculos de distintas plataformas en el mismo paquetes EN LA MISMA TRANSACCION
                 }
             }
         });

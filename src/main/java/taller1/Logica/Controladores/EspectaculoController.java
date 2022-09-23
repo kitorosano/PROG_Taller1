@@ -35,11 +35,13 @@ public class EspectaculoController implements IEspectaculo {
     public void vaciarDatos(){
         Connection connection = null;
         Statement statement = null;
-        String deleteQuery = "DELETE FROM plataformas;";
+        String deleteQuery1 = "DELETE FROM plataformas;";
+        String deleteQuery2 = "DELETE FROM paquetes;";
         try {
             connection = ConexionDB.getConnection();
             statement = connection.createStatement();
-            statement.executeUpdate(deleteQuery);
+            statement.executeUpdate(deleteQuery1);
+            statement.executeUpdate(deleteQuery2);
             System.out.println("Todos los datos relacionados a los espectaculos (plataforma, funciones, paquetes y registros) han sido eliminados.");
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());

@@ -10,6 +10,8 @@ CREATE TABLE artistas (
   ua_apellido VARCHAR(30) NOT NULL,
   ua_correo VARCHAR(50) NOT NULL,
   ua_fechaNacimiento DATE NOT NULL,
+  ua_contrasena VARCHAR(30) NOT NULL,
+  ua_imagen VARCHAR(200) NOT NULL,
   ua_descripcion VARCHAR(100) NOT NULL,
   ua_biografia VARCHAR(200) NOT NULL,
   ua_sitioWeb VARCHAR(50) NOT NULL,
@@ -23,6 +25,8 @@ CREATE TABLE espectadores (
   ue_apellido VARCHAR(30) NOT NULL,
   ue_correo VARCHAR(50) NOT NULL,
   ue_fechaNacimiento DATE NOT NULL,
+  ue_contrasena VARCHAR(30) NOT NULL,
+  ue_imagen VARCHAR(200) NOT NULL,
 
   PRIMARY KEY (ue_nickname, ue_correo)
 );

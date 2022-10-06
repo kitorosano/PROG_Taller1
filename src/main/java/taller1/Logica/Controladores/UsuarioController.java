@@ -112,9 +112,11 @@ public class UsuarioController implements IUsuario {
                 String apellido = resultSet.getString("ue_apellido");
                 String correo = resultSet.getString("ue_correo");
                 LocalDate fechaNacimiento = resultSet.getDate("ue_fechaNacimiento").toLocalDate();
+                String contrasena = resultSet.getString("ue_contrasena");
+                String imagen = resultSet.getString("ue_imagen");
 
-                Usuario usuario = new Espectador(nickname, nombre, apellido, correo, fechaNacimiento);
-                usuarios.put(nickname, usuario);
+                Usuario espectador = new Espectador(nickname, nombre, apellido, correo, fechaNacimiento, contrasena, imagen);
+                usuarios.put(nickname, espectador);
             }
 
             // Obtenemos los artistas
@@ -126,11 +128,13 @@ public class UsuarioController implements IUsuario {
                 String apellido = resultSet.getString("ua_apellido");
                 String correo = resultSet.getString("ua_correo");
                 LocalDate fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
+                String contrasena = resultSet.getString("ua_contrasena");
+                String imagen = resultSet.getString("ua_imagen");
                 String descripcion = resultSet.getString("ua_descripcion");
                 String biografia = resultSet.getString("ua_biografia");
                 String sitioWeb = resultSet.getString("ua_sitioWeb");
-
-                Usuario artista = new Artista(nickname, nombre, apellido, correo, fechaNacimiento, descripcion, biografia, sitioWeb);
+                
+                Usuario artista = new Artista(nickname, nombre, apellido, correo, fechaNacimiento, contrasena, imagen, descripcion, biografia, sitioWeb);
                 usuarios.put(nickname, artista);
             }
         } catch (RuntimeException e) {
@@ -157,11 +161,12 @@ public class UsuarioController implements IUsuario {
         Connection connection = null;
         Statement statement = null;
         String insertUsuario = "";
-        if (usuario instanceof Espectador)
-            insertUsuario = "INSERT INTO espectadores (ue_nickname, ue_nombre, ue_apellido, ue_correo, ue_fechaNacimiento) VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "')";
-        else if (usuario instanceof Artista)
-            insertUsuario = "INSERT INTO artistas (ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_descripcion, ua_biografia, ua_sitioWeb) VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "', '" + ((Artista) usuario).getDescripcion() + "', '" + ((Artista) usuario).getBiografia() + "', '" + ((Artista) usuario).getSitioWeb() + "')";
-
+        if (usuario instanceof Artista)
+            insertUsuario = "INSERT INTO artistas (ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_contrasena, ua_imagen, ua_descripcion, ua_biografia, ua_sitioWeb) VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "', '" + usuario.getContrasena() + "', '" + usuario.getImagen() + "', '" + ((Artista) usuario).getDescripcion() + "', '" + ((Artista) usuario).getBiografia() + "', '" + ((Artista) usuario).getSitioWeb() + "')";
+        else if (usuario instanceof Espectador)
+            insertUsuario = "INSERT INTO espectadores (ue_nickname, ue_nombre, ue_apellido, ue_correo, ue_fechaNacimiento, ue_contrasena, ue_imagen) VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "', '" + usuario.getContrasena() + "', '" + usuario.getImagen() + "')";
+        else throw new RuntimeException("Error al insertar el usuario, tipo no reconocido");
+        
         try {
             connection = ConexionDB.getConnection();
             statement = connection.createStatement();
@@ -188,11 +193,12 @@ public class UsuarioController implements IUsuario {
         Connection connection = null;
         Statement statement = null;
         String updateUsuario = "";
-        if (usuario instanceof Espectador)
-            updateUsuario = "UPDATE espectadores SET ue_nombre = '" + usuario.getNombre() + "', ue_apellido = '" + usuario.getApellido() + "', ue_correo = '" + usuario.getCorreo() + "', ue_fechaNacimiento = '" + usuario.getFechaNacimiento() + "' WHERE ue_nickname = '" + usuario.getNickname() + "'";
-        else if (usuario instanceof Artista)
-            updateUsuario = "UPDATE artistas SET ua_nombre = '" + usuario.getNombre() + "', ua_apellido = '" + usuario.getApellido() + "', ua_correo = '" + usuario.getCorreo() + "', ua_fechaNacimiento = '" + usuario.getFechaNacimiento() + "', ua_descripcion = '" + ((Artista) usuario).getDescripcion() + "', ua_biografia = '" + ((Artista) usuario).getBiografia() + "', ua_sitioWeb = '" + ((Artista) usuario).getSitioWeb() + "' WHERE ua_nickname = '" + usuario.getNickname() + "'";
-
+        if (usuario instanceof Artista)
+            updateUsuario = "UPDATE artistas SET ua_nombre = '" + usuario.getNombre() + "', ua_apellido = '" + usuario.getApellido() + "', ua_correo = '" + usuario.getCorreo() + "', ua_fechaNacimiento = '" + usuario.getFechaNacimiento() + "', ua_contrasena = '" + usuario.getContrasena() + "', ua_imagen = '" + usuario.getImagen() + "', ua_descripcion = '" + ((Artista) usuario).getDescripcion() + "', ua_biografia = '" + ((Artista) usuario).getBiografia() + "', ua_sitioWeb = '" + ((Artista) usuario).getSitioWeb() + "' WHERE ua_nickname = '" + usuario.getNickname() + "'";
+        else if (usuario instanceof Espectador)
+            updateUsuario = "UPDATE espectadores SET ue_nombre = '" + usuario.getNombre() + "', ue_apellido = '" + usuario.getApellido() + "', ue_correo = '" + usuario.getCorreo() + "', ue_fechaNacimiento = '" + usuario.getFechaNacimiento() + "', ue_contrasena = '" + usuario.getContrasena() + "', ue_imagen = '" + usuario.getImagen() + "' WHERE ue_nickname = '" + usuario.getNickname() + "'";
+        else throw new RuntimeException("Error al modificar el usuario, tipo no reconocido");
+        
         try {
             connection = ConexionDB.getConnection();
             statement = connection.createStatement();
@@ -240,10 +246,12 @@ public class UsuarioController implements IUsuario {
                 String ua_apellido = resultSet.getString("ua_apellido");
                 String ua_correo = resultSet.getString("ua_correo");
                 LocalDate ua_fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
+                String ua_contrasena = resultSet.getString("ua_contrasena");
+                String ua_imagen = resultSet.getString("ua_imagen");
                 String ua_descripcion = resultSet.getString("ua_descripcion");
                 String ua_biografia = resultSet.getString("ua_biografia");
                 String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-                Artista ua = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_descripcion, ua_biografia, ua_sitioWeb);
+                Artista ua = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_contrasena, ua_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
 
                 String es_nombre = resultSet.getString("es_nombre");
                 String es_descripcion = resultSet.getString("es_descripcion");
@@ -386,10 +394,12 @@ public class UsuarioController implements IUsuario {
                 String ua_apellido = resultSet.getString("ua_apellido");
                 String ua_correo = resultSet.getString("ua_correo");
                 LocalDate ua_fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
+                String ua_contrasena = resultSet.getString("ua_contrasena");
+                String ua_imagen = resultSet.getString("ua_imagen");
                 String ua_descripcion = resultSet.getString("ua_descripcion");
                 String ua_biografia = resultSet.getString("ua_biografia");
                 String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-                Artista ua = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_descripcion, ua_biografia, ua_sitioWeb);
+                Artista ua = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_contrasena, ua_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
 
                 String es_nombre = resultSet.getString("es_nombre");
                 String es_descripcion = resultSet.getString("es_descripcion");
@@ -411,7 +421,9 @@ public class UsuarioController implements IUsuario {
                 String ue_apellido = resultSet.getString("ue_apellido");
                 String ue_correo = resultSet.getString("ue_correo");
                 LocalDate ue_fechaNacimiento = resultSet.getDate("ue_fechaNacimiento").toLocalDate();
-                Espectador ue = new Espectador(ue_nickname, ue_nombre, ue_apellido, ue_correo, ue_fechaNacimiento);
+                String ue_contrasena = resultSet.getString("ue_contrasena");
+                String ue_imagen = resultSet.getString("ue_imagen");
+                Espectador ue = new Espectador(ue_nickname, ue_nombre, ue_apellido, ue_correo, ue_fechaNacimiento, ue_contrasena, ue_imagen);
 
                 Boolean ue_fn_canjeado = resultSet.getBoolean("ue_fn_canjeado");
                 Double ue_fn_costo = resultSet.getDouble("ue_fn_costo");
@@ -468,10 +480,12 @@ public class UsuarioController implements IUsuario {
                 String ua_apellido = resultSet.getString("ua_apellido");
                 String ua_correo = resultSet.getString("ua_correo");
                 LocalDate ua_fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
+                String ua_contrasena = resultSet.getString("ua_contrasena");
+                String ua_imagen = resultSet.getString("ua_imagen");
                 String ua_descripcion = resultSet.getString("ua_descripcion");
                 String ua_biografia = resultSet.getString("ua_biografia");
                 String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-                Artista ua = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_descripcion, ua_biografia, ua_sitioWeb);
+                Artista ua = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_contrasena, ua_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
 
                 String es_nombre = resultSet.getString("es_nombre");
                 String es_descripcion = resultSet.getString("es_descripcion");
@@ -493,7 +507,9 @@ public class UsuarioController implements IUsuario {
                 String ue_apellido = resultSet.getString("ue_apellido");
                 String ue_correo = resultSet.getString("ue_correo");
                 LocalDate ue_fechaNacimiento = resultSet.getDate("ue_fechaNacimiento").toLocalDate();
-                Espectador ue = new Espectador(ue_nickname, ue_nombre, ue_apellido, ue_correo, ue_fechaNacimiento);
+                String ue_contrasena = resultSet.getString("ue_contrasena");
+                String ue_imagen = resultSet.getString("ue_imagen");
+                Espectador ue = new Espectador(ue_nickname, ue_nombre, ue_apellido, ue_correo, ue_fechaNacimiento, ue_contrasena, ue_imagen);
 
                 Boolean ue_fn_canjeado = resultSet.getBoolean("ue_fn_canjeado");
                 Double ue_fn_costo = resultSet.getDouble("ue_fn_costo");

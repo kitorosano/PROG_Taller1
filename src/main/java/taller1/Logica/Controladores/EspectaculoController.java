@@ -216,10 +216,12 @@ public class EspectaculoController implements IEspectaculo {
                 String ua_apellido = resultSet.getString("ua_apellido");
                 String ua_correo = resultSet.getString("ua_correo");
                 LocalDate ua_fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
+                String ua_contrasena = resultSet.getString("ua_contrasena");
+                String ua_imagen = resultSet.getString("ua_imagen");
                 String ua_descripcion = resultSet.getString("ua_descripcion");
                 String ua_biografia = resultSet.getString("ua_biografia");
                 String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-                Artista artista = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_descripcion, ua_biografia, ua_sitioWeb);
+                Artista artista = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_contrasena, ua_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
 
                 String es_nombre = resultSet.getString("es_nombre");
                 String es_descripcion = resultSet.getString("es_descripcion");
@@ -309,10 +311,12 @@ public class EspectaculoController implements IEspectaculo {
                 String ua_apellido = resultSet.getString("ua_apellido");
                 String ua_correo = resultSet.getString("ua_correo");
                 LocalDate ua_fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
+                String ua_contrasena = resultSet.getString("ua_contrasena");
+                String ua_imagen = resultSet.getString("ua_imagen");
                 String ua_descripcion = resultSet.getString("ua_descripcion");
                 String ua_biografia = resultSet.getString("ua_biografia");
                 String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-                Artista artista = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_descripcion, ua_biografia, ua_sitioWeb);
+                Artista artista = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_contrasena, ua_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
 
                 String es_nombre = resultSet.getString("es_nombre");
                 String es_descripcion = resultSet.getString("es_descripcion");
@@ -470,11 +474,13 @@ public class EspectaculoController implements IEspectaculo {
                 String ua_apellido = resultSet.getString("ua_apellido");
                 String ua_correo = resultSet.getString("ua_correo");
                 LocalDate ua_fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
+                String ua_contrasena = resultSet.getString("ua_contrasena");
+                String ua_imagen = resultSet.getString("ua_imagen");
                 String ua_descripcion = resultSet.getString("ua_descripcion");
                 String ua_biografia = resultSet.getString("ua_biografia");
                 String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-                Artista artistaOrganizador = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_descripcion, ua_biografia, ua_sitioWeb);
-
+                Artista artistaOrganizador = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_contrasena, ua_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
+                
                 String pl_nombre = resultSet.getString("pl_nombre");
                 String pl_descripcion = resultSet.getString("pl_descripcion");
                 String pl_url = resultSet.getString("pl_url");

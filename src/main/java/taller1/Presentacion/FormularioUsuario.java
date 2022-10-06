@@ -30,6 +30,8 @@ public class FormularioUsuario extends JInternalFrame {
     private JLabel lblBiografia;
     private JLabel lblURL;
     private JButton btnConsulta;
+    private JTextField tfContrasena;
+    private JTextField tfContrasena2;
     private JLabel LabelDescripcion;
 
     private String seleccionado;
@@ -53,9 +55,17 @@ public class FormularioUsuario extends JInternalFrame {
                 if (comprobarCamposNulos()) {
                     JOptionPane.showMessageDialog(null, "Los campos obligatorios no pueden estar vacios");
                 } else {
+                    // comprobar que los datos sean unicos
                     if (!comprobarDatosUnicos(tfNickname.getText(), tfCorreo.getText())) {
                         seleccionado = (String) comboBoxTipo.getSelectedItem();
-                        String nickname = tfNickname.getText(), nombre = tfNombre.getText(), apellido = tfApellido.getText(), correo = tfCorreo.getText();
+                        String nickname = tfNickname.getText(),
+                            nombre = tfNombre.getText(),
+                            apellido = tfApellido.getText(),
+                            correo = tfCorreo.getText(),
+                            contrasena = tfContrasena.getText(),
+                            imagen = "";
+                        
+                        // validar fecha
                         if (!validarFecha(tfFechaNac.getText())) {
                             JOptionPane.showMessageDialog(null, "El formato de fecha no es valido");
                             return;
@@ -66,12 +76,19 @@ public class FormularioUsuario extends JInternalFrame {
                             JOptionPane.showMessageDialog(null, "La URL no es valida");
                             return;
                         }
+                        
+                        //validar contraseña
+                        if (!tfContrasena.getText().equals(tfContrasena2.getText())) {
+                            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
+                            return;
+                        }
+                        
                         if (seleccionado.equals("Artista")) {
                             String descripcion = tfDescripcion.getText(),
                                     biografia = tfBiografia.getText(),
                                     url = tfURL.getText();
                             try {
-                                Fabrica.getInstance().getIUsuario().altaUsuario(new Artista(nickname, nombre, apellido, correo, fechanac, descripcion, biografia, url));
+                                Fabrica.getInstance().getIUsuario().altaUsuario(new Artista(nickname, nombre, apellido, correo, fechanac, contrasena, imagen, descripcion, biografia, url));
                                 JOptionPane.showMessageDialog(null, "Artista creado con exito");
                                 dispose();
                             } catch (Exception ex) {
@@ -79,7 +96,7 @@ public class FormularioUsuario extends JInternalFrame {
                             }
                         } else { // equal Espectador
                             try {
-                                Fabrica.getInstance().getIUsuario().altaUsuario(new Espectador(nickname, nombre, apellido, correo, fechanac));
+                                Fabrica.getInstance().getIUsuario().altaUsuario(new Espectador(nickname, nombre, apellido, correo, fechanac, contrasena, imagen));
                                 JOptionPane.showMessageDialog(null, "Espectador creado con exito");
                                 dispose();
                             } catch (Exception ex) {
@@ -105,7 +122,6 @@ public class FormularioUsuario extends JInternalFrame {
                         lblBiografia.setVisible(false);
                         lblURL.setVisible(false);
                         lbDescripcion.setVisible(false);
-                        LabelDescripcion.setVisible(false);
                     } else {
                         tfDescripcion.setVisible(true);
                         tfURL.setVisible(true);
@@ -113,7 +129,6 @@ public class FormularioUsuario extends JInternalFrame {
                         lblBiografia.setVisible(true);
                         lblURL.setVisible(true);
                         lbDescripcion.setVisible(true);
-                        LabelDescripcion.setVisible(true);
                     }
                 }
             }
@@ -138,7 +153,7 @@ public class FormularioUsuario extends JInternalFrame {
 
     public boolean comprobarCamposNulos() {                //Devuelve true si hay campos nulos
         String seleccionado = (String) comboBoxTipo.getSelectedItem();
-        if (tfNickname.getText().isEmpty() || tfNombre.getText().isEmpty() || tfApellido.getText().isEmpty() || tfCorreo.getText().isEmpty() || tfFechaNac.getText().isEmpty()) {
+        if (tfNickname.getText().isEmpty() || tfNombre.getText().isEmpty() || tfApellido.getText().isEmpty() || tfCorreo.getText().isEmpty() || tfFechaNac.getText().isEmpty() || tfContrasena.getText().isEmpty() || tfContrasena2.getText().isEmpty()) {
             return true;
         } else {
             if (seleccionado.equals("Artista") && tfDescripcion.getText().isEmpty()) {

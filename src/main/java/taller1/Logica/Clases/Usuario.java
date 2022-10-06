@@ -8,16 +8,20 @@ public class Usuario {
     private String apellido;
     private String correo;
     private LocalDate fechaNacimiento;
+    private String contrasena;
+    private String imagen;
 
     public Usuario() {
     }
-
-    public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento) {
+    
+    public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String contrasena, String imagen) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
+        this.contrasena = contrasena;
+        this.imagen = imagen;
     }
 
     public String getNickname() {
@@ -59,9 +63,25 @@ public class Usuario {
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+    
+    public String getContrasena() {
+        return contrasena;
+    }
+    
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
+    public String getImagen() {
+        return imagen;
+    }
+    
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
     @Override
     public String toString() {
-        return "Usuario{" + "nickname='" + nickname + '\'' + ", nombre='" + nombre + '\'' + ", apellido='" + apellido + '\'' + ", correo='" + correo + '\'' + ", fechaNacimiento=" + fechaNacimiento + '}';
+        return "Usuario{" + "nickname=" + nickname + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", fechaNacimiento=" + fechaNacimiento + ", contrasena=" + contrasena + ", imagen=" + imagen + '}';
     }
 }

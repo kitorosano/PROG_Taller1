@@ -2,4 +2,4 @@
 .env
 
 #compilado
-out/
+out/production/

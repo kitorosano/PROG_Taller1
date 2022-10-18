@@ -10,14 +10,16 @@ public class Espectaculo {
     private int maxEspectadores;
     private String url;
     private double costo;
+    private E_EstadoEspectaculo estado;
     private LocalDateTime fechaRegistro;
+    private String imagen;
     private Plataforma plataforma;
     private Artista artista;
 
     public Espectaculo() {
     }
 
-    public Espectaculo(String nombre, String descripcion, double duracion, int minEspectadores, int maxEspectadores, String url, double costo, LocalDateTime fechaRegistro, Plataforma plataforma, Artista artistaOrganizador) {
+    public Espectaculo(String nombre, String descripcion, double duracion, int minEspectadores, int maxEspectadores, String url, double costo, E_EstadoEspectaculo estado, LocalDateTime fechaRegistro, String imagen, Plataforma plataforma, Artista artistaOrganizador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -25,7 +27,9 @@ public class Espectaculo {
         this.maxEspectadores = maxEspectadores;
         this.url = url;
         this.costo = costo;
+        this.estado = estado;
         this.fechaRegistro = fechaRegistro;
+        this.imagen = imagen;
         this.plataforma = plataforma;
         this.artista = artistaOrganizador;
     }
@@ -85,6 +89,12 @@ public class Espectaculo {
     public void setCosto(double costo) {
         this.costo = costo;
     }
+    public E_EstadoEspectaculo getEstado() {
+        return estado;
+    }
+    public void setEstado(E_EstadoEspectaculo estado) {
+        this.estado = estado;
+    }
 
     public LocalDateTime getFechaRegistro() {
         return fechaRegistro;
@@ -92,6 +102,12 @@ public class Espectaculo {
 
     public void setFechaRegistro(LocalDateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+    public String getImagen() {
+        return imagen;
+    }
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public Plataforma getPlataforma() {
@@ -120,7 +136,9 @@ public class Espectaculo {
                 ", maxEspectadores=" + maxEspectadores +
                 ", url='" + url + '\'' +
                 ", costo=" + costo +
+                ", estado=" + estado +
                 ", fechaRegistro=" + fechaRegistro +
+                ", imagen='" + imagen + '\'' +
                 ", plataforma=" + plataforma +
                 ", arganizador=" + artista +
                 '}';

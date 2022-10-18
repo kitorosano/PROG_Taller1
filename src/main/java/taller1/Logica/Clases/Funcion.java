@@ -7,15 +7,17 @@ public class Funcion {
     private Espectaculo espectaculo;
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaRegistro;
+    private String imagen;
 
     public Funcion() {
     }
 
-    public Funcion(String nombre, Espectaculo espectaculo, LocalDateTime fechaHoraInicio, LocalDateTime fechaRegistro) {
+    public Funcion(String nombre, Espectaculo espectaculo, LocalDateTime fechaHoraInicio, LocalDateTime fechaRegistro, String imagen) {
         this.nombre = nombre;
         this.espectaculo = espectaculo;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaRegistro = fechaRegistro;
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -49,6 +51,12 @@ public class Funcion {
     public void setFechaRegistro(LocalDateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+    public String getImagen() {
+        return imagen;
+    }
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
     @Override
     public String toString() {
@@ -57,6 +65,7 @@ public class Funcion {
                 ", espectaculo=" + espectaculo +
                 ", fechaHoraInicio=" + fechaHoraInicio +
                 ", fechaRegistro=" + fechaRegistro +
+                ", imagen='" + imagen + '\'' +
                 '}';
     }
 }

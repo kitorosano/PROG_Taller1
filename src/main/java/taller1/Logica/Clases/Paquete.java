@@ -8,16 +8,18 @@ public class Paquete {
     private String descripcion;
     private double descuento;
     private LocalDateTime fechaRegistro;
+    private String imagen;
 
     public Paquete() {
     }
 
-    public Paquete(String nombre, LocalDateTime fechaExpiracion, String descripcion, double descuento, LocalDateTime fechaRegistro) {
+    public Paquete(String nombre, LocalDateTime fechaExpiracion, String descripcion, double descuento, LocalDateTime fechaRegistro, String imagen) {
         this.nombre = nombre;
         this.fechaExpiracion = fechaExpiracion;
         this.descripcion = descripcion;
         this.descuento = descuento;
         this.fechaRegistro = fechaRegistro;
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -59,6 +61,12 @@ public class Paquete {
     public void setFechaRegistro(LocalDateTime fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
+    public String getImagen() {
+        return imagen;
+    }
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
     @Override
     public String toString() {
@@ -68,6 +76,7 @@ public class Paquete {
                 ", descripcion='" + descripcion + '\'' +
                 ", descuento=" + descuento +
                 ", fechaRegistro=" + fechaRegistro +
+                ", imagen='" + imagen + '\'' +
                 '}';
     }
 }

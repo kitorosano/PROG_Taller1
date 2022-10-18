@@ -32,64 +32,6 @@ public class UsuarioController implements IUsuario {
         return instance;
     }
 
-    // DATOS PRUEBA
-
-    @Override
-    public void vaciarDatos(){
-        Connection connection = null;
-        Statement statement = null;
-        String deleteArtistas = "DELETE FROM artistas";
-        String deleteEspectadores = "DELETE FROM espectadores";
-        try {
-            connection = ConexionDB.getConnection();
-            statement = connection.createStatement();
-            statement.executeUpdate(deleteArtistas);
-            System.out.println("Datos artistas vaciados");
-            statement.executeUpdate(deleteEspectadores);
-            System.out.println("Datos espectaculos vaciados");
-        } catch (RuntimeException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Error al conectar con la base de datos", e);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Error al vaciar los usuarios", e);
-        } finally {
-            try {
-                if (statement != null) statement.close();
-                if (connection != null) connection.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
-            }
-        }
-    }
-
-    @Override
-    public void cargarDatosPrueba(){
-        Connection connection = null;
-        try {
-            connection = ConexionDB.getConnection();
-            ScriptRunner sr = new ScriptRunner(connection);
-            Reader reader = new BufferedReader(new FileReader("src/main/resources/artistas.sql"));
-            sr.runScript(reader);
-            reader = new BufferedReader(new FileReader("src/main/resources/espectadores.sql"));
-            sr.runScript(reader);
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (RuntimeException ex) {
-            System.out.println(ex.getMessage());
-            throw new RuntimeException("Error al insertar los datos de prueba de usuarios", ex);
-        } finally {
-            try {
-                if (connection != null) connection.close();
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-                throw new RuntimeException("Error al cerrar la conexión a la base de datos", ex);
-            }
-        }
-    }
-
-
     // METODOS
 
     @Override

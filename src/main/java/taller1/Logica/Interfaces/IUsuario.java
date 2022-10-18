@@ -6,10 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public interface IUsuario {
-    // CARGAR DATOS PRUEBA
-    void cargarDatosPrueba();
-    void vaciarDatos();
-
     // METODOS
     Map<String, Usuario> obtenerUsuarios();
     void altaUsuario(Usuario nuevoUsuario); //usar instanceof para verificar que el usuario es una instancia de Artista o Espectador

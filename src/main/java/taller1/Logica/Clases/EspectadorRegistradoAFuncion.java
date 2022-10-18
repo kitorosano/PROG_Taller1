@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 public class EspectadorRegistradoAFuncion {
     private Espectador espectador;
     private Funcion funcion;
+    private Paquete paquete;
     private boolean canjeado;
     private double costo;
     private LocalDateTime fechaRegistro;
@@ -13,9 +14,10 @@ public class EspectadorRegistradoAFuncion {
     public EspectadorRegistradoAFuncion() {
     }
 
-    public EspectadorRegistradoAFuncion(Espectador espectador, Funcion funcion, boolean canjeado, double costo, LocalDateTime fechaRegistro) {
+    public EspectadorRegistradoAFuncion(Espectador espectador, Funcion funcion, Paquete paquete, boolean canjeado, double costo, LocalDateTime fechaRegistro) {
         this.espectador = espectador;
         this.funcion = funcion;
+        this.paquete = paquete;
         this.canjeado = canjeado;
         this.costo = costo;
         this.fechaRegistro = fechaRegistro;
@@ -35,6 +37,12 @@ public class EspectadorRegistradoAFuncion {
 
     public void setFuncion(Funcion funcion) {
         this.funcion = funcion;
+    }
+    public Paquete getPaquete() {
+        return paquete;
+    }
+    public void setPaquete(Paquete paquete) {
+        this.paquete = paquete;
     }
 
     public boolean isCanjeado() {
@@ -66,6 +74,7 @@ public class EspectadorRegistradoAFuncion {
         return "EspectadorRegistradoAFuncion{" +
                 "espectador=" + espectador +
                 ", funcion=" + funcion +
+                ", paquete=" + paquete +
                 ", canjeado=" + canjeado +
                 ", costo=" + costo +
                 ", fechaRegistro=" + fechaRegistro +

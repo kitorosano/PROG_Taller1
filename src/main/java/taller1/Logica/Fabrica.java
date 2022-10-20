@@ -1,11 +1,7 @@
 package main.java.taller1.Logica;
 
-import main.java.taller1.Logica.Controladores.DatabaseController;
-import main.java.taller1.Logica.Controladores.EspectaculoController;
-import main.java.taller1.Logica.Controladores.UsuarioController;
-import main.java.taller1.Logica.Interfaces.IDatabase;
-import main.java.taller1.Logica.Interfaces.IEspectaculo;
-import main.java.taller1.Logica.Interfaces.IUsuario;
+import main.java.taller1.Logica.Controladores.*;
+import main.java.taller1.Logica.Interfaces.*;
 
 public class Fabrica {
     private static Fabrica instance;
@@ -30,6 +26,26 @@ public class Fabrica {
     public IEspectaculo getIEspectaculo() {
         EspectaculoController espectaculoController = EspectaculoController.getInstance();
         return espectaculoController;
+    }
+    
+    public IFuncion getIFuncion() {
+        FuncionController funcionController = FuncionController.getInstance();
+        return funcionController;
+    }
+    
+    public IPaquete getIPaquete() {
+        PaqueteController paqueteController = PaqueteController.getInstance();
+        return paqueteController;
+    }
+    
+    public ICategoria getICategoria() {
+        CategoriaController categoriaController = CategoriaController.getInstance();
+        return categoriaController;
+    }
+    
+    public IPlataforma getIPlataforma() {
+        PlataformaController plataformaController = PlataformaController.getInstance();
+        return plataformaController;
     }
     
     public IDatabase getIDatabase() {

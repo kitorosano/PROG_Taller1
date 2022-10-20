@@ -7,7 +7,7 @@ import java.util.Map;
 public interface IEspectaculo {
     void altaEspectaculo(Espectaculo nuevoEspectaculo);
     Map<String, Espectaculo> obtenerEspectaculos();
-    Espectaculo obtenerEspectaculoPorNombre(String nombrePlataforma, String nombre);
+    Espectaculo obtenerEspectaculo(String nombrePlataforma, String nombre);
     Map<String, Espectaculo> obtenerEspectaculosPorPlataforma(String nombrePlataforma);
     Map<String, Espectaculo> obtenerEspectaculosPorArtista(String nickname);
 }

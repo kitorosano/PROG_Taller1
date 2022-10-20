@@ -12,9 +12,4 @@ public interface IUsuario {
     Optional<Usuario> obtenerUsuarioPorCorreo(String correo);
     void altaUsuario(Usuario nuevoUsuario); //usar instanceof para verificar que el usuario es una instancia de Artista o Espectador
     void modificarUsuario(Usuario usuarioModificado);
-    
-    
-    // METODOS DE ESPECTADOR REGISTRADO A FUNCION
-    Map<String, EspectadorRegistradoAFuncion> obtenerFuncionesRegistradasDelEspectador(String nickname);
-    Map<String, EspectadorRegistradoAFuncion> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion);
 }

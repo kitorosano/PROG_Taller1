@@ -30,7 +30,7 @@ public class PaqueteController implements IPaquete {
   public void altaPaquete(Paquete nuevoPaquete) {
     Connection connection = null;
     Statement statement = null;
-    String insertPaquete = "INSERT INTO paquetes (paq_nombre, paq_fechaExpiracion, paq_descripcion, paq_descuento, paq_fechaRegistro, paq_imagen)\n" +
+    String insertPaquete = "INSERT INTO paquetes (paq_nombre, paq_fechaExpiracion, paq_descripcion, paq_descuento, paq_fechaRegistro, paq_imagen) " +
         "VALUES ('" + nuevoPaquete.getNombre() + "', '" + nuevoPaquete.getFechaExpiracion() + "', '" + nuevoPaquete.getDescripcion() + "', " + nuevoPaquete.getDescuento() + ", '" + nuevoPaquete.getFechaRegistro() + ", '" + nuevoPaquete.getImagen() + "')'";
     try {
       connection = ConexionDB.getConnection();
@@ -52,14 +52,13 @@ public class PaqueteController implements IPaquete {
       }
     }
   }
-  
   @Override
   public Map<String, Paquete> obtenerPaquetes() {
     Map<String, Paquete> paquetes = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectPaquetes = "SELECT * FROM paquetes ORDER BY paq_fechaRegistro DESC";
+    String selectPaquetes = "SELECT * FROM paquetes";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -71,7 +70,7 @@ public class PaqueteController implements IPaquete {
         double paq_descuento = resultSet.getDouble("paq_descuento");
         LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
         String paq_imagen = resultSet.getString("paq_imagen");
-        Paquete paquete = new Paquete(paq_nombre, paq_fechaExpiracion, paq_descripcion, paq_descuento, paq_fechaRegistro, paq_imagen);
+        Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
         
         paquetes.put(paq_nombre, paquete);
       }
@@ -93,62 +92,32 @@ public class PaqueteController implements IPaquete {
     }
     return paquetes;
   }
-  
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosDePaquete(String nombrePaquete) {
-    Map<String, Espectaculo> espectaculos = new HashMap<>();
+  public Paquete obtenerPaquete(String nombrePaquete){
+    Paquete paquete = null;
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectEspectaculosByPaquete = "SELECT *\n" +
-        "FROM espectaculos_paquetes ES_PAQ, espectaculos ES, artistas UA, plataformas PL\n" +
-        "WHERE ES_PAQ.es_paq_nombreEspectaculo = ES.es_nombre \n" +
-        "AND ES.es_artistaOrganizador = UA.ua_nickname\n" +
-        "AND ES.es_plataformaAsociada = PL.pl_nombre\n" +
-        "AND ES_PAQ.es_paq_nombrePaquete = '" + nombrePaquete + "'\n" +
-        "ORDER BY ES.es_fechaRegistro DESC";
+    String selectPaquete = "SELECT * FROM paquetes WHERE paq_nombre = '" + nombrePaquete + "'";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
-      resultSet = statement.executeQuery(selectEspectaculosByPaquete);
-      while (resultSet.next()) {
-        String ua_nickname = resultSet.getString("ua_nickname");
-        String ua_nombre = resultSet.getString("ua_nombre");
-        String ua_apellido = resultSet.getString("ua_apellido");
-        String ua_correo = resultSet.getString("ua_correo");
-        LocalDate ua_fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
-        String ua_contrasenia = resultSet.getString("ua_contrasenia");
-        String ua_imagen = resultSet.getString("ua_imagen");
-        String ua_descripcion = resultSet.getString("ua_descripcion");
-        String ua_biografia = resultSet.getString("ua_biografia");
-        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-        Artista artistaOrganizador = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_contrasenia, ua_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
-        
-        String pl_nombre = resultSet.getString("pl_nombre");
-        String pl_descripcion = resultSet.getString("pl_descripcion");
-        String pl_url = resultSet.getString("pl_url");
-        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
-        
-        String es_nombre = resultSet.getString("es_nombre");
-        String es_descripcion = resultSet.getString("es_descripcion");
-        Double es_duracion = resultSet.getDouble("es_duracion");
-        int es_minEspectadores = resultSet.getInt("es_minEspectadores");
-        int es_maxEspectadores = resultSet.getInt("es_maxEspectadores");
-        String es_url = resultSet.getString("es_url");
-        double es_costo = resultSet.getDouble("es_costo");
-        E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
-        LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
-        String es_imagen = resultSet.getString("es_imagen");
-        Espectaculo espectaculo = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artistaOrganizador);
-        
-        espectaculos.put(es_nombre, espectaculo);
+      resultSet = statement.executeQuery(selectPaquete);
+      if (resultSet.next()) {
+        String paq_nombre = resultSet.getString("paq_nombre");
+        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
+        String paq_descripcion = resultSet.getString("paq_descripcion");
+        double paq_descuento = resultSet.getDouble("paq_descuento");
+        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
+        String paq_imagen = resultSet.getString("paq_imagen");
+        paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
       }
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
     } catch (SQLException e) {
       System.out.println(e.getMessage());
-      throw new RuntimeException("Error al obtener los espectáculos del paquete", e);
+      throw new RuntimeException("Error al obtener el paquete", e);
     } finally {
       try {
         if (resultSet != null) resultSet.close();
@@ -159,7 +128,7 @@ public class PaqueteController implements IPaquete {
         throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
       }
     }
-    return espectaculos;
+    return paquete;
   }
   
   @Override
@@ -168,11 +137,10 @@ public class PaqueteController implements IPaquete {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectPaquetesByEspectaculo = "SELECT *\n" +
-        "FROM espectaculos_paquetes ES_PAQ, paquetes PAQ\n" +
-        "WHERE ES_PAQ.es_paq_nombrePaquete = PAQ.paq_nombre \n" +
-        "AND ES_PAQ.es_paq_nombreEspectaculo = '" + nombreEspectaculo + "'\n" +
-        "ORDER BY PAQ.paq_fechaRegistro DESC";
+    String selectPaquetesByEspectaculo = "SELECT * " +
+        "FROM espectaculos_paquetes ES_PAQ, paquetes PAQ " +
+        "WHERE ES_PAQ.es_paq_nombrePaquete = PAQ.paq_nombre  " +
+        "AND ES_PAQ.es_paq_nombreEspectaculo = '" + nombreEspectaculo + "' ";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -184,7 +152,7 @@ public class PaqueteController implements IPaquete {
         double paq_descuento = resultSet.getDouble("paq_descuento");
         LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
         String paq_imagen = resultSet.getString("paq_imagen");
-        Paquete paquete = new Paquete(paq_nombre, paq_fechaExpiracion, paq_descripcion, paq_descuento, paq_fechaRegistro, paq_imagen);
+        Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
         
         paquetes.put(paq_nombre, paquete);
       }
@@ -208,14 +176,169 @@ public class PaqueteController implements IPaquete {
   }
   
   @Override
-  public void altaEspectaculosAPaquete(Map<String, Espectaculo> espectaculos, String nombrePaquete) {
+  public Map<String, Espectaculo> obtenerEspectaculosDePaquete(String nombrePaquete){
+    Map<String, Espectaculo> espectaculos = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
-    String insertEspectaculosPaquetes = "INSERT INTO espectaculos_paquetes (es_paq_nombreEspectaculo, es_paq_nombrePaquete) VALUES ";
-    for (Espectaculo espectaculo : espectaculos.values()) {
-      insertEspectaculosPaquetes += "('" + espectaculo.getNombre() + "', '" + nombrePaquete + "'), ";
+    ResultSet resultSet = null;
+    String selectEspectaculosByPaquete = "SELECT * " +
+                "FROM espectaculos_paquetes as ES_PAQ, espectaculos as ES, artistas as UA, usuarios as U, plataformas as PL " +
+                "WHERE ES_PAQ.es_paq_nombreEspectaculo = ES.es_nombre " +
+                "AND ES.es_plataforma = PL.pl_nombre " +
+                "AND ES.es_artistaOrganizador = UA.ua_nickname " +
+                "AND UA.ua_nickname = U.us_nickname " +
+                "AND ES_PAQ.es_paq_nombrePaquete = '" + nombrePaquete + "' ";
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement();
+      resultSet = statement.executeQuery(selectEspectaculosByPaquete);
+      while (resultSet.next()) {
+        String u_nickname = resultSet.getString("u_nickname");
+        String u_nombre = resultSet.getString("u_nombre");
+        String u_apellido = resultSet.getString("u_apellido");
+        String u_correo = resultSet.getString("u_correo");
+        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
+        String u_contrasenia = resultSet.getString("u_contrasenia");
+        String u_imagen = resultSet.getString("u_imagen");
+        String ua_descripcion = resultSet.getString("ua_descripcion");
+        String ua_biografia = resultSet.getString("ua_biografia");
+        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
+        Artista artistaOrganizador = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
+  
+        String pl_nombre = resultSet.getString("pl_nombre");
+        String pl_descripcion = resultSet.getString("pl_descripcion");
+        String pl_url = resultSet.getString("pl_url");
+        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
+  
+        String es_nombre = resultSet.getString("es_nombre");
+        String es_descripcion = resultSet.getString("es_descripcion");
+        Double es_duracion = resultSet.getDouble("es_duracion");
+        int es_minEspectadores = resultSet.getInt("es_minEspectadores");
+        int es_maxEspectadores = resultSet.getInt("es_maxEspectadores");
+        String es_url = resultSet.getString("es_url");
+        Double es_costo = resultSet.getDouble("es_costo");
+        E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
+        LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
+        String es_imagen = resultSet.getString("es_imagen");
+        Espectaculo espectaculo = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artistaOrganizador);
+        espectaculos.put(es_nombre, espectaculo);
+      }
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al obtener los espectáculos del paquete", e);
+    } finally {
+      try {
+        if (resultSet != null) resultSet.close();
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
     }
-    insertEspectaculosPaquetes = insertEspectaculosPaquetes.substring(0, insertEspectaculosPaquetes.length() - 2);
+    return espectaculos;
+  }
+  
+  @Override
+  public Map<String, Paquete> obtenerPaquetesPorEspectador(String nickname){
+    Map<String, Paquete> paquetes = new HashMap<>();
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+    String selectPaquetesByEspectador = "SELECT * " +
+                "FROM paquetes as PAQ, espectadores_paquetes as ES_PAQ, espectadores as ES "+
+                "WHERE ES_PAQ.es_paq_nombrePaquete = PAQ.paq_nombre " +
+                "AND ES.es_nickname = ES_PAQ.es_paq_nicknameEspectador " +
+                "AND ES.es_nickname = '" + nickname + "' ";
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement();
+      resultSet = statement.executeQuery(selectPaquetesByEspectador);
+      while (resultSet.next()) {
+  
+        String paq_nombre = resultSet.getString("paq_nombre");
+        String paq_descripcion = resultSet.getString("paq_descripcion");
+        Double paq_descuento = resultSet.getDouble("paq_descuento");
+        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
+        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
+        String paq_imagen = resultSet.getString("paq_imagen");
+        Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
+        paquetes.put(paq_nombre, paquete);
+      }
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al obtener los paquetes del espectador", e);
+    } finally {
+      try {
+        if (resultSet != null) resultSet.close();
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+    return paquetes;
+  }
+  
+  @Override
+  public Map<String, Espectador> obtenerEspectadoresDePaquete(String nombrePaquete){
+    Map<String, Espectador> espectadores = new HashMap<>();
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+    String selectEspectadoresByPaquete = "SELECT * " +
+        "FROM espectadores_paquetes as UE_PAQ, espectadores as UE, usuarios as U " +
+        "WHERE UE_PAQ.ue_paq_nombrePaquete = '" + nombrePaquete + "' " +
+        "AND UE_PAQ.ue_paq_nicknameEspectador = UE.es_nickname " +
+        "AND UE.es_nickname = U.us_nickname ";
+        
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement();
+      resultSet = statement.executeQuery(selectEspectadoresByPaquete);
+      while (resultSet.next()) {
+        String u_nickname = resultSet.getString("u_nickname");
+        String u_nombre = resultSet.getString("u_nombre");
+        String u_apellido = resultSet.getString("u_apellido");
+        String u_correo = resultSet.getString("u_correo");
+        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
+        String u_contrasenia = resultSet.getString("u_contrasenia");
+        String u_imagen = resultSet.getString("u_imagen");
+        Espectador espectador = new Espectador(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen);
+        espectadores.put(u_nickname, espectador);
+      }
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al obtener los espectáculos del paquete", e);
+    } finally {
+      try {
+        if (resultSet != null) resultSet.close();
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+    return espectadores;
+  }
+  @Override
+  public void altaEspectaculoAPaquete(String nombreEspectaculo, String nombrePaquete) {
+    Connection connection = null;
+    Statement statement = null;
+    String insertEspectaculosPaquetes = "INSERT INTO espectaculos_paquetes (es_paq_nombreEspectaculo, es_paq_nombrePaquete) " +
+        "                 VALUES ('" + nombreEspectaculo + "', '" + nombrePaquete + "') ";
+    
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -226,6 +349,34 @@ public class PaqueteController implements IPaquete {
     } catch (SQLException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al dar de alta los espectáculos al paquete", e);
+    } finally {
+      try {
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+  }
+  
+  @Override
+  public void altaEspectadorAPaquete(String nickname, String nombrePaquete){
+    Connection connection = null;
+    Statement statement = null;
+    String insertEspectadoresPaquetes = "INSERT INTO espectadores_paquetes (ue_paq_nicknameEspectador, ue_paq_nombrePaquete) " +
+        "                 VALUES ('" + nickname + "', '" + nombrePaquete + "') ";
+    
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement();
+      statement.executeUpdate(insertEspectadoresPaquetes);
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al dar de alta los espectadores al paquete", e);
     } finally {
       try {
         if (statement != null) statement.close();

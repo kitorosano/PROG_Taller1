@@ -53,7 +53,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    Fabrica.getInstance().getIEspectaculo().registrarEspectadoresAFunciones(espectadores);
+                    Fabrica.getInstance().getIFuncion().registrarEspectadoresAFunciones(espectadores);
                     JOptionPane.showMessageDialog(null,"Espectadores agregados");
                     dispose();
                 } catch (Exception ex) {
@@ -156,11 +156,11 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
             costo=espectaculo.getCosto();
         }
         //FALTA VER COMO ACTUALIZAR LOS DATOS DE LOS ESPECTACULOS CANJEADOS
-        espectadores.put(listaAinvitar.getSelectedValue().toString(),new EspectadorRegistradoAFuncion(nuevo,funcion,false,costo, LocalDateTime.now()));
+        espectadores.put(listaAinvitar.getSelectedValue().toString(), new EspectadorRegistradoAFuncion(nuevo,funcion,null, false,costo, LocalDateTime.now()));
     }
     private void cargarDatosComboBox() {
         try {
-            Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+            Map<String, Plataforma> plataformas = Fabrica.getInstance().getIPlataforma().obtenerPlataformas();
             for (Plataforma p : plataformas.values()) {
                 cbPlataforma.addItem(p.getNombre());
             }
@@ -190,7 +190,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         if(funcionPredefinida==null) {
             try {
-                funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(plataformaSelect, espectaculoSelect);
+                funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(plataformaSelect, espectaculoSelect);
                 for (Map.Entry<String, Funcion> entry : funciones.entrySet()) {
                     model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getEspectaculo().getNombre(), entry.getValue().getFechaHoraInicio()});
                 }
@@ -198,7 +198,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
                 JOptionPane.showMessageDialog(null, ex);
             }
         }else{
-            funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(plataformaSelect, espectaculoSelect);
+            funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(plataformaSelect, espectaculoSelect);
             model.addRow(new Object[]{funcionPredefinida.getNombre(),funcionPredefinida.getEspectaculo().getNombre(),funcionPredefinida.getFechaHoraInicio()});
         }
     }
@@ -209,7 +209,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         modelInvitados.clear();
         try {
             usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
-            invitados=Fabrica.getInstance().getIUsuario().obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
+            invitados=Fabrica.getInstance().getIFuncion().obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
             Espectaculo espectaculo=funciones.get(nombreFuncion).getEspectaculo();
             maximo=espectaculo.getMaxEspectadores()-invitados.size();
             for(Usuario u:usuarios.values()){
@@ -227,7 +227,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         modelRegistros.clear();
         String invitado=modelAInvitar.getElementAt(listaAinvitar.getSelectedIndex());
         try {
-            registros= Fabrica.getInstance().getIUsuario().obtenerFuncionesRegistradasDelEspectador(invitado);
+            registros= Fabrica.getInstance().getIFuncion().obtenerFuncionesRegistradasDelEspectador(invitado);
             for(EspectadorRegistradoAFuncion esp: registros.values()){
                 if(!esp.isCanjeado()){
                     modelRegistros.addElement(esp.getFuncion().getNombre());

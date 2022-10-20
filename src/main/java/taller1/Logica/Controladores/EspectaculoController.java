@@ -187,7 +187,7 @@ public class EspectaculoController implements IEspectaculo {
     return espectaculos;
   }
   @Override
-  public Espectaculo obtenerEspectaculoPorNombre(String nombrePlataforma, String nombre){
+  public Espectaculo obtenerEspectaculo(String nombrePlataforma, String nombre){
     Espectaculo espectaculo = null;
     Connection connection = null;
     Statement statement = null;

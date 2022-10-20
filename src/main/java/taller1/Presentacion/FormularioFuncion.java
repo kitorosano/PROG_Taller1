@@ -47,7 +47,7 @@ public class FormularioFuncion extends JInternalFrame {
             public void mouseClicked(MouseEvent e) {
                 if(!comprobarErrorencampos()){
                     try{
-                        Fabrica.getInstance().getIEspectaculo().altaFuncion(crearFuncion());
+                        Fabrica.getInstance().getIFuncion().altaFuncion(crearFuncion());
                         JOptionPane.showMessageDialog(null,"Funcion creada con exito");
                         dispose();
                     } catch (Exception ex) {
@@ -107,7 +107,7 @@ public class FormularioFuncion extends JInternalFrame {
 
     public void cargarDatosComboBox() {
         try{
-            Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+            Map<String, Plataforma> plataformas = Fabrica.getInstance().getIPlataforma().obtenerPlataformas();
             for (Plataforma p : plataformas.values()) {
                 cbPlataforma.addItem(p.getNombre());
             }
@@ -153,7 +153,7 @@ public class FormularioFuncion extends JInternalFrame {
     }
     public boolean comprobarNombreUnico(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {       //Devuelve true si no hay error
         try {
-            Map<String,Funcion> funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(nombrePlataforma,nombreEspectaculo);
+            Map<String,Funcion> funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(nombrePlataforma,nombreEspectaculo);
             for (Funcion fun : funciones.values()) {
                 if (fun.getNombre().equals(nombreFuncion)) {
                     return false;
@@ -199,7 +199,7 @@ public class FormularioFuncion extends JInternalFrame {
                     break;
                 }
             }
-            return new Funcion(nombre,espectaculo,fechahora,LocalDateTime.now());
+            return new Funcion(nombre,espectaculo,fechahora,LocalDateTime.now(), "");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -142,7 +142,7 @@ public class DetalleEspectaculo extends JInternalFrame {
 
         DefaultTableModel model = (DefaultTableModel) tablaFunciones.getModel();
         try {
-            this.FuncionesDelEspectaculo = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(this.espectaculo.getPlataforma().getNombre(),this.espectaculo.getNombre());
+            this.FuncionesDelEspectaculo = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(this.espectaculo.getPlataforma().getNombre(),this.espectaculo.getNombre());
 
             for (Map.Entry<String, Funcion> entry : this.FuncionesDelEspectaculo.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre(),entry.getValue().getFechaHoraInicio()});
@@ -155,7 +155,7 @@ public class DetalleEspectaculo extends JInternalFrame {
 
         DefaultTableModel model = (DefaultTableModel) tablaPaquetes.getModel();
         try {
-            this.PaquetesDelEspectaculo = Fabrica.getInstance().getIEspectaculo().obtenerPaquetesDeEspectaculo(this.espectaculo.getNombre());
+            this.PaquetesDelEspectaculo = Fabrica.getInstance().getIPaquete().obtenerPaquetesDeEspectaculo(this.espectaculo.getNombre());
 
 
             for (Map.Entry<String,Paquete> entry : this.PaquetesDelEspectaculo.entrySet()) {

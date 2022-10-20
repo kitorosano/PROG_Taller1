@@ -146,7 +146,7 @@ public class DetalleUsuario extends JInternalFrame {
 
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
-            this.funcionesRegistradasDelEspectador = Fabrica.getInstance().getIUsuario().obtenerFuncionesRegistradasDelEspectador(this.usuario.getNickname());
+            this.funcionesRegistradasDelEspectador = Fabrica.getInstance().getIFuncion().obtenerFuncionesRegistradasDelEspectador(this.usuario.getNickname());
             for (Map.Entry<String, EspectadorRegistradoAFuncion> entry : this.funcionesRegistradasDelEspectador.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getEspectador().getNickname(), entry.getValue().getFuncion().getNombre()});
             }
@@ -159,7 +159,7 @@ public class DetalleUsuario extends JInternalFrame {
 
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
-            this.espectaculosArtista = Fabrica.getInstance().getIUsuario().obtenerEspectaculosArtista(this.usuario.getNickname());
+            this.espectaculosArtista = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorArtista(this.usuario.getNickname());
             for (Map.Entry<String, Espectaculo> entry : espectaculosArtista.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getCosto()});
             }

@@ -99,7 +99,7 @@ public class ListadoEspectaculos extends JInternalFrame {
         Map<String, Plataforma> plataformas = new HashMap<String, Plataforma>();
 
         try {
-            plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+            plataformas = Fabrica.getInstance().getIPlataforma().obtenerPlataformas();
             for (Map.Entry<String, Plataforma> entry : plataformas.entrySet()) {
                 cmbBox.addItem(entry.getValue().getNombre());           //guardo la plataforma en el combo box
             }

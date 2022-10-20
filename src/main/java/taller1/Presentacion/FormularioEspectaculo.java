@@ -1,9 +1,6 @@
 package main.java.taller1.Presentacion;
 
-import main.java.taller1.Logica.Clases.Artista;
-import main.java.taller1.Logica.Clases.Espectaculo;
-import main.java.taller1.Logica.Clases.Plataforma;
-import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
@@ -82,7 +79,7 @@ public class FormularioEspectaculo extends JInternalFrame {
 
     public void cargarDatosComboBox() {
         // TODO: PONER EN UN TRY CATCH Y QUIZAS ¿GUARDARLO EN UNA VARIABLE PARA NO TENER QUE VOLVER A CONSULTARLOS?
-        Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+        Map<String, Plataforma> plataformas = Fabrica.getInstance().getIPlataforma().obtenerPlataformas();
         Map<String, Usuario> usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
 
         for (Plataforma p : plataformas.values()) {
@@ -133,7 +130,7 @@ public class FormularioEspectaculo extends JInternalFrame {
         double duracion = Double.parseDouble(tfDuracion.getText()), costo = Double.parseDouble(tfCosto.getText());
         Plataforma plataforma = null;
         Artista artista = null;
-        Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+        Map<String, Plataforma> plataformas = Fabrica.getInstance().getIPlataforma().obtenerPlataformas();
         Map<String, Usuario> usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
         for (Plataforma p : plataformas.values()) {
             if (p.getNombre().equals((String) cbPlataforma.getSelectedItem())) {
@@ -149,7 +146,7 @@ public class FormularioEspectaculo extends JInternalFrame {
                 }
             }
         }
-        Espectaculo nuevo = new Espectaculo(nombre, descripcion, duracion, minEspec, maxEspec, url, costo, LocalDateTime.now(), plataforma, artista);
+        Espectaculo nuevo = new Espectaculo(nombre, descripcion, duracion, minEspec, maxEspec, url, costo, E_EstadoEspectaculo.INGRESADO, LocalDateTime.now(), "",plataforma, artista);
         return nuevo;
     }
 

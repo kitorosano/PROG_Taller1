@@ -92,7 +92,7 @@ public class ListadoPaquetes extends JInternalFrame{
         Map<String, Paquete> paquetes = new HashMap<String, Paquete>();
         model.clear();
         try {
-            paquetes = Fabrica.getInstance().getIEspectaculo().obtenerPaquetes();
+            paquetes = Fabrica.getInstance().getIPaquete().obtenerPaquetes();
         for (Map.Entry<String, Paquete> entry : paquetes.entrySet()) {
                 model.addElement(entry.getValue().getNombre());           //guardo el paquete en la lista
             }
@@ -105,7 +105,7 @@ public class ListadoPaquetes extends JInternalFrame{
         Map<String, Paquete> Paquetes = new HashMap<String, Paquete>();
 
         try {
-            Paquetes = Fabrica.getInstance().getIEspectaculo().obtenerPaquetes();
+            Paquetes = Fabrica.getInstance().getIPaquete().obtenerPaquetes();
             Paquete paquete = Paquetes.get(listaPaquetes.getSelectedValue());  //Guardo el paquete seleccionada buscando en la lista por su nombre
             JInternalFrame detalle = new DetallePaquete("Detalle paquete", paquete);
             detalle.setIconifiable(true);

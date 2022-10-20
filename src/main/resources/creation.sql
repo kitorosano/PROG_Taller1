@@ -50,7 +50,7 @@ CREATE TABLE espectaculos (
   es_maxEspectadores INTEGER NOT NULL,
   es_url VARCHAR(50) NOT NULL,
   es_costo DOUBLE NOT NULL,
-  es_estado ENUM('Ingresado', 'Aceptado', 'Rechazado') NOT NULL,
+  es_estado ENUM('INGRESADO', 'ACEPTADO', 'RECHAZADO') NOT NULL,
   es_fechaRegistro DATETIME NOT NULL,
   es_imagen VARCHAR(200),
   es_plataformaAsociada VARCHAR(30) NOT NULL,
@@ -152,7 +152,7 @@ CREATE TABLE espectadores_funciones_canjeados (
     PRIMARY KEY (ue_fn_c_nickname, ue_fn_c_nombreFuncion, ue_fn_c_espectaculoAsociado, ue_fn_c_plataformaAsociada, ue_fn_c_nicknameCanjeado, ue_fn_c_nombreFuncionCanjeado, ue_fn_c_espectaculoAsociadoCanjeado, ue_fn_c_plataformaAsociadaCanjeado),
     FOREIGN KEY (ue_fn_c_nickname, ue_fn_c_nombreFuncion, ue_fn_c_espectaculoAsociado, ue_fn_c_plataformaAsociada) REFERENCES espectadores_funciones (ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada) ON DELETE CASCADE,
     FOREIGN KEY (ue_fn_c_nicknameCanjeado, ue_fn_c_nombreFuncionCanjeado, ue_fn_c_espectaculoAsociadoCanjeado, ue_fn_c_plataformaAsociadaCanjeado) REFERENCES espectadores_funciones (ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada) ON DELETE CASCADE
-)
+);
 
 CREATE TABLE espectadores_paquetes (
     ue_paq_nickname VARCHAR(30) NOT NULL,
@@ -162,5 +162,4 @@ CREATE TABLE espectadores_paquetes (
     PRIMARY KEY (ue_paq_nickname, ue_paq_nombrePaquete),
     FOREIGN KEY (ue_paq_nickname) REFERENCES espectadores (ue_nickname) ON DELETE CASCADE,
     FOREIGN KEY (ue_paq_nombrePaquete) REFERENCES paquetes (paq_nombre) ON DELETE CASCADE
-    );
-)
+);

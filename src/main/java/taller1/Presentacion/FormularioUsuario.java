@@ -30,8 +30,8 @@ public class FormularioUsuario extends JInternalFrame {
     private JLabel lblBiografia;
     private JLabel lblURL;
     private JButton btnConsulta;
-    private JTextField tfContrasena;
-    private JTextField tfContrasena2;
+    private JTextField tfContrasenia;
+    private JTextField tfContrasenia2;
     private JLabel LabelDescripcion;
 
     private String seleccionado;
@@ -62,7 +62,7 @@ public class FormularioUsuario extends JInternalFrame {
                             nombre = tfNombre.getText(),
                             apellido = tfApellido.getText(),
                             correo = tfCorreo.getText(),
-                            contrasena = tfContrasena.getText(),
+                            contrasenia = tfContrasenia.getText(),
                             imagen = "";
                         
                         // validar fecha
@@ -78,7 +78,7 @@ public class FormularioUsuario extends JInternalFrame {
                         }
                         
                         //validar contraseña
-                        if (!tfContrasena.getText().equals(tfContrasena2.getText())) {
+                        if (!tfContrasenia.getText().equals(tfContrasenia2.getText())) {
                             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
                             return;
                         }
@@ -88,7 +88,7 @@ public class FormularioUsuario extends JInternalFrame {
                                     biografia = tfBiografia.getText(),
                                     url = tfURL.getText();
                             try {
-                                Fabrica.getInstance().getIUsuario().altaUsuario(new Artista(nickname, nombre, apellido, correo, fechanac, contrasena, imagen, descripcion, biografia, url));
+                                Fabrica.getInstance().getIUsuario().altaUsuario(new Artista(nickname, nombre, apellido, correo, fechanac, contrasenia, imagen, descripcion, biografia, url));
                                 JOptionPane.showMessageDialog(null, "Artista creado con exito");
                                 dispose();
                             } catch (Exception ex) {
@@ -96,7 +96,7 @@ public class FormularioUsuario extends JInternalFrame {
                             }
                         } else { // equal Espectador
                             try {
-                                Fabrica.getInstance().getIUsuario().altaUsuario(new Espectador(nickname, nombre, apellido, correo, fechanac, contrasena, imagen));
+                                Fabrica.getInstance().getIUsuario().altaUsuario(new Espectador(nickname, nombre, apellido, correo, fechanac, contrasenia, imagen));
                                 JOptionPane.showMessageDialog(null, "Espectador creado con exito");
                                 dispose();
                             } catch (Exception ex) {
@@ -153,7 +153,7 @@ public class FormularioUsuario extends JInternalFrame {
 
     public boolean comprobarCamposNulos() {                //Devuelve true si hay campos nulos
         String seleccionado = (String) comboBoxTipo.getSelectedItem();
-        if (tfNickname.getText().isEmpty() || tfNombre.getText().isEmpty() || tfApellido.getText().isEmpty() || tfCorreo.getText().isEmpty() || tfFechaNac.getText().isEmpty() || tfContrasena.getText().isEmpty() || tfContrasena2.getText().isEmpty()) {
+        if (tfNickname.getText().isEmpty() || tfNombre.getText().isEmpty() || tfApellido.getText().isEmpty() || tfCorreo.getText().isEmpty() || tfFechaNac.getText().isEmpty() || tfContrasenia.getText().isEmpty() || tfContrasenia2.getText().isEmpty()) {
             return true;
         } else {
             if (seleccionado.equals("Artista") && tfDescripcion.getText().isEmpty()) {

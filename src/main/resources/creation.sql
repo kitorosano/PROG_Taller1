@@ -4,31 +4,34 @@ CREATE DATABASE PROG_Taller1;
 
 USE PROG_Taller1;
 
+CREATE TABLE usuarios (
+  u_nickname VARCHAR(30) NOT NULL,
+  u_nombre VARCHAR(30) NOT NULL,
+  u_apellido VARCHAR(30) NOT NULL,
+  u_correo VARCHAR(50) NOT NULL,
+  u_fechaNacimiento DATE NOT NULL,
+  u_contrasenia VARCHAR(30) NOT NULL,
+  u_imagen VARCHAR(200),
+
+  PRIMARY KEY (u_nickname),
+  UNIQUE (u_correo)
+);
+
 CREATE TABLE espectadores (
   ue_nickname VARCHAR(30) NOT NULL,
-  ue_nombre VARCHAR(30) NOT NULL,
-  ue_apellido VARCHAR(30) NOT NULL,
-  ue_correo VARCHAR(50) NOT NULL,
-  ue_fechaNacimiento DATE NOT NULL,
-  ue_contrasena VARCHAR(30) NOT NULL,
-  ue_imagen VARCHAR(200),
 
-  PRIMARY KEY (ue_nickname, ue_correo)
+  PRIMARY KEY (ue_nickname),
+  FOREIGN KEY (ue_nickname) REFERENCES usuarios(u_nickname) ON DELETE CASCADE
 );
 
 CREATE TABLE artistas (
   ua_nickname VARCHAR(30) NOT NULL,
-  ua_nombre VARCHAR(30) NOT NULL,
-  ua_apellido VARCHAR(30) NOT NULL,
-  ua_correo VARCHAR(50) NOT NULL,
-  ua_fechaNacimiento DATE NOT NULL,
-  ua_contrasena VARCHAR(30) NOT NULL,
-  ua_imagen VARCHAR(200),
   ua_descripcion VARCHAR(100) NOT NULL,
   ua_biografia VARCHAR(200),
   ua_sitioWeb VARCHAR(50),
 
-  PRIMARY KEY (ua_nickname, ua_correo)
+  PRIMARY KEY (ua_nickname),
+  FOREIGN KEY (ua_nickname) REFERENCES usuarios(u_nickname) ON DELETE CASCADE
 );
 
 CREATE TABLE plataformas (
@@ -66,7 +69,7 @@ CREATE TABLE funciones (
   fn_fechaRegistro DATETIME NOT NULL,
   fn_imagen VARCHAR(200),
 
-  PRIMARY KEY (fn_nombre),
+  PRIMARY KEY (fn_nombre, fn_espectaculoAsociado, fn_plataformaAsociada),
   FOREIGN KEY (fn_espectaculoAsociado, fn_plataformaAsociada) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE
 );
 

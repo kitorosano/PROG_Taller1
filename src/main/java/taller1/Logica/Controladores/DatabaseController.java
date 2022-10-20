@@ -2,18 +2,24 @@ package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Interfaces.IDatabase;
 import main.java.taller1.Persistencia.ConexionDB;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.impl.client.BasicResponseHandler;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.ibatis.jdbc.ScriptRunner;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseController implements IDatabase {
     private static DatabaseController instance = null;
+    private static final String apiUrl = "https://upload-image-to-imgur.vercel.app/upload";
 
     private DatabaseController() {}
 
@@ -68,9 +74,7 @@ public class DatabaseController implements IDatabase {
     try {
       connection = ConexionDB.getConnection();
       ScriptRunner sr = new ScriptRunner(connection);
-      Reader reader = new BufferedReader(new FileReader("src/main/resources/artistas.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/espectadores.sql"));
+      Reader reader = new BufferedReader(new FileReader("src/main/resources/usuarios.sql"));
       sr.runScript(reader);
       reader = new BufferedReader(new FileReader("src/main/resources/plataformas.sql"));
       sr.runScript(reader);
@@ -99,6 +103,32 @@ public class DatabaseController implements IDatabase {
         throw new RuntimeException("Error al cerrar la conexión a la base de datos", ex);
       }
     }
+  }
+  
+  @Override
+  public String guardarImagen(InputStream imagen){
+    String url = "";
+    try {
+      CloseableHttpClient client = HttpClients.createDefault();
+      HttpPost httpPost = new HttpPost(apiUrl);
+    
+      MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+      builder.addBinaryBody(
+          "file", imagen, ContentType.APPLICATION_OCTET_STREAM, "image.png");
+    
+      HttpEntity multipart = builder.build();
+      httpPost.setEntity(multipart);
+    
+      CloseableHttpResponse response = client.execute(httpPost);
+      client.close();
+      String responseString = new BasicResponseHandler().handleResponse(response);
+    
+      //get url from response
+      url = responseString.substring(responseString.indexOf("https://i.imgur.com/")).substring(0, url.indexOf("\""));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return url;
   }
   
 }

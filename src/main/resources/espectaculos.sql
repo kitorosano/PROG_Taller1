@@ -1,4 +1,4 @@
-INSERT INTO `espectaculos` (`es_nombre`, `es_descripcion`, `es_duracion`, `es_minEspectadores`, `es_maxEspectadores`, `es_url`, `es_costo`, `es_fechaRegistro`, `es_nombrePlataforma`, `es_artistaOrganizador`) VALUES
+INSERT INTO `espectaculos` (`es_nombre`, `es_descripcion`, `es_duracion`, `es_minEspectadores`, `es_maxEspectadores`, `es_url`, `es_costo`, `es_fechaRegistro`, `es_plataformaAsociada`, `es_artistaOrganizador`) VALUES
 ('Ante todo calamidades de la vida', 'La vida es como una montaña rusa, hay que saber subi y baja', 2, 40, 50, 'www.zorahsindisguise.com', 769.99, '2022-09-14 17:23:46', 'Twitch', 'Greenlam'),
 ('El arte de dormir con los ojos abiertos', 'Asustar nunca fue tan aterrados y menos estando dormido', 1.5, 13, 25, 'www.clementiusmementus.com', 1289, '2022-09-14 17:25:24', 'Nebula', 'Regrant'),
 ('El espectaculo de britney lanza', 'Este espectaculo la rompe a los niveles extratosfericos', 2.5, 3, 20, 'www.britneylanza.net', 499, '2022-09-14 17:21:08', 'Meta', 'Transcof'),

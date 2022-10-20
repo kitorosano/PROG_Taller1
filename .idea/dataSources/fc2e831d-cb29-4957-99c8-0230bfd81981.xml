@@ -871,5 +871,458 @@ videoclub\\_respaldo|schema||usuariovideoclub|localhost|UPDATE|G</Grants>
     <user id="233" parent="1" name="&apos;&apos;">
       <Host>localhost</Host>
     </user>
+    <table id="234" parent="221" name="artistas">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="235" parent="221" name="artistas_funciones">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="236" parent="221" name="espectaculos">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="237" parent="221" name="espectaculos_paquetes">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="238" parent="221" name="espectadores">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="239" parent="221" name="espectadores_funciones">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="240" parent="221" name="funciones">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="241" parent="221" name="paquetes">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="242" parent="221" name="plataformas">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <column id="243" parent="234" name="ua_nickname">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="244" parent="234" name="ua_nombre">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="245" parent="234" name="ua_apellido">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="246" parent="234" name="ua_correo">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="247" parent="234" name="ua_fechaNacimiento">
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="248" parent="234" name="ua_contrasena">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <column id="249" parent="234" name="ua_imagen">
+      <DataType>varchar(200)|0s</DataType>
+      <Position>7</Position>
+    </column>
+    <column id="250" parent="234" name="ua_descripcion">
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+    </column>
+    <column id="251" parent="234" name="ua_biografia">
+      <DataType>varchar(200)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>9</Position>
+    </column>
+    <column id="252" parent="234" name="ua_sitioWeb">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>10</Position>
+    </column>
+    <index id="253" parent="234" name="PRIMARY">
+      <ColNames>ua_nickname
+ua_correo</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="254" parent="234" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="255" parent="235" name="ua_fn_nickname">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="256" parent="235" name="ua_fn_nombreFuncion">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="257" parent="235" name="ua_fn_fechaRegistro">
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <foreign-key id="258" parent="235" name="artistas_funciones_ibfk_1">
+      <ColNames>ua_fn_nickname</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>ua_nickname</RefColNames>
+      <RefTableName>artistas</RefTableName>
+    </foreign-key>
+    <foreign-key id="259" parent="235" name="artistas_funciones_ibfk_2">
+      <ColNames>ua_fn_nombreFuncion</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>fn_nombre</RefColNames>
+      <RefTableName>funciones</RefTableName>
+    </foreign-key>
+    <index id="260" parent="235" name="PRIMARY">
+      <ColNames>ua_fn_nickname
+ua_fn_nombreFuncion</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="261" parent="235" name="ua_fn_nombreFuncion">
+      <ColNames>ua_fn_nombreFuncion</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="262" parent="235" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="263" parent="236" name="es_nombre">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="264" parent="236" name="es_descripcion">
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="265" parent="236" name="es_duracion">
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="266" parent="236" name="es_minEspectadores">
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="267" parent="236" name="es_maxEspectadores">
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="268" parent="236" name="es_url">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <column id="269" parent="236" name="es_costo">
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>7</Position>
+    </column>
+    <column id="270" parent="236" name="es_fechaRegistro">
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+    </column>
+    <column id="271" parent="236" name="es_nombrePlataforma">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>9</Position>
+    </column>
+    <column id="272" parent="236" name="es_artistaOrganizador">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>10</Position>
+    </column>
+    <foreign-key id="273" parent="236" name="espectaculos_ibfk_1">
+      <ColNames>es_nombrePlataforma</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>pl_nombre</RefColNames>
+      <RefTableName>plataformas</RefTableName>
+    </foreign-key>
+    <foreign-key id="274" parent="236" name="espectaculos_ibfk_2">
+      <ColNames>es_artistaOrganizador</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>ua_nickname</RefColNames>
+      <RefTableName>artistas</RefTableName>
+    </foreign-key>
+    <index id="275" parent="236" name="PRIMARY">
+      <ColNames>es_nombre
+es_nombrePlataforma</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="276" parent="236" name="es_nombrePlataforma">
+      <ColNames>es_nombrePlataforma</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="277" parent="236" name="es_artistaOrganizador">
+      <ColNames>es_artistaOrganizador</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="278" parent="236" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="279" parent="237" name="es_paq_nombrePaquete">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="280" parent="237" name="es_paq_nombreEspectaculo">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <foreign-key id="281" parent="237" name="espectaculos_paquetes_ibfk_1">
+      <ColNames>es_paq_nombrePaquete</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>paq_nombre</RefColNames>
+      <RefTableName>paquetes</RefTableName>
+    </foreign-key>
+    <foreign-key id="282" parent="237" name="espectaculos_paquetes_ibfk_2">
+      <ColNames>es_paq_nombreEspectaculo</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>es_nombre</RefColNames>
+      <RefTableName>espectaculos</RefTableName>
+    </foreign-key>
+    <index id="283" parent="237" name="PRIMARY">
+      <ColNames>es_paq_nombrePaquete
+es_paq_nombreEspectaculo</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="284" parent="237" name="es_paq_nombreEspectaculo">
+      <ColNames>es_paq_nombreEspectaculo</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="285" parent="237" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="286" parent="238" name="ue_nickname">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="287" parent="238" name="ue_nombre">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="288" parent="238" name="ue_apellido">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="289" parent="238" name="ue_correo">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="290" parent="238" name="ue_fechaNacimiento">
+      <DataType>date|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <column id="291" parent="238" name="ue_contrasena">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>6</Position>
+    </column>
+    <column id="292" parent="238" name="ue_imagen">
+      <DataType>varchar(200)|0s</DataType>
+      <Position>7</Position>
+    </column>
+    <index id="293" parent="238" name="PRIMARY">
+      <ColNames>ue_nickname
+ue_correo</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="294" parent="238" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="295" parent="239" name="ue_fn_nickname">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="296" parent="239" name="ue_fn_nombreFuncion">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="297" parent="239" name="ue_fn_canjeado">
+      <DataType>tinyint(1)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="298" parent="239" name="ue_fn_costo">
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="299" parent="239" name="ue_fn_fechaRegistro">
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <foreign-key id="300" parent="239" name="espectadores_funciones_ibfk_1">
+      <ColNames>ue_fn_nickname</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>ue_nickname</RefColNames>
+      <RefTableName>espectadores</RefTableName>
+    </foreign-key>
+    <foreign-key id="301" parent="239" name="espectadores_funciones_ibfk_2">
+      <ColNames>ue_fn_nombreFuncion</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>fn_nombre</RefColNames>
+      <RefTableName>funciones</RefTableName>
+    </foreign-key>
+    <index id="302" parent="239" name="PRIMARY">
+      <ColNames>ue_fn_nickname
+ue_fn_nombreFuncion</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="303" parent="239" name="ue_fn_nombreFuncion">
+      <ColNames>ue_fn_nombreFuncion</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="304" parent="239" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="305" parent="240" name="fn_nombre">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="306" parent="240" name="fn_espectaculoAsociado">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="307" parent="240" name="fn_fechaHoraInicio">
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="308" parent="240" name="fn_fechaRegistro">
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="309" parent="240" name="funciones_ibfk_1">
+      <ColNames>fn_espectaculoAsociado</ColNames>
+      <OnDelete>cascade</OnDelete>
+      <RefColNames>es_nombre</RefColNames>
+      <RefTableName>espectaculos</RefTableName>
+    </foreign-key>
+    <index id="310" parent="240" name="PRIMARY">
+      <ColNames>fn_nombre</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="311" parent="240" name="fn_espectaculoAsociado">
+      <ColNames>fn_espectaculoAsociado</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="312" parent="240" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="313" parent="241" name="paq_nombre">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="314" parent="241" name="paq_descripcion">
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="315" parent="241" name="paq_descuento">
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <column id="316" parent="241" name="paq_fechaExpiracion">
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+    </column>
+    <column id="317" parent="241" name="paq_fechaRegistro">
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>5</Position>
+    </column>
+    <index id="318" parent="241" name="PRIMARY">
+      <ColNames>paq_nombre</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="319" parent="241" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="320" parent="242" name="pl_nombre">
+      <DataType>varchar(30)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="321" parent="242" name="pl_descripcion">
+      <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+    </column>
+    <column id="322" parent="242" name="pl_url">
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+    </column>
+    <index id="323" parent="242" name="PRIMARY">
+      <ColNames>pl_nombre</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="324" parent="242" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
   </database-model>
 </dataSource>

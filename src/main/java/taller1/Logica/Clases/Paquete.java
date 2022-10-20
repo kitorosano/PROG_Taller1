@@ -13,7 +13,7 @@ public class Paquete {
     public Paquete() {
     }
 
-    public Paquete(String nombre, LocalDateTime fechaExpiracion, String descripcion, double descuento, LocalDateTime fechaRegistro, String imagen) {
+    public Paquete(String nombre, String descripcion, double descuento, LocalDateTime fechaExpiracion, LocalDateTime fechaRegistro, String imagen) {
         this.nombre = nombre;
         this.fechaExpiracion = fechaExpiracion;
         this.descripcion = descripcion;

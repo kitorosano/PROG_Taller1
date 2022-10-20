@@ -7,4 +7,5 @@ import java.util.Map;
 public interface IPlataforma {
   void altaPlataforma(Plataforma nuevaPlataforma);
   Map<String, Plataforma> obtenerPlataformas();
+  Plataforma obtenerPlataforma(String nombrePlataforma);
 }

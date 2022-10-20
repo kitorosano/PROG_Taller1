@@ -56,7 +56,7 @@ public class PlataformaController  implements IPlataforma {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectPlataformas = "SELECT * FROM plataformas order by pl_nombre";
+    String selectPlataformas = "SELECT * FROM plataformas";
     try {
       connection = ConexionDB.getConnection();
       
@@ -88,5 +88,44 @@ public class PlataformaController  implements IPlataforma {
       }
     }
     return plataformas;
+  }
+  
+  @Override
+  public Plataforma obtenerPlataforma(String nombrePlataforma) {
+    Plataforma plataforma = null;
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+    String selectPlataforma = "SELECT * FROM plataformas WHERE pl_nombre = '" + nombrePlataforma + "'";
+    try {
+      connection = ConexionDB.getConnection();
+      
+      // Obtenemos la plataforma de la base de datos
+      statement = connection.createStatement();
+      resultSet = statement.executeQuery(selectPlataforma);
+      if (resultSet.next()) {
+        String nombre = resultSet.getString("pl_nombre");
+        String descripcion = resultSet.getString("pl_descripcion");
+        String url = resultSet.getString("pl_url");
+        
+        plataforma = new Plataforma(nombre, descripcion, url);
+      }
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al obtener la plataforma", e);
+    } finally {
+      try {
+        if (resultSet != null) resultSet.close();
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+    return plataforma;
   }
 }

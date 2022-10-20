@@ -89,34 +89,68 @@ public class CategoriaController implements ICategoria {
   }
   
   @Override
+  public Categoria obtenerCategoria(String nombreCategoria){
+    Categoria categoria = null;
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+    String selectCategoria = "SELECT * FROM categorias WHERE cat_nombre = '" + nombreCategoria + "'";
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement();
+      resultSet = statement.executeQuery(selectCategoria);
+      if (resultSet.next()) {
+        String cat_nombre = resultSet.getString("cat_nombre");
+        categoria = new Categoria(cat_nombre);
+      }
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al obtener la categoría", e);
+    } finally {
+      try {
+        if (resultSet != null) resultSet.close();
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+    return categoria;
+  }
+  
+  @Override
   public Map<String, Espectaculo> obtenerEspectaculosDeCategoria(String nombreCategoria){
     Map<String, Espectaculo> espectaculos = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectEspectaculosByPaquete = "SELECT *\n" +
-        "FROM espectaculos_categprias ES_CAT, espectaculos ES, artistas UA, plataformas PL\n" +
-        "WHERE ES_CAT.es_cat_nombreEspectaculo = ES.es_nombre \n" +
-        "AND ES.es_artistaOrganizador = UA.ua_nickname\n" +
-        "AND ES.es_plataformaAsociada = PL.pl_nombre\n" +
-        "AND ES_CAT.es_cat_nombreCategoria = '" + nombreCategoria + "'\n" +
-        "ORDER BY ES.es_fechaRegistro DESC";
+    String selectEspectaculosByPaquete = "SELECT * " +
+        "FROM espectaculos_categorias ES_CAT, espectaculos ES, artistas UA, plataformas PL " +
+        "WHERE ES_CAT.es_cat_nombreEspectaculo = ES.es_nombre " +
+        "AND ES.es_artistaOrganizador = ua_nickname " +
+        "AND ES_CAT.es_cat_nombrePlataforma = ES.es_nombrePlataforma " +
+        "AND ES.es_nombrePlataforma = PL.pl_nombre " +
+        "AND ES_CAT.es_cat_nombreCategoria = '" + nombreCategoria + "' ";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectEspectaculosByPaquete);
       while (resultSet.next()) {
-        String ua_nickname = resultSet.getString("ua_nickname");
-        String ua_nombre = resultSet.getString("ua_nombre");
-        String ua_apellido = resultSet.getString("ua_apellido");
-        String ua_correo = resultSet.getString("ua_correo");
-        LocalDate ua_fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
-        String ua_contrasenia = resultSet.getString("ua_contrasenia");
-        String ua_imagen = resultSet.getString("ua_imagen");
+        String u_nickname = resultSet.getString("u_nickname");
+        String u_nombre = resultSet.getString("u_nombre");
+        String u_apellido = resultSet.getString("u_apellido");
+        String u_correo = resultSet.getString("u_correo");
+        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
+        String u_contrasenia = resultSet.getString("u_contrasenia");
+        String u_imagen = resultSet.getString("u_imagen");
         String ua_descripcion = resultSet.getString("ua_descripcion");
         String ua_biografia = resultSet.getString("ua_biografia");
         String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-        Artista artistaOrganizador = new Artista(ua_nickname, ua_nombre, ua_apellido, ua_correo, ua_fechaNacimiento, ua_contrasenia, ua_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
+        Artista artistaOrganizador = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
         
         String pl_nombre = resultSet.getString("pl_nombre");
         String pl_descripcion = resultSet.getString("pl_descripcion");
@@ -162,11 +196,10 @@ public class CategoriaController implements ICategoria {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectCategoriasByEspectaculo = "SELECT *\n" +
-        "FROM espectaculos_categprias ES_CAT, categorias CAT\n" +
-        "WHERE ES_CAT.es_cat_nombreCategoria = CAT.cat_nombre \n" +
-        "AND ES_CAT.es_cat_nombreEspectaculo = '" + nombreEspectaculo + "'\n" +
-        "ORDER BY CAT.cat_nombre";
+    String selectCategoriasByEspectaculo = "SELECT * " +
+        "FROM espectaculos_categorias ES_CAT, categorias CAT " +
+        "WHERE ES_CAT.es_cat_nombreCategoria = CAT.cat_nombre  " +
+        "AND ES_CAT.es_cat_nombreEspectaculo = '" + nombreEspectaculo + "' ";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -174,7 +207,6 @@ public class CategoriaController implements ICategoria {
       while (resultSet.next()) {
         String cat_nombre = resultSet.getString("cat_nombre");
         Categoria categoria = new Categoria(cat_nombre);
-        
         categorias.put(cat_nombre, categoria);
       }
     } catch (RuntimeException e) {
@@ -197,14 +229,12 @@ public class CategoriaController implements ICategoria {
   }
   
   @Override
-  public void altaCategoriasAEspectaculo(Map<String, Categoria> categorias, String nombreEspectaculo){
+  public void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo){
     Connection connection = null;
     Statement statement = null;
-    String insertEspectaculoCategoria = "INSERT INTO espectaculos_categorias (es_cat_nombreEspectaculo, es_cat_nombreCategoria) VALUES ";
-    for (Map.Entry<String, Categoria> entry : categorias.entrySet()) {
-      insertEspectaculoCategoria += "('" + nombreEspectaculo + "', '" + entry.getKey() + "'), ";
-    }
-    insertEspectaculoCategoria = insertEspectaculoCategoria.substring(0, insertEspectaculoCategoria.length() - 2);
+    String insertEspectaculoCategoria = "INSERT INTO espectaculos_categorias (es_cat_nombreEspectaculo, es_cat_nombreCategoria) " +
+        "                           VALUES ('" + nombreEspectaculo + "', '" + nombreCategoria + "')";
+    
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();

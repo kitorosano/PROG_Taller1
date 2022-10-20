@@ -9,7 +9,8 @@ public interface ICategoria {
   
   void altaCategoria(Categoria nuevaCategoria);
   Map<String, Categoria> obtenerCategorias();
+  Categoria obtenerCategoria(String nombreCategoria);
   Map<String, Espectaculo> obtenerEspectaculosDeCategoria(String nombreCategoria);
   Map<String, Categoria> obtenerCategoriasDeEspectaculo(String nombreEspectaculo);
-  void altaCategoriasAEspectaculo(Map<String, Categoria> categorias, String nombreEspectaculo);
+  void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo);
 }

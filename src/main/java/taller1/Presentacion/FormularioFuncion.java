@@ -192,7 +192,7 @@ public class FormularioFuncion extends JInternalFrame {
         LocalDateTime fechahora= LocalDateTime.of(LocalDate.parse(tfFecha.getText()), LocalTime.parse(tfHora.getText()));
         Espectaculo espectaculo = null;
         try {
-            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
+            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
             for (Espectaculo esp : espectaculos.values()) {
                 if(esp.getNombre().equals((String)cbEspectaculo.getSelectedItem())){
                     espectaculo=esp;
@@ -209,7 +209,7 @@ public class FormularioFuncion extends JInternalFrame {
         seleccionado=(String)cbPlataforma.getSelectedItem();
         try{
             cbEspectaculo.removeAllItems();
-            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
+            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
             for (Espectaculo esp : espectaculos.values()) {
                     cbEspectaculo.addItem(esp.getNombre());
             }

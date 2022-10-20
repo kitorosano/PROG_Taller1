@@ -117,7 +117,7 @@ public class FormularioEspectaculo extends JInternalFrame {
     }
 
     public boolean comprobarNombreUnico(String nombrePlataforma, String nombreEspectaculo) {       //Devuelve true si hay error
-        Map<String,Espectaculo> espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(nombrePlataforma);
+        Map<String,Espectaculo> espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(nombrePlataforma);
         for (Espectaculo esp : espectaculos.values()) {
             if (esp.getNombre().equals(nombreEspectaculo)) {
                 JOptionPane.showMessageDialog(null, "El nombre elegido ya existe en la plataforma");

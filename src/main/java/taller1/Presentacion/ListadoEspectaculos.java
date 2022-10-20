@@ -112,7 +112,7 @@ public class ListadoEspectaculos extends JInternalFrame {
         Map<String, Espectaculo> espectaculos = new HashMap<String, Espectaculo>();
         model.clear();
         try {
-            espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(cmbBox.getSelectedItem().toString());
+            espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(cmbBox.getSelectedItem().toString());
             for (Map.Entry<String, Espectaculo> entry : espectaculos.entrySet()) {
                 model.addElement(entry.getValue().getNombre());
             }
@@ -125,7 +125,7 @@ public class ListadoEspectaculos extends JInternalFrame {
         Map<String, Espectaculo> espectaculos = new HashMap<String, Espectaculo>();
 
         try {
-            espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(cmbBox.getSelectedItem().toString());
+            espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(cmbBox.getSelectedItem().toString());
             Espectaculo espectaculo = espectaculos.get(lista.getSelectedValue());  //Guardo el espectaculo seleccionado buscando en la lista por su nickname
             JInternalFrame detalle = new DetalleEspectaculo("Detalle espectaculo", espectaculo);
             detalle.setIconifiable(true);

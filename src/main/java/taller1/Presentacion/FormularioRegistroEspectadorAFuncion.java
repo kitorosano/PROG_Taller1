@@ -69,7 +69,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
                     plataformaSelect = (String) cbPlataforma.getSelectedItem();
                     try{
                         cbEspectaculo.removeAllItems();
-                        espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(plataformaSelect);
+                        espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(plataformaSelect);
                         for (Espectaculo esp : espectaculos.values()) {
                             cbEspectaculo.addItem(esp.getNombre());
                         }

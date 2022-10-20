@@ -66,7 +66,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
                 Map<String, Espectaculo>espectaculos;
                 String elegido;
                 elegido=(String) lstEspectAingresar.getSelectedValue();
-                espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos((String)cbPlataforma.getSelectedItem());
+                espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma((String)cbPlataforma.getSelectedItem());
                 Espectaculo nuevo = espectaculos.get(elegido);
                 espectaculosNuevos.put(nuevo.getNombre(),nuevo);
                 modelAgregados.addElement(elegido);
@@ -118,7 +118,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
         Map<String, Espectaculo>espectaculos;
         modelAAgregar.clear();
         try {
-            espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos((String)cbPlataforma.getSelectedItem());
+            espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma((String)cbPlataforma.getSelectedItem());
             for (Espectaculo esp : espectaculos.values()) {
                 if(!modelAgregados.contains(esp.getNombre())) {
                     modelAAgregar.addElement(esp.getNombre());

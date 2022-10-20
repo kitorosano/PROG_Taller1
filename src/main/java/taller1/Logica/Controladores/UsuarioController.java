@@ -44,7 +44,7 @@ public class UsuarioController implements IUsuario {
             "WHERE UE.ue_nickname=U.u_nickname " +
             "ORDER BY ue_nickname";
         String selectArtistas = "SELECT * " +
-            "FROM prog_taller1.usuarios as U, artistas as UA " +
+            "FROM usuarios as U, artistas as UA " +
             "WHERE UA.ua_nickname=U.u_nickname " +
             "ORDER BY UA.ua_nickname";
         try {

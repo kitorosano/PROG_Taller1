@@ -122,7 +122,7 @@ public class ListadoFunciones extends JInternalFrame {
         Map<String, Espectaculo> espectaculos = new HashMap<String, Espectaculo>();
         cmbEspectaculo.removeAllItems();
         try {
-            espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(cmbPlataforma.getSelectedItem().toString());
+            espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(cmbPlataforma.getSelectedItem().toString());
             for (Map.Entry<String, Espectaculo> entry : espectaculos.entrySet()) {
                 cmbEspectaculo.addItem(entry.getValue().getNombre());           //guardo el espectaculo en el combo box
             }

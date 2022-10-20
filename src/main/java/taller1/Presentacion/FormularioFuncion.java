@@ -47,7 +47,7 @@ public class FormularioFuncion extends JInternalFrame {
             public void mouseClicked(MouseEvent e) {
                 if(!comprobarErrorencampos()){
                     try{
-                        Fabrica.getInstance().getIEspectaculo().altaFuncion(crearFuncion());
+                        Fabrica.getInstance().getIFuncion().altaFuncion(crearFuncion());
                         JOptionPane.showMessageDialog(null,"Funcion creada con exito");
                         dispose();
                     } catch (Exception ex) {
@@ -107,7 +107,7 @@ public class FormularioFuncion extends JInternalFrame {
 
     public void cargarDatosComboBox() {
         try{
-            Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+            Map<String, Plataforma> plataformas = Fabrica.getInstance().getIPlataforma().obtenerPlataformas();
             for (Plataforma p : plataformas.values()) {
                 cbPlataforma.addItem(p.getNombre());
             }
@@ -153,7 +153,7 @@ public class FormularioFuncion extends JInternalFrame {
     }
     public boolean comprobarNombreUnico(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {       //Devuelve true si no hay error
         try {
-            Map<String,Funcion> funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(nombrePlataforma,nombreEspectaculo);
+            Map<String,Funcion> funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(nombrePlataforma,nombreEspectaculo);
             for (Funcion fun : funciones.values()) {
                 if (fun.getNombre().equals(nombreFuncion)) {
                     return false;
@@ -192,14 +192,14 @@ public class FormularioFuncion extends JInternalFrame {
         LocalDateTime fechahora= LocalDateTime.of(LocalDate.parse(tfFecha.getText()), LocalTime.parse(tfHora.getText()));
         Espectaculo espectaculo = null;
         try {
-            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
+            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
             for (Espectaculo esp : espectaculos.values()) {
                 if(esp.getNombre().equals((String)cbEspectaculo.getSelectedItem())){
                     espectaculo=esp;
                     break;
                 }
             }
-            return new Funcion(nombre,espectaculo,fechahora,LocalDateTime.now());
+            return new Funcion(nombre,espectaculo,fechahora,LocalDateTime.now(), "");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -209,7 +209,7 @@ public class FormularioFuncion extends JInternalFrame {
         seleccionado=(String)cbPlataforma.getSelectedItem();
         try{
             cbEspectaculo.removeAllItems();
-            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(seleccionado);
+            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
             for (Espectaculo esp : espectaculos.values()) {
                     cbEspectaculo.addItem(esp.getNombre());
             }

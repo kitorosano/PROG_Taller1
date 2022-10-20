@@ -110,7 +110,7 @@ public class ListadoFunciones extends JInternalFrame {
         Map<String, Plataforma> plataformas = new HashMap<String, Plataforma>();
         cmbPlataforma.removeAllItems();
         try {
-            plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+            plataformas = Fabrica.getInstance().getIPlataforma().obtenerPlataformas();
             for (Map.Entry<String, Plataforma> entry : plataformas.entrySet()) {
                 cmbPlataforma.addItem(entry.getValue().getNombre());           //guardo la plataforma en el combo box
             }
@@ -122,7 +122,7 @@ public class ListadoFunciones extends JInternalFrame {
         Map<String, Espectaculo> espectaculos = new HashMap<String, Espectaculo>();
         cmbEspectaculo.removeAllItems();
         try {
-            espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos(cmbPlataforma.getSelectedItem().toString());
+            espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(cmbPlataforma.getSelectedItem().toString());
             for (Map.Entry<String, Espectaculo> entry : espectaculos.entrySet()) {
                 cmbEspectaculo.addItem(entry.getValue().getNombre());           //guardo el espectaculo en el combo box
             }
@@ -136,7 +136,7 @@ public class ListadoFunciones extends JInternalFrame {
         if (cmbEspectaculo.getSelectedItem()==null)
             return;
         try {
-            funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(cmbPlataforma.getSelectedItem().toString(), cmbEspectaculo.getSelectedItem().toString());
+            funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(cmbPlataforma.getSelectedItem().toString(), cmbEspectaculo.getSelectedItem().toString());
             for (Map.Entry<String, Funcion> entry : funciones.entrySet()) {
                 model.addElement(entry.getValue().getNombre());           //guardo la funcion en la lista
             }
@@ -149,7 +149,7 @@ public class ListadoFunciones extends JInternalFrame {
         Map<String, Funcion> funciones = new HashMap<String, Funcion>();
 
         try {
-            funciones = Fabrica.getInstance().getIEspectaculo().obtenerFuncionesDeEspectaculo(cmbPlataforma.getSelectedItem().toString(), cmbEspectaculo.getSelectedItem().toString());
+            funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(cmbPlataforma.getSelectedItem().toString(), cmbEspectaculo.getSelectedItem().toString());
             Funcion funcion = funciones.get(listaFunciones.getSelectedValue());  //Guardo la funcion seleccionada buscando en la lista por su nombre
             JInternalFrame detalle = new DetalleFuncion("Detalle funcion", funcion);
             detalle.setIconifiable(true);

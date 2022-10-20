@@ -8,19 +8,19 @@ public class Usuario {
     private String apellido;
     private String correo;
     private LocalDate fechaNacimiento;
-    private String contrasena;
+    private String contrasenia;
     private String imagen;
 
     public Usuario() {
     }
     
-    public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String contrasena, String imagen) {
+    public Usuario(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String contrasenia, String imagen) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
-        this.contrasena = contrasena;
+        this.contrasenia = contrasenia;
         this.imagen = imagen;
     }
 
@@ -64,12 +64,12 @@ public class Usuario {
         this.fechaNacimiento = fechaNacimiento;
     }
     
-    public String getContrasena() {
-        return contrasena;
+    public String getContrasenia() {
+        return contrasenia;
     }
     
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
     
     public String getImagen() {
@@ -82,6 +82,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "nickname=" + nickname + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", fechaNacimiento=" + fechaNacimiento + ", contrasena=" + contrasena + ", imagen=" + imagen + '}';
+        return "Usuario{" + "nickname=" + nickname + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", fechaNacimiento=" + fechaNacimiento + ", contrasenia=" + contrasenia + ", imagen=" + imagen + '}';
     }
 }

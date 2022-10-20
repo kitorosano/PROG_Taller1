@@ -34,7 +34,7 @@ public class FormularioPlataforma extends JInternalFrame {
                     } else {
                         String nombre = tfNombre.getText(), descripcion = tfDescripcion.getText(), url = tfURL.getText();
                         try {
-                            Fabrica.getInstance().getIEspectaculo().altaPlataforma(new Plataforma(nombre, descripcion, url));
+                            Fabrica.getInstance().getIPlataforma().altaPlataforma(new Plataforma(nombre, descripcion, url));
                             JOptionPane.showMessageDialog(null, "Plataforma agregada con exito");
                             dispose();
                         } catch (Exception ex) {
@@ -68,7 +68,7 @@ public class FormularioPlataforma extends JInternalFrame {
     }
 
     public boolean comprobarNombre(String nombre) {          //Devuelve true si el nombre ya existe
-        Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
+        Map<String, Plataforma> plataformas = Fabrica.getInstance().getIPlataforma().obtenerPlataformas();
         Set<String> keys = plataformas.keySet();
         for (String key : keys) {
             if (key.equals(nombre))

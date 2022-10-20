@@ -5,24 +5,9 @@ import main.java.taller1.Logica.Clases.*;
 import java.util.Map;
 
 public interface IEspectaculo {
-    //CARGAR DATOS PRUEBA
-    void cargarDatosPrueba();
-    void vaciarDatos();
-
-    // METODOS
-    void altaPlataforma(Plataforma nuevaPlataforma);
-    Map<String, Plataforma> obtenerPlataformas();
-
     void altaEspectaculo(Espectaculo nuevoEspectaculo);
-    Map<String, Espectaculo> obtenerEspectaculos(String nombrePlataforma);
-
-    void altaFuncion(Funcion nuevaFuncion);
-    Map<String, Funcion> obtenerFuncionesDeEspectaculo(String nombrePlataforma, String nombreEspectaculo);
-    void registrarEspectadoresAFunciones(Map<String, EspectadorRegistradoAFuncion> espectadoresFunciones);
-
-    void altaPaquete(Paquete nuevoPaquete);
-    Map<String, Paquete> obtenerPaquetes();
-    Map<String, Espectaculo> obtenerEspectaculosDePaquete(String nombrePaquete);
-    Map<String, Paquete> obtenerPaquetesDeEspectaculo(String nombreEspectaculo);
-    void altaEspectaculosAPaquete(Map<String, Espectaculo> espectaculos, String nombrePaquete);
+    Map<String, Espectaculo> obtenerEspectaculos();
+    Espectaculo obtenerEspectaculo(String nombrePlataforma, String nombre);
+    Map<String, Espectaculo> obtenerEspectaculosPorPlataforma(String nombrePlataforma);
+    Map<String, Espectaculo> obtenerEspectaculosPorArtista(String nickname);
 }

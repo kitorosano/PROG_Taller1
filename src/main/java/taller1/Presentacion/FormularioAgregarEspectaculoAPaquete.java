@@ -66,7 +66,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
                 Map<String, Espectaculo>espectaculos;
                 String elegido;
                 elegido=(String) lstEspectAingresar.getSelectedValue();
-                espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos((String)cbPlataforma.getSelectedItem());
+                espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma((String)cbPlataforma.getSelectedItem());
                 Espectaculo nuevo = espectaculos.get(elegido);
                 espectaculosNuevos.put(nuevo.getNombre(),nuevo);
                 modelAgregados.addElement(elegido);
@@ -84,8 +84,9 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //altaEspectaculosAPaquete(espectaculosNuevos, (String)cbPaquete.getSelectedItem());
-                Fabrica.getInstance().getIEspectaculo().altaEspectaculosAPaquete(espectaculosNuevos, (String)cbPaquete.getSelectedItem());
+                for (Map.Entry<String, Espectaculo> entry : espectaculosNuevos.entrySet()) {
+                    Fabrica.getInstance().getIPaquete().altaEspectaculoAPaquete(entry.getValue().getNombre(),(String)cbPaquete.getSelectedItem());
+                }
                 JOptionPane.showMessageDialog(null,"Espectaculos agregados con exito");
                 dispose();
             }
@@ -100,8 +101,8 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
 
     public void cargarDatosComboBox() {
         try{
-            Map<String, Plataforma> plataformas = Fabrica.getInstance().getIEspectaculo().obtenerPlataformas();
-            Map<String, Paquete> paquetes=Fabrica.getInstance().getIEspectaculo().obtenerPaquetes();
+            Map<String, Plataforma> plataformas = Fabrica.getInstance().getIPlataforma().obtenerPlataformas();
+            Map<String, Paquete> paquetes=Fabrica.getInstance().getIPaquete().obtenerPaquetes();
             for (Plataforma p : plataformas.values()) {
                 cbPlataforma.addItem(p.getNombre());
             }
@@ -118,7 +119,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
         Map<String, Espectaculo>espectaculos;
         modelAAgregar.clear();
         try {
-            espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculos((String)cbPlataforma.getSelectedItem());
+            espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma((String)cbPlataforma.getSelectedItem());
             for (Espectaculo esp : espectaculos.values()) {
                 if(!modelAgregados.contains(esp.getNombre())) {
                     modelAAgregar.addElement(esp.getNombre());
@@ -133,7 +134,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
         Map<String, Espectaculo>espectaculos;
         modelAgregados.clear();
         try {
-            espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosDePaquete((String)cbPaquete.getSelectedItem());
+            espectaculos=Fabrica.getInstance().getIPaquete().obtenerEspectaculosDePaquete((String)cbPaquete.getSelectedItem());
             for (Espectaculo esp : espectaculos.values()) {
                 modelAgregados.addElement(esp.getNombre());
                 if(modelAAgregar.contains(esp.getNombre())){

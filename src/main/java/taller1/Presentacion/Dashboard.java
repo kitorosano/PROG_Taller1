@@ -63,8 +63,7 @@ public class Dashboard extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Fabrica.getInstance().getIEspectaculo().vaciarDatos();
-                    Fabrica.getInstance().getIUsuario().vaciarDatos();
+                    Fabrica.getInstance().getIDatabase().vaciarDatos();
                     JOptionPane.showMessageDialog(null, "Datos vaciados correctamente");
                 } catch (Exception exception) {
                     JOptionPane.showMessageDialog(null, "Error al vaciar los datos");
@@ -76,8 +75,7 @@ public class Dashboard extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Fabrica.getInstance().getIUsuario().cargarDatosPrueba();
-                    Fabrica.getInstance().getIEspectaculo().cargarDatosPrueba();
+                    Fabrica.getInstance().getIDatabase().cargarDatos();
                     JOptionPane.showMessageDialog(null, "Datos cargados correctamente");
                 } catch (RuntimeException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());

@@ -1,0 +1,86 @@
+-- INSERTAR USUARIOS ESPECTADORES
+
+INSERT INTO `usuarios` (`u_nickname`, `u_nombre`, `u_apellido`, `u_correo`, `u_fechaNacimiento`, `u_contrasenia`, `u_imagen`) VALUES
+('Cookley', 'Henrie', 'Minchinton', 'hminchintoni@dyndns.org', '2022-04-09', '123456', NULL),
+('Domainer', 'Brade', 'Kohnemann', 'bkohnemanne@apple.com', '2022-06-06', '123456', NULL),
+('Greenlam', 'Graham', 'Ghelardoni', 'gghelardonih@hhs.gov', '2022-02-20', '123456', NULL),
+('Hatity', 'Erick', 'Mival', 'emival5@vinaora.com', '2022-05-09', '123456', NULL),
+('Job', 'Inger', 'Dono', 'idonoc@seesaa.net', '2022-01-13', '123456', NULL),
+('Keylex', 'Jeanine', 'Tunsley', 'jtunsley0@chron.com', '2022-02-14', '123456', NULL),
+('Konklab', 'Lizette', 'Steers', 'lsteersd@printfriendly.com', '2022-01-22', '123456', NULL),
+('Lotlux', 'Elicia', 'Koppen', 'ekoppen9@bizjournals.com', '2021-09-11', '123456', NULL),
+('Pannier', 'Maury', 'Byllam', 'mbyllam2@opensource.org', '2022-08-30', '123456', NULL),
+('Rank', 'Imojean', 'Styles', 'istylesg@aboutads.info', '2022-06-11', '123456', NULL),
+('Span', 'Lola', 'Montez', 'lmontezj@vkontakte.ru', '2022-03-05', '123456', NULL),
+('Stim', 'Mellicent', 'Palek', 'mpalek3@jigsy.com', '2022-07-02', '123456', NULL),
+('Stronghold', 'Vi', 'Chevers', 'vchevers6@altervista.org', '2021-10-26', '123456', NULL),
+('Sub-Ex', 'Hillary', 'Johnsey', 'hjohnsey1@mozilla.org', '2022-04-15', '123456', NULL),
+('Tampflex', 'My', 'Oboy', 'moboyb@google.com.hk', '2022-01-26', '123456', NULL),
+('Voyatouch', 'Lexi', 'Orrum', 'lorruma@ask.com', '2022-05-23', '123456', NULL),
+('Wrapsafe', 'Benn', 'Reinbach', 'breinbach8@apache.org', '2022-05-29', '123456', NULL),
+('Y-find', 'Dieter', 'Camacho', 'dcamachof@globo.com', '2021-10-25', '123456', NULL),
+('Zamit', 'Fancie', 'O\'Criane', 'focriane7@cornell.edu', '2022-01-03', '123456', NULL);
+
+INSERT INTO `espectadores`(`ue_nickname`) VALUES
+('Cookley'),
+('Domainer'),
+('Greenlam'),
+('Hatity'),
+('Job'),
+('Keylex'),
+('Konklab'),
+('Lotlux'),
+('Pannier'),
+('Rank'),
+('Span'),
+('Stim'),
+('Stronghold'),
+('Sub-Ex'),
+('Tampflex'),
+('Voyatouch'),
+('Wrapsafe'),
+('Y-find'),
+('Zamit');
+
+
+-- INSERTAR USUARIOS ARTISTAS
+
+INSERT INTO `usuarios` (`u_nickname`, `u_nombre`, `u_apellido`, `u_correo`, `u_fechaNacimiento`, `u_contrasenia`, `u_imagen`) VALUES
+('Domainer2', 'Luciana', 'Hegarty', 'lhegarty8@soup.io', '2022-06-02', '123456', NULL),
+('Duobam2', 'Fanya', 'Schuelcke', 'fschuelckeg@ox.ac.uk', '2021-10-29', '123456', NULL),
+('Fixflex2', 'Savina', 'Russo', 'srussoi@skype.com', '2022-08-03', '123456', NULL),
+('Greenlam2', 'Zorah', 'Woodall', 'zwoodall9@bing.com', '2021-11-12', '123456', NULL),
+('Home Ing2', 'Ferrell', 'Pabst', 'fpabst7@dmoz.org', '2022-02-06', '123456', NULL),
+('Kanlam2', 'Madelene', 'Grisley', 'mgrisley1@gnu.org', '2022-02-25', '123456', NULL),
+('Mat Lam Tam2', 'Selene', 'Smith', 'ssmithc@jalbum.net', '2022-03-30', '123456', NULL),
+('Matsoft2', 'Cassandra', 'Lamlin', 'clamlinj@shareasale.com', '2021-11-22', '123456', NULL),
+('Opela2', 'Konstanze', 'D\'Alesco', 'kdalescoa@infoseek.co.jp', '2022-05-29', '123456', NULL),
+('Otcom2', 'Kimmi', 'Florez', 'kflorez5@vkontakte.ru', '2022-06-04', '123456', NULL),
+('Rank2', 'Golda', 'Burgan', 'gburgan4@wikia.com', '2022-03-21', '123456', NULL),
+('Regrant2', 'Clementius', 'Gaskal', 'cgaskal0@usa.gov', '2022-01-20', '123456', NULL),
+('Ronstring2', 'Godard', 'Rushworth', 'grushworthf@elpais.com', '2022-07-07', '123456', NULL),
+('Span2', 'Ingaborg', 'Exell', 'iexell3@fastcompany.com', '2022-05-07', '123456', NULL),
+('Transcof2', 'Britney', 'Reavell', 'breavellb@slideshare.net', '2021-10-16', '123456', NULL),
+('Treeflex2', 'Birdie', 'Tankus', 'btankus2@netlog.com', '2022-07-25', '123456', NULL),
+('Tresom2', 'Mamie', 'Burling', 'mburlingd@multiply.com', '2021-10-18', '123456', NULL),
+('Veribet2', 'Cherida', 'Hover', 'chovere@i2i.jp', '2021-10-26', '123456', NULL);
+
+INSERT INTO `artistas` (ua_nickname, ua_descripcion, ua_biografia, ua_sitioWeb) VALUES
+('Domainer2', 'Jatri', 'Biostatistician I', 'www.virginia.edu'),
+('Duobam2', 'Twitterbeat', 'Budget/Accounting Analyst III', 'www.arstechnica.com'),
+('Fixflex2', 'Skibox', 'VP Product Management', 'www.canalblog.com'),
+('Greenlam2', 'Fivebridge', 'Nurse Practicioner', 'bbc.www.co.uk'),
+('Home Ing2', 'Quatz', 'Payment Adjustment Coordinator', 'www.google.it'),
+('Kanlam2', 'Twimbo', 'Food Chemist', 'www.census.gov'),
+('Mat Lam Tam2', 'Camimbo', 'Financial Analyst', 'www.marketwatch.com'),
+('Matsoft2', 'Camimbo', 'Developer III', 'www.vkontakte.ru'),
+('Opela2', 'Youspan', 'Media Manager II', 'www.apple.com'),
+('Otcom2', 'Twinder', 'General Manager', 'www.paypal.com'),
+('Rank2', 'Browseblab', 'Sales Associate', 'www.rambler.ru'),
+('Regrant2', 'Jabbercube', 'Quality Control Specialist', 'www.marketwatch.com'),
+('Ronstring2', 'Kwilith', 'Associate Professor', 'www.purevolume.com'),
+('Span2', 'Aimbo', 'Statistician III', 'pagesperso-www.orange.fr'),
+('Transcof2', 'Zoonder', 'Research Assistant IV', 'www.diigo.com'),
+('Treeflex2', 'Zoovu', 'VP Product Management', 'www.ycombinator.com'),
+('Tresom2', 'Tagpad', 'Chief Design Engineer', 'www.alexa.com'),
+('Veribet2', 'Flipstorm', 'Automation Specialist II', 'www.bing.com');

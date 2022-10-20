@@ -6,7 +6,7 @@ public class Espectador extends Usuario{
 
     public Espectador() {
     }
-    public Espectador(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String contrasena, String imagen) {
-        super(nickname, nombre, apellido, correo, fechaNacimiento, contrasena, imagen);
+    public Espectador(String nickname, String nombre, String apellido, String correo, LocalDate fechaNacimiento, String contrasenia, String imagen) {
+        super(nickname, nombre, apellido, correo, fechaNacimiento, contrasenia, imagen);
     }
 }

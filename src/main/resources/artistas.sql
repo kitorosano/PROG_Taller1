@@ -1,6 +1,6 @@
 -- noinspection SqlNoDataSourceInspectionForFile
 
-INSERT INTO `artistas` (`ua_nickname`, `ua_nombre`, `ua_apellido`, `ua_correo`, `ua_fechaNacimiento`, `ua_contrasena`, `ua_imagen`, `ua_descripcion`, `ua_biografia`, `ua_sitioWeb`) VALUES
+INSERT INTO `artistas` (`ua_nickname`, `ua_nombre`, `ua_apellido`, `ua_correo`, `ua_fechaNacimiento`, `ua_contrasenia`, `ua_imagen`, `ua_descripcion`, `ua_biografia`, `ua_sitioWeb`) VALUES
 ('Domainer', 'Luciana', 'Hegarty', 'lhegarty8@soup.io', '2022-06-02', '123456', NULL, 'Jatri', 'Biostatistician I', 'www.virginia.edu'),
 ('Duobam', 'Fanya', 'Schuelcke', 'fschuelckeg@ox.ac.uk', '2021-10-29', '123456', NULL, 'Twitterbeat', 'Budget/Accounting Analyst III', 'www.arstechnica.com'),
 ('Fixflex', 'Savina', 'Russo', 'srussoi@skype.com', '2022-08-03', '123456', NULL, 'Skibox', 'VP Product Management', 'www.canalblog.com'),

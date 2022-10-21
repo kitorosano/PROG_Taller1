@@ -89,8 +89,11 @@ public class DetalleUsuario extends JInternalFrame {
 
                     if (usuario instanceof Artista) {
                         String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
-                        Espectaculo espectaculo = espectaculosArtista.get(valor);
-
+                        String plataforma= table1.getValueAt(table1.getSelectedRow(), 2).toString();
+                        System.out.println("el valor es:"+ valor);
+                        System.out.println("espectaculos artista"+ espectaculosArtista);
+                        Espectaculo espectaculo = espectaculosArtista.get(valor+"-"+plataforma);
+                        System.out.println("el espectaculo es:"+espectaculo);
                         JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle Espectaculo", espectaculo);
                         detalleEspectaculo.setIconifiable(true);
                         detalleEspectaculo.setClosable(true);
@@ -126,7 +129,7 @@ public class DetalleUsuario extends JInternalFrame {
 
     private void createUIComponents(int tipo) { //tipo 1:Artista , tipo 2:espectador
         // TODO: place custom component creation code here
-        String[] espectaculo = {"Nombre Espectaculo", "Costo"};
+        String[] espectaculo = {"Nombre Espectaculo", "Costo","Plataforma"};
         String[] funcion = {"Nickname Espectador", "Nombre Funcion"};
         String[] titulos = {};
         if (tipo == 1) titulos = espectaculo;
@@ -161,7 +164,9 @@ public class DetalleUsuario extends JInternalFrame {
         try {
             this.espectaculosArtista = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorArtista(this.usuario.getNickname());
             for (Map.Entry<String, Espectaculo> entry : espectaculosArtista.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getCosto()});
+                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getCosto(),entry.getValue().getPlataforma().getNombre()});
+                System.out.println("claves del espectaculo cuando se agregan:"+entry.getValue().getNombre());
+                System.out.println(" espectaculo cuando se agregan:"+entry.getValue().getNombre());
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());

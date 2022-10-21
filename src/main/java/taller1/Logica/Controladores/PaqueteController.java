@@ -31,7 +31,7 @@ public class PaqueteController implements IPaquete {
     Connection connection = null;
     Statement statement = null;
     String insertPaquete = "INSERT INTO paquetes (paq_nombre, paq_fechaExpiracion, paq_descripcion, paq_descuento, paq_fechaRegistro, paq_imagen) " +
-        "VALUES ('" + nuevoPaquete.getNombre() + "', '" + nuevoPaquete.getFechaExpiracion() + "', '" + nuevoPaquete.getDescripcion() + "', " + nuevoPaquete.getDescuento() + ", '" + nuevoPaquete.getFechaRegistro() + ", '" + nuevoPaquete.getImagen() + "')'";
+            "VALUES ('" + nuevoPaquete.getNombre() + "', '" + nuevoPaquete.getFechaExpiracion() + "', '" + nuevoPaquete.getDescripcion() + "', " + nuevoPaquete.getDescuento() + ", '" + nuevoPaquete.getFechaRegistro() + "', '" + nuevoPaquete.getImagen() + "')";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -250,9 +250,9 @@ public class PaqueteController implements IPaquete {
     ResultSet resultSet = null;
     String selectPaquetesByEspectador = "SELECT * " +
                 "FROM paquetes as PAQ, espectadores_paquetes as ES_PAQ, espectadores as ES "+
-                "WHERE ES_PAQ.es_paq_nombrePaquete = PAQ.paq_nombre " +
-                "AND ES.es_nickname = ES_PAQ.es_paq_nicknameEspectador " +
-                "AND ES.es_nickname = '" + nickname + "' ";
+                "WHERE ES_PAQ.ue_paq_nombrePaquete = PAQ.paq_nombre " +
+                "AND ES.ue_nickname = ES_PAQ.ue_paq_nickname " +
+                "AND ES.ue_nickname = '" + nickname + "' ";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();

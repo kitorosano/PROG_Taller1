@@ -184,9 +184,9 @@ public class PaqueteController implements IPaquete {
     String selectEspectaculosByPaquete = "SELECT * " +
                 "FROM espectaculos_paquetes as ES_PAQ, espectaculos as ES, artistas as UA, usuarios as U, plataformas as PL " +
                 "WHERE ES_PAQ.es_paq_nombreEspectaculo = ES.es_nombre " +
-                "AND ES.es_plataforma = PL.pl_nombre " +
+                "AND ES.es_plataformaAsociada = PL.pl_nombre " +
                 "AND ES.es_artistaOrganizador = UA.ua_nickname " +
-                "AND UA.ua_nickname = U.us_nickname " +
+                "AND UA.ua_nickname = U.u_nickname " +
                 "AND ES_PAQ.es_paq_nombrePaquete = '" + nombrePaquete + "' ";
     try {
       connection = ConexionDB.getConnection();

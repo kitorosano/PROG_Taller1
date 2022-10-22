@@ -450,7 +450,7 @@ public class FuncionController implements IFuncion {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectFunciones = "SELECT * " +
-        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, paquetes as PAQ, funciones as FN, espectaculos as ES " +
+        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, funciones as FN, espectaculos as ES " +
         "WHERE UE_FN.ue_fn_nickname = UE.ue_nickname " +
         "  AND UE.ue_nickname = U.u_nickname " +
         "  AND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre " +
@@ -458,7 +458,6 @@ public class FuncionController implements IFuncion {
         "  AND FN.fn_espectaculoAsociado = ES.es_nombre " +
         "  AND UE_FN.ue_fn_plataformaAsociada = FN.fn_plataformaAsociada " +
         "  AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada " +
-        "  AND UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre " +
         "  AND UE_FN.ue_fn_nickname = '" + nickname + "'";
     try {
       connection = ConexionDB.getConnection();

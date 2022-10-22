@@ -497,14 +497,14 @@ public class FuncionController implements IFuncion {
         String u_imagen = resultSet.getString("u_imagen");
         Espectador ue = new Espectador(ue_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen);
         
-        String paq_nombre = resultSet.getString("paq_nombre");
-        String paq_descripcion = resultSet.getString("paq_descripcion");
-        Double paq_descuento = resultSet.getDouble("paq_descuento");
-        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
-        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
-        String paq_imagen = resultSet.getString("paq_imagen");
-        Paquete paq = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-        
+        //String paq_nombre = resultSet.getString("paq_nombre");
+        //String paq_descripcion = resultSet.getString("paq_descripcion");
+        //Double paq_descuento = resultSet.getDouble("paq_descuento");
+        //LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
+        //LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
+        //String paq_imagen = resultSet.getString("paq_imagen");
+        //Paquete paq = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
+        Paquete paq=null;
         Boolean ue_fn_canjeado = resultSet.getBoolean("ue_fn_canjeado");
         Double ue_fn_costo = resultSet.getDouble("ue_fn_costo");
         LocalDateTime ue_fn_fechaRegistro = resultSet.getTimestamp("ue_fn_fechaRegistro").toLocalDateTime();

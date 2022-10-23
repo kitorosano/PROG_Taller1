@@ -229,11 +229,11 @@ public class CategoriaController implements ICategoria {
   }
   
   @Override
-  public void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo){
+  public void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo, String nombrePlataforma){
     Connection connection = null;
     Statement statement = null;
-    String insertEspectaculoCategoria = "INSERT INTO espectaculos_categorias (es_cat_nombreEspectaculo, es_cat_nombreCategoria) " +
-        "                           VALUES ('" + nombreEspectaculo + "', '" + nombreCategoria + "')";
+    String insertEspectaculoCategoria = "INSERT INTO espectaculos_categorias (es_cat_nombreEspectaculo,es_cat_nombrePlataforma, es_cat_nombreCategoria) " +
+        "                           VALUES ('" + nombreEspectaculo + "', '" + nombrePlataforma + "','" + nombreCategoria + "')";
     
     try {
       connection = ConexionDB.getConnection();

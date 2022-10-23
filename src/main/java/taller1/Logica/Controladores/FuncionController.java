@@ -30,8 +30,8 @@ public class FuncionController implements IFuncion {
   public void altaFuncion(Funcion nuevaFuncion) {
     Connection connection = null;
     Statement statement = null;
-    String insertFuncion = "INSERT INTO funciones (fn_nombre, fn_espectaculoAsociado, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen) " +
-        "VALUES ('" + nuevaFuncion.getNombre() + "', '" + nuevaFuncion.getEspectaculo().getNombre() + "', '" + nuevaFuncion.getFechaHoraInicio() + "', '" + nuevaFuncion.getFechaRegistro() + "', '" + nuevaFuncion.getImagen() + "')";
+    String insertFuncion = "INSERT INTO funciones (fn_nombre, fn_espectaculoAsociado, fn_plataformaAsociada, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen) " +
+        "VALUES ('" + nuevaFuncion.getNombre() + "', '" + nuevaFuncion.getEspectaculo().getNombre() + "', '" + nuevaFuncion.getEspectaculo().getPlataforma().getNombre()+ "', '"+ nuevaFuncion.getFechaHoraInicio() + "', '" + nuevaFuncion.getFechaRegistro() + "', '" + nuevaFuncion.getImagen() + "')";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();

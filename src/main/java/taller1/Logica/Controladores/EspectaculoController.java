@@ -272,12 +272,12 @@ public class EspectaculoController implements IEspectaculo {
         Plataforma pl = new Plataforma(pl_nombre, pl_descripcion, pl_url);
         
         String ua_nickname = resultSet.getString("ua_nickname");
-        String ua_nombre = resultSet.getString("ua_nombre");
-        String ua_apellido = resultSet.getString("ua_apellido");
-        String ua_correo = resultSet.getString("ua_correo");
-        LocalDate ua_fechaNacimiento = resultSet.getDate("ua_fechaNacimiento").toLocalDate();
-        String ua_contrasenia = resultSet.getString("ua_contrasenia");
-        String ua_imagen = resultSet.getString("ua_imagen");
+        String ua_nombre = resultSet.getString("u_nombre");
+        String ua_apellido = resultSet.getString("u_apellido");
+        String ua_correo = resultSet.getString("u_correo");
+        LocalDate ua_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
+        String ua_contrasenia = resultSet.getString("u_contrasenia");
+        String ua_imagen = resultSet.getString("u_imagen");
         String ua_descripcion = resultSet.getString("ua_descripcion");
         String ua_biografia = resultSet.getString("ua_biografia");
         String ua_sitioWeb = resultSet.getString("ua_sitioWeb");

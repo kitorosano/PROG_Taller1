@@ -1,9 +1,9 @@
 INSERT INTO `espectaculos` (`es_nombre`, `es_descripcion`, `es_duracion`, `es_minEspectadores`, `es_maxEspectadores`, `es_url`, `es_costo`, `es_estado`, `es_fechaRegistro`, `es_imagen`, `es_plataformaAsociada`, `es_artistaOrganizador`) VALUES
-('Ante todo calamidades de la vida', 'La vida es como una montaña rusa, hay que saber subi y baja', 2, 40, 50, 'www.zorahsindisguise.com', 769.99, 'INGRESADO', '2022-09-14 17:23:46', '','Twitch', 'Greenlam'),
-('El arte de dormir con los ojos abiertos', 'Asustar nunca fue tan aterrados y menos estando dormido', 1.5, 13, 25, 'www.clementiusmementus.com', 1289, 'INGRESADO', '2022-09-14 17:25:24', '','Nebula', 'Regrant'),
-('El espectaculo de britney lanza', 'Este espectaculo la rompe a los niveles extratosfericos', 2.5, 3, 20, 'www.britneylanza.net', 499, 'INGRESADO', '2022-09-14 17:21:08', '','Meta', 'Transcof'),
+('Ante todo calamidades de la vida', 'La vida es como una montaña rusa, hay que saber subi y baja', 2, 40, 50, 'www.zorahsindisguise.com', 769.99, 'INGRESADO', '2022-09-14 17:23:46', '','Twitch', 'Greenlam2'),
+('El arte de dormir con los ojos abiertos', 'Asustar nunca fue tan aterrados y menos estando dormido', 1.5, 13, 25, 'www.clementiusmementus.com', 1289, 'INGRESADO', '2022-09-14 17:25:24', '','Nebula', 'Regrant2'),
+('El espectaculo de britney lanza', 'Este espectaculo la rompe a los niveles extratosfericos', 2.5, 3, 20, 'www.britneylanza.net', 499, 'INGRESADO', '2022-09-14 17:21:08', '','Meta', 'Transcof2'),
 ('God of games', 'games, games, games... give me games', 3, 40, 60, 'www.godofgames.com.uy', 700, 'INGRESADO', '2022-09-14 17:26:04', '','Nebula', 'Ronstring2'),
-('La boda de tu tia', 'Las tias son geniales', 1.4, 1, 10, 'www.lastiasdominanelmundo.com', 149.89, 'INGRESADO', '2022-09-14 17:24:29', '','Twitch', 'Mat Lam Tam'),
-('La Ópera Metropolitana de Nueva York', 'Es uno de los más importantes de la ópera mundial, con un elenco de estrellas internacionales.', 3, 3, 20, 'www.operametropolitana.com', 3999.99, 'INGRESADO', '2022-09-07 19:29:52', '','Meta', 'Transcof'),
-('Luciana decora tu pelo', 'Las barbies estan sobrevaloradas, aguante my little pony', 2.8, 16, 40, 'www.luciaaaaana.com', 800, 'INGRESADO', '2022-09-14 17:26:54', '','Youtube', 'Domainer'),
-('Save or not to save', 'En la vida muchas veces nos vamos a preguntar si realmente vale la pena savar o no saber', 4, 10, 30, 'www.savingme.com.co', 1399, 'INGRESADO', '2022-09-14 17:22:16', '','Meta', 'Fixflex');
+('La boda de tu tia', 'Las tias son geniales', 1.4, 1, 10, 'www.lastiasdominanelmundo.com', 149.89, 'INGRESADO', '2022-09-14 17:24:29', '','Twitch', 'Mat Lam Tam2'),
+('La Ópera Metropolitana de Nueva York', 'Es uno de los más importantes de la ópera mundial, con un elenco de estrellas internacionales.', 3, 3, 20, 'www.operametropolitana.com', 3999.99, 'INGRESADO', '2022-09-07 19:29:52', '','Meta', 'Transcof2'),
+('Luciana decora tu pelo', 'Las barbies estan sobrevaloradas, aguante my little pony', 2.8, 16, 40, 'www.luciaaaaana.com', 800, 'INGRESADO', '2022-09-14 17:26:54', '','Youtube', 'Domainer2'),
+('Save or not to save', 'En la vida muchas veces nos vamos a preguntar si realmente vale la pena savar o no saber', 4, 10, 30, 'www.savingme.com.co', 1399, 'INGRESADO', '2022-09-14 17:22:16', '','Meta', 'Fixflex2');

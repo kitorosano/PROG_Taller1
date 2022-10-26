@@ -7,7 +7,7 @@ INSERT INTO `espectaculos_paquetes` (`es_paq_nombrePaquete`, `es_paq_nombreEspec
 ('sixPack', 'El espectaculo de britney lanza', 'Meta'),
 ('Las aventuras de ayer y hoy', 'God of games', 'Nebula'),
 ('sixPack', 'God of games', 'Nebula'),
-('Nice and spicy', 'La boda de tu tia', 'Meta'),
+('Nice and spicy', 'La boda de tu tia', 'Twitch'),
 ('sixPack', 'La boda de tu tia', 'Twitch'),
 ('Las aventuras de ayer y hoy', 'La Ópera Metropolitana de Nueva York', 'Meta'),
 ('sixPack', 'La Ópera Metropolitana de Nueva York', 'Meta'),

@@ -21,7 +21,7 @@ CREATE TABLE espectadores (
   ue_nickname VARCHAR(30) NOT NULL,
 
   PRIMARY KEY (ue_nickname),
-  FOREIGN KEY (ue_nickname) REFERENCES usuarios(u_nickname) ON DELETE CASCADE
+  FOREIGN KEY (ue_nickname) REFERENCES usuarios(u_nickname) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE artistas (
@@ -31,7 +31,7 @@ CREATE TABLE artistas (
   ua_sitioWeb VARCHAR(50),
 
   PRIMARY KEY (ua_nickname),
-  FOREIGN KEY (ua_nickname) REFERENCES usuarios(u_nickname) ON DELETE CASCADE
+  FOREIGN KEY (ua_nickname) REFERENCES usuarios(u_nickname) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE plataformas (
@@ -57,8 +57,8 @@ CREATE TABLE espectaculos (
   es_artistaOrganizador VARCHAR(30) NOT NULL,
 
   PRIMARY KEY (es_nombre, es_plataformaAsociada),
-  FOREIGN KEY (es_plataformaAsociada) REFERENCES plataformas (pl_nombre) ON DELETE CASCADE,
-  FOREIGN KEY (es_artistaOrganizador) REFERENCES artistas (ua_nickname) ON DELETE CASCADE
+  FOREIGN KEY (es_plataformaAsociada) REFERENCES plataformas (pl_nombre) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (es_artistaOrganizador) REFERENCES artistas (ua_nickname) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE funciones (
@@ -70,7 +70,7 @@ CREATE TABLE funciones (
   fn_imagen VARCHAR(200),
 
   PRIMARY KEY (fn_nombre, fn_espectaculoAsociado, fn_plataformaAsociada),
-  FOREIGN KEY (fn_espectaculoAsociado, fn_plataformaAsociada) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE
+  FOREIGN KEY (fn_espectaculoAsociado, fn_plataformaAsociada) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE categorias (
@@ -85,8 +85,8 @@ CREATE TABLE espectaculos_categorias (
     es_cat_nombreCategoria VARCHAR(30) NOT NULL,
 
     PRIMARY KEY (es_cat_nombreEspectaculo, es_cat_nombrePlataforma, es_cat_nombreCategoria),
-    FOREIGN KEY (es_cat_nombreEspectaculo, es_cat_nombrePlataforma) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE,
-    FOREIGN KEY (es_cat_nombreCategoria) REFERENCES categorias (cat_nombre) ON DELETE CASCADE
+    FOREIGN KEY (es_cat_nombreEspectaculo, es_cat_nombrePlataforma) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (es_cat_nombreCategoria) REFERENCES categorias (cat_nombre) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE paquetes (
@@ -106,8 +106,8 @@ CREATE TABLE espectaculos_paquetes (
   es_paq_plataformaAsociada VARCHAR(30) NOT NULL,
   
   PRIMARY KEY (es_paq_nombrePaquete, es_paq_nombreEspectaculo, es_paq_plataformaAsociada),
-  FOREIGN KEY (es_paq_nombrePaquete) REFERENCES paquetes (paq_nombre) ON DELETE CASCADE,
-  FOREIGN KEY (es_paq_nombreEspectaculo, es_paq_plataformaAsociada) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE
+  FOREIGN KEY (es_paq_nombrePaquete) REFERENCES paquetes (paq_nombre) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (es_paq_nombreEspectaculo, es_paq_plataformaAsociada) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE artistas_funciones (
@@ -117,8 +117,8 @@ CREATE TABLE artistas_funciones (
   ua_fn_plataformaAsociada VARCHAR(30) NOT NULL,
   
   PRIMARY KEY (ua_fn_nickname, ua_fn_nombreFuncion, ua_fn_espectaculoAsociado, ua_fn_plataformaAsociada),
-  FOREIGN KEY (ua_fn_nickname) REFERENCES artistas (ua_nickname) ON DELETE CASCADE,
-  FOREIGN KEY (ua_fn_nombreFuncion, ua_fn_espectaculoAsociado, ua_fn_plataformaAsociada) REFERENCES funciones (fn_nombre, fn_espectaculoAsociado, fn_plataformaAsociada) ON DELETE CASCADE
+  FOREIGN KEY (ua_fn_nickname) REFERENCES artistas (ua_nickname) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (ua_fn_nombreFuncion, ua_fn_espectaculoAsociado, ua_fn_plataformaAsociada) REFERENCES funciones (fn_nombre, fn_espectaculoAsociado, fn_plataformaAsociada) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE espectadores_funciones (
@@ -133,9 +133,9 @@ CREATE TABLE espectadores_funciones (
 
   
   PRIMARY KEY (ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada),
-  FOREIGN KEY (ue_fn_nickname) REFERENCES espectadores (ue_nickname) ON DELETE CASCADE,
-  FOREIGN KEY (ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada) REFERENCES funciones (fn_nombre, fn_espectaculoAsociado, fn_plataformaAsociada) ON DELETE CASCADE,
-  FOREIGN KEY (ue_fn_nombrePaquete) REFERENCES paquetes (paq_nombre) ON DELETE CASCADE
+  FOREIGN KEY (ue_fn_nickname) REFERENCES espectadores (ue_nickname) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada) REFERENCES funciones (fn_nombre, fn_espectaculoAsociado, fn_plataformaAsociada) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (ue_fn_nombrePaquete) REFERENCES paquetes (paq_nombre) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE espectadores_funciones_canjeados (
@@ -150,8 +150,8 @@ CREATE TABLE espectadores_funciones_canjeados (
     ue_fn_c_plataformaAsociadaCanjeado VARCHAR(30) NOT NULL,
 
     PRIMARY KEY (ue_fn_c_nickname, ue_fn_c_nombreFuncion, ue_fn_c_espectaculoAsociado, ue_fn_c_plataformaAsociada, ue_fn_c_nicknameCanjeado, ue_fn_c_nombreFuncionCanjeado, ue_fn_c_espectaculoAsociadoCanjeado, ue_fn_c_plataformaAsociadaCanjeado),
-    FOREIGN KEY (ue_fn_c_nickname, ue_fn_c_nombreFuncion, ue_fn_c_espectaculoAsociado, ue_fn_c_plataformaAsociada) REFERENCES espectadores_funciones (ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada) ON DELETE CASCADE,
-    FOREIGN KEY (ue_fn_c_nicknameCanjeado, ue_fn_c_nombreFuncionCanjeado, ue_fn_c_espectaculoAsociadoCanjeado, ue_fn_c_plataformaAsociadaCanjeado) REFERENCES espectadores_funciones (ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada) ON DELETE CASCADE
+    FOREIGN KEY (ue_fn_c_nickname, ue_fn_c_nombreFuncion, ue_fn_c_espectaculoAsociado, ue_fn_c_plataformaAsociada) REFERENCES espectadores_funciones (ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ue_fn_c_nicknameCanjeado, ue_fn_c_nombreFuncionCanjeado, ue_fn_c_espectaculoAsociadoCanjeado, ue_fn_c_plataformaAsociadaCanjeado) REFERENCES espectadores_funciones (ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE espectadores_paquetes (
@@ -160,6 +160,6 @@ CREATE TABLE espectadores_paquetes (
     ue_paq_fechaRegistro DATETIME NOT NULL,
 
     PRIMARY KEY (ue_paq_nickname, ue_paq_nombrePaquete),
-    FOREIGN KEY (ue_paq_nickname) REFERENCES espectadores (ue_nickname) ON DELETE CASCADE,
-    FOREIGN KEY (ue_paq_nombrePaquete) REFERENCES paquetes (paq_nombre) ON DELETE CASCADE
+    FOREIGN KEY (ue_paq_nickname) REFERENCES espectadores (ue_nickname) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (ue_paq_nombrePaquete) REFERENCES paquetes (paq_nombre) ON DELETE CASCADE ON UPDATE CASCADE
 );

@@ -30,8 +30,8 @@ public class FuncionController implements IFuncion {
   public void altaFuncion(Funcion nuevaFuncion) {
     Connection connection = null;
     Statement statement = null;
-    String insertFuncion = "INSERT INTO funciones (fn_nombre, fn_espectaculoAsociado, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen) " +
-        "VALUES ('" + nuevaFuncion.getNombre() + "', '" + nuevaFuncion.getEspectaculo().getNombre() + "', '" + nuevaFuncion.getFechaHoraInicio() + "', '" + nuevaFuncion.getFechaRegistro() + "', '" + nuevaFuncion.getImagen() + "')";
+    String insertFuncion = "INSERT INTO funciones (fn_nombre, fn_espectaculoAsociado, fn_plataformaAsociada, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen) " +
+        "VALUES ('" + nuevaFuncion.getNombre() + "', '" + nuevaFuncion.getEspectaculo().getNombre() + "', '" + nuevaFuncion.getEspectaculo().getPlataforma().getNombre()+ "', '"+ nuevaFuncion.getFechaHoraInicio() + "', '" + nuevaFuncion.getFechaRegistro() + "', '" + nuevaFuncion.getImagen() + "')";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -450,7 +450,7 @@ public class FuncionController implements IFuncion {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectFunciones = "SELECT * " +
-        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, paquetes as PAQ, funciones as FN, espectaculos as ES " +
+        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, funciones as FN, espectaculos as ES " +
         "WHERE UE_FN.ue_fn_nickname = UE.ue_nickname " +
         "  AND UE.ue_nickname = U.u_nickname " +
         "  AND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre " +
@@ -458,7 +458,6 @@ public class FuncionController implements IFuncion {
         "  AND FN.fn_espectaculoAsociado = ES.es_nombre " +
         "  AND UE_FN.ue_fn_plataformaAsociada = FN.fn_plataformaAsociada " +
         "  AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada " +
-        "  AND UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre " +
         "  AND UE_FN.ue_fn_nickname = '" + nickname + "'";
     try {
       connection = ConexionDB.getConnection();
@@ -498,14 +497,14 @@ public class FuncionController implements IFuncion {
         String u_imagen = resultSet.getString("u_imagen");
         Espectador ue = new Espectador(ue_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen);
         
-        String paq_nombre = resultSet.getString("paq_nombre");
-        String paq_descripcion = resultSet.getString("paq_descripcion");
-        Double paq_descuento = resultSet.getDouble("paq_descuento");
-        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
-        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
-        String paq_imagen = resultSet.getString("paq_imagen");
-        Paquete paq = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-        
+        //String paq_nombre = resultSet.getString("paq_nombre");
+        //String paq_descripcion = resultSet.getString("paq_descripcion");
+        //Double paq_descuento = resultSet.getDouble("paq_descuento");
+        //LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
+        //LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
+        //String paq_imagen = resultSet.getString("paq_imagen");
+        //Paquete paq = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
+        Paquete paq=null;
         Boolean ue_fn_canjeado = resultSet.getBoolean("ue_fn_canjeado");
         Double ue_fn_costo = resultSet.getDouble("ue_fn_costo");
         LocalDateTime ue_fn_fechaRegistro = resultSet.getTimestamp("ue_fn_fechaRegistro").toLocalDateTime();
@@ -544,8 +543,8 @@ public class FuncionController implements IFuncion {
         "  AND UE.ue_nickname = U.u_nickname " +
         "  AND UE_FN.ue_fn_espectaculoAsociado = FN.fn_espectaculoAsociado " +
         "  AND FN.fn_espectaculoAsociado = ES.es_nombre " +
-        "  AND UE_FN.ue_fn.plataformaAsociada = FN.fn_plataformaAsociada " +
-        "  AND FN.fn_plataformaAsociada = ES.plataformaAsociada " +
+        "  AND UE_FN.ue_fn_plataformaAsociada = FN.fn_plataformaAsociada " +
+        "  AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada " +
         "  AND UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre " +
         "  AND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre " +
         "  AND FN.fn_nombre = '" + nombreFuncion + "' ";

@@ -12,5 +12,5 @@ public interface ICategoria {
   Categoria obtenerCategoria(String nombreCategoria);
   Map<String, Espectaculo> obtenerEspectaculosDeCategoria(String nombreCategoria);
   Map<String, Categoria> obtenerCategoriasDeEspectaculo(String nombreEspectaculo);
-  void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo);
+  void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo, String nombrePlataforma);
 }

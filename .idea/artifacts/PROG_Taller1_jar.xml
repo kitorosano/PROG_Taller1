@@ -8,6 +8,9 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/jgoodies-forms-1.9.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/mysql-connector-java-8.0.30.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/libs/mybatis-3.4.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/httpclient-4.5.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/httpmime-4.5.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/httpcore-4.4.15.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

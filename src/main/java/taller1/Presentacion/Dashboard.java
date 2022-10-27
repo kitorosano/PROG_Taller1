@@ -31,6 +31,7 @@ public class Dashboard extends JFrame {
     private JMenuItem altaDeFuncionJMenuItem;
     private JMenuItem altaDePaqueteJMenuItem;
     private JMenuItem altaDePlataformaJMenuItem;
+    private JMenuItem altaDeCategoriaJMenuItem;
     private JMenuItem consultaDeUsuarioJMenuItem;
     private JMenuItem consultaDeEspectaculoJMenuItem;
     private JMenuItem consultaDeFuncionJMenuItem;
@@ -143,7 +144,18 @@ public class Dashboard extends JFrame {
                 iFrame.setClosable(true);
                 iFrame.setSize(500,310);
                 dashboardJDesktopPane.add(iFrame);
-                iFrame.setSize(600,400);
+                iFrame.setVisible(true);
+            }
+        });
+    
+        altaDeCategoriaJMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame iFrame = new FormularioCategoria("Formulario de categoria");
+                iFrame.setIconifiable(true);
+                iFrame.setClosable(true);
+                iFrame.setSize(500,120);
+                dashboardJDesktopPane.add(iFrame);
                 iFrame.setVisible(true);
             }
         });

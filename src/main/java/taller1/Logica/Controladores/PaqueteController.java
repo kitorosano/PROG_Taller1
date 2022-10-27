@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class PaqueteController implements IPaquete {
   private static PaqueteController  instance;
@@ -93,7 +94,7 @@ public class PaqueteController implements IPaquete {
     return paquetes;
   }
   @Override
-  public Paquete obtenerPaquete(String nombrePaquete){
+  public Optional<Paquete> obtenerPaquete(String nombrePaquete){
     Paquete paquete = null;
     Connection connection = null;
     Statement statement = null;
@@ -128,7 +129,7 @@ public class PaqueteController implements IPaquete {
         throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
       }
     }
-    return paquete;
+    return Optional.ofNullable(paquete);
   }
   
   @Override
@@ -243,21 +244,30 @@ public class PaqueteController implements IPaquete {
   }
   
   @Override
-  public Map<String, Paquete> obtenerPaquetesPorEspectador(String nickname){
-    Map<String, Paquete> paquetes = new HashMap<>();
+  public Map<String, EspectadorPaquete> obtenerPaquetesPorEspectador(String nickname){
+    Map<String, EspectadorPaquete> paquetes = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
     String selectPaquetesByEspectador = "SELECT * " +
-                "FROM paquetes as PAQ, espectadores_paquetes as ES_PAQ, espectadores as ES "+
+                "FROM paquetes as PAQ, espectadores_paquetes as ES_PAQ, espectadores as ES, usuarios as U "+
                 "WHERE ES_PAQ.ue_paq_nombrePaquete = PAQ.paq_nombre " +
-                "AND ES.ue_nickname = ES_PAQ.ue_paq_nickname " +
-                "AND ES.ue_nickname = '" + nickname + "' ";
+                "AND ES_PAQ.ue_paq_nickname = ES.es_nickname " +
+                "AND ES.es_nickname = U.u_nickname " +
+                "AND U.u_nickname = '" + nickname + "' ";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPaquetesByEspectador);
       while (resultSet.next()) {
+        String u_nickname = resultSet.getString("u_nickname");
+        String u_nombre = resultSet.getString("u_nombre");
+        String u_apellido = resultSet.getString("u_apellido");
+        String u_correo = resultSet.getString("u_correo");
+        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
+        String u_contrasenia = resultSet.getString("u_contrasenia");
+        String u_imagen = resultSet.getString("u_imagen");
+        Espectador espectador = new Espectador(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen);
   
         String paq_nombre = resultSet.getString("paq_nombre");
         String paq_descripcion = resultSet.getString("paq_descripcion");
@@ -266,7 +276,11 @@ public class PaqueteController implements IPaquete {
         LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
         String paq_imagen = resultSet.getString("paq_imagen");
         Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-        paquetes.put(paq_nombre, paquete);
+        
+        LocalDateTime ue_paq_fechaRegistro = resultSet.getTimestamp("ue_paq_fechaRegistro").toLocalDateTime();
+        
+        EspectadorPaquete espectadorPaquete = new EspectadorPaquete(espectador, paquete, ue_paq_fechaRegistro);
+        paquetes.put(paq_nombre, espectadorPaquete);
       }
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -288,8 +302,8 @@ public class PaqueteController implements IPaquete {
   }
   
   @Override
-  public Map<String, Espectador> obtenerEspectadoresDePaquete(String nombrePaquete){
-    Map<String, Espectador> espectadores = new HashMap<>();
+  public Map<String, EspectadorPaquete> obtenerEspectadoresDePaquete(String nombrePaquete){
+    Map<String, EspectadorPaquete> espectadores = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -304,6 +318,7 @@ public class PaqueteController implements IPaquete {
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectEspectadoresByPaquete);
       while (resultSet.next()) {
+  
         String u_nickname = resultSet.getString("u_nickname");
         String u_nombre = resultSet.getString("u_nombre");
         String u_apellido = resultSet.getString("u_apellido");
@@ -312,7 +327,19 @@ public class PaqueteController implements IPaquete {
         String u_contrasenia = resultSet.getString("u_contrasenia");
         String u_imagen = resultSet.getString("u_imagen");
         Espectador espectador = new Espectador(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen);
-        espectadores.put(u_nickname, espectador);
+  
+        String paq_nombre = resultSet.getString("paq_nombre");
+        String paq_descripcion = resultSet.getString("paq_descripcion");
+        Double paq_descuento = resultSet.getDouble("paq_descuento");
+        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
+        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
+        String paq_imagen = resultSet.getString("paq_imagen");
+        Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
+  
+        LocalDateTime ue_paq_fechaRegistro = resultSet.getTimestamp("ue_paq_fechaRegistro").toLocalDateTime();
+  
+        EspectadorPaquete espectadorPaquete = new EspectadorPaquete(espectador, paquete, ue_paq_fechaRegistro);
+        espectadores.put(u_nickname, espectadorPaquete);
       }
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -364,8 +391,8 @@ public class PaqueteController implements IPaquete {
   public void altaEspectadorAPaquete(String nickname, String nombrePaquete){
     Connection connection = null;
     Statement statement = null;
-    String insertEspectadoresPaquetes = "INSERT INTO espectadores_paquetes (ue_paq_nicknameEspectador, ue_paq_nombrePaquete) " +
-        "                 VALUES ('" + nickname + "', '" + nombrePaquete + "') ";
+    String insertEspectadoresPaquetes = "INSERT INTO espectadores_paquetes (ue_paq_nickname, ue_paq_nombrePaquete, ue_paq_fechaRegistro) " +
+        "                 VALUES ('" + nickname + "', '" + nombrePaquete + "', '" + LocalDate.now() + "') ";
     
     try {
       connection = ConexionDB.getConnection();

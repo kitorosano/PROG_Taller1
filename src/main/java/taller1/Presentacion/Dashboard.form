@@ -68,6 +68,12 @@
                   <text value="Alta de plataforma"/>
                 </properties>
               </component>
+              <component id="31455" class="javax.swing.JMenuItem" binding="altaDeCategoriaJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="Alta de categoria"/>
+                </properties>
+              </component>
               <component id="26589" class="javax.swing.JSeparator">
                 <constraints/>
                 <properties/>

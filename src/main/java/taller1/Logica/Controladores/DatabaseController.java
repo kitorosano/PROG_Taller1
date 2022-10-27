@@ -84,7 +84,11 @@ public class DatabaseController implements IDatabase {
       sr.runScript(reader);
       reader = new BufferedReader(new FileReader("src/main/resources/funciones.sql"));
       sr.runScript(reader);
+      reader = new BufferedReader(new FileReader("src/main/resources/categorias.sql"));
+      sr.runScript(reader);
       reader = new BufferedReader(new FileReader("src/main/resources/espectaculos_paquetes.sql"));
+      sr.runScript(reader);
+      reader = new BufferedReader(new FileReader("src/main/resources/espectaculos_categorias.sql"));
       sr.runScript(reader);
       reader = new BufferedReader(new FileReader("src/main/resources/espectadores_funciones.sql"));
       sr.runScript(reader);

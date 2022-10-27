@@ -4,12 +4,14 @@ import main.java.taller1.Logica.Clases.Plataforma;
 import main.java.taller1.Logica.Interfaces.IPlataforma;
 import main.java.taller1.Persistencia.ConexionDB;
 
+import javax.swing.text.html.Option;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class PlataformaController  implements IPlataforma {
   private static PlataformaController instance;
@@ -91,7 +93,7 @@ public class PlataformaController  implements IPlataforma {
   }
   
   @Override
-  public Plataforma obtenerPlataforma(String nombrePlataforma) {
+  public Optional<Plataforma> obtenerPlataforma(String nombrePlataforma) {
     Plataforma plataforma = null;
     Connection connection = null;
     Statement statement = null;
@@ -126,6 +128,6 @@ public class PlataformaController  implements IPlataforma {
         throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
       }
     }
-    return plataforma;
+    return Optional.ofNullable(plataforma);
   }
 }

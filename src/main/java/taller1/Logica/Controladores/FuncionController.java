@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class FuncionController implements IFuncion {
   private static FuncionController instance;
@@ -126,7 +127,7 @@ public class FuncionController implements IFuncion {
   }
   
   @Override
-  public Funcion obtenerFuncion(String nombrePlataforma, String nombreEspectador, String nombreFuncion) {
+  public Optional<Funcion> obtenerFuncion(String nombrePlataforma, String nombreEspectador, String nombreFuncion) {
     Funcion funcion = null;
     Connection connection = null;
     Statement statement = null;
@@ -197,7 +198,7 @@ public class FuncionController implements IFuncion {
         throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
       }
     }
-    return funcion;
+    return Optional.ofNullable(funcion);
   }
   
   @Override
@@ -413,6 +414,33 @@ public class FuncionController implements IFuncion {
     return funciones;
   }
   
+  @Override
+  public void registrarEspectadorAFuncion(EspectadorRegistradoAFuncion espectadorRegistradoAFuncion) {
+    Connection connection = null;
+    Statement statement = null;
+    String insertEspectadorFunciones = "INSERT INTO espectadores_funciones(ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_nombrePaquete, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro) " +
+        " VALUES ('" + espectadorRegistradoAFuncion.getEspectador().getNickname() + "', '" + espectadorRegistradoAFuncion.getFuncion().getNombre() + "', '" + espectadorRegistradoAFuncion.getPaquete().getNombre() + "', " + espectadorRegistradoAFuncion.isCanjeado() + ", " + espectadorRegistradoAFuncion.getCosto() + ", '" + espectadorRegistradoAFuncion.getFechaRegistro() + "')";
+    
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement();
+      statement.executeUpdate(insertEspectadorFunciones);
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al registrar los espectadores a la función", e);
+    } finally {
+      try {
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+  }
   @Override
   public void registrarEspectadoresAFunciones(Map<String, EspectadorRegistradoAFuncion> espectadoresFunciones) {
     Connection connection = null;

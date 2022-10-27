@@ -200,6 +200,80 @@ public class FuncionController implements IFuncion {
     }
     return Optional.ofNullable(funcion);
   }
+  @Override
+  public Map<String, Funcion> obtenerFuncionesDePlataforma(String nombrePlataforma) {
+    Map<String, Funcion> funciones = new HashMap<>();
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+    String selectFunciones = "SELECT * " +
+        "FROM funciones as FN, espectaculos as ES, plataformas as PL, artistas as UA, usuarios as U " +
+        "WHERE FN.fn_espectaculoAsociado = ES.es_nombre " +
+        " AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada" +
+        " AND ES.es_plataformaAsociada = PL.pl_nombre " +
+        " AND ES.es_artistaOrganizador = UA.ua_nickname " +
+        " AND UA.ua_nickname = U.u_nickname " +
+        " AND PL.pl_nombre = '" + nombrePlataforma + "'";
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement();
+      resultSet = statement.executeQuery(selectFunciones);
+      while (resultSet.next()) {
+        String pl_nombre = resultSet.getString("pl_nombre");
+        String pl_descripcion = resultSet.getString("pl_descripcion");
+        String pl_url = resultSet.getString("pl_url");
+        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
+        
+        String u_nickname = resultSet.getString("u_nickname");
+        String u_nombre = resultSet.getString("u_nombre");
+        String u_apellido = resultSet.getString("u_apellido");
+        String u_correo = resultSet.getString("u_correo");
+        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
+        String u_contrasenia = resultSet.getString("u_contrasenia");
+        String u_imagen = resultSet.getString("u_imagen");
+        String ua_descripcion = resultSet.getString("ua_descripcion");
+        String ua_biografia = resultSet.getString("ua_biografia");
+        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
+        Artista artista = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
+        
+        String es_nombre = resultSet.getString("es_nombre");
+        String es_descripcion = resultSet.getString("es_descripcion");
+        int es_duracion = resultSet.getInt("es_duracion");
+        int es_minEspectadores = resultSet.getInt("es_minEspectadores");
+        int es_maxEspectadores = resultSet.getInt("es_maxEspectadores");
+        String es_url = resultSet.getString("es_url");
+        int es_costo = resultSet.getInt("es_costo");
+        E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
+        LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
+        String es_imagen = resultSet.getString("es_imagen");
+        Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artista);
+        
+        String fn_nombre = resultSet.getString("fn_nombre");
+        LocalDateTime fn_fechaHoraInicio = resultSet.getTimestamp("fn_fechaHoraInicio").toLocalDateTime();
+        LocalDateTime fn_fechaRegistro = resultSet.getTimestamp("fn_fechaRegistro").toLocalDateTime();
+        String fn_imagen = resultSet.getString("fn_imagen");
+        Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
+        
+        funciones.put(fn_nombre, funcion);
+      }
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al obtener las funciones", e);
+    } finally {
+      try {
+        if (resultSet != null) resultSet.close();
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+    return funciones;
+  }
   
   @Override
   public Map<String, Funcion> obtenerFuncionesDeEspectaculo(String nombrePlataforma, String nombreEspectaculo) {

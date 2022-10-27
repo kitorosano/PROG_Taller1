@@ -12,6 +12,7 @@ public interface IFuncion {
   void altaFuncion(Funcion nuevaFuncion);
   Map<String, Funcion> obtenerFunciones();
   Optional<Funcion> obtenerFuncion(String nombrePlataforma, String nombreEspectador, String nombreFuncion);
+  Map<String, Funcion> obtenerFuncionesDePlataforma(String nombrePlataforma);
   Map<String, Funcion> obtenerFuncionesDeEspectaculo(String nombrePlataforma, String nombreEspectaculo);
   Map<String, Artista> obtenerArtistasInvitadosAFuncion(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion);
   Map<String, Funcion> obtenerFuncionesDeArtista(String nombrePlataforma, String nombreEspectaculo, String nombreArtista);

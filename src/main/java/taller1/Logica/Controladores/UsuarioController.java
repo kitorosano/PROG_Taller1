@@ -233,7 +233,7 @@ public class UsuarioController implements IUsuario {
         Connection connection = null;
         Statement statement = null;
         String insertUsuario = "INSERT INTO usuarios (u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen) " +
-            "VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "', '" + usuario.getContrasenia() + "', '" + usuario.getImagen() + "')";
+            "VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "', '" + usuario.getContrasenia() + "', '" + usuario.getImagen() + "'); ";
         
         if (usuario instanceof Artista)
             insertUsuario += "INSERT INTO artistas (ua_nickname, ua_descripcion, ua_biografia, ua_sitioWeb) " +
@@ -270,7 +270,7 @@ public class UsuarioController implements IUsuario {
         Statement statement = null;
         String updateUsuario = "UPDATE usuarios " +
             "SET u_nombre = '" + usuario.getNombre() + "', u_apellido = '" + usuario.getApellido() + "', u_correo = '" + usuario.getCorreo() + "', u_fechaNacimiento = '" + usuario.getFechaNacimiento() + "', u_contrasenia = '" + usuario.getContrasenia() + "', u_imagen = '" + usuario.getImagen() + "' " +
-            "WHERE u_nickname = '" + usuario.getNickname() + "'";
+            "WHERE u_nickname = '" + usuario.getNickname() + "'; ";
         if (usuario instanceof Artista)
             updateUsuario += "UPDATE artistas " +
                 "SET ua_descripcion = '" + ((Artista) usuario).getDescripcion() + "', ua_biografia = '" + ((Artista) usuario).getBiografia() + "', ua_sitioWeb = '" + ((Artista) usuario).getSitioWeb() + "' " +

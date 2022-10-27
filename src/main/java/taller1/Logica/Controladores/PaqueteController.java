@@ -392,7 +392,7 @@ public class PaqueteController implements IPaquete {
     Connection connection = null;
     Statement statement = null;
     String insertEspectadoresPaquetes = "INSERT INTO espectadores_paquetes (ue_paq_nickname, ue_paq_nombrePaquete, ue_paq_fechaRegistro) " +
-        "                 VALUES ('" + nickname + "', '" + nombrePaquete + "', '" + LocalDate.now() + "') ";
+        "                 VALUES ('" + nickname + "', '" + nombrePaquete + "', '" + LocalDateTime.now() + "') ";
     
     try {
       connection = ConexionDB.getConnection();

@@ -492,8 +492,8 @@ public class FuncionController implements IFuncion {
   public void registrarEspectadorAFuncion(EspectadorRegistradoAFuncion espectadorRegistradoAFuncion) {
     Connection connection = null;
     Statement statement = null;
-    String insertEspectadorFunciones = "INSERT INTO espectadores_funciones(ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_nombrePaquete, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro) " +
-        " VALUES ('" + espectadorRegistradoAFuncion.getEspectador().getNickname() + "', '" + espectadorRegistradoAFuncion.getFuncion().getNombre() + "', '" + espectadorRegistradoAFuncion.getPaquete().getNombre() + "', " + espectadorRegistradoAFuncion.isCanjeado() + ", " + espectadorRegistradoAFuncion.getCosto() + ", '" + espectadorRegistradoAFuncion.getFechaRegistro() + "')";
+    String insertEspectadorFunciones = "INSERT INTO espectadores_funciones(ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada, ue_fn_nombrePaquete, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro) " +
+        " VALUES ('" + espectadorRegistradoAFuncion.getEspectador().getNickname() + "', '" + espectadorRegistradoAFuncion.getFuncion().getNombre() + "', '" + espectadorRegistradoAFuncion.getFuncion().getEspectaculo().getNombre() + "', " + espectadorRegistradoAFuncion.getFuncion().getEspectaculo().getPlataforma().getNombre() + "', " + espectadorRegistradoAFuncion.getPaquete().getNombre() + "', " + espectadorRegistradoAFuncion.isCanjeado() + ", " + espectadorRegistradoAFuncion.getCosto() + ", '" + LocalDateTime.now() + "')";
     
     try {
       connection = ConexionDB.getConnection();
@@ -524,6 +524,7 @@ public class FuncionController implements IFuncion {
       insertEspectadoresFunciones += "('" + espectadorFuncion.getEspectador().getNickname() + "', '" + espectadorFuncion.getFuncion().getNombre() + "', " + espectadorFuncion.getPaquete().getNombre() + "', " + espectadorFuncion.isCanjeado() + ", " + espectadorFuncion.getCosto() + ", '" + espectadorFuncion.getFechaRegistro() + "'), ";
     }
     insertEspectadoresFunciones = insertEspectadoresFunciones.substring(0, insertEspectadoresFunciones.length() - 2); // Eliminamos la última coma y espacio
+    
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();

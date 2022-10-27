@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class CategoriaController implements ICategoria {
   
@@ -89,7 +90,7 @@ public class CategoriaController implements ICategoria {
   }
   
   @Override
-  public Categoria obtenerCategoria(String nombreCategoria){
+  public Optional<Categoria> obtenerCategoria(String nombreCategoria){
     Categoria categoria = null;
     Connection connection = null;
     Statement statement = null;
@@ -119,7 +120,7 @@ public class CategoriaController implements ICategoria {
         throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
       }
     }
-    return categoria;
+    return Optional.ofNullable(categoria);
   }
   
   @Override
@@ -132,8 +133,8 @@ public class CategoriaController implements ICategoria {
         "FROM espectaculos_categorias ES_CAT, espectaculos ES, artistas UA, plataformas PL " +
         "WHERE ES_CAT.es_cat_nombreEspectaculo = ES.es_nombre " +
         "AND ES.es_artistaOrganizador = ua_nickname " +
-        "AND ES_CAT.es_cat_nombrePlataforma = ES.es_nombrePlataforma " +
-        "AND ES.es_nombrePlataforma = PL.pl_nombre " +
+        "AND ES_CAT.es_cat_plataformaAsociada = ES.es_plataformaAsociada " +
+        "AND ES.es_plataformaAsociada = PL.pl_nombre " +
         "AND ES_CAT.es_cat_nombreCategoria = '" + nombreCategoria + "' ";
     try {
       connection = ConexionDB.getConnection();
@@ -232,7 +233,7 @@ public class CategoriaController implements ICategoria {
   public void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo, String nombrePlataforma){
     Connection connection = null;
     Statement statement = null;
-    String insertEspectaculoCategoria = "INSERT INTO espectaculos_categorias (es_cat_nombreEspectaculo,es_cat_nombrePlataforma, es_cat_nombreCategoria) " +
+    String insertEspectaculoCategoria = "INSERT INTO espectaculos_categorias (es_cat_nombreEspectaculo,es_cat_plataformaAsociada, es_cat_nombreCategoria) " +
         "                           VALUES ('" + nombreEspectaculo + "', '" + nombrePlataforma + "','" + nombreCategoria + "')";
     
     try {

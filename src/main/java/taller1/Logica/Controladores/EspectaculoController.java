@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class EspectaculoController implements IEspectaculo {
   private static EspectaculoController instance;
@@ -187,7 +188,7 @@ public class EspectaculoController implements IEspectaculo {
     return espectaculos;
   }
   @Override
-  public Espectaculo obtenerEspectaculo(String nombrePlataforma, String nombre){
+  public Optional<Espectaculo> obtenerEspectaculo(String nombrePlataforma, String nombre){
     Espectaculo espectaculo = null;
     Connection connection = null;
     Statement statement = null;
@@ -247,7 +248,7 @@ public class EspectaculoController implements IEspectaculo {
         throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
       }
     }
-    return espectaculo;
+    return Optional.ofNullable(espectaculo);
   }
   @Override
   public Map<String, Espectaculo> obtenerEspectaculosPorArtista(String nickname) {

@@ -81,11 +81,11 @@ CREATE TABLE categorias (
 
 CREATE TABLE espectaculos_categorias (
     es_cat_nombreEspectaculo VARCHAR(50) NOT NULL,
-    es_cat_nombrePlataforma VARCHAR(30) NOT NULL,
+    es_cat_plataformaAsociada VARCHAR(30) NOT NULL,
     es_cat_nombreCategoria VARCHAR(30) NOT NULL,
 
-    PRIMARY KEY (es_cat_nombreEspectaculo, es_cat_nombrePlataforma, es_cat_nombreCategoria),
-    FOREIGN KEY (es_cat_nombreEspectaculo, es_cat_nombrePlataforma) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY (es_cat_nombreEspectaculo, es_cat_plataformaAsociada, es_cat_nombreCategoria),
+    FOREIGN KEY (es_cat_nombreEspectaculo, es_cat_plataformaAsociada) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (es_cat_nombreCategoria) REFERENCES categorias (cat_nombre) ON DELETE CASCADE ON UPDATE CASCADE
 );
 

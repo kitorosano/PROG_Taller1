@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class FuncionController implements IFuncion {
   private static FuncionController instance;
@@ -126,7 +127,7 @@ public class FuncionController implements IFuncion {
   }
   
   @Override
-  public Funcion obtenerFuncion(String nombrePlataforma, String nombreEspectador, String nombreFuncion) {
+  public Optional<Funcion> obtenerFuncion(String nombrePlataforma, String nombreEspectador, String nombreFuncion) {
     Funcion funcion = null;
     Connection connection = null;
     Statement statement = null;
@@ -197,7 +198,7 @@ public class FuncionController implements IFuncion {
         throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
       }
     }
-    return funcion;
+    return Optional.ofNullable(funcion);
   }
   
   @Override

@@ -1,4 +1,4 @@
-INSERT INTO `espectaculos_categoria`(`es_cat_nombreEspectaculo`, `es_cat_nombrePlataforma`, `es_cat_nombreCategoria`) VALUES
+INSERT INTO `espectaculos_categoria`(`es_cat_nombreEspectaculo`, `es_cat_plataformaAsociada`, `es_cat_nombreCategoria`) VALUES
 ('Ante todo calamidades de la vida', 'Twitch', 'Comedia'),
 ('Ante todo calamidades de la vida', 'Twitch', 'Vida'),
 ('El arte de dormir con los ojos abiertos', 'Nebula', 'Horror'),

@@ -1,16 +1,10 @@
 <component name="libraryTable">
   <library name="dotenv-java-2.2.4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/dotenv-java-2.2.4.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/jgoodies-common-1.8.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/jgoodies-forms-1.9.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/mysql-connector-java-8.0.30.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/mybatis-3.4.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/httpclient-4.5.13.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/httpmime-4.5.13.jar!/" />
-      <root url="jar://$PROJECT_DIR$/libs/httpcore-4.4.15.jar!/" />
+      <root url="file://$PROJECT_DIR$/libs" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/libs" recursive="false" />
   </library>
 </component>

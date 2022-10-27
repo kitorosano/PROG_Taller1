@@ -3,6 +3,7 @@ package main.java.taller1.Logica.Controladores;
 import main.java.taller1.Logica.Interfaces.IDatabase;
 import main.java.taller1.Persistencia.ConexionDB;
 import org.apache.http.HttpEntity;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -11,6 +12,7 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.ibatis.jdbc.ScriptRunner;
+import sun.misc.IOUtils;
 
 import java.io.*;
 import java.sql.Connection;
@@ -110,28 +112,31 @@ public class DatabaseController implements IDatabase {
   }
   
   @Override
-  public String guardarImagen(InputStream imagen){
+  public String guardarImagen(FileInputStream imagen){
     String url = "";
     try {
       CloseableHttpClient client = HttpClients.createDefault();
       HttpPost httpPost = new HttpPost(apiUrl);
-    
+  
+      byte[] imagen_bytes = IOUtils.readFully(imagen, -1, false); // Convierte el archivo a bytes
       MultipartEntityBuilder builder = MultipartEntityBuilder.create();
       builder.addBinaryBody(
-          "file", imagen, ContentType.APPLICATION_OCTET_STREAM, "image.png");
-    
+          "file",  imagen_bytes, ContentType.APPLICATION_OCTET_STREAM, "imagen.png");
+      
       HttpEntity multipart = builder.build();
       httpPost.setEntity(multipart);
-    
+  
       CloseableHttpResponse response = client.execute(httpPost);
       client.close();
       String responseString = new BasicResponseHandler().handleResponse(response);
-    
-      //get url from response
-      url = responseString.substring(responseString.indexOf("https://i.imgur.com/")).substring(0, url.indexOf("\""));
+      
+      url = responseString.substring(responseString.indexOf("https://i.imgur.com/"));
+      url = url.substring(0, url.indexOf("\""));
     } catch (IOException e) {
-      e.printStackTrace();
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al guardar la imagen", e);
     }
+    
     return url;
   }
   

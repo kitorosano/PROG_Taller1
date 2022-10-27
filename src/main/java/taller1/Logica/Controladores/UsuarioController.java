@@ -233,15 +233,13 @@ public class UsuarioController implements IUsuario {
         Connection connection = null;
         Statement statement = null;
         String insertUsuario = "INSERT INTO usuarios (u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen) " +
-            "VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "', '" + usuario.getContrasenia() + "', '" + usuario.getImagen() + "'); ";
+            "VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "', '" + usuario.getContrasenia() + "', '" + usuario.getImagen() + "');\n";
         
         if (usuario instanceof Artista)
-            insertUsuario += "INSERT INTO artistas (ua_nickname, ua_descripcion, ua_biografia, ua_sitioWeb) " +
-                "VALUES ('" + usuario.getNickname() + "', '" + ((Artista) usuario).getDescripcion() + "', '" + ((Artista) usuario).getBiografia() + "', '" + ((Artista) usuario).getSitioWeb() + "')";
-        else if (usuario instanceof Espectador)
-            insertUsuario += "INSERT INTO espectadores (ue_nickname) " +
-                "VALUES ('" + usuario.getNickname() + "')";
-        else throw new RuntimeException("Error al modificar el usuario, tipo no reconocido");
+            insertUsuario += " INSERT INTO artistas (ua_nickname, ua_descripcion, ua_biografia, ua_sitioWeb) " +
+                "VALUES ('" + usuario.getNickname() + "', '" + ((Artista) usuario).getDescripcion() + "', '" + ((Artista) usuario).getBiografia() + "', '" + ((Artista) usuario).getSitioWeb() + "');";
+        else
+            insertUsuario += " INSERT INTO espectadores (ue_nickname) VALUES ('" + usuario.getNickname() + "');";
                 
         try {
             connection = ConexionDB.getConnection();

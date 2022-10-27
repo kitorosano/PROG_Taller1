@@ -250,10 +250,10 @@ public class PaqueteController implements IPaquete {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectPaquetesByEspectador = "SELECT * " +
-                "FROM paquetes as PAQ, espectadores_paquetes as ES_PAQ, espectadores as ES, usuarios as U "+
-                "WHERE ES_PAQ.ue_paq_nombrePaquete = PAQ.paq_nombre " +
-                "AND ES_PAQ.ue_paq_nickname = ES.es_nickname " +
-                "AND ES.es_nickname = U.u_nickname " +
+                "FROM paquetes as PAQ, espectadores_paquetes as UE_PAQ, espectadores as UE, usuarios as U "+
+                "WHERE UE_PAQ.ue_paq_nombrePaquete = PAQ.paq_nombre " +
+                "AND UE_PAQ.ue_paq_nickname = UE.ue_nickname " +
+                "AND UE.ue_nickname = U.u_nickname " +
                 "AND U.u_nickname = '" + nickname + "' ";
     try {
       connection = ConexionDB.getConnection();

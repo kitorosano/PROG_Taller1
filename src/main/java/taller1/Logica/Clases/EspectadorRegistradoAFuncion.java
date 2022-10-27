@@ -13,7 +13,36 @@ public class EspectadorRegistradoAFuncion {
 
     public EspectadorRegistradoAFuncion() {
     }
-
+    
+    public EspectadorRegistradoAFuncion(Espectador espectador, Funcion funcion, double costo) {
+        this.espectador = espectador;
+        this.funcion = funcion;
+        this.canjeado = false;
+        this.costo = costo;
+    }
+    public EspectadorRegistradoAFuncion(Espectador espectador, Funcion funcion, boolean canjeado, double costo) {
+        this.espectador = espectador;
+        this.funcion = funcion;
+        this.canjeado = canjeado;
+        this.costo = costo;
+    }
+    
+    public EspectadorRegistradoAFuncion(Espectador espectador, Funcion funcion, boolean canjeado, double costo, LocalDateTime fechaRegistro) {
+        this.espectador = espectador;
+        this.funcion = funcion;
+        this.canjeado = canjeado;
+        this.costo = costo;
+        this.fechaRegistro = fechaRegistro;
+    }
+    
+    public EspectadorRegistradoAFuncion(Espectador espectador, Funcion funcion, Paquete paquete, boolean canjeado, double costo) {
+        this.espectador = espectador;
+        this.funcion = funcion;
+        this.paquete = paquete;
+        this.canjeado = canjeado;
+        this.costo = costo;
+    }
+    
     public EspectadorRegistradoAFuncion(Espectador espectador, Funcion funcion, Paquete paquete, boolean canjeado, double costo, LocalDateTime fechaRegistro) {
         this.espectador = espectador;
         this.funcion = funcion;

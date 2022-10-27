@@ -606,11 +606,10 @@ public class FuncionController implements IFuncion {
         //LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
         //String paq_imagen = resultSet.getString("paq_imagen");
         //Paquete paq = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-        Paquete paq=null;
         Boolean ue_fn_canjeado = resultSet.getBoolean("ue_fn_canjeado");
         Double ue_fn_costo = resultSet.getDouble("ue_fn_costo");
         LocalDateTime ue_fn_fechaRegistro = resultSet.getTimestamp("ue_fn_fechaRegistro").toLocalDateTime();
-        EspectadorRegistradoAFuncion es_fn = new EspectadorRegistradoAFuncion(ue, fn, paq, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro);
+        EspectadorRegistradoAFuncion es_fn = new EspectadorRegistradoAFuncion(ue, fn, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro);
         
         funcionesRegistradas.put(fn_nombre, es_fn);
       }

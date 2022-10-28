@@ -133,7 +133,7 @@ public class CategoriaController implements ICategoria {
         "FROM espectaculos_categorias ES_CAT, espectaculos ES, artistas UA, usuarios U, plataformas PL " +
         "WHERE ES_CAT.es_cat_nombreEspectaculo = ES.es_nombre " +
         "AND ES.es_artistaOrganizador = UA.ua_nickname " +
-        "AND UA.ua_usuario = U.u_nickname " +
+        "AND UA.ua_nickname = U.u_nickname " +
         "AND ES_CAT.es_cat_plataformaAsociada = ES.es_plataformaAsociada " +
         "AND ES.es_plataformaAsociada = PL.pl_nombre " +
         "AND ES_CAT.es_cat_nombreCategoria = '" + nombreCategoria + "' ";

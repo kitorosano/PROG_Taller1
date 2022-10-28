@@ -330,7 +330,7 @@ public class FuncionController implements IFuncion {
         String fn_imagen = resultSet.getString("fn_imagen");
         Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
   
-        funciones.put(fn_nombre, funcion);
+        funciones.put(fn_nombre+"-"+es_nombre+"-"+pl_nombre, funcion);
       }
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -466,7 +466,7 @@ public class FuncionController implements IFuncion {
         LocalDateTime fn_fechaRegistro = resultSet.getTimestamp("fn_fechaRegistro").toLocalDateTime();
         String fn_imagen = resultSet.getString("fn_imagen");
         Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
-        funciones.put(fn_nombre, funcion);
+        funciones.put(fn_nombre+"-"+es_nombre+"-"+pl_nombre, funcion);
       }
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -553,7 +553,7 @@ public class FuncionController implements IFuncion {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectFunciones = "SELECT * " +
-        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, funciones as FN, espectaculos as ES " +
+        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, funciones as FN, espectaculos as ES, plataformas as PL " +
         "WHERE UE_FN.ue_fn_nickname = UE.ue_nickname " +
         "  AND UE.ue_nickname = U.u_nickname " +
         "  AND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre " +
@@ -561,12 +561,18 @@ public class FuncionController implements IFuncion {
         "  AND FN.fn_espectaculoAsociado = ES.es_nombre " +
         "  AND UE_FN.ue_fn_plataformaAsociada = FN.fn_plataformaAsociada " +
         "  AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada " +
+        "  AND ES.es_plataformaAsociada = PL.pl_nombre " +
         "  AND UE_FN.ue_fn_nickname = '" + nickname + "'";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectFunciones);
       while (resultSet.next()) {
+        String pl_nombre = resultSet.getString("pl_nombre");
+        String pl_descripcion = resultSet.getString("pl_descripcion");
+        String pl_url = resultSet.getString("pl_url");
+        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
+        
         String es_nombre = resultSet.getString("es_nombre");
         String es_descripcion = resultSet.getString("es_descripcion");
         Double es_duracion = resultSet.getDouble("es_duracion");
@@ -577,12 +583,11 @@ public class FuncionController implements IFuncion {
         E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
         LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
         String es_imagen = resultSet.getString("es_imagen");
-        String es_plataformaAsociada = resultSet.getString("es_plataformaAsociada");
-        Plataforma plataforma = new Plataforma();
-        plataforma.setNombre(es_plataformaAsociada);
+        
         String es_artistaOrganizador = resultSet.getString("es_artistaOrganizador");
         Artista artista = new Artista();
         artista.setNickname(es_artistaOrganizador);
+        
         Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artista);
         
         String fn_nombre = resultSet.getString("fn_nombre");
@@ -612,7 +617,7 @@ public class FuncionController implements IFuncion {
         LocalDateTime ue_fn_fechaRegistro = resultSet.getTimestamp("ue_fn_fechaRegistro").toLocalDateTime();
         EspectadorRegistradoAFuncion es_fn = new EspectadorRegistradoAFuncion(ue, fn, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro);
         
-        funcionesRegistradas.put(fn_nombre, es_fn);
+        funcionesRegistradas.put(fn_nombre+"-"+es_nombre+"-"+pl_nombre, es_fn);
       }
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -640,13 +645,14 @@ public class FuncionController implements IFuncion {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectEspectadores = "SELECT * " +
-        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, paquetes as PAQ, funciones as FN, espectaculos as ES " +
+        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, paquetes as PAQ, funciones as FN, espectaculos as ES, plataformas as PL " +
         "WHERE UE_FN.ue_fn_nickname = UE.ue_nickname " +
         "  AND UE.ue_nickname = U.u_nickname " +
         "  AND UE_FN.ue_fn_espectaculoAsociado = FN.fn_espectaculoAsociado " +
         "  AND FN.fn_espectaculoAsociado = ES.es_nombre " +
         "  AND UE_FN.ue_fn_plataformaAsociada = FN.fn_plataformaAsociada " +
         "  AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada " +
+        "  AND ES.es_plataformaAsociada = PL.pl_nombre " +
         "  AND UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre " +
         "  AND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre " +
         "  AND FN.fn_nombre = '" + nombreFuncion + "' ";
@@ -655,6 +661,11 @@ public class FuncionController implements IFuncion {
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectEspectadores);
       while (resultSet.next()) {
+        String pl_nombre = resultSet.getString("pl_nombre");
+        String pl_descripcion = resultSet.getString("pl_descripcion");
+        String pl_url = resultSet.getString("pl_url");
+        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
+        
         String es_nombre = resultSet.getString("es_nombre");
         String es_descripcion = resultSet.getString("es_descripcion");
         Double es_duracion = resultSet.getDouble("es_duracion");
@@ -665,12 +676,11 @@ public class FuncionController implements IFuncion {
         E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
         LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
         String es_imagen = resultSet.getString("es_imagen");
-        String es_plataformaAsociada = resultSet.getString("es_plataformaAsociada");
-        Plataforma plataforma = new Plataforma();
-        plataforma.setNombre(es_plataformaAsociada);
+        
         String es_artistaOrganizador = resultSet.getString("es_artistaOrganizador");
         Artista artista = new Artista();
         artista.setNickname(es_artistaOrganizador);
+        
         Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artista);
   
         String fn_nombre = resultSet.getString("fn_nombre");

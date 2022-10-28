@@ -155,7 +155,7 @@ public class DetalleEspectaculo extends JInternalFrame {
 
         DefaultTableModel model = (DefaultTableModel) tablaPaquetes.getModel();
         try {
-            this.PaquetesDelEspectaculo = Fabrica.getInstance().getIPaquete().obtenerPaquetesDeEspectaculo(this.espectaculo.getNombre());
+            this.PaquetesDelEspectaculo = Fabrica.getInstance().getIPaquete().obtenerPaquetesDeEspectaculo(this.espectaculo.getNombre(), this.espectaculo.getPlataforma().getNombre());
 
 
             for (Map.Entry<String,Paquete> entry : this.PaquetesDelEspectaculo.entrySet()) {

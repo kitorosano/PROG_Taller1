@@ -101,13 +101,13 @@ CREATE TABLE paquetes (
 );
 
 CREATE TABLE espectaculos_paquetes (
-  es_paq_nombrePaquete VARCHAR(50) NOT NULL,
   es_paq_nombreEspectaculo VARCHAR(50) NOT NULL,
   es_paq_plataformaAsociada VARCHAR(30) NOT NULL,
+  es_paq_nombrePaquete VARCHAR(50) NOT NULL,
   
-  PRIMARY KEY (es_paq_nombrePaquete, es_paq_nombreEspectaculo, es_paq_plataformaAsociada),
-  FOREIGN KEY (es_paq_nombrePaquete) REFERENCES paquetes (paq_nombre) ON DELETE CASCADE,
-  FOREIGN KEY (es_paq_nombreEspectaculo, es_paq_plataformaAsociada) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE
+  PRIMARY KEY (es_paq_nombreEspectaculo, es_paq_plataformaAsociada, es_paq_nombrePaquete),
+  FOREIGN KEY (es_paq_nombreEspectaculo, es_paq_plataformaAsociada) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE,
+  FOREIGN KEY (es_paq_nombrePaquete) REFERENCES paquetes (paq_nombre) ON DELETE CASCADE
 );
 
 CREATE TABLE artistas_funciones (

@@ -1,7 +1,6 @@
 package main.java.taller1.Presentacion;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
 import java.io.*;

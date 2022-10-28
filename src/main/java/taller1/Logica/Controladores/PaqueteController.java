@@ -142,7 +142,7 @@ public class PaqueteController implements IPaquete {
         "FROM espectaculos_paquetes ES_PAQ, paquetes PAQ " +
         "WHERE ES_PAQ.es_paq_nombrePaquete = PAQ.paq_nombre  " +
         "AND ES_PAQ.es_paq_nombreEspectaculo = '" + nombreEspectaculo + "' " +
-        "AND ES_PAQ.es_paq_nombrePlataforma = '" + nombrePlataforma + "'";
+        "AND ES_PAQ.es_paq_plataformaAsociada = '" + nombrePlataforma + "'";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();

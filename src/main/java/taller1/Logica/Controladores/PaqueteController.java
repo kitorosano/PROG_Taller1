@@ -186,7 +186,7 @@ public class PaqueteController implements IPaquete {
     String selectEspectaculosByPaquete = "SELECT * " +
                 "FROM espectaculos_paquetes as ES_PAQ, espectaculos as ES, artistas as UA, usuarios as U, plataformas as PL " +
                 "WHERE ES_PAQ.es_paq_nombreEspectaculo = ES.es_nombre " +
-                "AND ES_PAQ.ees_paq_plataformaAsociada = ES.es_plataformaAsociada " +
+                "AND ES_PAQ.es_paq_plataformaAsociada = ES.es_plataformaAsociada " +
                 "AND ES.es_plataformaAsociada = PL.pl_nombre " +
                 "AND ES.es_artistaOrganizador = UA.ua_nickname " +
                 "AND UA.ua_nickname = U.u_nickname " +

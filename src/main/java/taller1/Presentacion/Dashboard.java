@@ -60,6 +60,7 @@ public class Dashboard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         pack();
 
+        /* INICIO*/
         vaciarDatosJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,7 +72,6 @@ public class Dashboard extends JFrame {
                 }
             }
         });
-
         cargarDatosJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,7 +83,6 @@ public class Dashboard extends JFrame {
                 }
             }
         });
-
         cerrarJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,6 +90,7 @@ public class Dashboard extends JFrame {
             }
         });
 
+        /* ALTAS*/
         altaDeUsuarioJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,7 +101,6 @@ public class Dashboard extends JFrame {
                 iFrame.setVisible(true);
             }
         });
-
         altaDeEspectaculoJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,7 +112,6 @@ public class Dashboard extends JFrame {
                 iFrame.setVisible(true);
             }
         });
-
         altaDeFuncionJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -124,7 +122,6 @@ public class Dashboard extends JFrame {
                 iFrame.setVisible(true);
             }
         });
-
         altaDePaqueteJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -135,7 +132,6 @@ public class Dashboard extends JFrame {
                 iFrame.setVisible(true);
             }
         });
-
         altaDePlataformaJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -147,7 +143,6 @@ public class Dashboard extends JFrame {
                 iFrame.setVisible(true);
             }
         });
-    
         altaDeCategoriaJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -159,51 +154,6 @@ public class Dashboard extends JFrame {
                 iFrame.setVisible(true);
             }
         });
-
-        consultaDeUsuarioJMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JInternalFrame iFrame = new ListadoUsuarios("Consulta de usuario");
-                iFrame.setIconifiable(true);
-                iFrame.setClosable(true);
-                dashboardJDesktopPane.add(iFrame);
-                iFrame.setVisible(true);
-            }
-        });
-
-        consultaDeEspectaculoJMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JInternalFrame iFrame = new ListadoEspectaculos("Consulta de espectaculo");
-                iFrame.setIconifiable(true);
-                iFrame.setClosable(true);
-                dashboardJDesktopPane.add(iFrame);
-                iFrame.setVisible(true);
-            }
-        });
-
-        consultaDeFuncionJMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JInternalFrame iFrame = new ListadoFunciones("Consulta de funcion");
-                iFrame.setIconifiable(true);
-                iFrame.setClosable(true);
-                dashboardJDesktopPane.add(iFrame);
-                iFrame.setVisible(true);
-            }
-        });
-
-        consultaDePaqueteJMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JInternalFrame iFrame = new ListadoPaquetes("Consulta de paquete");
-                iFrame.setIconifiable(true);
-                iFrame.setClosable(true);
-                dashboardJDesktopPane.add(iFrame);
-                iFrame.setVisible(true);
-            }
-        });
-
         registroAFuncionJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -214,7 +164,6 @@ public class Dashboard extends JFrame {
                 iFrame.setVisible(true);
             }
         });
-
         agregarEspAPaqueteJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -226,6 +175,49 @@ public class Dashboard extends JFrame {
             }
         });
 
+        /* CONSULTAS */
+        consultaDeUsuarioJMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame iFrame = new ListadoUsuarios("Consulta de usuario");
+                iFrame.setIconifiable(true);
+                iFrame.setClosable(true);
+                dashboardJDesktopPane.add(iFrame);
+                iFrame.setVisible(true);
+            }
+        });
+        consultaDeEspectaculoJMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame iFrame = new ListadoEspectaculos("Consulta de espectaculo");
+                iFrame.setIconifiable(true);
+                iFrame.setClosable(true);
+                dashboardJDesktopPane.add(iFrame);
+                iFrame.setVisible(true);
+            }
+        });
+        consultaDeFuncionJMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame iFrame = new ListadoFunciones("Consulta de funcion");
+                iFrame.setIconifiable(true);
+                iFrame.setClosable(true);
+                dashboardJDesktopPane.add(iFrame);
+                iFrame.setVisible(true);
+            }
+        });
+        consultaDePaqueteJMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame iFrame = new ListadoPaquetes("Consulta de paquete");
+                iFrame.setIconifiable(true);
+                iFrame.setClosable(true);
+                dashboardJDesktopPane.add(iFrame);
+                iFrame.setVisible(true);
+            }
+        });
+
+        /* ACERCA DE */
         nosotrosJMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

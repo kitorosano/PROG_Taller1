@@ -1,7 +1,7 @@
 package main.java.taller1.Presentacion;
 
-import main.java.taller1.Logica.Clases.Categoria;
 import main.java.taller1.Logica.Fabrica;
+import main.java.taller1.Logica.Clases.Categoria;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;

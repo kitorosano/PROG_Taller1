@@ -3,12 +3,16 @@ package main.java.taller1.Presentacion;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 import java.awt.Image;
 import java.io.IOException;
@@ -45,14 +49,15 @@ public class DetalleUsuario extends JInternalFrame {
     Map<String, Espectaculo> espectaculosArtista;
 
 
+
     public DetalleUsuario(String title, Usuario usuario) {
         super(title);
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         this.usuario = usuario;
-
-        nicknameContenido.setText("Nickname: "+usuario.getNickname());
+        
+        nicknameContenido.setText(usuario.getNickname());
         nombreContenido.setText(usuario.getNombre());
         apellidoContenido.setText(usuario.getApellido());
         correoContenido.setText(usuario.getCorreo());
@@ -109,8 +114,7 @@ public class DetalleUsuario extends JInternalFrame {
                     if (usuario instanceof Artista) {
                         String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
                         String plataforma= table1.getValueAt(table1.getSelectedRow(), 2).toString();
-                        System.out.println("el valor es:"+ valor);
-                        System.out.println("espectaculos artista"+ espectaculosArtista);
+
                         Espectaculo espectaculo = espectaculosArtista.get(valor+"-"+plataforma);
                         System.out.println("el espectaculo es:"+espectaculo);
                         JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle Espectaculo", espectaculo);

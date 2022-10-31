@@ -130,6 +130,7 @@ public class ListadoEspectaculos extends JInternalFrame {
             JInternalFrame detalle = new DetalleEspectaculo("Detalle espectaculo", espectaculo);
             detalle.setIconifiable(true);
             detalle.setClosable(true);
+            detalle.setSize(1260,700);
             Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
             detalle.setVisible(true);
         }catch (Exception e){

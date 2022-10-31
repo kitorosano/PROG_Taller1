@@ -2,23 +2,22 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="main.java.taller1.Presentacion.DetalleEspectaculo">
   <grid id="27dc6" binding="mainPanel" layout-manager="FormLayout">
     <rowspec value="center:9px:noGrow"/>
-    <rowspec value="top:13dlu:noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="top:19dlu:noGrow"/>
+    <rowspec value="top:23dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
     <rowspec value="center:18px:noGrow"/>
     <rowspec value="center:19px:noGrow"/>
+    <rowspec value="top:31dlu:noGrow"/>
+    <rowspec value="center:25px:noGrow"/>
+    <rowspec value="center:44px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:22px:noGrow"/>
-    <rowspec value="center:21px:noGrow"/>
-    <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="top:11dlu:noGrow"/>
+    <rowspec value="top:15dlu:noGrow"/>
     <rowspec value="center:max(d;4px):noGrow"/>
-    <rowspec value="center:481px:noGrow"/>
+    <rowspec value="center:283px:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
-    <rowspec value="center:28px:noGrow"/>
-    <colspec value="fill:max(d;4px):noGrow"/>
-    <colspec value="left:24dlu:noGrow"/>
-    <colspec value="fill:250px:noGrow"/>
+    <rowspec value="center:33px:noGrow"/>
+    <colspec value="fill:31px:noGrow"/>
+    <colspec value="fill:192px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:108px:noGrow"/>
     <colspec value="left:4dlu:noGrow"/>
@@ -35,43 +34,18 @@
     <colspec value="left:6dlu:noGrow"/>
     <colspec value="fill:max(d;4px):noGrow"/>
     <colspec value="fill:27px:noGrow"/>
-    <colspec value="left:7dlu:noGrow"/>
+    <colspec value="left:111dlu:noGrow"/>
     <constraints>
-      <xy x="30" y="26" width="1147" height="703"/>
+      <xy x="30" y="26" width="1233" height="598"/>
     </constraints>
     <properties>
-      <preferredSize width="1200" height="700"/>
+      <preferredSize width="1290" height="700"/>
     </properties>
     <border type="none"/>
     <children>
-      <component id="77997" class="javax.swing.JLabel" binding="nombreLabel" default-binding="true">
-        <constraints>
-          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-          <forms defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <focusable value="false"/>
-          <text value="Nombre"/>
-        </properties>
-      </component>
-      <component id="3da49" class="javax.swing.JLabel" binding="nombreContenido">
-        <constraints>
-          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-          <forms defaultalign-horz="false" defaultalign-vert="false"/>
-        </constraints>
-        <properties>
-          <focusable value="false"/>
-          <font style="0"/>
-          <text value="Label"/>
-        </properties>
-      </component>
       <scrollpane id="882b8">
         <constraints>
-          <grid row="12" column="2" row-span="1" col-span="5" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="1" row-span="1" col-span="5" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -87,19 +61,19 @@
       </scrollpane>
       <component id="5e531" class="javax.swing.JLabel" binding="funcionesDelEspectaculoTitulo">
         <constraints>
-          <grid row="10" column="2" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="10" column="1" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
           <focusable value="false"/>
-          <text value="Funciones del espectaculo"/>
+          <text value="Funciones "/>
         </properties>
       </component>
       <component id="de647" class="javax.swing.JButton" binding="agregarFuncionButton" default-binding="true">
         <constraints>
-          <grid row="14" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
@@ -108,7 +82,7 @@
       </component>
       <component id="16a47" class="javax.swing.JLabel" binding="urlLabel" default-binding="true">
         <constraints>
-          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -120,7 +94,7 @@
       </component>
       <component id="23206" class="javax.swing.JLabel" binding="urlContenido">
         <constraints>
-          <grid row="8" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -133,7 +107,7 @@
       </component>
       <component id="8974c" class="javax.swing.JLabel" binding="duracionLabel" default-binding="true">
         <constraints>
-          <grid row="4" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -145,7 +119,7 @@
       </component>
       <component id="6d5a7" class="javax.swing.JLabel" binding="duracionContenido">
         <constraints>
-          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -158,7 +132,7 @@
       </component>
       <component id="83ca0" class="javax.swing.JLabel" binding="costoLabel" default-binding="true">
         <constraints>
-          <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -170,7 +144,7 @@
       </component>
       <component id="1b536" class="javax.swing.JLabel" binding="costoContenido">
         <constraints>
-          <grid row="8" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -183,7 +157,7 @@
       </component>
       <component id="93a39" class="javax.swing.JLabel" binding="minEspectadoresLabel" default-binding="true">
         <constraints>
-          <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="4" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -195,7 +169,7 @@
       </component>
       <component id="c1a73" class="javax.swing.JLabel" binding="minEspectadoresContenido">
         <constraints>
-          <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -208,7 +182,7 @@
       </component>
       <component id="a0af7" class="javax.swing.JLabel" binding="maxEspectadoresLabel" default-binding="true">
         <constraints>
-          <grid row="7" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -220,7 +194,7 @@
       </component>
       <component id="6942a" class="javax.swing.JLabel" binding="maxEspectadoresContenido">
         <constraints>
-          <grid row="8" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="8" column="5" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -233,7 +207,7 @@
       </component>
       <component id="46be3" class="javax.swing.JLabel" binding="fechaDeRegistroLabel" default-binding="true">
         <constraints>
-          <grid row="4" column="8" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="4" column="7" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -245,7 +219,7 @@
       </component>
       <component id="2c7b" class="javax.swing.JLabel" binding="fechaDeRegistroContenido">
         <constraints>
-          <grid row="5" column="8" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="5" column="7" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -258,7 +232,7 @@
       </component>
       <component id="905df" class="javax.swing.JLabel" binding="artistaOrganizadorLabel" default-binding="true">
         <constraints>
-          <grid row="4" column="10" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="4" column="9" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -270,7 +244,7 @@
       </component>
       <component id="15e7b" class="javax.swing.JLabel" binding="artistaOrganizadorContenido">
         <constraints>
-          <grid row="5" column="10" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="5" column="9" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -283,7 +257,7 @@
       </component>
       <component id="eb006" class="javax.swing.JLabel" binding="nombreDePlataformaLabel" default-binding="true">
         <constraints>
-          <grid row="4" column="13" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="4" column="12" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -295,7 +269,7 @@
       </component>
       <component id="2857" class="javax.swing.JLabel" binding="plataformaContenido">
         <constraints>
-          <grid row="5" column="13" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="5" column="12" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -308,7 +282,7 @@
       </component>
       <component id="964aa" class="javax.swing.JLabel" binding="descripcionLabel" default-binding="true">
         <constraints>
-          <grid row="7" column="8" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="7" column="7" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -320,7 +294,7 @@
       </component>
       <component id="14714" class="javax.swing.JLabel" binding="descripcionContenido">
         <constraints>
-          <grid row="8" column="8" row-span="1" col-span="8" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="8" column="7" row-span="1" col-span="8" vsize-policy="6" hsize-policy="6" anchor="1" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
@@ -333,7 +307,7 @@
       </component>
       <scrollpane id="d9494">
         <constraints>
-          <grid row="12" column="8" row-span="1" col-span="12" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="12" column="7" row-span="1" col-span="8" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
@@ -349,23 +323,70 @@
       </scrollpane>
       <component id="dc11f" class="javax.swing.JLabel" binding="paquetesDelEspectaculoTitulo">
         <constraints>
-          <grid row="10" column="8" row-span="1" col-span="6" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="10" column="7" row-span="1" col-span="6" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
           <focusable value="false"/>
-          <text value="Paquetes del espectaculo"/>
+          <text value="Paquetes "/>
         </properties>
       </component>
       <component id="8db3f" class="javax.swing.JButton" binding="actualizarFuncionesButton" default-binding="true">
         <constraints>
-          <grid row="14" column="4" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="3" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
           <text value="Actualizar Funciones"/>
+        </properties>
+      </component>
+      <component id="3da49" class="javax.swing.JLabel" binding="nombreContenido">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="8" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <focusable value="false"/>
+          <font size="22" style="0"/>
+          <text value="Label"/>
+        </properties>
+      </component>
+      <component id="d56c9" class="javax.swing.JLabel" binding="imagen">
+        <constraints>
+          <grid row="2" column="1" row-span="5" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <scrollpane id="44188" binding="scrollPane3">
+        <constraints>
+          <grid row="12" column="16" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="42407" class="javax.swing.JTable" binding="tablaCategorias">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="8bdb6" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="10" column="16" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-vert="false"/>
+        </constraints>
+        <properties>
+          <text value="Categorias "/>
+          <verticalAlignment value="0"/>
+          <verticalTextPosition value="0"/>
         </properties>
       </component>
     </children>

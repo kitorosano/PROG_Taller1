@@ -24,6 +24,8 @@ public class DetallePaquete extends JInternalFrame {
     private JLabel fechaDeRegistroContenido;
     private JTable table1;
     private JLabel espectaculosLabel;
+    private JTable tablaCategoria;
+    private JScrollPane scrollpaneCat;
 
     Paquete paquete;
 
@@ -55,6 +57,7 @@ public class DetallePaquete extends JInternalFrame {
                     JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle de espectaculo", espectaculo);
                     detalleEspectaculo.setIconifiable(true);
                     detalleEspectaculo.setClosable(true);
+                    detalleEspectaculo.setSize(1260,700);
                     Dashboard.getInstance().getDashboardJDesktopPane().add(detalleEspectaculo);
                     detalleEspectaculo.setVisible(true);
                 }
@@ -78,6 +81,17 @@ public class DetallePaquete extends JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
             this.EspectaculosPaquete = Fabrica.getInstance().getIPaquete().obtenerEspectaculosDePaquete(this.paquete.getNombre());
+            for (Map.Entry<String, Espectaculo> entry : this.EspectaculosPaquete.entrySet()) {
+                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getDescripcion(), entry.getValue().getCosto()});
+            }
+        } catch (Exception exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        }
+    }
+    private void cargarTablaCategorias(){
+        DefaultTableModel model = (DefaultTableModel) tablaCategoria.getModel();
+        try {
+
             for (Map.Entry<String, Espectaculo> entry : this.EspectaculosPaquete.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getDescripcion(), entry.getValue().getCosto()});
             }

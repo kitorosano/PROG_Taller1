@@ -1,10 +1,10 @@
 package main.java.taller1.Logica.Interfaces;
 
-import main.java.taller1.Logica.Clases.Categoria;
-import main.java.taller1.Logica.Clases.Espectaculo;
-
 import java.util.Map;
 import java.util.Optional;
+
+import main.java.taller1.Logica.Clases.Categoria;
+import main.java.taller1.Logica.Clases.Espectaculo;
 
 public interface ICategoria {
   

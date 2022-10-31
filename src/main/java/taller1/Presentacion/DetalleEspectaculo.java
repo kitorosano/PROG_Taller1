@@ -1,7 +1,7 @@
 package main.java.taller1.Presentacion;
 
-import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.Fabrica;
+import main.java.taller1.Logica.Clases.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -155,7 +155,7 @@ public class DetalleEspectaculo extends JInternalFrame {
 
         DefaultTableModel model = (DefaultTableModel) tablaPaquetes.getModel();
         try {
-            this.PaquetesDelEspectaculo = Fabrica.getInstance().getIPaquete().obtenerPaquetesDeEspectaculo(this.espectaculo.getNombre());
+            this.PaquetesDelEspectaculo = Fabrica.getInstance().getIPaquete().obtenerPaquetesDeEspectaculo(this.espectaculo.getNombre(), this.espectaculo.getPlataforma().getNombre());
 
 
             for (Map.Entry<String,Paquete> entry : this.PaquetesDelEspectaculo.entrySet()) {

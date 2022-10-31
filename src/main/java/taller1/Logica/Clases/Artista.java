@@ -42,7 +42,7 @@ public class Artista extends Usuario {
 
     @Override
     public String toString() {
-        return super.toString() + "Artista{" +
+        return "Artista|"+ super.toString() + "{" +
                 "descripcion='" + descripcion + '\'' +
                 ", biografia='" + biografia + '\'' +
                 ", sitioWeb='" + sitioWeb + '\'' +

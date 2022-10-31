@@ -133,7 +133,7 @@ public class PaqueteController implements IPaquete {
   }
   
   @Override
-  public Map<String, Paquete> obtenerPaquetesDeEspectaculo(String nombreEspectaculo) {
+  public Map<String, Paquete> obtenerPaquetesDeEspectaculo(String nombreEspectaculo, String nombrePlataforma) {
     Map<String, Paquete> paquetes = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
@@ -141,7 +141,8 @@ public class PaqueteController implements IPaquete {
     String selectPaquetesByEspectaculo = "SELECT * " +
         "FROM espectaculos_paquetes ES_PAQ, paquetes PAQ " +
         "WHERE ES_PAQ.es_paq_nombrePaquete = PAQ.paq_nombre  " +
-        "AND ES_PAQ.es_paq_nombreEspectaculo = '" + nombreEspectaculo + "' ";
+        "AND ES_PAQ.es_paq_nombreEspectaculo = '" + nombreEspectaculo + "' " +
+        "AND ES_PAQ.es_paq_plataformaAsociada = '" + nombrePlataforma + "'";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -185,6 +186,7 @@ public class PaqueteController implements IPaquete {
     String selectEspectaculosByPaquete = "SELECT * " +
                 "FROM espectaculos_paquetes as ES_PAQ, espectaculos as ES, artistas as UA, usuarios as U, plataformas as PL " +
                 "WHERE ES_PAQ.es_paq_nombreEspectaculo = ES.es_nombre " +
+                "AND ES_PAQ.es_paq_plataformaAsociada = ES.es_plataformaAsociada " +
                 "AND ES.es_plataformaAsociada = PL.pl_nombre " +
                 "AND ES.es_artistaOrganizador = UA.ua_nickname " +
                 "AND UA.ua_nickname = U.u_nickname " +
@@ -222,7 +224,7 @@ public class PaqueteController implements IPaquete {
         LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
         String es_imagen = resultSet.getString("es_imagen");
         Espectaculo espectaculo = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artistaOrganizador);
-        espectaculos.put(es_nombre, espectaculo);
+        espectaculos.put(es_nombre+"-"+pl_nombre, espectaculo);
       }
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -360,11 +362,11 @@ public class PaqueteController implements IPaquete {
     return espectadores;
   }
   @Override
-  public void altaEspectaculoAPaquete(String nombreEspectaculo, String nombrePaquete) {
+  public void altaEspectaculoAPaquete(String nombreEspectaculo, String nombrePlataforma, String nombrePaquete) {
     Connection connection = null;
     Statement statement = null;
-    String insertEspectaculosPaquetes = "INSERT INTO espectaculos_paquetes (es_paq_nombreEspectaculo, es_paq_nombrePaquete) " +
-        "                 VALUES ('" + nombreEspectaculo + "', '" + nombrePaquete + "') ";
+    String insertEspectaculosPaquetes = "INSERT INTO espectaculos_paquetes (es_paq_nombreEspectaculo, es_paq_plataformaAsociada, es_paq_nombrePaquete) " +
+        "                 VALUES ('" + nombreEspectaculo + "', '" + nombrePlataforma + "', '" + nombrePaquete + "') ";
     
     try {
       connection = ConexionDB.getConnection();
@@ -388,7 +390,7 @@ public class PaqueteController implements IPaquete {
   }
   
   @Override
-  public void altaEspectadorAPaquete(String nickname, String nombrePaquete){
+  public void altaEspectadorAPaquete(String nombrePaquete, String nickname){
     Connection connection = null;
     Statement statement = null;
     String insertEspectadoresPaquetes = "INSERT INTO espectadores_paquetes (ue_paq_nickname, ue_paq_nombrePaquete, ue_paq_fechaRegistro) " +

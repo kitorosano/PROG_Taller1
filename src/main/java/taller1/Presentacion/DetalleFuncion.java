@@ -1,7 +1,7 @@
 package main.java.taller1.Presentacion;
 
-import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.Fabrica;
+import main.java.taller1.Logica.Clases.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

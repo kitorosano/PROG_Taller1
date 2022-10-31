@@ -5,16 +5,19 @@ import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Paquete;
 import main.java.taller1.Logica.Fabrica;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DetallePaquete extends JInternalFrame {
     private JPanel mainPanel;
-    private JLabel nombreLabel;
     private JLabel descripcionLabel;
     private JLabel fechaDeExpiracionLabel;
     private JLabel descuentoLabel;
@@ -28,6 +31,7 @@ public class DetallePaquete extends JInternalFrame {
     private JLabel espectaculosLabel;
     private JTable tablaCategoria;
     private JScrollPane scrollpaneCat;
+    private JLabel imagen;
 
     Paquete paquete;
 
@@ -42,8 +46,25 @@ public class DetallePaquete extends JInternalFrame {
         pack();
 
         this.paquete = paquete;
+        Image image = null;/* w  ww .  ja  v  a 2 s.c o m*/
+        try {
+            //url prueba "https://static1.diariovasco.com/www/multimedia/201801/25/media/cortadas/31313973-kXfH-U507727509188TF-624x385@Diario%20Vasco.JPG"
+            URL url = new URL(paquete.getImagen());
+            image = ImageIO.read(url);
+        }
+        catch (IOException e) {
+        }
+        if(image != null) {
+            Icon icon = new ImageIcon(image.getScaledInstance(150, 170, Image.SCALE_DEFAULT));
+            imagen.setText("");
+            imagen.setIcon(icon);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Error: no se pudo obtener la imagen!");
+            imagen.setText("Imagen del espectaculo");
+        }
 
-        nombreContenido.setText(paquete.getNombre());
+        nombreContenido.setText("Nombre: "+paquete.getNombre());
         fechaDeExpiracionContenido.setText(paquete.getFechaExpiracion().toString());
         descripcionContenido.setText(paquete.getDescripcion());
         descuentoContenido.setText(String.valueOf(paquete.getDescuento()));
@@ -56,7 +77,7 @@ public class DetallePaquete extends JInternalFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
-                    String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
+                    String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString()+"-"+table1.getValueAt(table1.getSelectedRow(), 1).toString();
                     Espectaculo espectaculo = EspectaculosPaquete.get(valor);
 
                     JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle de espectaculo", espectaculo);
@@ -71,7 +92,7 @@ public class DetallePaquete extends JInternalFrame {
     }
 
     private void createUIComponents() {
-        table1.setModel(new DefaultTableModel(null, new String[]{"Nombre", "Descripcion", "Costo"}) {
+        table1.setModel(new DefaultTableModel(null, new String[]{"Nombre", "Plataforma", "Costo"}) {
                             @Override
                             public boolean isCellEditable(int row, int column) {
                                 return false;
@@ -97,7 +118,7 @@ public class DetallePaquete extends JInternalFrame {
         try {
             this.EspectaculosPaquete = Fabrica.getInstance().getIPaquete().obtenerEspectaculosDePaquete(this.paquete.getNombre());
             for (Map.Entry<String, Espectaculo> entry : this.EspectaculosPaquete.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getDescripcion(), entry.getValue().getCosto()});//se carga la lista de categorias mientras recorro los espectaculos
+                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getPlataforma().getNombre(), entry.getValue().getCosto()});//se carga la lista de categorias mientras recorro los espectaculos
                 try {
                     Map<String, Categoria> categoriasdelEspectaulo = Fabrica.getInstance().getICategoria().obtenerCategoriasDeEspectaculo(entry.getValue().getNombre());
                     for (Map.Entry<String, Categoria> entry2 : categoriasdelEspectaulo.entrySet()) {

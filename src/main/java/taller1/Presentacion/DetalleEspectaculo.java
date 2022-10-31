@@ -97,7 +97,8 @@ public class DetalleEspectaculo extends JInternalFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
-                    Funcion funcion=FuncionesDelEspectaculo.get(tablaFunciones.getValueAt(tablaFunciones.getSelectedRow(), 0).toString());
+                    Funcion funcion=FuncionesDelEspectaculo.get(tablaFunciones.getValueAt(tablaFunciones.getSelectedRow(), 0).toString()+"-"+espectaculo.getNombre()+"-"+espectaculo.getPlataforma().getNombre());
+                    System.out.println(FuncionesDelEspectaculo);
                     JInternalFrame detalle = new DetalleFuncion("Detalle de funcion",funcion);
                     detalle.setIconifiable(true);
                     detalle.setClosable(true);

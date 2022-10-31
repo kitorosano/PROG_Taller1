@@ -96,8 +96,7 @@ public class DetalleUsuario extends JInternalFrame {
                     if (usuario instanceof Artista) {
                         String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
                         String plataforma= table1.getValueAt(table1.getSelectedRow(), 2).toString();
-                        System.out.println("el valor es:"+ valor);
-                        System.out.println("espectaculos artista"+ espectaculosArtista);
+
                         Espectaculo espectaculo = espectaculosArtista.get(valor+"-"+plataforma);
                         System.out.println("el espectaculo es:"+espectaculo);
                         JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle Espectaculo", espectaculo);

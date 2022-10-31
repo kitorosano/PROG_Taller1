@@ -4,7 +4,6 @@ import main.java.taller1.Logica.Clases.Plataforma;
 import main.java.taller1.Logica.Interfaces.IPlataforma;
 import main.java.taller1.Persistencia.ConexionDB;
 
-import javax.swing.text.html.Option;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

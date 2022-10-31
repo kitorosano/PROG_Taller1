@@ -1,7 +1,7 @@
 package main.java.taller1.Presentacion;
 
-import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.Fabrica;
+import main.java.taller1.Logica.Clases.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,11 +14,15 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
+import java.awt.Image;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class DetalleUsuario extends JInternalFrame {
 
     private JPanel mainPanel;
-    private JLabel nicknameLabel;
     private JLabel nombreLabel;
     private JLabel apellidoLabel;
     private JLabel correoLabel;
@@ -36,6 +40,7 @@ public class DetalleUsuario extends JInternalFrame {
     private JLabel sitioWebLabel;
     private JLabel sitioWebContenido;
     private JButton modificarUsuarioButton;
+    private JLabel imagen;
 
     Usuario usuario;
 
@@ -51,14 +56,27 @@ public class DetalleUsuario extends JInternalFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         this.usuario = usuario;
-
-
+        
         nicknameContenido.setText(usuario.getNickname());
         nombreContenido.setText(usuario.getNombre());
         apellidoContenido.setText(usuario.getApellido());
         correoContenido.setText(usuario.getCorreo());
         fechaNContenido.setText(usuario.getFechaNacimiento().toString());
-
+        Image image = null;/* w  ww .  ja  v  a 2 s.c o m*/
+        try {
+            //url prueba "https://ih1.redbubble.net/image.995101085.8413/flat,750x,075,f-pad,750x1000,f8f8f8.jpg"
+            URL url = new URL(usuario.getImagen());
+            image = ImageIO.read(url);
+        }
+        catch (IOException e) {
+        }
+        if(image != null) {
+            Icon icon = new ImageIcon(image.getScaledInstance(150, 170, Image.SCALE_DEFAULT));
+            imagen.setIcon(icon);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Error: no se pudo obtener la imagen!");
+        }
         if (this.usuario instanceof Artista) {
             createUIComponents(1);
             cargarTablaArtista();

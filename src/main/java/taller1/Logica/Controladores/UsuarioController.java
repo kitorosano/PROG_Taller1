@@ -3,18 +3,12 @@ package main.java.taller1.Logica.Controladores;
 import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.Interfaces.IUsuario;
 import main.java.taller1.Persistencia.ConexionDB;
-import org.apache.ibatis.jdbc.ScriptRunner;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

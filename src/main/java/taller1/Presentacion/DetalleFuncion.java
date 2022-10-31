@@ -3,17 +3,20 @@ package main.java.taller1.Presentacion;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 public class DetalleFuncion extends JInternalFrame {
     private JPanel mainPanel;
-    private JLabel nombreLabel;
     private JLabel nombreContenido;
     private JLabel espectaculoContenido;
     private JLabel fechaHoraDeInicioContenido;
@@ -21,12 +24,12 @@ public class DetalleFuncion extends JInternalFrame {
     private JLabel nombreDeEspectaculoLabel;
     private JLabel fechaYHoraDeLabel;
     private JLabel fechaDeRegistroLabel;
-    private JLabel detalleDeFuncionLabel;
     private JTable table1;
     private JLabel espectadoresLabel;
     private JScrollPane scrollPane1;
     private JButton registrarEspectadoresButton;
     private JButton actualizarEspectadoresButton;
+    private JLabel imagen;
 
     Funcion funcion;
     Map<String, EspectadorRegistradoAFuncion> espectadoresDeFuncion;
@@ -39,10 +42,25 @@ public class DetalleFuncion extends JInternalFrame {
 
         this.funcion = funcion;
 
-        nombreContenido.setText(this.funcion.getNombre());
+        nombreContenido.setText("Nombre: "+this.funcion.getNombre());
         espectaculoContenido.setText(this.funcion.getEspectaculo().getNombre());
         fechaHoraDeInicioContenido.setText(this.funcion.getFechaHoraInicio().toString());
         fechaDeRegistroContenido.setText(this.funcion.getFechaRegistro().toString());
+        Image image = null;/* w  ww .  ja  v  a 2 s.c o m*/
+        try {
+            //url prueba "https://estaticos-cdn.prensaiberica.es/clip/96bd18ae-b0ae-44b8-878b-f1ab4a8a213e_16-9-discover-aspect-ratio_default_0.jpg"
+            URL url = new URL(funcion.getImagen());
+            image = ImageIO.read(url);
+        }
+        catch (IOException e) {
+        }
+        if(image != null) {
+            Icon icon = new ImageIcon(image.getScaledInstance(150, 180, Image.SCALE_DEFAULT));
+            imagen.setIcon(icon);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Error: no se pudo obtener la imagen!");
+        }
         createUIComponents();
         cargarTabla();
 

@@ -193,6 +193,15 @@
           </component>
         </children>
       </scrollpane>
+      <component id="d20cc" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="10" column="11" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Categorias"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

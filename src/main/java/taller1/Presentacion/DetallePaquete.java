@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.Clases.Categoria;
 import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Paquete;
 import main.java.taller1.Logica.Fabrica;
@@ -8,6 +9,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.HashMap;
 import java.util.Map;
 
 public class DetallePaquete extends JInternalFrame {
@@ -31,6 +33,8 @@ public class DetallePaquete extends JInternalFrame {
 
     Map<String, Espectaculo> EspectaculosPaquete;
 
+    Map<String, Categoria> categoriasPaquete = new HashMap<>();
+
     public DetallePaquete(String title, Paquete paquete) {
         super(title);
         setContentPane(mainPanel);
@@ -46,6 +50,7 @@ public class DetallePaquete extends JInternalFrame {
         fechaDeRegistroContenido.setText(paquete.getFechaRegistro().toString());
         createUIComponents();
         cargarTabla();
+        cargarTablaCategorias();
         table1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -75,6 +80,16 @@ public class DetallePaquete extends JInternalFrame {
         );
         table1.getTableHeader().setReorderingAllowed(false);
         table1.getTableHeader().setResizingAllowed(false);
+
+        tablaCategoria.setModel(new DefaultTableModel(null, new String[]{"Nombre"}) {
+                            @Override
+                            public boolean isCellEditable(int row, int column) {
+                                return false;
+                            }
+                        }
+        );
+        tablaCategoria.getTableHeader().setReorderingAllowed(false);
+        tablaCategoria.getTableHeader().setResizingAllowed(false);
     }
 
     private void cargarTabla() {
@@ -82,7 +97,15 @@ public class DetallePaquete extends JInternalFrame {
         try {
             this.EspectaculosPaquete = Fabrica.getInstance().getIPaquete().obtenerEspectaculosDePaquete(this.paquete.getNombre());
             for (Map.Entry<String, Espectaculo> entry : this.EspectaculosPaquete.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getDescripcion(), entry.getValue().getCosto()});
+                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getDescripcion(), entry.getValue().getCosto()});//se carga la lista de categorias mientras recorro los espectaculos
+                try {
+                    Map<String, Categoria> categoriasdelEspectaulo = Fabrica.getInstance().getICategoria().obtenerCategoriasDeEspectaculo(entry.getValue().getNombre());
+                    for (Map.Entry<String, Categoria> entry2 : categoriasdelEspectaulo.entrySet()) {
+                        categoriasPaquete.put(entry2.getValue().getNombre(),entry2.getValue());
+                    }
+                } catch (Exception exc) {
+                    JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+                }
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());
@@ -91,9 +114,8 @@ public class DetallePaquete extends JInternalFrame {
     private void cargarTablaCategorias(){
         DefaultTableModel model = (DefaultTableModel) tablaCategoria.getModel();
         try {
-
-            for (Map.Entry<String, Espectaculo> entry : this.EspectaculosPaquete.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getDescripcion(), entry.getValue().getCosto()});
+            for (Map.Entry<String, Categoria> entry : this.categoriasPaquete.entrySet()) {
+                model.addRow(new Object[]{entry.getValue().getNombre()});
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());

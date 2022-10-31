@@ -46,9 +46,8 @@ public class DetallePaquete extends JInternalFrame {
         pack();
 
         this.paquete = paquete;
-        Image image = null;/* w  ww .  ja  v  a 2 s.c o m*/
+        Image image = null;
         try {
-            //url prueba "https://static1.diariovasco.com/www/multimedia/201801/25/media/cortadas/31313973-kXfH-U507727509188TF-624x385@Diario%20Vasco.JPG"
             URL url = new URL(paquete.getImagen());
             image = ImageIO.read(url);
         }

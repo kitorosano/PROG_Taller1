@@ -59,9 +59,8 @@ public class DetalleEspectaculo extends JInternalFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         this.espectaculo=espectaculo;
-        Image image = null;/* w  ww .  ja  v  a 2 s.c o m*/
+        Image image = null;
         try {
-            //url prueba "https://static1.diariovasco.com/www/multimedia/201801/25/media/cortadas/31313973-kXfH-U507727509188TF-624x385@Diario%20Vasco.JPG"
             URL url = new URL(this.espectaculo.getImagen());
             image = ImageIO.read(url);
         }

@@ -140,5 +140,32 @@ public class DatabaseController implements IDatabase {
     
     return url;
   }
+  @Override
+  public String guardarImagen(File imagen){
+    String url = "";
+    try {
+      CloseableHttpClient client = HttpClients.createDefault();
+      HttpPost httpPost = new HttpPost(apiUrl);
+      
+      MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+      builder.addBinaryBody(
+          "file",  imagen, ContentType.APPLICATION_OCTET_STREAM, "imagen.png");
+      
+      HttpEntity multipart = builder.build();
+      httpPost.setEntity(multipart);
+      
+      CloseableHttpResponse response = client.execute(httpPost);
+      client.close();
+      String responseString = new BasicResponseHandler().handleResponse(response);
+      
+      url = responseString.substring(responseString.indexOf("https://i.imgur.com/"));
+      url = url.substring(0, url.indexOf("\""));
+    } catch (IOException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al guardar la imagen", e);
+    }
+    
+    return url;
+  }
   
 }

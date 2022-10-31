@@ -5,7 +5,9 @@ import main.java.taller1.Logica.Fabrica;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 
 public class pruebaImagen extends JInternalFrame {
     private JButton seleccionarImagenButton;
@@ -20,22 +22,20 @@ public class pruebaImagen extends JInternalFrame {
         seleccionarImagenButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String path;
+                File file;
                 JFileChooser j = new JFileChooser();
                 int retorno = j.showOpenDialog(panel1);
 
                 if(retorno == JFileChooser.APPROVE_OPTION){
-                    path= j.getSelectedFile().getAbsolutePath();
+                    file = j.getSelectedFile();
                     //uso de guardar imagen convirtiendo a input stram
-                    System.out.println(path);
                     try {
-                        FileInputStream fileInput = new FileInputStream(path);
-                        System.out.println(Fabrica.getInstance().getIDatabase().guardarImagen(fileInput));
+                        String res = Fabrica.getInstance().getIDatabase().guardarImagen(file);
+                        System.out.println(res);
                     }
                     catch (Exception exc) {
                         JOptionPane.showMessageDialog(null, "Error" + exc.toString());
                     }
-
                 }
             }
         });

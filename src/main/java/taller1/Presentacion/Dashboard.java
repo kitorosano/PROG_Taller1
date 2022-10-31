@@ -42,6 +42,7 @@ public class Dashboard extends JFrame {
     private JMenuItem githubJMenuItem;
     private JMenuItem registroTrabajoJMenuItem;
     private JMenuItem vaciarDatosJMenuItem;
+    private JMenuItem aceptarRechazarEspectaculo;
 
     public JDesktopPane getDashboardJDesktopPane(){
         return this.dashboardJDesktopPane;
@@ -170,6 +171,18 @@ public class Dashboard extends JFrame {
                 JInternalFrame iFrame = new FormularioAgregarEspectaculoAPaquete("Agregar espectaculo a paquete");
                 iFrame.setIconifiable(true);
                 iFrame.setClosable(true);
+                dashboardJDesktopPane.add(iFrame);
+                iFrame.setVisible(true);
+            }
+        });
+
+        aceptarRechazarEspectaculo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame iFrame = new AceptarRechazarEspectaculo("Aceptar/Rechazar Espectaculo");
+                iFrame.setIconifiable(true);
+                iFrame.setClosable(true);
+                iFrame.setSize(485,500);
                 dashboardJDesktopPane.add(iFrame);
                 iFrame.setVisible(true);
             }

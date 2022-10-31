@@ -32,6 +32,7 @@ public class FormularioUsuario extends JInternalFrame {
     private JButton btnConsulta;
     private JTextField tfContrasenia;
     private JTextField tfContrasenia2;
+    private JButton seleccionarImagenButton;
     private JLabel LabelDescripcion;
 
     private String seleccionado;
@@ -147,6 +148,18 @@ public class FormularioUsuario extends JInternalFrame {
                 alta.setClosable(true);
                 Dashboard.getInstance().getDashboardJDesktopPane().add(alta);
                 alta.setVisible(true);
+            }
+        });
+        seleccionarImagenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String path;
+                JFileChooser j = new JFileChooser();
+                int retorno = j.showOpenDialog(panel1);
+
+                if(retorno == JFileChooser.APPROVE_OPTION){
+                    path= j.getSelectedFile().getAbsolutePath();
+                }
             }
         });
     }

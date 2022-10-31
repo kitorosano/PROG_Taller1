@@ -156,6 +156,12 @@
                   <text value="Cerrar"/>
                 </properties>
               </component>
+              <component id="2015b" class="javax.swing.JMenuItem" binding="pruebaImgJMenuItem">
+                <constraints/>
+                <properties>
+                  <text value="pruebaImgJMenuItem"/>
+                </properties>
+              </component>
             </children>
           </grid>
           <grid id="d14e3" class="javax.swing.JMenu" binding="acercaDeJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">

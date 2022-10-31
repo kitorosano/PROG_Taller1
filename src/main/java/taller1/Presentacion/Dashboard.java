@@ -42,6 +42,7 @@ public class Dashboard extends JFrame {
     private JMenuItem githubJMenuItem;
     private JMenuItem registroTrabajoJMenuItem;
     private JMenuItem vaciarDatosJMenuItem;
+    private JMenuItem pruebaImgJMenuItem;
 
     public JDesktopPane getDashboardJDesktopPane(){
         return this.dashboardJDesktopPane;
@@ -81,6 +82,18 @@ public class Dashboard extends JFrame {
                 } catch (RuntimeException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
+            }
+        });
+
+        pruebaImgJMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame iFrame = new pruebaImagen("Prueba Imagen");
+                iFrame.setIconifiable(true);
+                iFrame.setClosable(true);
+                iFrame.setSize(300,300);
+                dashboardJDesktopPane.add(iFrame);
+                iFrame.setVisible(true);
             }
         });
         cerrarJMenuItem.addActionListener(new ActionListener() {

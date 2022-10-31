@@ -117,8 +117,9 @@ public class DatabaseController implements IDatabase {
     try {
       CloseableHttpClient client = HttpClients.createDefault();
       HttpPost httpPost = new HttpPost(apiUrl);
-  
+
       byte[] imagen_bytes = IOUtils.readFully(imagen, -1, false); // Convierte el archivo a bytes
+
       MultipartEntityBuilder builder = MultipartEntityBuilder.create();
       builder.addBinaryBody(
           "file",  imagen_bytes, ContentType.APPLICATION_OCTET_STREAM, "imagen.png");

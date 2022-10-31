@@ -90,6 +90,16 @@
                   <text value="Agregar espectaculo a paquete"/>
                 </properties>
               </component>
+              <component id="892a1" class="javax.swing.JSeparator">
+                <constraints/>
+                <properties/>
+              </component>
+              <component id="1b4a4" class="javax.swing.JMenuItem" binding="aceptarRechazarEspectaculo">
+                <constraints/>
+                <properties>
+                  <text value="Aceptar/Rechazar Espectaculo"/>
+                </properties>
+              </component>
             </children>
           </grid>
           <grid id="23ea5" class="javax.swing.JMenu" binding="consultasJMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">

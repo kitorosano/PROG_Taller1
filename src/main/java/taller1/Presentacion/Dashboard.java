@@ -25,6 +25,8 @@ public class Dashboard extends JFrame {
     private JMenu acercaDeJMenu;
 
     private JMenuItem cargarDatosJMenuItem;
+    private JMenuItem vaciarDatosJMenuItem;
+    private JMenuItem pruebaImgJMenuItem;
     private JMenuItem cerrarJMenuItem;
     private JMenuItem altaDeUsuarioJMenuItem;
     private JMenuItem altaDeEspectaculoJMenuItem;
@@ -32,17 +34,16 @@ public class Dashboard extends JFrame {
     private JMenuItem altaDePaqueteJMenuItem;
     private JMenuItem altaDePlataformaJMenuItem;
     private JMenuItem altaDeCategoriaJMenuItem;
+    private JMenuItem registroAFuncionJMenuItem;
+    private JMenuItem agregarEspAPaqueteJMenuItem;
+    private JMenuItem aceptarRechazarEspectaculo;
     private JMenuItem consultaDeUsuarioJMenuItem;
     private JMenuItem consultaDeEspectaculoJMenuItem;
     private JMenuItem consultaDeFuncionJMenuItem;
     private JMenuItem consultaDePaqueteJMenuItem;
-    private JMenuItem registroAFuncionJMenuItem;
-    private JMenuItem agregarEspAPaqueteJMenuItem;
     private JMenuItem nosotrosJMenuItem;
     private JMenuItem githubJMenuItem;
     private JMenuItem registroTrabajoJMenuItem;
-    private JMenuItem vaciarDatosJMenuItem;
-    private JMenuItem pruebaImgJMenuItem;
 
     public JDesktopPane getDashboardJDesktopPane(){
         return this.dashboardJDesktopPane;
@@ -183,6 +184,18 @@ public class Dashboard extends JFrame {
                 JInternalFrame iFrame = new FormularioAgregarEspectaculoAPaquete("Agregar espectaculo a paquete");
                 iFrame.setIconifiable(true);
                 iFrame.setClosable(true);
+                dashboardJDesktopPane.add(iFrame);
+                iFrame.setVisible(true);
+            }
+        });
+
+        aceptarRechazarEspectaculo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JInternalFrame iFrame = new AceptarRechazarEspectaculo("Aceptar/Rechazar Espectaculo");
+                iFrame.setIconifiable(true);
+                iFrame.setClosable(true);
+                iFrame.setSize(485,500);
                 dashboardJDesktopPane.add(iFrame);
                 iFrame.setVisible(true);
             }

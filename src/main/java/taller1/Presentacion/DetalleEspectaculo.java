@@ -3,17 +3,20 @@ package main.java.taller1.Presentacion;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 public class DetalleEspectaculo extends JInternalFrame {
     private JPanel mainPanel;
-    private JLabel nombreLabel;
     private JLabel descripcionLabel;
     private JLabel duracionLabel;
     private JLabel minEspectadoresLabel;
@@ -39,9 +42,14 @@ public class DetalleEspectaculo extends JInternalFrame {
     private JTable tablaFunciones;
     private JTable tablaPaquetes;
     private JButton actualizarFuncionesButton;
+    private JLabel imagen;
+    private JTable tablaCategorias;
+    private JScrollPane scrollPane3;
 
     Map<String, Paquete> PaquetesDelEspectaculo;
     Map<String, Funcion> FuncionesDelEspectaculo;
+
+    Map<String,Categoria> categoriasDelEspectaculo;
 
     Espectaculo espectaculo;
 
@@ -51,13 +59,30 @@ public class DetalleEspectaculo extends JInternalFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
         this.espectaculo=espectaculo;
+        Image image = null;/* w  ww .  ja  v  a 2 s.c o m*/
+        try {
+            //url prueba "https://static1.diariovasco.com/www/multimedia/201801/25/media/cortadas/31313973-kXfH-U507727509188TF-624x385@Diario%20Vasco.JPG"
+            URL url = new URL(this.espectaculo.getImagen());
+            image = ImageIO.read(url);
+        }
+        catch (IOException e) {
+        }
+        if(image != null) {
+            Icon icon = new ImageIcon(image.getScaledInstance(150, 170, Image.SCALE_DEFAULT));
+            imagen.setText("");
+            imagen.setIcon(icon);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Error: no se pudo obtener la imagen!");
+            imagen.setText("Imagen del espectaculo");
+        }
 
-        nombreContenido.setText(this.espectaculo.getNombre());
+        nombreContenido.setText("Nombre: "+this.espectaculo.getNombre());
         descripcionContenido.setText(this.espectaculo.getDescripcion());
         duracionContenido.setText(String.valueOf(this.espectaculo.getDuracion()));
         minEspectadoresContenido.setText(String.valueOf(this.espectaculo.getMinEspectadores()));
         maxEspectadoresContenido.setText(String.valueOf(this.espectaculo.getMaxEspectadores()));
-        urlContenido.setText(this.espectaculo.getUrl());
+        urlContenido.setText(strToHtml(this.espectaculo.getUrl()));
         costoContenido.setText(String.valueOf(this.espectaculo.getCosto()));
         fechaDeRegistroContenido.setText(this.espectaculo.getFechaRegistro().toString());
         plataformaContenido.setText(this.espectaculo.getPlataforma().getNombre());
@@ -66,12 +91,14 @@ public class DetalleEspectaculo extends JInternalFrame {
         createUIComponents();
         cargarTablaFunciones();
         cargarTablaPaquetes();
+        cargarTablaCategorias();
         tablaFunciones.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
-                    Funcion funcion=FuncionesDelEspectaculo.get(tablaFunciones.getValueAt(tablaFunciones.getSelectedRow(), 0).toString());
+                    Funcion funcion=FuncionesDelEspectaculo.get(tablaFunciones.getValueAt(tablaFunciones.getSelectedRow(), 0).toString()+"-"+espectaculo.getNombre()+"-"+espectaculo.getPlataforma().getNombre());
+                    System.out.println(FuncionesDelEspectaculo);
                     JInternalFrame detalle = new DetalleFuncion("Detalle de funcion",funcion);
                     detalle.setIconifiable(true);
                     detalle.setClosable(true);
@@ -94,6 +121,8 @@ public class DetalleEspectaculo extends JInternalFrame {
                 }
             }
         });
+
+
 
         agregarFuncionButton.addActionListener(new ActionListener() {
             @Override
@@ -137,6 +166,18 @@ public class DetalleEspectaculo extends JInternalFrame {
         );
         tablaPaquetes.getTableHeader().setReorderingAllowed(false);
         tablaPaquetes.getTableHeader().setResizingAllowed(false);
+
+        tablaCategorias.setModel(new DefaultTableModel(null,new String[]{"Nombre"} ) {
+                                   @Override
+                                   public boolean isCellEditable(int row, int column) {
+                                       return false;
+                                   }
+                               }
+        );
+        tablaCategorias.getTableHeader().setReorderingAllowed(false);
+        tablaCategorias.getTableHeader().setResizingAllowed(false);
+
+
     }
     private void cargarTablaFunciones() {
 
@@ -165,6 +206,19 @@ public class DetalleEspectaculo extends JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());
         }
     }
+    private void cargarTablaCategorias() {
+
+        DefaultTableModel model = (DefaultTableModel) tablaCategorias.getModel();
+        try {
+            this.categoriasDelEspectaculo = Fabrica.getInstance().getICategoria().obtenerCategoriasDeEspectaculo(espectaculo.getNombre());
+
+            for (Map.Entry<String,Categoria> entry : this.categoriasDelEspectaculo.entrySet()) {
+                model.addRow(new Object[]{entry.getValue().getNombre()});
+            }
+        } catch (Exception exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        }
+    }
     public void limpiartablaFunciones() {
         DefaultTableModel temp = (DefaultTableModel) tablaFunciones.getModel();
         int filas = tablaFunciones.getRowCount();
@@ -172,5 +226,8 @@ public class DetalleEspectaculo extends JInternalFrame {
         for (int a = 0; filas > a; a++) {
             temp.removeRow(0);
         }
+    }
+    private String strToHtml(String text){
+        return "<html><p>"+text +"</p></html>";
     }
 }

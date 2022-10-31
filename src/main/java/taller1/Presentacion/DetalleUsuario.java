@@ -57,9 +57,8 @@ public class DetalleUsuario extends JInternalFrame {
         apellidoContenido.setText(usuario.getApellido());
         correoContenido.setText(usuario.getCorreo());
         fechaNContenido.setText(usuario.getFechaNacimiento().toString());
-        Image image = null;/* w  ww .  ja  v  a 2 s.c o m*/
+        Image image = null;
         try {
-            //url prueba "https://ih1.redbubble.net/image.995101085.8413/flat,750x,075,f-pad,750x1000,f8f8f8.jpg"
             URL url = new URL(usuario.getImagen());
             image = ImageIO.read(url);
         }

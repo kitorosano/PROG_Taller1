@@ -46,9 +46,8 @@ public class DetalleFuncion extends JInternalFrame {
         espectaculoContenido.setText(this.funcion.getEspectaculo().getNombre());
         fechaHoraDeInicioContenido.setText(this.funcion.getFechaHoraInicio().toString());
         fechaDeRegistroContenido.setText(this.funcion.getFechaRegistro().toString());
-        Image image = null;/* w  ww .  ja  v  a 2 s.c o m*/
+        Image image = null;
         try {
-            //url prueba "https://estaticos-cdn.prensaiberica.es/clip/96bd18ae-b0ae-44b8-878b-f1ab4a8a213e_16-9-discover-aspect-ratio_default_0.jpg"
             URL url = new URL(funcion.getImagen());
             image = ImageIO.read(url);
         }

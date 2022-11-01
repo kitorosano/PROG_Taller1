@@ -4,8 +4,10 @@ import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Paquete;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -22,7 +24,10 @@ public class FormularioPaquete extends JInternalFrame {
   private JTextField tfDescuento;
   private JTextField tfFechaVenc; //TODO: Implementar JCalendar
   private JButton btnConsulta;
-  
+  private JButton seleccionarImagenButton;
+
+  String imagen=null;
+
   public FormularioPaquete(String title) {
     super(title);
     setContentPane(panel1);
@@ -43,7 +48,7 @@ public class FormularioPaquete extends JInternalFrame {
                 String descripcion = tfDescripcion.getText();
                 double descuento = Double.parseDouble(tfDescuento.getText());
                 LocalDateTime fechaRegistro = LocalDateTime.now();
-                String imagen = "";
+                //String imagen = "";
                 
               Paquete paquete = new Paquete(nombre, descripcion, descuento, fechaRegistro, fechaVencimiento, imagen);
               Fabrica.getInstance().getIPaquete().altaPaquete(paquete);
@@ -70,6 +75,39 @@ public class FormularioPaquete extends JInternalFrame {
         consulta.setClosable(true);
         Dashboard.getInstance().getDashboardJDesktopPane().add(consulta);
         consulta.setVisible(true);
+      }
+    });
+    seleccionarImagenButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        String path;
+        File file;
+        JFileChooser j = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "imagenes JPG & PNG ", "jpg", "png");
+        j.setFileFilter(filter);
+        j.setAcceptAllFileFilterUsed(false);
+        int retorno = j.showOpenDialog(panel1);
+
+        if(retorno == JFileChooser.APPROVE_OPTION){
+          file= j.getSelectedFile();
+          try {
+            String res =null;
+            res = Fabrica.getInstance().getIDatabase().guardarImagen(file);
+            if(res.isEmpty()){
+              seleccionarImagenButton.setBackground(Color.red.darker());
+            }
+            else{
+
+              seleccionarImagenButton.setBackground(Color.green.darker());
+            }
+            System.out.println(res);
+            imagen=res;
+          }
+          catch (Exception exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+          }
+        }
       }
     });
   }

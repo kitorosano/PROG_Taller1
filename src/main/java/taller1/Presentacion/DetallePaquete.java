@@ -49,6 +49,7 @@ public class DetallePaquete extends JInternalFrame {
         Image image = null;
         try {
             URL url = new URL(paquete.getImagen());
+            System.out.println(url);
             image = ImageIO.read(url);
         }
         catch (IOException e) {

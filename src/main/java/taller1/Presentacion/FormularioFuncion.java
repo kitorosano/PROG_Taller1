@@ -239,7 +239,7 @@ public class FormularioFuncion extends JInternalFrame {
                     break;
                 }
             }
-            return new Funcion(nombre,espectaculo,fechahora,LocalDateTime.now(), imagen);
+            return new Funcion(nombre,espectaculo,fechahora,LocalDateTime.now(),imagen);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

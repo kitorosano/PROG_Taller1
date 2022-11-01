@@ -268,8 +268,10 @@ public class UsuarioController implements IUsuario {
         String updateUsuario = "UPDATE usuarios " +
             "SET u_nombre = '" + usuario.getNombre() + "', u_apellido = '" + usuario.getApellido() + "', u_correo = '" + usuario.getCorreo() + "', u_fechaNacimiento = '" + usuario.getFechaNacimiento() + "', u_contrasenia = '" + usuario.getContrasenia() + "', u_imagen = '" + usuario.getImagen() + "' " +
             "WHERE u_nickname = '" + usuario.getNickname() + "'; ";
+        
+        String updateUsuario2 = "";
         if (usuario instanceof Artista)
-            updateUsuario += "UPDATE artistas " +
+            updateUsuario2 = "UPDATE artistas " +
                 "SET ua_descripcion = '" + ((Artista) usuario).getDescripcion() + "', ua_biografia = '" + ((Artista) usuario).getBiografia() + "', ua_sitioWeb = '" + ((Artista) usuario).getSitioWeb() + "' " +
                 "WHERE ua_nickname = '" + usuario.getNickname() + "'";
         
@@ -277,6 +279,7 @@ public class UsuarioController implements IUsuario {
             connection = ConexionDB.getConnection();
             statement = connection.createStatement();
             statement.executeUpdate(updateUsuario);
+            statement.executeUpdate(updateUsuario2);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException("Error al conectar con la base de datos", e);

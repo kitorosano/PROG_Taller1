@@ -8,6 +8,7 @@ import org.w3c.dom.css.RGBColor;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -163,6 +164,10 @@ public class FormularioUsuario extends JInternalFrame {
                 String path;
                 File file;
                 JFileChooser j = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                        "imagenes JPG & PNG ", "jpg", "png");
+                j.setFileFilter(filter);
+                j.setAcceptAllFileFilterUsed(false);
                 int retorno = j.showOpenDialog(panel1);
 
                 if(retorno == JFileChooser.APPROVE_OPTION){

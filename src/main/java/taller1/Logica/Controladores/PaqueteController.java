@@ -27,6 +27,10 @@ public class PaqueteController implements IPaquete {
     return instance;
   }
   
+  /**
+   * Crea un paquete
+   * @param nuevoPaquete Objeto de tipo Paquete con los datos del paquete a crear
+   */
   @Override
   public void altaPaquete(Paquete nuevoPaquete) {
     Connection connection = null;
@@ -53,6 +57,11 @@ public class PaqueteController implements IPaquete {
       }
     }
   }
+  
+  /**
+   * Obtiene todos los paquetes
+   * @return Mapa con todos los paquetes
+   */
   @Override
   public Map<String, Paquete> obtenerPaquetes() {
     Map<String, Paquete> paquetes = new HashMap<>();
@@ -93,6 +102,12 @@ public class PaqueteController implements IPaquete {
     }
     return paquetes;
   }
+  
+  /**
+   * Obtiene un paquete
+   * @param nombrePaquete Nombre del paquete a obtener
+   * @return Objeto de tipo Paquete con los datos del paquete
+   */
   @Override
   public Optional<Paquete> obtenerPaquete(String nombrePaquete){
     Paquete paquete = null;
@@ -132,6 +147,14 @@ public class PaqueteController implements IPaquete {
     return Optional.ofNullable(paquete);
   }
   
+  /**
+   * Obtiene todos los paquetes de un espectáculo
+   * @param nombreEspectaculo Nombre del espectáculo
+   *                          del que se quieren obtener los paquetes
+   * @param nombrePlataforma Nombre de la plataforma
+   *                         del que se quieren obtener los paquetes
+   * @return Mapa con todos los paquetes del espectáculo
+   */
   @Override
   public Map<String, Paquete> obtenerPaquetesDeEspectaculo(String nombreEspectaculo, String nombrePlataforma) {
     Map<String, Paquete> paquetes = new HashMap<>();
@@ -177,6 +200,12 @@ public class PaqueteController implements IPaquete {
     return paquetes;
   }
   
+  /**
+   * Obtiene todos los espectáculos de un paquete
+   * @param nombrePaquete Nombre del paquete
+   *                      del que se quieren obtener los espectáculos
+   * @return Mapa con todos los espectáculos del paquete
+   */
   @Override
   public Map<String, Espectaculo> obtenerEspectaculosDePaquete(String nombrePaquete){
     Map<String, Espectaculo> espectaculos = new HashMap<>();
@@ -245,6 +274,12 @@ public class PaqueteController implements IPaquete {
     return espectaculos;
   }
   
+  /**
+   * Obtiene todos los paquetes comprados de un espectador
+   * @param nickname Nickname del espectador
+   *                          del que se quieren obtener los paquetes
+   * @return Mapa con todos los paquetes comprados del espectador
+   */
   @Override
   public Map<String, EspectadorPaquete> obtenerPaquetesPorEspectador(String nickname){
     Map<String, EspectadorPaquete> paquetes = new HashMap<>();
@@ -303,6 +338,12 @@ public class PaqueteController implements IPaquete {
     return paquetes;
   }
   
+  /**
+   * Obtiene todos los espectadores que compraron un paquete
+   * @param nombrePaquete Nombre del paquete
+   *                          del que se quieren obtener los espectadores
+   * @return Mapa con todos los espectadores que compraron el paquete
+   */
   @Override
   public Map<String, EspectadorPaquete> obtenerEspectadoresDePaquete(String nombrePaquete){
     Map<String, EspectadorPaquete> espectadores = new HashMap<>();
@@ -361,6 +402,16 @@ public class PaqueteController implements IPaquete {
     }
     return espectadores;
   }
+  
+  /**
+   * Ingresa un espectaculo a un paquete
+   * @param nombreEspectaculo Nombre del espectaculo
+   *                          que se quiere ingresar al paquete
+   * @param nombrePlataforma Nombre de la plataforma
+   *                         en la que se encuentra el espectaculo
+   * @param nombrePaquete Nombre del paquete
+   *                      al que se quiere ingresar el espectaculo
+   */
   @Override
   public void altaEspectaculoAPaquete(String nombreEspectaculo, String nombrePlataforma, String nombrePaquete) {
     Connection connection = null;
@@ -389,6 +440,13 @@ public class PaqueteController implements IPaquete {
     }
   }
   
+  /**
+   * Ingresa un espectador a un paquete
+   * @param nombrePaquete Nombre del paquete
+   *                      al que se quiere ingresar el espectador
+   * @param nickname Nickname del espectador
+   *                           que se quiere ingresar al paquete
+   */
   @Override
   public void altaEspectadorAPaquete(String nombrePaquete, String nickname){
     Connection connection = null;

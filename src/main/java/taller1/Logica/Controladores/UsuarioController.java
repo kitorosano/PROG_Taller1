@@ -26,7 +26,11 @@ public class UsuarioController implements IUsuario {
         }
         return instance;
     }
-
+    
+    /**
+     * Metodo que obtiene todos los usuarios registrados en la base de datos
+     * @return Mapa con todos los usuarios registrados en la base de datos
+     */
     @Override
     public Map<String, Usuario> obtenerUsuarios() {
         Map<String, Usuario> usuarios = new HashMap<>();
@@ -97,6 +101,11 @@ public class UsuarioController implements IUsuario {
         return usuarios;
     }
     
+    /**
+     * Metodo que obtiene un usuario registrado en la base de datos a partir de su nickname
+     * @param nickname Nickname del usuario a buscar
+     * @return Optional con el usuario encontrado
+     */
     @Override
     public Optional<Usuario> obtenerUsuarioPorNickname(String nickname){
         Usuario usuario = null;
@@ -159,6 +168,11 @@ public class UsuarioController implements IUsuario {
         return Optional.ofNullable(usuario);
     }
     
+    /**
+     * Metodo que obtiene un usuario registrado en la base de datos a partir de su correo
+     * @param correo Correo del usuario a buscar
+     * @return Optional con el usuario encontrado
+     */
     @Override
     public Optional<Usuario> obtenerUsuarioPorCorreo(String correo){
         Usuario usuario = null;
@@ -222,6 +236,10 @@ public class UsuarioController implements IUsuario {
         return Optional.ofNullable(usuario);
     }
 
+    /**
+     * Metodo que ingresa un usuario a la base de datos
+     * @param usuario Objeto usuario a ingresar
+     */
     @Override
     public void altaUsuario(Usuario usuario) {
         Connection connection = null;
@@ -261,6 +279,10 @@ public class UsuarioController implements IUsuario {
         }
     }
 
+    /**
+     * Metodo que modifica un usuario en la base de datos
+     * @param usuario Objeto usuario con los datos a modificar
+     */
     @Override
     public void modificarUsuario(Usuario usuario) {
         Connection connection = null;

@@ -32,6 +32,9 @@ public class DatabaseController implements IDatabase {
         return instance;
     }
   
+  /**
+   * Metodo que permite vaciar los datos que existian en base de datos y crear toda la estructura nuevamente
+   */
   @Override
   public void vaciarDatos(){
     Connection connection = null;
@@ -70,6 +73,9 @@ public class DatabaseController implements IDatabase {
     }
   }
   
+  /**
+   * Metodo que permite cargar los datos de prueba a la base de datos
+   */
   @Override
   public void cargarDatos(){
     Connection connection = null;
@@ -111,6 +117,12 @@ public class DatabaseController implements IDatabase {
     }
   }
   
+  /**
+   * Metodo que permite guardar una imagen en la base de datos
+   * @param imagen de tipo FileInputStream
+   *               imagen que se desea guardar en la base de datos
+   * @return String
+   */
   @Override
   public String guardarImagen(FileInputStream imagen){
     String url = "";
@@ -140,6 +152,13 @@ public class DatabaseController implements IDatabase {
     
     return url;
   }
+  
+  /**
+   * Metodo que permite obtener una imagen de la base de datos
+   * @param imagen de tipo File
+   *                de la imagen que se guardar en la base de datos
+   * @return String
+   */
   @Override
   public String guardarImagen(File imagen){
     String url = "";

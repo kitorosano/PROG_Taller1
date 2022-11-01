@@ -28,6 +28,10 @@ public class CategoriaController implements ICategoria {
     return instance;
   }
   
+  /**
+   * Metodo que permite crear una categoria
+   * @param categoria Objeto Categoria que se desea crear
+   */
   @Override
   public void altaCategoria(Categoria categoria) {
     Connection connection = null;
@@ -54,6 +58,10 @@ public class CategoriaController implements ICategoria {
     }
   }
   
+  /**
+   * Metodo que permite obtener todas las categorias
+   * @return Mapa con todas las categorias
+   */
   @Override
   public Map<String, Categoria> obtenerCategorias(){
     Map<String, Categoria> categorias = new HashMap<>();
@@ -89,6 +97,11 @@ public class CategoriaController implements ICategoria {
     return categorias;
   }
   
+  /**
+   * Metodo que permite obtener una categoria
+   * @param nombreCategoria Nombre de la categoria que se desea obtener
+   * @return Objeto Categoria
+   */
   @Override
   public Optional<Categoria> obtenerCategoria(String nombreCategoria){
     Categoria categoria = null;
@@ -123,6 +136,12 @@ public class CategoriaController implements ICategoria {
     return Optional.ofNullable(categoria);
   }
   
+  /**
+   * Metodo que permite obtener todos los espectaculos de una categoria
+   * @param nombreCategoria Nombre de la categoria de la que se desea obtener los espectaculos
+   *                        que pertenecen a ella
+   * @return Mapa con todos los espectaculos de la categoria
+   */
   @Override
   public Map<String, Espectaculo> obtenerEspectaculosDeCategoria(String nombreCategoria){
     Map<String, Espectaculo> espectaculos = new HashMap<>();
@@ -192,6 +211,11 @@ public class CategoriaController implements ICategoria {
     return espectaculos;
   }
   
+  /**
+   * Metodo que permite obtener todas las categorias de un espectaculo
+   * @param nombreEspectaculo Nombre del espectaculo del que se desea obtener las categorias
+   * @return Mapa con todas las categorias de la base de datos
+   */
   @Override
   public Map<String, Categoria> obtenerCategoriasDeEspectaculo(String nombreEspectaculo){
     Map<String, Categoria> categorias = new HashMap<>();
@@ -230,6 +254,16 @@ public class CategoriaController implements ICategoria {
     return categorias;
   }
   
+  /**
+   * Metodo que permite obtener todos los espectaculos de una categoria
+   * @param nombreCategoria Nombre de la categoria del que se desea obtener los espectaculos
+   *                        asociados
+   * @param nombreEspectaculo Nombre del espectaculo del que se desea obtener las categorias
+   *                          asociadas
+   * @param nombrePlataforma Nombre de la plataforma del que se desea obtener los espectaculos
+   *                         asociados
+   * @return Mapa con todos los espectaculos de la base de datos
+   */
   @Override
   public void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo, String nombrePlataforma){
     Connection connection = null;

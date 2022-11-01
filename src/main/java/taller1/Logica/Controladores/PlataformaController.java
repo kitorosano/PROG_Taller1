@@ -25,6 +25,10 @@ public class PlataformaController  implements IPlataforma {
     return instance;
   }
   
+  /**
+   * Metodo que permite crear una plataforma
+   * @param nuevaPlataforma Objeto Plataforma que se desea crear
+   */
   @Override
   public void altaPlataforma(Plataforma nuevaPlataforma) {
     Connection connection = null;
@@ -51,6 +55,10 @@ public class PlataformaController  implements IPlataforma {
     }
   }
   
+  /**
+   * Metodo que permite obtener todas las plataformas
+   * @return Mapa con todas las plataformas
+   */
   @Override
   public Map<String, Plataforma> obtenerPlataformas() {
     Map<String, Plataforma> plataformas = new HashMap<>();
@@ -91,6 +99,11 @@ public class PlataformaController  implements IPlataforma {
     return plataformas;
   }
   
+  /**
+   * Metodo que permite obtener una plataforma
+   * @param nombrePlataforma Nombre de la plataforma que se desea obtener
+   * @return Optional con la plataforma
+   */
   @Override
   public Optional<Plataforma> obtenerPlataforma(String nombrePlataforma) {
     Plataforma plataforma = null;

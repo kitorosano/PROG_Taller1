@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="main.java.taller1.Presentacion.DetalleUsuario">
   <grid id="27dc6" binding="mainPanel" layout-manager="FormLayout">
-    <rowspec value="center:max(d;4px):noGrow"/>
-    <rowspec value="top:75dlu:noGrow"/>
+    <rowspec value="center:19px:noGrow"/>
+    <rowspec value="top:57dlu:noGrow"/>
     <rowspec value="center:d:noGrow"/>
     <rowspec value="top:4dlu:noGrow"/>
     <rowspec value="center:21px:noGrow"/>

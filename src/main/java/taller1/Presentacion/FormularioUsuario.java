@@ -4,10 +4,15 @@ import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Artista;
 import main.java.taller1.Logica.Clases.Espectador;
 import main.java.taller1.Logica.Clases.Usuario;
+import org.w3c.dom.css.RGBColor;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -33,9 +38,12 @@ public class FormularioUsuario extends JInternalFrame {
     private JTextField tfContrasenia;
     private JTextField tfContrasenia2;
     private JButton seleccionarImagenButton;
+    private JLabel estadoImagen;
     private JLabel LabelDescripcion;
 
     private String seleccionado;
+
+    String imagen=null;
 
     private String regexURL = "(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})";
 
@@ -63,8 +71,8 @@ public class FormularioUsuario extends JInternalFrame {
                             nombre = tfNombre.getText(),
                             apellido = tfApellido.getText(),
                             correo = tfCorreo.getText(),
-                            contrasenia = tfContrasenia.getText(),
-                            imagen = "";
+                            contrasenia = tfContrasenia.getText();
+                            //imagen = "";
                         
                         // validar fecha
                         if (!validarFecha(tfFechaNac.getText())) {
@@ -154,12 +162,38 @@ public class FormularioUsuario extends JInternalFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String path;
+                File file;
                 JFileChooser j = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                        "imagenes JPG & PNG ", "jpg", "png");
+                j.setFileFilter(filter);
+                j.setAcceptAllFileFilterUsed(false);
                 int retorno = j.showOpenDialog(panel1);
 
                 if(retorno == JFileChooser.APPROVE_OPTION){
-                    path= j.getSelectedFile().getAbsolutePath();
+                    file= j.getSelectedFile();
+                    try {
+                        String res =null;
+
+
+                        res = Fabrica.getInstance().getIDatabase().guardarImagen(file);
+                        if(res.isEmpty()){
+                            seleccionarImagenButton.setBackground(Color.red.darker());
+                        }
+                        else{
+                            float[] hsvals;
+                            seleccionarImagenButton.setBackground(Color.green.darker());
+                        }
+
+                        System.out.println(res);
+                        imagen=res;
+
+                    }
+                    catch (Exception exc) {
+                        JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+                    }
                 }
+
             }
         });
     }

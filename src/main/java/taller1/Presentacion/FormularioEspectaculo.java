@@ -4,12 +4,14 @@ import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Map;
 
@@ -28,6 +30,9 @@ public class FormularioEspectaculo extends JInternalFrame {
     private JSpinner spEspMaximos;
     private JSpinner spEspMinimos;
     private JButton btnConsulta;
+    private JButton seleccionarImagenButton;
+
+    String imagen=null;
 
     private String regexURL = "(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})";
 
@@ -73,6 +78,40 @@ public class FormularioEspectaculo extends JInternalFrame {
                 consulta.setClosable(true);
                 Dashboard.getInstance().getDashboardJDesktopPane().add(consulta);
                 consulta.setVisible(true);
+            }
+        });
+        seleccionarImagenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String path;
+                File file;
+                JFileChooser j = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                        "imagenes JPG & PNG ", "jpg", "png");
+                j.setFileFilter(filter);
+                j.setAcceptAllFileFilterUsed(false);
+                int retorno = j.showOpenDialog(panel1);
+
+                if(retorno == JFileChooser.APPROVE_OPTION){
+                    file= j.getSelectedFile();
+                    try {
+                        String res =null;
+                        res = Fabrica.getInstance().getIDatabase().guardarImagen(file);
+                        if(res.isEmpty()){
+
+                            seleccionarImagenButton.setBackground(Color.red.darker());
+                        }
+                        else{
+
+                            seleccionarImagenButton.setBackground(Color.green.darker());
+                        }
+                        System.out.println(res);
+                        imagen=res;
+                    }
+                    catch (Exception exc) {
+                        JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+                    }
+                }
             }
         });
     }
@@ -146,7 +185,7 @@ public class FormularioEspectaculo extends JInternalFrame {
                 }
             }
         }
-        Espectaculo nuevo = new Espectaculo(nombre, descripcion, duracion, minEspec, maxEspec, url, costo, E_EstadoEspectaculo.INGRESADO, LocalDateTime.now(), "",plataforma, artista);
+        Espectaculo nuevo = new Espectaculo(nombre, descripcion, duracion, minEspec, maxEspec, url, costo, E_EstadoEspectaculo.INGRESADO, LocalDateTime.now(), imagen,plataforma, artista);
         return nuevo;
     }
 

@@ -82,7 +82,9 @@ public class DatabaseController implements IDatabase {
     try {
       connection = ConexionDB.getConnection();
       ScriptRunner sr = new ScriptRunner(connection);
-      Reader reader = new BufferedReader(new FileReader("src/main/resources/usuarios.sql"));
+      Reader reader = new BufferedReader(new FileReader("src/main/resources/creation.sql"));
+      sr.runScript(reader);
+      reader = new BufferedReader(new FileReader("src/main/resources/usuarios.sql"));
       sr.runScript(reader);
       reader = new BufferedReader(new FileReader("src/main/resources/plataformas.sql"));
       sr.runScript(reader);

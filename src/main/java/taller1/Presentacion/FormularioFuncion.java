@@ -4,8 +4,11 @@ import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -29,8 +32,11 @@ public class FormularioFuncion extends JInternalFrame {
     private JTextField tfFecha; //TODO: Implementar JCalendar
     private JTextField tfHora;
     private JButton btnConsulta;
+    private JButton seleccionarImagenButton;
 
     private String seleccionado;
+
+    String imagen=null;
 
     public FormularioFuncion(String title, Espectaculo elegido) {
         super(title);
@@ -102,6 +108,39 @@ public class FormularioFuncion extends JInternalFrame {
                 alta.setClosable(true);
                 Dashboard.getInstance().getDashboardJDesktopPane().add(alta);
                 alta.setVisible(true);
+            }
+        });
+        seleccionarImagenButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String path;
+                File file;
+                JFileChooser j = new JFileChooser();
+                FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                        "imagenes JPG & PNG ", "jpg", "png");
+                j.setFileFilter(filter);
+                j.setAcceptAllFileFilterUsed(false);
+                int retorno = j.showOpenDialog(panel1);
+
+                if(retorno == JFileChooser.APPROVE_OPTION){
+                    file= j.getSelectedFile();
+                    try {
+                        String res =null;
+                        res = Fabrica.getInstance().getIDatabase().guardarImagen(file);
+                        if(res.isEmpty()){
+                            seleccionarImagenButton.setBackground(Color.red.darker());
+                        }
+                        else{
+                            float[] hsvals;
+                            seleccionarImagenButton.setBackground(Color.green.darker());
+                        }
+                        System.out.println(res);
+                        imagen=res;
+                    }
+                    catch (Exception exc) {
+                        JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+                    }
+                }
             }
         });
     }
@@ -200,7 +239,7 @@ public class FormularioFuncion extends JInternalFrame {
                     break;
                 }
             }
-            return new Funcion(nombre,espectaculo,fechahora,LocalDateTime.now(), "");
+            return new Funcion(nombre,espectaculo,fechahora,LocalDateTime.now(),imagen);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

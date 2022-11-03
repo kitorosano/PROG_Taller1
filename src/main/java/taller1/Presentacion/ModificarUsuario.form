@@ -224,7 +224,7 @@
               <forms defaultalign-horz="false"/>
             </constraints>
             <properties>
-              <text value="Label"/>
+              <text value="Cambiar imagen"/>
             </properties>
           </component>
         </children>

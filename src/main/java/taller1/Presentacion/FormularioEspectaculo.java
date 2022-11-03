@@ -13,7 +13,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class FormularioEspectaculo extends JInternalFrame {
 
@@ -31,6 +33,18 @@ public class FormularioEspectaculo extends JInternalFrame {
     private JSpinner spEspMinimos;
     private JButton btnConsulta;
     private JButton seleccionarImagenButton;
+    private JList listCategoriaAgregar;
+    private JList listCategoriaQuitar;
+    private JButton btnQuitar;
+    private JButton btnAgregar;
+
+    private DefaultListModel<String> modelAgregar = new DefaultListModel<String>();
+
+    private DefaultListModel<String> modelQuitar = new DefaultListModel<String>();
+
+    private Map<String,Categoria>categorias;
+
+    private Map<String, String>categoriasAgregar = new HashMap<String, String>();
 
     String imagen=null;
 
@@ -47,6 +61,12 @@ public class FormularioEspectaculo extends JInternalFrame {
         soloNumero(tfDuracion);
         soloNumero(tfCosto);
         cargarDatosComboBox();
+
+        listCategoriaAgregar.setModel(modelAgregar);
+        listCategoriaQuitar.setModel(modelQuitar);
+
+        cargarDatosListas();
+
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -54,7 +74,8 @@ public class FormularioEspectaculo extends JInternalFrame {
                 if (!comprobarErrorEnCampos()) {
                     if (!comprobarNombreUnico(plataforma, tfNombre.getText())) {
                         try {
-                            Fabrica.getInstance().getIEspectaculo().altaEspectaculo(crearEspectaculo());
+                            crearEspectaculo();
+
                             JOptionPane.showMessageDialog(null, "Espectaculo agregado con exito");
                             dispose();
                         } catch (Exception ex) {
@@ -114,6 +135,28 @@ public class FormularioEspectaculo extends JInternalFrame {
                 }
             }
         });
+        btnAgregar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+                String miCategoria = (String) listCategoriaAgregar.getSelectedValue();
+                //Categoria cat = Fabrica.getInstance().getICategoria().obtenerCategoria(miCategoria).get();
+                categoriasAgregar.put(miCategoria, miCategoria);
+
+                String categoria=modelAgregar.getElementAt(listCategoriaAgregar.getSelectedIndex());
+                modelQuitar.addElement(categoria);
+                modelAgregar.remove(listCategoriaAgregar.getSelectedIndex());
+            }
+        });
+        btnQuitar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                categoriasAgregar.remove((String)listCategoriaQuitar.getSelectedValue());
+                String categoria=modelQuitar.getElementAt(listCategoriaQuitar.getSelectedIndex());
+                modelAgregar.addElement(categoria);
+                modelQuitar.remove(listCategoriaQuitar.getSelectedIndex());
+            }
+        });
     }
 
     public void cargarDatosComboBox() {
@@ -163,7 +206,7 @@ public class FormularioEspectaculo extends JInternalFrame {
         return false;
     }
 
-    public Espectaculo crearEspectaculo() {
+    public void crearEspectaculo() {
         String nombre = tfNombre.getText(), descripcion = tfDescripcion.getText(), url = tfURL.getText();
         int minEspec = (int) spEspMinimos.getValue(), maxEspec = (int) spEspMaximos.getValue();
         double duracion = Double.parseDouble(tfDuracion.getText()), costo = Double.parseDouble(tfCosto.getText());
@@ -190,7 +233,12 @@ public class FormularioEspectaculo extends JInternalFrame {
         }
 
         Espectaculo nuevo = new Espectaculo(nombre, descripcion, duracion, minEspec, maxEspec, url, costo, E_EstadoEspectaculo.INGRESADO, LocalDateTime.now(), imagen,plataforma, artista);
-        return nuevo;
+        Fabrica.getInstance().getIEspectaculo().altaEspectaculo(nuevo);
+
+        for (String micategoria : categoriasAgregar.values()){
+            Fabrica.getInstance().getICategoria().altaCategoriaAEspectaculo(micategoria, nuevo.getNombre(), nuevo.getPlataforma().getNombre());
+        }
+
     }
 
     private void soloNumero(JTextField tf) {         //Impide que se ingresen caracteres no numericos
@@ -207,4 +255,34 @@ public class FormularioEspectaculo extends JInternalFrame {
             }
         });
     }
+
+    public void cargarDatosListas(){
+        Map<String,EspectadorRegistradoAFuncion>invitados;
+        modelAgregar.clear();
+        modelQuitar.clear();
+        try {
+            /*
+            usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
+            invitados=Fabrica.getInstance().getIFuncion().obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
+            Espectaculo espectaculo=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect).getEspectaculo();
+            maximo=espectaculo.getMaxEspectadores()-invitados.size();
+            */
+            categorias = Fabrica.getInstance().getICategoria().obtenerCategorias();
+            for(Categoria c:categorias.values()){
+                modelAgregar.addElement(c.getNombre());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.toString());
+        }
+    }
+
+    /*
+    public void AgregarCategoriaAMapa(){
+        String nombreCategoria = listCategoriaAgregar.getSelectedValue().toString();
+        Categoria micategoria = Fabrica.getInstance().getICategoria().obtenerCategoria(nombreCategoria);
+
+        categoriasAgregar.put(nombreCategoria, Fabrica.getInstance().getICategoria().obtenerCategoria(nombreCategoria));
+    }
+     */
+
 }

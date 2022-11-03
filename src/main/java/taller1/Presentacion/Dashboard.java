@@ -121,7 +121,7 @@ public class Dashboard extends JFrame {
                 JInternalFrame iFrame = new FormularioEspectaculo("Formulario de Espectaculo");
                 iFrame.setIconifiable(true);
                 iFrame.setClosable(true);
-                iFrame.setSize(580,460);
+                iFrame.setSize(535,580);
                 dashboardJDesktopPane.add(iFrame);
                 iFrame.setVisible(true);
             }

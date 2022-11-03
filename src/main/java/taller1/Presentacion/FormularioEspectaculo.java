@@ -185,6 +185,10 @@ public class FormularioEspectaculo extends JInternalFrame {
                 }
             }
         }
+        if(imagen==null){
+            imagen="https://i.imgur.com/BeJ3HuS.png";
+        }
+
         Espectaculo nuevo = new Espectaculo(nombre, descripcion, duracion, minEspec, maxEspec, url, costo, E_EstadoEspectaculo.INGRESADO, LocalDateTime.now(), imagen,plataforma, artista);
         return nuevo;
     }

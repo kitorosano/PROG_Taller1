@@ -301,7 +301,9 @@ public class UsuarioController implements IUsuario {
             connection = ConexionDB.getConnection();
             statement = connection.createStatement();
             statement.executeUpdate(updateUsuario);
-            statement.executeUpdate(updateUsuario2);
+            if (usuario instanceof Artista) {
+                statement.executeUpdate(updateUsuario2);
+            }
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException("Error al conectar con la base de datos", e);

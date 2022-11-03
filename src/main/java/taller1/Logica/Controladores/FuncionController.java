@@ -492,9 +492,14 @@ public class FuncionController implements IFuncion {
   public void registrarEspectadorAFuncion(EspectadorRegistradoAFuncion espectadorRegistradoAFuncion) {
     Connection connection = null;
     Statement statement = null;
-    String insertEspectadorFunciones = "INSERT INTO espectadores_funciones(ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada, ue_fn_nombrePaquete, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro) " +
-        " VALUES ('" + espectadorRegistradoAFuncion.getEspectador().getNickname() + "', '" + espectadorRegistradoAFuncion.getFuncion().getNombre() + "', '" + espectadorRegistradoAFuncion.getFuncion().getEspectaculo().getNombre() + "', " + espectadorRegistradoAFuncion.getFuncion().getEspectaculo().getPlataforma().getNombre() + "', " + espectadorRegistradoAFuncion.getPaquete().getNombre() + "', " + espectadorRegistradoAFuncion.isCanjeado() + ", " + espectadorRegistradoAFuncion.getCosto() + ", '" + LocalDateTime.now() + "')";
-    
+    String insertEspectadorFunciones="";
+    if(espectadorRegistradoAFuncion.getPaquete()==null) {
+      insertEspectadorFunciones = "INSERT INTO espectadores_funciones(ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada, ue_fn_nombrePaquete, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro) " +
+              " VALUES ('" + espectadorRegistradoAFuncion.getEspectador().getNickname() + "', '" + espectadorRegistradoAFuncion.getFuncion().getNombre() + "', '" + espectadorRegistradoAFuncion.getFuncion().getEspectaculo().getNombre() + "', " + espectadorRegistradoAFuncion.getFuncion().getEspectaculo().getPlataforma().getNombre() + "', " + null + "', " + espectadorRegistradoAFuncion.isCanjeado() + ", " + espectadorRegistradoAFuncion.getCosto() + ", '" + LocalDateTime.now() + "')";
+    } else{
+        insertEspectadorFunciones = "INSERT INTO espectadores_funciones(ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada, ue_fn_nombrePaquete, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro) " +
+                " VALUES ('" + espectadorRegistradoAFuncion.getEspectador().getNickname() + "', '" + espectadorRegistradoAFuncion.getFuncion().getNombre() + "', '" + espectadorRegistradoAFuncion.getFuncion().getEspectaculo().getNombre() + "', " + espectadorRegistradoAFuncion.getFuncion().getEspectaculo().getPlataforma().getNombre() + "', " + espectadorRegistradoAFuncion.getPaquete().getNombre() + "', " + espectadorRegistradoAFuncion.isCanjeado() + ", " + espectadorRegistradoAFuncion.getCosto() + ", '" + LocalDateTime.now() + "')";
+      }
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -519,9 +524,14 @@ public class FuncionController implements IFuncion {
   public void registrarEspectadoresAFunciones(Map<String, EspectadorRegistradoAFuncion> espectadoresFunciones) {
     Connection connection = null;
     Statement statement = null;
-    String insertEspectadoresFunciones = "INSERT INTO espectadores_funciones(ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_nombrePaquete, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro) VALUES ";
+    String insertEspectadoresFunciones = "INSERT INTO espectadores_funciones(ue_fn_nickname, ue_fn_nombreFuncion,ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada,ue_fn_nombrePaquete, ue_fn_canjeado, ue_fn_costo, ue_fn_fechaRegistro) VALUES ";
     for (EspectadorRegistradoAFuncion espectadorFuncion : espectadoresFunciones.values()) {
-      insertEspectadoresFunciones += "('" + espectadorFuncion.getEspectador().getNickname() + "', '" + espectadorFuncion.getFuncion().getNombre() + "', " + espectadorFuncion.getPaquete().getNombre() + "', " + espectadorFuncion.isCanjeado() + ", " + espectadorFuncion.getCosto() + ", '" + espectadorFuncion.getFechaRegistro() + "'), ";
+      if(espectadorFuncion.getPaquete()==null){
+        insertEspectadoresFunciones += "('" + espectadorFuncion.getEspectador().getNickname() + "', '" + espectadorFuncion.getFuncion().getNombre() + "', '"+espectadorFuncion.getFuncion().getEspectaculo().getNombre()+"','" +espectadorFuncion.getFuncion().getEspectaculo().getPlataforma().getNombre()+"',"+ null + ", " + espectadorFuncion.isCanjeado() + ", " + espectadorFuncion.getCosto() + ", '" + espectadorFuncion.getFechaRegistro() + "'), ";
+      }else{
+        insertEspectadoresFunciones += "('" + espectadorFuncion.getEspectador().getNickname() + "', '" + espectadorFuncion.getFuncion().getNombre() + "', "+espectadorFuncion.getFuncion().getEspectaculo().getNombre()+"','" +espectadorFuncion.getFuncion().getEspectaculo().getPlataforma().getNombre()+"','"+ espectadorFuncion.getPaquete().getNombre() + "', " + espectadorFuncion.isCanjeado() + ", " + espectadorFuncion.getCosto() + ", '" + espectadorFuncion.getFechaRegistro() + "'), ";
+      }
+
     }
     insertEspectadoresFunciones = insertEspectadoresFunciones.substring(0, insertEspectadoresFunciones.length() - 2); // Eliminamos la última coma y espacio
     
@@ -653,7 +663,7 @@ public class FuncionController implements IFuncion {
         "  AND UE_FN.ue_fn_plataformaAsociada = FN.fn_plataformaAsociada " +
         "  AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada " +
         "  AND ES.es_plataformaAsociada = PL.pl_nombre " +
-        "  AND UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre " +
+        "  AND UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre" +
         "  AND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre " +
         "  AND FN.fn_nombre = '" + nombreFuncion + "' ";
     try {

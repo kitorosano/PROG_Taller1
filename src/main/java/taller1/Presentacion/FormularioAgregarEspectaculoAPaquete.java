@@ -85,7 +85,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 for (Map.Entry<String, Espectaculo> entry : espectaculosNuevos.entrySet()) {
-                    Fabrica.getInstance().getIPaquete().altaEspectaculoAPaquete((String)cbPaquete.getSelectedItem(), entry.getValue().getNombre(),entry.getValue().getPlataforma().getNombre());
+                    Fabrica.getInstance().getIPaquete().altaEspectaculoAPaquete( entry.getValue().getNombre(),entry.getValue().getPlataforma().getNombre(),(String)cbPaquete.getSelectedItem());
                 }
                 JOptionPane.showMessageDialog(null,"Espectaculos agregados con exito");
                 dispose();

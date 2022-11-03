@@ -261,12 +261,6 @@ public class FormularioEspectaculo extends JInternalFrame {
         modelAgregar.clear();
         modelQuitar.clear();
         try {
-            /*
-            usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
-            invitados=Fabrica.getInstance().getIFuncion().obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
-            Espectaculo espectaculo=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect).getEspectaculo();
-            maximo=espectaculo.getMaxEspectadores()-invitados.size();
-            */
             categorias = Fabrica.getInstance().getICategoria().obtenerCategorias();
             for(Categoria c:categorias.values()){
                 modelAgregar.addElement(c.getNombre());
@@ -275,14 +269,5 @@ public class FormularioEspectaculo extends JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.toString());
         }
     }
-
-    /*
-    public void AgregarCategoriaAMapa(){
-        String nombreCategoria = listCategoriaAgregar.getSelectedValue().toString();
-        Categoria micategoria = Fabrica.getInstance().getICategoria().obtenerCategoria(nombreCategoria);
-
-        categoriasAgregar.put(nombreCategoria, Fabrica.getInstance().getICategoria().obtenerCategoria(nombreCategoria));
-    }
-     */
 
 }

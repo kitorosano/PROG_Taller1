@@ -122,9 +122,13 @@ public class DetalleUsuario extends JInternalFrame {
                         Dashboard.getInstance().getDashboardJDesktopPane().add(detalleEspectaculo);
                         detalleEspectaculo.setVisible(true);
                     } else {
-                        String valor = table1.getValueAt(table1.getSelectedRow(), 1).toString();
-                        Funcion funcion = funcionesRegistradasDelEspectador.get(valor).getFuncion();
+                        String nombre_funcion = table1.getValueAt(table1.getSelectedRow(), 0).toString();
+                        String nombre_espectaculo = table1.getValueAt(table1.getSelectedRow(), 1).toString();
+                        String nombre_plataforma = table1.getValueAt(table1.getSelectedRow(), 2).toString();
 
+                        Funcion funcion = funcionesRegistradasDelEspectador.get(nombre_funcion+"-"+nombre_espectaculo+"-"+nombre_plataforma).getFuncion();
+
+                            System.out.println(funcion);
                         JInternalFrame detalle = new DetalleFuncion("Detalle Funcion", funcion);
                         detalle.setIconifiable(true);
                         detalle.setClosable(true);
@@ -152,7 +156,7 @@ public class DetalleUsuario extends JInternalFrame {
     private void createUIComponents(int tipo) { //tipo 1:Artista , tipo 2:espectador
         // TODO: place custom component creation code here
         String[] espectaculo = {"Nombre Espectaculo", "Costo","Plataforma"};
-        String[] funcion = {"Nickname Espectador", "Nombre Funcion"};
+        String[] funcion = {"Funcion", "Espectaculo","Plataforma"};
         String[] titulos = {};
         if (tipo == 1) titulos = espectaculo;
         else titulos = funcion;
@@ -173,7 +177,7 @@ public class DetalleUsuario extends JInternalFrame {
         try {
             this.funcionesRegistradasDelEspectador = Fabrica.getInstance().getIFuncion().obtenerFuncionesRegistradasDelEspectador(this.usuario.getNickname());
             for (Map.Entry<String, EspectadorRegistradoAFuncion> entry : this.funcionesRegistradasDelEspectador.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getEspectador().getNickname(), entry.getValue().getFuncion().getNombre()});
+                model.addRow(new Object[]{ entry.getValue().getFuncion().getNombre(),entry.getValue().getFuncion().getEspectaculo().getNombre(),entry.getValue().getFuncion().getEspectaculo().getPlataforma().getNombre()});
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());

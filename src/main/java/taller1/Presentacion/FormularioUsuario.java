@@ -91,7 +91,9 @@ public class FormularioUsuario extends JInternalFrame {
                             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
                             return;
                         }
-                        
+                        if(imagen==null){
+                            imagen="https://i.imgur.com/e4W1PV0.png";
+                        }
                         if (seleccionado.equals("Artista")) {
                             String descripcion = tfDescripcion.getText(),
                                     biografia = tfBiografia.getText(),

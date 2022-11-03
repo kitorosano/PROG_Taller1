@@ -49,7 +49,9 @@ public class FormularioPaquete extends JInternalFrame {
                 double descuento = Double.parseDouble(tfDescuento.getText());
                 LocalDateTime fechaRegistro = LocalDateTime.now();
                 //String imagen = "";
-                
+               if(imagen==null){
+                  imagen="https://i.imgur.com/hHn0WrG.png";
+               }
               Paquete paquete = new Paquete(nombre, descripcion, descuento, fechaRegistro, fechaVencimiento, imagen);
               Fabrica.getInstance().getIPaquete().altaPaquete(paquete);
               JOptionPane.showMessageDialog(null, "Paquete agregado exitosamente");

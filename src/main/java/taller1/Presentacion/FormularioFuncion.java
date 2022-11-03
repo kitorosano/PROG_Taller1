@@ -239,6 +239,9 @@ public class FormularioFuncion extends JInternalFrame {
                     break;
                 }
             }
+            if(imagen==null){
+                imagen="https://i.imgur.com/EDotlnM.png";
+            }
             return new Funcion(nombre,espectaculo,fechahora,LocalDateTime.now(),imagen);
         } catch (Exception e) {
             throw new RuntimeException(e);

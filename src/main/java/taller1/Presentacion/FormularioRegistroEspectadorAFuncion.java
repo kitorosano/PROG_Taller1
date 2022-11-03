@@ -146,8 +146,8 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
     private void AgregarEspectadorAMapa(){
         Espectador nuevo;
         double costo;
-        Espectaculo espectaculo=funciones.get(nombreFuncion).getEspectaculo();
-        Funcion funcion=funciones.get(nombreFuncion);
+        Espectaculo espectaculo=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect).getEspectaculo();
+        Funcion funcion=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect);
         usuarios=Fabrica.getInstance().getIUsuario().obtenerUsuarios();
         nuevo= (Espectador) usuarios.get((String) listaAinvitar.getSelectedValue());
         if(listaRegistPrevios.getSelectedIndices().length == 3){
@@ -210,7 +210,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         try {
             usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
             invitados=Fabrica.getInstance().getIFuncion().obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
-            Espectaculo espectaculo=funciones.get(nombreFuncion).getEspectaculo();
+            Espectaculo espectaculo=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect).getEspectaculo();
             maximo=espectaculo.getMaxEspectadores()-invitados.size();
             for(Usuario u:usuarios.values()){
                 if(u instanceof Espectador && !invitados.containsKey(u.getNickname())){

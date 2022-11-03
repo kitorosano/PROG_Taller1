@@ -150,7 +150,7 @@ public class ListadoFunciones extends JInternalFrame {
 
         try {
             funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(cmbPlataforma.getSelectedItem().toString(), cmbEspectaculo.getSelectedItem().toString());
-            Funcion funcion = funciones.get(listaFunciones.getSelectedValue());  //Guardo la funcion seleccionada buscando en la lista por su nombre
+            Funcion funcion = funciones.get(listaFunciones.getSelectedValue()+"-"+cmbEspectaculo.getSelectedItem().toString()+"-"+cmbPlataforma.getSelectedItem().toString());  //Guardo la funcion seleccionada buscando en la lista por su nombre
             JInternalFrame detalle = new DetalleFuncion("Detalle funcion", funcion);
             detalle.setIconifiable(true);
             detalle.setClosable(true);

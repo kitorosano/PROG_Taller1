@@ -663,7 +663,7 @@ public class FuncionController implements IFuncion {
         "  AND UE_FN.ue_fn_plataformaAsociada = FN.fn_plataformaAsociada " +
         "  AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada " +
         "  AND ES.es_plataformaAsociada = PL.pl_nombre " +
-        "  AND UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre" +
+        "  AND (UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre OR UE_FN.ue_fn_nombrePaquete IS NULL)" +
         "  AND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre " +
         "  AND FN.fn_nombre = '" + nombreFuncion + "' ";
     try {

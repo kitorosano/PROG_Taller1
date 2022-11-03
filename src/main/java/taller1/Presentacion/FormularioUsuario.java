@@ -81,7 +81,7 @@ public class FormularioUsuario extends JInternalFrame {
                         }
                         LocalDate fechanac = LocalDate.parse(tfFechaNac.getText());
                         //validate url with regex
-                        if (!tfURL.getText().matches(regexURL)) {
+                        if ((!tfURL.getText().matches(regexURL)) && ((String) comboBoxTipo.getSelectedItem() == "Artista")) {
                             JOptionPane.showMessageDialog(null, "La URL no es valida");
                             return;
                         }

@@ -268,8 +268,8 @@ public class CategoriaController implements ICategoria {
   public void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo, String nombrePlataforma){
     Connection connection = null;
     Statement statement = null;
-    String insertEspectaculoCategoria = "INSERT INTO espectaculos_categorias (es_cat_nombreEspectaculo,es_cat_plataformaAsociada, es_cat_nombreCategoria) " +
-        "                           VALUES ('" + nombreEspectaculo + "', '" + nombrePlataforma + "','" + nombreCategoria + "')";
+    String insertEspectaculoCategoria = "INSERT INTO espectaculos_categorias (es_cat_nombreEspectaculo, es_cat_plataformaAsociada, es_cat_nombreCategoria) " +
+                                      " VALUES ('" + nombreEspectaculo + "', '" + nombrePlataforma + "','" + nombreCategoria + "')";
     
     try {
       connection = ConexionDB.getConnection();

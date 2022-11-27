@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.UsuarioDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Artista;
 import main.java.taller1.Logica.Clases.Espectador;
@@ -99,7 +100,19 @@ public class FormularioUsuario extends JInternalFrame {
                                     biografia = tfBiografia.getText(),
                                     url = tfURL.getText();
                             try {
-                                Fabrica.getInstance().getIUsuario().altaUsuario(new Artista(nickname, nombre, apellido, correo, fechanac, contrasenia, imagen, descripcion, biografia, url));
+                                UsuarioDTO usuarioDTO = new UsuarioDTO();
+                                usuarioDTO.setNickname(nickname);
+                                usuarioDTO.setNombre(nombre);
+                                usuarioDTO.setApellido(apellido);
+                                usuarioDTO.setCorreo(correo);
+                                usuarioDTO.setContrasenia(contrasenia);
+                                usuarioDTO.setFechaNacimiento(fechanac);
+                                usuarioDTO.setImagen(imagen);
+                                usuarioDTO.setDescripcion(descripcion);
+                                usuarioDTO.setBiografia(biografia);
+                                usuarioDTO.setSitioWeb(url);
+                                usuarioDTO.setEsArtista(true);
+                                Fabrica.getInstance().getIUsuario().altaUsuario(usuarioDTO);
                                 JOptionPane.showMessageDialog(null, "Artista creado con exito");
                                 dispose();
                             } catch (Exception ex) {
@@ -107,7 +120,15 @@ public class FormularioUsuario extends JInternalFrame {
                             }
                         } else { // equal Espectador
                             try {
-                                Fabrica.getInstance().getIUsuario().altaUsuario(new Espectador(nickname, nombre, apellido, correo, fechanac, contrasenia, imagen));
+                                UsuarioDTO usuarioDTO = new UsuarioDTO();
+                                usuarioDTO.setNickname(nickname);
+                                usuarioDTO.setNombre(nombre);
+                                usuarioDTO.setApellido(apellido);
+                                usuarioDTO.setCorreo(correo);
+                                usuarioDTO.setContrasenia(contrasenia);
+                                usuarioDTO.setFechaNacimiento(fechanac);
+                                usuarioDTO.setImagen(imagen);
+                                Fabrica.getInstance().getIUsuario().altaUsuario(usuarioDTO);
                                 JOptionPane.showMessageDialog(null, "Espectador creado con exito");
                                 dispose();
                             } catch (Exception ex) {

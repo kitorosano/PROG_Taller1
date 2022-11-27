@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.AltaCategoriaAEspectaculoDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 
@@ -236,7 +237,11 @@ public class FormularioEspectaculo extends JInternalFrame {
         Fabrica.getInstance().getIEspectaculo().altaEspectaculo(nuevo);
 
         for (String micategoria : categoriasAgregar.values()){
-            Fabrica.getInstance().getICategoria().altaCategoriaAEspectaculo(micategoria, nuevo.getNombre(), nuevo.getPlataforma().getNombre());
+            AltaCategoriaAEspectaculoDTO altaCategoriaAEspectaculoDTO = new AltaCategoriaAEspectaculoDTO();
+            altaCategoriaAEspectaculoDTO.setNombreCategoria(micategoria);
+            altaCategoriaAEspectaculoDTO.setNombreEspectaculo(nuevo.getNombre());
+            altaCategoriaAEspectaculoDTO.setNombrePlataforma(nuevo.getPlataforma().getNombre());
+            Fabrica.getInstance().getICategoria().altaCategoriaAEspectaculo(altaCategoriaAEspectaculoDTO);
         }
 
     }

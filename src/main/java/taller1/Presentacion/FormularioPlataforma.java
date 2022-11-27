@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.PlataformaDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 
@@ -33,7 +34,7 @@ public class FormularioPlataforma extends JInternalFrame {
                     } else {
                         String nombre = tfNombre.getText(), descripcion = tfDescripcion.getText(), url = tfURL.getText();
                         try {
-                            Fabrica.getInstance().getIPlataforma().altaPlataforma(new Plataforma(nombre, descripcion, url));
+                            Fabrica.getInstance().getIPlataforma().altaPlataforma(new PlataformaDTO(nombre, descripcion, url));
                             JOptionPane.showMessageDialog(null, "Plataforma agregada con exito");
                             dispose();
                         } catch (Exception ex) {

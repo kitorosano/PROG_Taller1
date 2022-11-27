@@ -1,6 +1,8 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
+import main.java.taller1.Logica.DTOs.EspectaculoNuevoEstadoDTO;
 import main.java.taller1.Logica.Interfaces.IEspectaculo;
 import main.java.taller1.Logica.Servicios.EspectaculoService;
 import main.java.taller1.Persistencia.ConexionDB;
@@ -20,6 +22,7 @@ public class EspectaculoController implements IEspectaculo {
   private EspectaculoService servicio;
   
   private EspectaculoController() {
+    servicio = new EspectaculoService();
   }
   
   public static EspectaculoController getInstance() {
@@ -30,7 +33,7 @@ public class EspectaculoController implements IEspectaculo {
   }
   
   @Override
-  public void altaEspectaculo(Espectaculo nuevoEspectaculo) {
+  public void altaEspectaculo(EspectaculoDTO nuevoEspectaculo) {
     servicio.altaEspectaculo(nuevoEspectaculo);
   }
   @Override
@@ -63,7 +66,7 @@ public class EspectaculoController implements IEspectaculo {
     return servicio.obtenerEspectaculosPorArtistaYEstado(nickname, estado);
   }
   @Override
-  public void cambiarEstadoEspectaculo(String nombrePlataforma, String nombreEspectaculo, E_EstadoEspectaculo nuevoEstado){
-    servicio.cambiarEstadoEspectaculo(nombrePlataforma, nombreEspectaculo, nuevoEstado);
+  public void cambiarEstadoEspectaculo(EspectaculoNuevoEstadoDTO espectaculoNuevoEstadoDTO){
+    servicio.cambiarEstadoEspectaculo(espectaculoNuevoEstadoDTO);
   }
 }

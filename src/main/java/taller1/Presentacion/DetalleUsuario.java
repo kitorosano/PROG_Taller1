@@ -175,7 +175,7 @@ public class DetalleUsuario extends JInternalFrame {
 
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
-            this.funcionesRegistradasDelEspectador = Fabrica.getInstance().getIFuncion().obtenerFuncionesRegistradasDelEspectador(this.usuario.getNickname());
+            this.funcionesRegistradasDelEspectador = Fabrica.getInstance().getIEspectadorRegistradoAFuncion().obtenerFuncionesRegistradasDelEspectador(this.usuario.getNickname());
             for (Map.Entry<String, EspectadorRegistradoAFuncion> entry : this.funcionesRegistradasDelEspectador.entrySet()) {
                 model.addRow(new Object[]{ entry.getValue().getFuncion().getNombre(),entry.getValue().getFuncion().getEspectaculo().getNombre(),entry.getValue().getFuncion().getEspectaculo().getPlataforma().getNombre()});
             }

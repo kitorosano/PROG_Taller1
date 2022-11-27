@@ -4,6 +4,7 @@ import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.DTOs.AltaCategoriaAEspectaculoDTO;
 import main.java.taller1.Logica.DTOs.CategoriaDTO;
 import main.java.taller1.Logica.Mappers.CategoriaMapper;
+import main.java.taller1.Logica.Mappers.EspectaculoMapper;
 import main.java.taller1.Persistencia.ConexionDB;
 
 import java.sql.Connection;
@@ -101,7 +102,6 @@ public class CategoriaService {
     return Optional.ofNullable(categoria);
   }
   
-  //TODO: IMPLEMENTAR MAPPERS DE ESPECTACULO ACA
   public Map<String, Espectaculo> obtenerEspectaculosDeCategoria(String nombreCategoria){
     Map<String, Espectaculo> espectaculos = new HashMap<>();
     Connection connection = null;
@@ -119,38 +119,7 @@ public class CategoriaService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectEspectaculosByPaquete);
-      while (resultSet.next()) {
-        String u_nickname = resultSet.getString("u_nickname");
-        String u_nombre = resultSet.getString("u_nombre");
-        String u_apellido = resultSet.getString("u_apellido");
-        String u_correo = resultSet.getString("u_correo");
-        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String u_contrasenia = resultSet.getString("u_contrasenia");
-        String u_imagen = resultSet.getString("u_imagen");
-        String ua_descripcion = resultSet.getString("ua_descripcion");
-        String ua_biografia = resultSet.getString("ua_biografia");
-        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-        Artista artistaOrganizador = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
-        
-        String pl_nombre = resultSet.getString("pl_nombre");
-        String pl_descripcion = resultSet.getString("pl_descripcion");
-        String pl_url = resultSet.getString("pl_url");
-        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
-        
-        String es_nombre = resultSet.getString("es_nombre");
-        String es_descripcion = resultSet.getString("es_descripcion");
-        Double es_duracion = resultSet.getDouble("es_duracion");
-        int es_minEspectadores = resultSet.getInt("es_minEspectadores");
-        int es_maxEspectadores = resultSet.getInt("es_maxEspectadores");
-        String es_url = resultSet.getString("es_url");
-        double es_costo = resultSet.getDouble("es_costo");
-        E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
-        LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
-        String es_imagen = resultSet.getString("es_imagen");
-        Espectaculo espectaculo = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artistaOrganizador);
-        
-        espectaculos.put(es_nombre, espectaculo);
-      }
+      espectaculos.putAll(EspectaculoMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

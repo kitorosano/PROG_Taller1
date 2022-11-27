@@ -3,6 +3,7 @@ package main.java.taller1.Presentacion;
 import main.java.taller1.Logica.Clases.E_EstadoEspectaculo;
 import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Funcion;
+import main.java.taller1.Logica.DTOs.EspectaculoNuevoEstadoDTO;
 import main.java.taller1.Logica.Fabrica;
 
 import javax.swing.*;
@@ -37,7 +38,11 @@ public class AceptarRechazarEspectaculo extends  JInternalFrame {
                     int respuesta = JOptionPane.showConfirmDialog(mainPanel,"Deseas aceptar el espectaculo?","Confirmar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
                     if(respuesta==0){
                         try{
-                            Fabrica.getInstance().getIEspectaculo().cambiarEstadoEspectaculo(seleccionado.getPlataforma().getNombre(),seleccionado.getNombre(),E_EstadoEspectaculo.ACEPTADO);
+                            EspectaculoNuevoEstadoDTO espectaculoNuevoEstadoDTO = new EspectaculoNuevoEstadoDTO();
+                            espectaculoNuevoEstadoDTO.setNombreEspectaculo(seleccionado.getNombre());
+                            espectaculoNuevoEstadoDTO.setNombrePlataforma(seleccionado.getPlataforma().getNombre());
+                            espectaculoNuevoEstadoDTO.setNuevoEstado(E_EstadoEspectaculo.ACEPTADO);
+                            Fabrica.getInstance().getIEspectaculo().cambiarEstadoEspectaculo(espectaculoNuevoEstadoDTO);
                             JOptionPane.showMessageDialog(mainPanel,"Se acepto el espectaculo con exito!");
                             limpiartablaEspectaculos();
                             cargarTablaEspectaculo();
@@ -66,7 +71,11 @@ public class AceptarRechazarEspectaculo extends  JInternalFrame {
                     int respuesta = JOptionPane.showConfirmDialog(mainPanel, "Deseas rechazar el espectaculo?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if(respuesta==0){
                         try{
-                            Fabrica.getInstance().getIEspectaculo().cambiarEstadoEspectaculo(seleccionado.getPlataforma().getNombre(),seleccionado.getNombre(),E_EstadoEspectaculo.RECHAZADO);
+                            EspectaculoNuevoEstadoDTO espectaculoNuevoEstadoDTO = new EspectaculoNuevoEstadoDTO();
+                            espectaculoNuevoEstadoDTO.setNombreEspectaculo(seleccionado.getNombre());
+                            espectaculoNuevoEstadoDTO.setNombrePlataforma(seleccionado.getPlataforma().getNombre());
+                            espectaculoNuevoEstadoDTO.setNuevoEstado(E_EstadoEspectaculo.RECHAZADO);
+                            Fabrica.getInstance().getIEspectaculo().cambiarEstadoEspectaculo(espectaculoNuevoEstadoDTO);
                             JOptionPane.showMessageDialog(mainPanel,"Se ha rechazado el espectaculo!");
                             limpiartablaEspectaculos();
                             cargarTablaEspectaculo();

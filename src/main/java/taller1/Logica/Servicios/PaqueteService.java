@@ -1,6 +1,7 @@
 package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.PaqueteDTO;
 import main.java.taller1.Persistencia.ConexionDB;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ import java.util.Optional;
 
 public class PaqueteService {
   
-  public void altaPaquete(Paquete nuevoPaquete) {
+  public void altaPaquete(PaqueteDTO nuevoPaquete) {
     Connection connection = null;
     Statement statement = null;
     String insertPaquete = "INSERT INTO paquetes (paq_nombre, paq_fechaExpiracion, paq_descripcion, paq_descuento, paq_fechaRegistro, paq_imagen) " +

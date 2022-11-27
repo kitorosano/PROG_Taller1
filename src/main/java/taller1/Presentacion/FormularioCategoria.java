@@ -37,7 +37,9 @@ public class FormularioCategoria extends JInternalFrame {
         }
   
         try {
-          Fabrica.getInstance().getICategoria().altaCategoria(new CategoriaDTO(nombre));
+          CategoriaDTO categoriaDTO = new CategoriaDTO();
+          categoriaDTO.setNombre(nombre);
+          Fabrica.getInstance().getICategoria().altaCategoria(categoriaDTO);
           JOptionPane.showMessageDialog(null, "Categoria agregada con exito");
           limpiarCampos();
         } catch (Exception ex) {

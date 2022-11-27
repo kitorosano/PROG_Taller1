@@ -68,7 +68,6 @@ public class EspectaculoMapper {
       espectaculoDTO.setPlataforma(PlataformaMapper.toDTO(espectaculo.getPlataforma()));
       espectaculoDTO.setArtista(UsuarioMapper.toDTO(espectaculo.getArtista()));
       
-      
       return espectaculoDTO;
     } catch (Exception e) {
       System.out.println(e.getMessage());

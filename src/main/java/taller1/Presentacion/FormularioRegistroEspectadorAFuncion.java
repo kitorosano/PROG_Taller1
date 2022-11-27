@@ -53,7 +53,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
-                    Fabrica.getInstance().getIFuncion().registrarEspectadoresAFunciones(espectadores);
+                    Fabrica.getInstance().getIEspectadorRegistradoAFuncion().registrarEspectadoresAFunciones(espectadores);
                     JOptionPane.showMessageDialog(null,"Espectadores agregados");
                     dispose();
                 } catch (Exception ex) {
@@ -209,7 +209,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         modelInvitados.clear();
         try {
             usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
-            invitados=Fabrica.getInstance().getIFuncion().obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
+            invitados=Fabrica.getInstance().getIEspectadorRegistradoAFuncion().obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
             Espectaculo espectaculo=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect).getEspectaculo();
             maximo=espectaculo.getMaxEspectadores()-invitados.size();
             for(Usuario u:usuarios.values()){
@@ -227,7 +227,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         modelRegistros.clear();
         String invitado=modelAInvitar.getElementAt(listaAinvitar.getSelectedIndex());
         try {
-            registros= Fabrica.getInstance().getIFuncion().obtenerFuncionesRegistradasDelEspectador(invitado);
+            registros= Fabrica.getInstance().getIEspectadorRegistradoAFuncion().obtenerFuncionesRegistradasDelEspectador(invitado);
             for(EspectadorRegistradoAFuncion esp: registros.values()){
                 if(!esp.isCanjeado()){
                     modelRegistros.addElement(esp.getFuncion().getNombre());

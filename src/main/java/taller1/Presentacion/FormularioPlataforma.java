@@ -34,7 +34,11 @@ public class FormularioPlataforma extends JInternalFrame {
                     } else {
                         String nombre = tfNombre.getText(), descripcion = tfDescripcion.getText(), url = tfURL.getText();
                         try {
-                            Fabrica.getInstance().getIPlataforma().altaPlataforma(new PlataformaDTO(nombre, descripcion, url));
+                            PlataformaDTO plataformaDTO = new PlataformaDTO();
+                            plataformaDTO.setNombre(nombre);
+                            plataformaDTO.setDescripcion(descripcion);
+                            plataformaDTO.setUrl(url);
+                            Fabrica.getInstance().getIPlataforma().altaPlataforma(plataformaDTO);
                             JOptionPane.showMessageDialog(null, "Plataforma agregada con exito");
                             dispose();
                         } catch (Exception ex) {

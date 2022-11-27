@@ -1,8 +1,11 @@
 package main.java.taller1.Presentacion;
 
 import main.java.taller1.Logica.DTOs.AltaCategoriaAEspectaculoDTO;
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.Mappers.PlataformaMapper;
+import main.java.taller1.Logica.Mappers.UsuarioMapper;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -233,14 +236,26 @@ public class FormularioEspectaculo extends JInternalFrame {
             imagen="https://i.imgur.com/BeJ3HuS.png";
         }
 
-        Espectaculo nuevo = new Espectaculo(nombre, descripcion, duracion, minEspec, maxEspec, url, costo, E_EstadoEspectaculo.INGRESADO, LocalDateTime.now(), imagen,plataforma, artista);
-        Fabrica.getInstance().getIEspectaculo().altaEspectaculo(nuevo);
+        EspectaculoDTO espectaculoDTO = new EspectaculoDTO();
+        espectaculoDTO.setNombre(nombre);
+        espectaculoDTO.setDescripcion(descripcion);
+        espectaculoDTO.setDuracion(duracion);
+        espectaculoDTO.setMinEspectadores(minEspec);
+        espectaculoDTO.setMaxEspectadores(maxEspec);
+        espectaculoDTO.setUrl(url);
+        espectaculoDTO.setCosto(costo);
+        espectaculoDTO.setEstado(E_EstadoEspectaculo.INGRESADO);
+        espectaculoDTO.setFechaRegistro(LocalDateTime.now());
+        espectaculoDTO.setImagen(imagen);
+        espectaculoDTO.setPlataforma(PlataformaMapper.toDTO(plataforma));
+        espectaculoDTO.setArtista(UsuarioMapper.toDTO(artista));
+        Fabrica.getInstance().getIEspectaculo().altaEspectaculo(espectaculoDTO);
 
         for (String micategoria : categoriasAgregar.values()){
             AltaCategoriaAEspectaculoDTO altaCategoriaAEspectaculoDTO = new AltaCategoriaAEspectaculoDTO();
             altaCategoriaAEspectaculoDTO.setNombreCategoria(micategoria);
-            altaCategoriaAEspectaculoDTO.setNombreEspectaculo(nuevo.getNombre());
-            altaCategoriaAEspectaculoDTO.setNombrePlataforma(nuevo.getPlataforma().getNombre());
+            altaCategoriaAEspectaculoDTO.setNombreEspectaculo(espectaculoDTO.getNombre());
+            altaCategoriaAEspectaculoDTO.setNombrePlataforma(espectaculoDTO.getPlataforma().getNombre());
             Fabrica.getInstance().getICategoria().altaCategoriaAEspectaculo(altaCategoriaAEspectaculoDTO);
         }
 

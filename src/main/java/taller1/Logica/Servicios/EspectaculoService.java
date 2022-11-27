@@ -2,6 +2,8 @@ package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.E_EstadoEspectaculo;
 import main.java.taller1.Logica.Clases.Espectaculo;
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
+import main.java.taller1.Logica.DTOs.EspectaculoNuevoEstadoDTO;
 import main.java.taller1.Logica.Mappers.EspectaculoMapper;
 import main.java.taller1.Persistencia.ConexionDB;
 
@@ -16,7 +18,7 @@ import java.util.Optional;
 public class EspectaculoService {
   
   
-  public void altaEspectaculo(Espectaculo nuevoEspectaculo) {
+  public void altaEspectaculo(EspectaculoDTO nuevoEspectaculo) {
     Connection connection = null;
     Statement statement = null;
     String insertEspectaculo = "INSERT INTO espectaculos (es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, es_plataformaAsociada, es_artistaOrganizador) " +
@@ -283,13 +285,13 @@ public class EspectaculoService {
     return espectaculos;
   }
   
-  public void cambiarEstadoEspectaculo(String nombrePlataforma, String nombreEspectaculo, E_EstadoEspectaculo nuevoEstado){
+  public void cambiarEstadoEspectaculo(EspectaculoNuevoEstadoDTO espectaculoNuevoEstadoDTO){
     Connection connection = null;
     Statement statement = null;
     String updateEspectaculo = "UPDATE espectaculos " +
-        "SET es_estado='" + nuevoEstado + "' " +
-        "WHERE es_nombre='" + nombreEspectaculo + "' " +
-        "AND es_plataformaAsociada='" + nombrePlataforma + "'";
+        "SET es_estado='" + espectaculoNuevoEstadoDTO.getNuevoEstado() + "' " +
+        "WHERE es_nombre='" + espectaculoNuevoEstadoDTO.getNombreEspectaculo() + "' " +
+        "AND es_plataformaAsociada='" + espectaculoNuevoEstadoDTO.getNombrePlataforma() + "'";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();

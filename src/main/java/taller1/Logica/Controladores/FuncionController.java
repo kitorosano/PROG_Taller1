@@ -62,23 +62,4 @@ public class FuncionController implements IFuncion {
     return servicio.obtenerFuncionesDeArtista(nombrePlataforma, nombreEspectaculo, nombreArtista);
   }
   
-  @Override
-  public void registrarEspectadorAFuncion(EspectadorRegistradoAFuncion espectadorRegistradoAFuncion) {
-    servicio.registrarEspectadorAFuncion(espectadorRegistradoAFuncion);
-  }
-  @Override
-  public void registrarEspectadoresAFunciones(Map<String, EspectadorRegistradoAFuncion> espectadoresFunciones) {
-    servicio.registrarEspectadoresAFunciones(espectadoresFunciones);
-  }
-  
-  @Override
-  public Map<String, EspectadorRegistradoAFuncion> obtenerFuncionesRegistradasDelEspectador(String nickname) {
-    return servicio.obtenerFuncionesRegistradasDelEspectador(nickname);
-  }
-  
-  @Override
-  public Map<String, EspectadorRegistradoAFuncion> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion) {
-    return servicio.obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
-  }
-  
 }

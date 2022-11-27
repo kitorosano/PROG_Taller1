@@ -5,9 +5,6 @@ import main.java.taller1.Logica.Interfaces.*;
 
 public class Fabrica {
     private static Fabrica instance;
-    private IUsuario usuario;
-    private IEspectaculo espectaculo;
-    private IDatabase database;
 
     private Fabrica() {}
 
@@ -31,6 +28,12 @@ public class Fabrica {
     public IFuncion getIFuncion() {
         FuncionController funcionController = FuncionController.getInstance();
         return funcionController;
+    }
+    
+    
+    public IEspectadorRegistradoAFuncion getIEspectadorRegistradoAFuncion() {
+        EspectadorRegistradoAFuncionController espectadorRegistradoAFuncionController = EspectadorRegistradoAFuncionController.getInstance();
+        return espectadorRegistradoAFuncionController;
     }
     
     public IPaquete getIPaquete() {

@@ -82,5 +82,4 @@ public class PlataformaMapper {
         return plataformaDTOMap;
     }
 
-
 }

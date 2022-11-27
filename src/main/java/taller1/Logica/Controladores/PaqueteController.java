@@ -1,6 +1,7 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.EspectaculoAPaqueteDTO;
 import main.java.taller1.Logica.DTOs.PaqueteDTO;
 import main.java.taller1.Logica.Interfaces.IPaquete;
 import main.java.taller1.Logica.Servicios.PaqueteService;
@@ -115,8 +116,8 @@ public class PaqueteController implements IPaquete {
    *                      al que se quiere ingresar el espectaculo
    */
   @Override
-  public void altaEspectaculoAPaquete(String nombreEspectaculo, String nombrePlataforma, String nombrePaquete) {
-    servicio.altaEspectaculoAPaquete(nombreEspectaculo, nombrePlataforma, nombrePaquete);
+  public void altaEspectaculoAPaquete(EspectaculoAPaqueteDTO espectaculoAPaqueteDTO) {
+    servicio.altaEspectaculoAPaquete(espectaculoAPaqueteDTO);
   }
   
   /**

@@ -7,6 +7,7 @@ import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Espectador;
 import main.java.taller1.Logica.Clases.EspectadorPaquete;
 import main.java.taller1.Logica.Clases.Paquete;
+import main.java.taller1.Logica.DTOs.EspectaculoAPaqueteDTO;
 import main.java.taller1.Logica.DTOs.PaqueteDTO;
 
 public interface IPaquete {
@@ -18,7 +19,7 @@ public interface IPaquete {
   Map<String, Espectaculo> obtenerEspectaculosDePaquete(String nombrePaquete);
   Map<String, EspectadorPaquete> obtenerPaquetesPorEspectador(String nickname);
   Map<String, EspectadorPaquete> obtenerEspectadoresDePaquete(String nombrePaquete);
-  void altaEspectaculoAPaquete(String nombrePaquete, String nombreEspectaculo, String nombrePlataforma);
+  void altaEspectaculoAPaquete(EspectaculoAPaqueteDTO espectaculoAPaqueteDTO);
   void altaEspectadorAPaquete(String nombrePaquete, String nickname);
   
 }

@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.CategoriaDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Categoria;
 
@@ -36,7 +37,7 @@ public class FormularioCategoria extends JInternalFrame {
         }
   
         try {
-          Fabrica.getInstance().getICategoria().altaCategoria(new Categoria(nombre));
+          Fabrica.getInstance().getICategoria().altaCategoria(new CategoriaDTO(nombre));
           JOptionPane.showMessageDialog(null, "Categoria agregada con exito");
           limpiarCampos();
         } catch (Exception ex) {

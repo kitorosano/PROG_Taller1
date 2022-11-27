@@ -35,6 +35,7 @@ public class EspectaculoController implements IEspectaculo {
   }
   @Override
   public Map<String, Espectaculo> obtenerEspectaculos() {
+    //TODO: Desde aca llamar al servicio para obtener favoritos y devolver el DTO completo
     return servicio.obtenerEspectaculos();
   }
   @Override

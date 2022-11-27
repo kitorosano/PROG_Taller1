@@ -1,6 +1,8 @@
 package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.Plataforma;
+import main.java.taller1.Logica.DTOs.PlataformaDTO;
+import main.java.taller1.Logica.Mappers.PlataformaMapper;
 import main.java.taller1.Persistencia.ConexionDB;
 
 import java.sql.Connection;
@@ -13,10 +15,10 @@ import java.util.Optional;
 
 public class PlataformaService {
   
-  public void altaPlataforma(Plataforma nuevaPlataforma) {
+  public void altaPlataforma(PlataformaDTO plataformadto) {
     Connection connection = null;
     Statement statement = null;
-    String insertPlataforma = "INSERT INTO plataformas (pl_nombre, pl_descripcion, pl_url) VALUES ('" + nuevaPlataforma.getNombre() + "', '" + nuevaPlataforma.getDescripcion() + "', '" + nuevaPlataforma.getUrl() + "')";
+    String insertPlataforma = "INSERT INTO plataformas (pl_nombre, pl_descripcion, pl_url) VALUES ('" + plataformadto.getNombre() + "', '" + plataformadto.getDescripcion() + "', '" + plataformadto.getUrl() + "')";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -49,14 +51,7 @@ public class PlataformaService {
       // Obtenemos todas las plataformas de la base de datos
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPlataformas);
-      while (resultSet.next()) {
-        String nombre = resultSet.getString("pl_nombre");
-        String descripcion = resultSet.getString("pl_descripcion");
-        String url = resultSet.getString("pl_url");
-        
-        Plataforma plataforma = new Plataforma(nombre, descripcion, url);
-        plataformas.put(nombre, plataforma);
-      }
+      plataformas.putAll(PlataformaMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -87,13 +82,7 @@ public class PlataformaService {
       // Obtenemos la plataforma de la base de datos
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPlataforma);
-      if (resultSet.next()) {
-        String nombre = resultSet.getString("pl_nombre");
-        String descripcion = resultSet.getString("pl_descripcion");
-        String url = resultSet.getString("pl_url");
-        
-        plataforma = new Plataforma(nombre, descripcion, url);
-      }
+      plataforma = PlataformaMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

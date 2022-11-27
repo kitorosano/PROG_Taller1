@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.UsuarioDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Artista;
 import main.java.taller1.Logica.Clases.Espectador;
@@ -145,17 +146,31 @@ public class ModificarUsuario extends JInternalFrame {
     }
 
     private void ActualizarUsuario(Usuario usuario){
-        usuario.setNombre(txtNombre.getText());
-        usuario.setApellido(txtApellido.getText());
-        LocalDate fechanac = LocalDate.parse(txtFechaNac.getText());
-        usuario.setFechaNacimiento(fechanac);
-        usuario.setImagen(imagen);
-        if (usuario instanceof Artista){
-            ((Artista) usuario).setDescripcion(txtDescripcion.getText());
-            ((Artista) usuario).setBiografia(txtBiografia.getText());
-            ((Artista) usuario).setSitioWeb(txtURL.getText());
+//        usuario.setNombre(txtNombre.getText());
+//        usuario.setApellido(txtApellido.getText());
+//        LocalDate fechanac = LocalDate.parse(txtFechaNac.getText());
+//        usuario.setFechaNacimiento(fechanac);
+//        usuario.setImagen(imagen);
+//        if (usuario instanceof Artista){
+//            ((Artista) usuario).setDescripcion(txtDescripcion.getText());
+//            ((Artista) usuario).setBiografia(txtBiografia.getText());
+//            ((Artista) usuario).setSitioWeb(txtURL.getText());
+//        }
+//        Fabrica.getInstance().getIUsuario().modificarUsuario(usuario);
+    
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setNombre(txtNombre.getText());
+        usuarioDTO.setApellido(txtApellido.getText());
+        usuarioDTO.setCorreo(txtCorreo.getText());
+        usuarioDTO.setFechaNacimiento(LocalDate.parse(txtFechaNac.getText()));
+        usuarioDTO.setImagen(imagen);
+        if (usuario instanceof Artista) {
+            usuarioDTO.setDescripcion(txtDescripcion.getText());
+            usuarioDTO.setBiografia(txtBiografia.getText());
+            usuarioDTO.setSitioWeb(txtURL.getText());
+            usuarioDTO.setEsArtista(true);
         }
-        Fabrica.getInstance().getIUsuario().modificarUsuario(usuario);
+        Fabrica.getInstance().getIUsuario().modificarUsuario(usuarioDTO);
     }
 
     public boolean comprobarCamposNulos(Usuario usuario) {                //Devuelve true si hay campos nulos

@@ -6,10 +6,11 @@ import java.util.Optional;
 import main.java.taller1.Logica.Clases.Artista;
 import main.java.taller1.Logica.Clases.EspectadorRegistradoAFuncion;
 import main.java.taller1.Logica.Clases.Funcion;
+import main.java.taller1.Logica.DTOs.FuncionDTO;
 
 public interface IFuncion {
   
-  void altaFuncion(Funcion nuevaFuncion);
+  void altaFuncion(FuncionDTO nuevafuncion);
   Map<String, Funcion> obtenerFunciones();
   Optional<Funcion> obtenerFuncion(String nombrePlataforma, String nombreEspectador, String nombreFuncion);
   Map<String, Funcion> obtenerFuncionesDePlataforma(String nombrePlataforma);

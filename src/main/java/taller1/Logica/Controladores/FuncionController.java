@@ -1,6 +1,7 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.FuncionDTO;
 import main.java.taller1.Logica.Interfaces.IFuncion;
 import main.java.taller1.Logica.Servicios.FuncionService;
 import main.java.taller1.Persistencia.ConexionDB;
@@ -31,7 +32,7 @@ public class FuncionController implements IFuncion {
   }
   
   @Override
-  public void altaFuncion(Funcion nuevaFuncion) {
+  public void altaFuncion(FuncionDTO nuevaFuncion) {
     servicio.altaFuncion(nuevaFuncion);
   }
   @Override

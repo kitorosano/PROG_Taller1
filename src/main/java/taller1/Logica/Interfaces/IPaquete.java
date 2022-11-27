@@ -7,10 +7,11 @@ import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Espectador;
 import main.java.taller1.Logica.Clases.EspectadorPaquete;
 import main.java.taller1.Logica.Clases.Paquete;
+import main.java.taller1.Logica.DTOs.PaqueteDTO;
 
 public interface IPaquete {
   
-  void altaPaquete(Paquete nuevoPaquete);
+  void altaPaquete(PaqueteDTO nuevoPaquete);
   Map<String, Paquete> obtenerPaquetes();
   Optional<Paquete> obtenerPaquete(String nombrePaquete);
   Map<String, Paquete> obtenerPaquetesDeEspectaculo(String nombreEspectaculo, String nombrePlataforma);

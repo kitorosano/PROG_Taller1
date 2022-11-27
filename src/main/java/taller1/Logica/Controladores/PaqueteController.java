@@ -1,6 +1,7 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.PaqueteDTO;
 import main.java.taller1.Logica.Interfaces.IPaquete;
 import main.java.taller1.Logica.Servicios.PaqueteService;
 import main.java.taller1.Persistencia.ConexionDB;
@@ -35,7 +36,7 @@ public class PaqueteController implements IPaquete {
    * @param nuevoPaquete Objeto de tipo Paquete con los datos del paquete a crear
    */
   @Override
-  public void altaPaquete(Paquete nuevoPaquete) {
+  public void altaPaquete(PaqueteDTO nuevoPaquete) {
     servicio.altaPaquete(nuevoPaquete);
   }
   

@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.PaqueteDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Paquete;
 
@@ -52,7 +53,7 @@ public class FormularioPaquete extends JInternalFrame {
                if(imagen==null){
                   imagen="https://i.imgur.com/hHn0WrG.png";
                }
-              Paquete paquete = new Paquete(nombre, descripcion, descuento, fechaRegistro, fechaVencimiento, imagen);
+              PaqueteDTO paquete = new PaqueteDTO(nombre, descripcion, descuento, fechaRegistro, fechaVencimiento, imagen);
               Fabrica.getInstance().getIPaquete().altaPaquete(paquete);
               JOptionPane.showMessageDialog(null, "Paquete agregado exitosamente");
               dispose();

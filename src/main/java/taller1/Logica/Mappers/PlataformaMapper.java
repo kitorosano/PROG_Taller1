@@ -16,4 +16,5 @@ public class PlataformaMapper {
             throw new RuntimeException("Error al mapear UserDTO a User", e);
         }
     }
+
 }

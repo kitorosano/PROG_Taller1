@@ -1,9 +1,9 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Interfaces.IDatabase;
+import main.java.taller1.Logica.Servicios.DatabaseService;
 import main.java.taller1.Persistencia.ConexionDB;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ContentType;
@@ -21,9 +21,11 @@ import java.sql.Statement;
 
 public class DatabaseController implements IDatabase {
     private static DatabaseController instance = null;
-    private static final String apiUrl = "https://upload-image-to-imgur.vercel.app/upload";
+    private DatabaseService servicio;
 
-    private DatabaseController() {}
+    private DatabaseController() {
+      servicio = new DatabaseService();
+    }
 
     public static DatabaseController getInstance() {
         if (instance == null) {
@@ -37,40 +39,7 @@ public class DatabaseController implements IDatabase {
    */
   @Override
   public void vaciarDatos(){
-    Connection connection = null;
-    Statement statement = null;
-    String deletePlataformas = "DELETE FROM plataformas";
-    String deletePaquetes = "DELETE FROM paquetes";
-    String deleteArtistas = "DELETE FROM artistas";
-    String deleteEspectadores = "DELETE FROM espectadores";
-    try {
-      connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
-      statement.executeUpdate(deletePlataformas);
-      statement.executeUpdate(deletePaquetes);
-      statement.executeUpdate(deleteArtistas);
-      statement.executeUpdate(deleteEspectadores);
-      System.out.println("Todos los datos relacionados a los usuarios (artistas, espectadores) y espectaculos (plataforma, funciones, paquetes y registros) han sido eliminados.");
-      ScriptRunner sr = new ScriptRunner(connection);
-      Reader reader = new BufferedReader(new FileReader("src/main/resources/creation.sql"));
-      sr.runScript(reader);
-    } catch (RuntimeException e) {
-      System.out.println(e.getMessage());
-      throw new RuntimeException("Error al conectar con la base de datos", e);
-    } catch (SQLException e) {
-      System.out.println(e.getMessage());
-      throw new RuntimeException("Error al vaciar los datos de los espectaculos", e);
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    } finally {
-      try {
-        if (statement != null) statement.close();
-        if (connection != null) connection.close();
-      } catch (SQLException e) {
-        System.out.println(e.getMessage());
-        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
-      }
-    }
+    servicio.vaciarDatos();
   }
   
   /**
@@ -78,45 +47,7 @@ public class DatabaseController implements IDatabase {
    */
   @Override
   public void cargarDatos(){
-    Connection connection = null;
-    try {
-      connection = ConexionDB.getConnection();
-      ScriptRunner sr = new ScriptRunner(connection);
-      Reader reader = new BufferedReader(new FileReader("src/main/resources/creation.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/usuarios.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/plataformas.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/paquetes.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/espectaculos.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/funciones.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/categorias.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/espectaculos_paquetes.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/espectaculos_categorias.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/espectadores_funciones.sql"));
-      sr.runScript(reader);
-      reader = new BufferedReader(new FileReader("src/main/resources/artistas_funciones.sql"));
-      sr.runScript(reader);
-    } catch (FileNotFoundException ex) {
-      ex.printStackTrace();
-    } catch (RuntimeException ex) {
-      System.out.println(ex.getMessage());
-      throw new RuntimeException("Error al insertar los datos de prueba de usuarios y espectaculos", ex);
-    } finally {
-      try {
-        if (connection != null) connection.close();
-      } catch (SQLException ex) {
-        System.out.println(ex.getMessage());
-        throw new RuntimeException("Error al cerrar la conexión a la base de datos", ex);
-      }
-    }
+    servicio.cargarDatos();
   }
   
   /**
@@ -127,32 +58,7 @@ public class DatabaseController implements IDatabase {
    */
   @Override
   public String guardarImagen(FileInputStream imagen){
-    String url = "";
-    try {
-      CloseableHttpClient client = HttpClients.createDefault();
-      HttpPost httpPost = new HttpPost(apiUrl);
-
-      byte[] imagen_bytes = IOUtils.readFully(imagen, -1, false); // Convierte el archivo a bytes
-
-      MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-      builder.addBinaryBody(
-          "file",  imagen_bytes, ContentType.APPLICATION_OCTET_STREAM, "imagen.png");
-      
-      HttpEntity multipart = builder.build();
-      httpPost.setEntity(multipart);
-  
-      CloseableHttpResponse response = client.execute(httpPost);
-      client.close();
-      String responseString = new BasicResponseHandler().handleResponse(response);
-      
-      url = responseString.substring(responseString.indexOf("https://i.imgur.com/"));
-      url = url.substring(0, url.indexOf("\""));
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
-      throw new RuntimeException("Error al guardar la imagen", e);
-    }
-    
-    return url;
+    return servicio.guardarImagen(imagen);
   }
   
   /**
@@ -163,30 +69,7 @@ public class DatabaseController implements IDatabase {
    */
   @Override
   public String guardarImagen(File imagen){
-    String url = "";
-    try {
-      CloseableHttpClient client = HttpClients.createDefault();
-      HttpPost httpPost = new HttpPost(apiUrl);
-      
-      MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-      builder.addBinaryBody(
-          "file",  imagen, ContentType.APPLICATION_OCTET_STREAM, "imagen.png");
-      
-      HttpEntity multipart = builder.build();
-      httpPost.setEntity(multipart);
-      
-      CloseableHttpResponse response = client.execute(httpPost);
-      client.close();
-      String responseString = new BasicResponseHandler().handleResponse(response);
-      
-      url = responseString.substring(responseString.indexOf("https://i.imgur.com/"));
-      url = url.substring(0, url.indexOf("\""));
-    } catch (IOException e) {
-      System.out.println(e.getMessage());
-      throw new RuntimeException("Error al guardar la imagen", e);
-    }
-    
-    return url;
+    return servicio.guardarImagen(imagen);
   }
   
 }

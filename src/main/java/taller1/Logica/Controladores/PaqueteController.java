@@ -1,6 +1,7 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.PaqueteDTO;
 import main.java.taller1.Logica.Interfaces.IPaquete;
 import main.java.taller1.Persistencia.ConexionDB;
 
@@ -32,7 +33,7 @@ public class PaqueteController implements IPaquete {
    * @param nuevoPaquete Objeto de tipo Paquete con los datos del paquete a crear
    */
   @Override
-  public void altaPaquete(Paquete nuevoPaquete) {
+  public void altaPaquete(PaqueteDTO nuevoPaquete) {
     Connection connection = null;
     Statement statement = null;
     String insertPaquete = "INSERT INTO paquetes (paq_nombre, paq_fechaExpiracion, paq_descripcion, paq_descuento, paq_fechaRegistro, paq_imagen) " +

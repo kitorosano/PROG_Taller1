@@ -5,13 +5,15 @@ import java.util.Optional;
 
 import main.java.taller1.Logica.Clases.Categoria;
 import main.java.taller1.Logica.Clases.Espectaculo;
+import main.java.taller1.Logica.DTOs.AltaCategoriaAEspectaculoDTO;
+import main.java.taller1.Logica.DTOs.CategoriaDTO;
 
 public interface ICategoria {
   
-  void altaCategoria(Categoria nuevaCategoria);
+  void altaCategoria(CategoriaDTO nuevaCategoria);
   Map<String, Categoria> obtenerCategorias();
   Optional<Categoria> obtenerCategoria(String nombreCategoria);
   Map<String, Espectaculo> obtenerEspectaculosDeCategoria(String nombreCategoria);
   Map<String, Categoria> obtenerCategoriasDeEspectaculo(String nombreEspectaculo);
-  void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo, String nombrePlataforma);
+  void altaCategoriaAEspectaculo(AltaCategoriaAEspectaculoDTO altaCategoriaAEspectaculoDTO);
 }

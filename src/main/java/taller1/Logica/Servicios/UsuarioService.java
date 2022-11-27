@@ -1,21 +1,20 @@
 package main.java.taller1.Logica.Servicios;
 
-import main.java.taller1.Logica.Clases.Artista;
-import main.java.taller1.Logica.Clases.Espectador;
 import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.DTOs.UsuarioDTO;
+import main.java.taller1.Logica.Mappers.UsuarioMapper;
 import main.java.taller1.Persistencia.ConexionDB;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 public class UsuarioService {
-
+  
   public Map<String, Usuario> obtenerUsuarios(){
     Map<String, Usuario> usuarios = new HashMap<>();
     Connection connection = null;
@@ -31,41 +30,16 @@ public class UsuarioService {
         "ORDER BY UA.ua_nickname";
     try {
       connection = ConexionDB.getConnection();
-    
+      
       // Obtenemos los espectadores
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectEspectadores);
-      while (resultSet.next()) {
-        String nickname = resultSet.getString("u_nickname");
-        String nombre = resultSet.getString("u_nombre");
-        String apellido = resultSet.getString("u_apellido");
-        String correo = resultSet.getString("u_correo");
-        LocalDate fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String contrasenia = resultSet.getString("u_contrasenia");
-        String imagen = resultSet.getString("u_imagen");
+      usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
       
-        Usuario espectador = new Espectador(nickname, nombre, apellido, correo, fechaNacimiento, contrasenia, imagen);
-        usuarios.put(nickname, espectador);
-      }
-    
       // Obtenemos los artistas
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectArtistas);
-      while (resultSet.next()) {
-        String nickname = resultSet.getString("u_nickname");
-        String nombre = resultSet.getString("u_nombre");
-        String apellido = resultSet.getString("u_apellido");
-        String correo = resultSet.getString("u_correo");
-        LocalDate fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String contrasenia = resultSet.getString("u_contrasenia");
-        String imagen = resultSet.getString("u_imagen");
-        String descripcion = resultSet.getString("ua_descripcion");
-        String biografia = resultSet.getString("ua_biografia");
-        String sitioWeb = resultSet.getString("ua_sitioWeb");
-      
-        Usuario artista = new Artista(nickname, nombre, apellido, correo, fechaNacimiento, contrasenia, imagen, descripcion, biografia, sitioWeb);
-        usuarios.put(nickname, artista);
-      }
+      usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -85,7 +59,7 @@ public class UsuarioService {
     return usuarios;
   }
   public Optional<Usuario> obtenerUsuarioPorNickname(String nickname){
-    Usuario usuario = null;
+    Usuario usuario;
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -96,35 +70,7 @@ public class UsuarioService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectUsuario);
-      if (resultSet.next()) { // Es un artista
-        String nombre = resultSet.getString("u_nombre");
-        String apellido = resultSet.getString("u_apellido");
-        String correo = resultSet.getString("u_correo");
-        LocalDate fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String contrasenia = resultSet.getString("u_contrasenia");
-        String imagen = resultSet.getString("u_imagen");
-        String descripcion = resultSet.getString("ua_descripcion");
-        String biografia = resultSet.getString("ua_biografia");
-        String sitioWeb = resultSet.getString("ua_sitioWeb");
-        
-        usuario = new Artista(nickname, nombre, apellido, correo, fechaNacimiento, contrasenia, imagen, descripcion, biografia, sitioWeb);
-      } else { // Es un espectador
-        selectUsuario = "SELECT * " +
-            "FROM usuarios as U, espectadores as UE " +
-            "WHERE UE.ue_nickname=U.u_nickname AND U.u_nickname = '" + nickname + "'";
-        statement = connection.createStatement();
-        resultSet = statement.executeQuery(selectUsuario);
-        if (resultSet.next()) {
-          String nombre = resultSet.getString("u_nombre");
-          String apellido = resultSet.getString("u_apellido");
-          String correo = resultSet.getString("u_correo");
-          LocalDate fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-          String contrasenia = resultSet.getString("u_contrasenia");
-          String imagen = resultSet.getString("u_imagen");
-          
-          usuario = new Espectador(nickname, nombre, apellido, correo, fechaNacimiento, contrasenia, imagen);
-        }
-      }
+      usuario = UsuarioMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -141,12 +87,11 @@ public class UsuarioService {
         throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
       }
     }
-    
     return Optional.ofNullable(usuario);
   }
   
   public Optional<Usuario> obtenerUsuarioPorCorreo(String correo){
-    Usuario usuario = null;
+    Usuario usuario;
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -158,35 +103,7 @@ public class UsuarioService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectUsuario);
-      if (resultSet.next()) { // Es un artista
-        String nickname = resultSet.getString("u_nickname");
-        String nombre = resultSet.getString("u_nombre");
-        String apellido = resultSet.getString("u_apellido");
-        LocalDate fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String contrasenia = resultSet.getString("u_contrasenia");
-        String imagen = resultSet.getString("u_imagen");
-        String descripcion = resultSet.getString("ua_descripcion");
-        String biografia = resultSet.getString("ua_biografia");
-        String sitioWeb = resultSet.getString("ua_sitioWeb");
-        
-        usuario = new Artista(nickname, nombre, apellido, correo, fechaNacimiento, contrasenia, imagen, descripcion, biografia, sitioWeb);
-      } else { // Es un espectador
-        selectUsuario = "SELECT * " +
-            "FROM usuarios as U, espectadores as UE " +
-            "WHERE UE.ue_nickname=U.u_nickname AND U.u_correo = '" + correo + "'";
-        statement = connection.createStatement();
-        resultSet = statement.executeQuery(selectUsuario);
-        if (resultSet.next()) {
-          String nickname = resultSet.getString("u_nickname");
-          String nombre = resultSet.getString("u_nombre");
-          String apellido = resultSet.getString("u_apellido");
-          LocalDate fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-          String contrasenia = resultSet.getString("u_contrasenia");
-          String imagen = resultSet.getString("u_imagen");
-          
-          usuario = new Espectador(nickname, nombre, apellido, correo, fechaNacimiento, contrasenia, imagen);
-        }
-      }
+      usuario = UsuarioMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -207,23 +124,21 @@ public class UsuarioService {
     return Optional.ofNullable(usuario);
   }
   
-  public void altaUsuario(Usuario usuario) {
+  public void altaUsuario(UsuarioDTO usuariodto) {
     Connection connection = null;
     Statement statement = null;
     String insertUsuario = "INSERT INTO `usuarios` (`u_nickname`, `u_nombre`, `u_apellido`, `u_correo`, `u_fechaNacimiento`, `u_contrasenia`, `u_imagen`) " +
-        "VALUES ('" + usuario.getNickname() + "', '" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCorreo() + "', '" + usuario.getFechaNacimiento() + "', '" + usuario.getContrasenia() + "', '" + usuario.getImagen() + "'); ";
+        "VALUES ('" + usuariodto.getNickname() + "', '" + usuariodto.getNombre() + "', '" + usuariodto.getApellido() + "', '" + usuariodto.getCorreo() + "', '" + usuariodto.getFechaNacimiento() + "', '" + usuariodto.getContrasenia() + "', '" + usuariodto.getImagen() + "'); ";
     
     String insertUsuario2;
-    if (usuario instanceof Artista)
+    if (usuariodto.isEsArtista())
       insertUsuario2 = "INSERT INTO `artistas` (`ua_nickname`, `ua_descripcion`, `ua_biografia`, `ua_sitioWeb`) " +
-          "VALUES ('" + usuario.getNickname() + "', '" + ((Artista) usuario).getDescripcion() + "', '" + ((Artista) usuario).getBiografia() + "', '" + ((Artista) usuario).getSitioWeb() + "')";
-    else if (usuario instanceof Espectador)
+          "VALUES ('" + usuariodto.getNickname() + "', '" + usuariodto.getDescripcion() + "', '" + usuariodto.getBiografia() + "', '" + usuariodto.getSitioWeb() + "')";
+    else
       insertUsuario2 = "INSERT INTO `espectadores` (`ue_nickname`) " +
-          "VALUES ('" + usuario.getNickname() + "')";
-    else throw new RuntimeException("Error al insertar el usuario, tipo no reconocido");
+          "VALUES ('" + usuariodto.getNickname() + "')";
     
     try {
-      System.out.println(insertUsuario);
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       statement.executeUpdate(insertUsuario);
@@ -245,24 +160,24 @@ public class UsuarioService {
     }
   }
   
-  public void modificarUsuario(Usuario usuario) {
+  public void modificarUsuario(UsuarioDTO usuariodto) {
     Connection connection = null;
     Statement statement = null;
     String updateUsuario = "UPDATE usuarios " +
-        "SET u_nombre = '" + usuario.getNombre() + "', u_apellido = '" + usuario.getApellido() + "', u_correo = '" + usuario.getCorreo() + "', u_fechaNacimiento = '" + usuario.getFechaNacimiento() + "', u_contrasenia = '" + usuario.getContrasenia() + "', u_imagen = '" + usuario.getImagen() + "' " +
-        "WHERE u_nickname = '" + usuario.getNickname() + "'; ";
+        "SET u_nombre = '" + usuariodto.getNombre() + "', u_apellido = '" + usuariodto.getApellido() + "', u_correo = '" + usuariodto.getCorreo() + "', u_fechaNacimiento = '" + usuariodto.getFechaNacimiento() + "', u_contrasenia = '" + usuariodto.getContrasenia() + "', u_imagen = '" + usuariodto.getImagen() + "' " +
+        "WHERE u_nickname = '" + usuariodto.getNickname() + "'; ";
     
     String updateUsuario2 = "";
-    if (usuario instanceof Artista)
+    if (usuariodto.isEsArtista())
       updateUsuario2 = "UPDATE artistas " +
-          "SET ua_descripcion = '" + ((Artista) usuario).getDescripcion() + "', ua_biografia = '" + ((Artista) usuario).getBiografia() + "', ua_sitioWeb = '" + ((Artista) usuario).getSitioWeb() + "' " +
-          "WHERE ua_nickname = '" + usuario.getNickname() + "'";
+          "SET ua_descripcion = '" + usuariodto.getDescripcion() + "', ua_biografia = '" + usuariodto.getBiografia() + "', ua_sitioWeb = '" + usuariodto.getSitioWeb() + "' " +
+          "WHERE ua_nickname = '" + usuariodto.getNickname() + "'";
     
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       statement.executeUpdate(updateUsuario);
-      if (usuario instanceof Artista) {
+      if (usuariodto.isEsArtista()) {
         statement.executeUpdate(updateUsuario2);
       }
     } catch (RuntimeException e) {

@@ -1,6 +1,7 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.Plataforma;
+import main.java.taller1.Logica.DTOs.PlataformaDTO;
 import main.java.taller1.Logica.Interfaces.IPlataforma;
 import main.java.taller1.Logica.Servicios.PlataformaService;
 import main.java.taller1.Persistencia.ConexionDB;
@@ -30,11 +31,11 @@ public class PlataformaController  implements IPlataforma {
   
   /**
    * Metodo que permite crear una plataforma
-   * @param nuevaPlataforma Objeto Plataforma que se desea crear
+   * @param plataformadto Objeto PlataformaDTO que se desea crear
    */
   @Override
-  public void altaPlataforma(Plataforma nuevaPlataforma) {
-    servicio.altaPlataforma(nuevaPlataforma);
+  public void altaPlataforma(PlataformaDTO plataformadto) {
+    servicio.altaPlataforma(plataformadto);
   }
   
   /**

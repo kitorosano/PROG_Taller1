@@ -1,6 +1,7 @@
 package main.java.taller1.Logica.Controladores;
 
-import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.DTOs.UsuarioDTO;
 import main.java.taller1.Logica.Interfaces.IUsuario;
 import main.java.taller1.Logica.Servicios.UsuarioService;
 
@@ -54,19 +55,19 @@ public class UsuarioController implements IUsuario {
 
     /**
      * Metodo que ingresa un usuario a la base de datos
-     * @param usuario Objeto usuario a ingresar
+     * @param usuariodto Objeto usuariodto a ingresar
      */
     @Override
-    public void altaUsuario(Usuario usuario) {
-        servicio.altaUsuario(usuario);
+    public void altaUsuario(UsuarioDTO usuariodto) {
+        servicio.altaUsuario(usuariodto);
     }
 
     /**
      * Metodo que modifica un usuario en la base de datos
-     * @param usuario Objeto usuario con los datos a modificar
+     * @param usuariodto Objeto usuariodto con los datos a modificar
      */
     @Override
-    public void modificarUsuario(Usuario usuario) {
-        servicio.modificarUsuario(usuario);
+    public void modificarUsuario(UsuarioDTO usuariodto) {
+        servicio.modificarUsuario(usuariodto);
     }
 }

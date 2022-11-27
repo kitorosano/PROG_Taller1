@@ -1,6 +1,8 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.AltaCategoriaAEspectaculoDTO;
+import main.java.taller1.Logica.DTOs.CategoriaDTO;
 import main.java.taller1.Logica.Interfaces.ICategoria;
 import main.java.taller1.Logica.Servicios.CategoriaService;
 import main.java.taller1.Persistencia.ConexionDB;
@@ -33,11 +35,11 @@ public class CategoriaController implements ICategoria {
   
   /**
    * Metodo que permite crear una categoria
-   * @param categoria Objeto Categoria que se desea crear
+   * @param categoriadto Objeto categoriadto que se desea crear
    */
   @Override
-  public void altaCategoria(Categoria categoria) {
-    servicio.altaCategoria(categoria);
+  public void altaCategoria(CategoriaDTO categoriadto) {
+    servicio.altaCategoria(categoriadto);
   }
   
   /**
@@ -82,16 +84,11 @@ public class CategoriaController implements ICategoria {
   
   /**
    * Metodo que permite obtener todos los espectaculos de una categoria
-   * @param nombreCategoria Nombre de la categoria del que se desea obtener los espectaculos
-   *                        asociados
-   * @param nombreEspectaculo Nombre del espectaculo del que se desea obtener las categorias
-   *                          asociadas
-   * @param nombrePlataforma Nombre de la plataforma del que se desea obtener los espectaculos
-   *                         asociados
+   * @param altaCategoriaAEspectaculoDTO Objeto que contiene el nombre del espectaculo, el nombre de la plataforma, y la categoria
    * @return Mapa con todos los espectaculos de la base de datos
    */
   @Override
-  public void altaCategoriaAEspectaculo(String nombreCategoria, String nombreEspectaculo, String nombrePlataforma){
-    servicio.altaCategoriaAEspectaculo(nombreCategoria, nombreEspectaculo, nombrePlataforma);
+  public void altaCategoriaAEspectaculo(AltaCategoriaAEspectaculoDTO altaCategoriaAEspectaculoDTO){
+    servicio.altaCategoriaAEspectaculo(altaCategoriaAEspectaculoDTO);
   }
 }

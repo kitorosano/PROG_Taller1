@@ -1,7 +1,7 @@
 package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.*;
-import main.java.taller1.Logica.DTOs.EspectaculoAPaqueteDTO;
+import main.java.taller1.Logica.DTOs.AltaEspectaculoAPaqueteDTO;
 import main.java.taller1.Logica.DTOs.PaqueteDTO;
 import main.java.taller1.Persistencia.ConexionDB;
 
@@ -340,11 +340,11 @@ public class PaqueteService {
     }
     return espectadores;
   }
-  public void altaEspectaculoAPaquete(EspectaculoAPaqueteDTO espectaculoAPaqueteDTO) {
+  public void altaEspectaculoAPaquete(AltaEspectaculoAPaqueteDTO altaEspectaculoAPaqueteDTO) {
     Connection connection = null;
     Statement statement = null;
     String insertEspectaculosPaquetes = "INSERT INTO espectaculos_paquetes (es_paq_nombreEspectaculo, es_paq_plataformaAsociada, es_paq_nombrePaquete) " +
-        "                 VALUES ('" + espectaculoAPaqueteDTO.getNombreEspectaculo() + "', '" + espectaculoAPaqueteDTO.getNombrePlataforma() + "', '" + espectaculoAPaqueteDTO.getNombrePaquete() + "') ";
+        "                 VALUES ('" + altaEspectaculoAPaqueteDTO.getNombreEspectaculo() + "', '" + altaEspectaculoAPaqueteDTO.getNombrePlataforma() + "', '" + altaEspectaculoAPaqueteDTO.getNombrePaquete() + "') ";
     
     try {
       connection = ConexionDB.getConnection();

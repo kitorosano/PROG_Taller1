@@ -1,14 +1,14 @@
 package main.java.taller1.Logica.DTOs;
 
-public class EspectaculoAPaqueteDTO {
+public class AltaEspectaculoAPaqueteDTO {
     private String nombrePaquete;
     private String nombreEspectaculo;
     private  String nombrePlataforma;
 
-    public EspectaculoAPaqueteDTO() {
+    public AltaEspectaculoAPaqueteDTO() {
     }
 
-    public EspectaculoAPaqueteDTO(String nombrePaquete, String nombreEspectaculo, String nombrePlataforma) {
+    public AltaEspectaculoAPaqueteDTO(String nombrePaquete, String nombreEspectaculo, String nombrePlataforma) {
         this.nombrePaquete = nombrePaquete;
         this.nombreEspectaculo = nombreEspectaculo;
         this.nombrePlataforma = nombrePlataforma;

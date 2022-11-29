@@ -245,7 +245,13 @@ public class FormularioFuncion extends JInternalFrame {
             if(imagen==null){
                 imagen="https://i.imgur.com/EDotlnM.png";
             }
-            return new FuncionDTO(nombre,espectaculo,fechahora,LocalDateTime.now(),imagen);
+            FuncionDTO dto = new FuncionDTO();
+            dto.setNombre(nombre);
+            dto.setEspectaculo(espectaculo);
+            dto.setFechaHoraInicio(fechahora);
+            dto.setFechaRegistro(fechahora);
+            dto.setImagen(imagen);
+            return dto;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

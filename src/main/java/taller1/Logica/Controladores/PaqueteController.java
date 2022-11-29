@@ -1,18 +1,11 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.AltaEspectaculoAPaqueteDTO;
 import main.java.taller1.Logica.DTOs.PaqueteDTO;
 import main.java.taller1.Logica.Interfaces.IPaquete;
 import main.java.taller1.Logica.Servicios.PaqueteService;
-import main.java.taller1.Persistencia.ConexionDB;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -115,8 +108,8 @@ public class PaqueteController implements IPaquete {
    *                      al que se quiere ingresar el espectaculo
    */
   @Override
-  public void altaEspectaculoAPaquete(String nombreEspectaculo, String nombrePlataforma, String nombrePaquete) {
-    servicio.altaEspectaculoAPaquete(nombreEspectaculo, nombrePlataforma, nombrePaquete);
+  public void altaEspectaculoAPaquete(AltaEspectaculoAPaqueteDTO altaEspectaculoAPaqueteDTO) {
+    servicio.altaEspectaculoAPaquete(altaEspectaculoAPaqueteDTO);
   }
   
   /**

@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.AltaEspectaculoAPaqueteDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 
@@ -85,7 +86,8 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 for (Map.Entry<String, Espectaculo> entry : espectaculosNuevos.entrySet()) {
-                    Fabrica.getInstance().getIPaquete().altaEspectaculoAPaquete( entry.getValue().getNombre(),entry.getValue().getPlataforma().getNombre(),(String)cbPaquete.getSelectedItem());
+                    AltaEspectaculoAPaqueteDTO datos= new AltaEspectaculoAPaqueteDTO(entry.getValue().getNombre(),entry.getValue().getPlataforma().getNombre(),(String)cbPaquete.getSelectedItem());
+                    Fabrica.getInstance().getIPaquete().altaEspectaculoAPaquete(datos);
                 }
                 JOptionPane.showMessageDialog(null,"Espectaculos agregados con exito");
                 dispose();

@@ -3,6 +3,7 @@ package main.java.taller1.Logica.Servicios;
 import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.DTOs.AltaEspectaculoAPaqueteDTO;
 import main.java.taller1.Logica.DTOs.PaqueteDTO;
+import main.java.taller1.Logica.Mappers.PaqueteMapper;
 import main.java.taller1.Persistencia.ConexionDB;
 
 import java.sql.Connection;
@@ -52,17 +53,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPaquetes);
-      while (resultSet.next()) {
-        String paq_nombre = resultSet.getString("paq_nombre");
-        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
-        String paq_descripcion = resultSet.getString("paq_descripcion");
-        double paq_descuento = resultSet.getDouble("paq_descuento");
-        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
-        String paq_imagen = resultSet.getString("paq_imagen");
-        Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-        
-        paquetes.put(paq_nombre, paquete);
-      }
+      paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -91,15 +82,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPaquete);
-      if (resultSet.next()) {
-        String paq_nombre = resultSet.getString("paq_nombre");
-        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
-        String paq_descripcion = resultSet.getString("paq_descripcion");
-        double paq_descuento = resultSet.getDouble("paq_descuento");
-        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
-        String paq_imagen = resultSet.getString("paq_imagen");
-        paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-      }
+      paquete= PaqueteMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -132,17 +115,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPaquetesByEspectaculo);
-      while (resultSet.next()) {
-        String paq_nombre = resultSet.getString("paq_nombre");
-        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
-        String paq_descripcion = resultSet.getString("paq_descripcion");
-        double paq_descuento = resultSet.getDouble("paq_descuento");
-        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
-        String paq_imagen = resultSet.getString("paq_imagen");
-        Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-        
-        paquetes.put(paq_nombre, paquete);
-      }
+      paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

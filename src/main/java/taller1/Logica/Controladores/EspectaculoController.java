@@ -1,6 +1,7 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.AltaEspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoNuevoEstadoDTO;
 import main.java.taller1.Logica.Interfaces.IEspectaculo;
@@ -33,7 +34,7 @@ public class EspectaculoController implements IEspectaculo {
   }
   
   @Override
-  public void altaEspectaculo(EspectaculoDTO nuevoEspectaculo) {
+  public void altaEspectaculo(AltaEspectaculoDTO nuevoEspectaculo) {
     servicio.altaEspectaculo(nuevoEspectaculo);
   }
   @Override

@@ -1,7 +1,9 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.FuncionDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.Mappers.FuncionMapper;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -98,7 +100,8 @@ public class DetalleEspectaculo extends JInternalFrame {
                 if (e.getClickCount() == 2) {
                     Funcion funcion=FuncionesDelEspectaculo.get(tablaFunciones.getValueAt(tablaFunciones.getSelectedRow(), 0).toString()+"-"+espectaculo.getNombre()+"-"+espectaculo.getPlataforma().getNombre());
                     System.out.println(FuncionesDelEspectaculo);
-                    JInternalFrame detalle = new DetalleFuncion("Detalle de funcion",funcion);
+                    FuncionDTO funcionDTO = FuncionMapper.toDTO(funcion);
+                    JInternalFrame detalle = new DetalleFuncion("Detalle de funcion",funcionDTO);
                     detalle.setIconifiable(true);
                     detalle.setClosable(true);
                     Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);

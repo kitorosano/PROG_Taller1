@@ -5,9 +5,12 @@ import java.util.Optional;
 
 import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Espectador;
-import main.java.taller1.Logica.Clases.EspectadorPaquete;
+import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.DTOs.AltaEspectaculoAPaqueteDTO;
+import main.java.taller1.Logica.DTOs.EspectadorPaqueteDTO;
 import main.java.taller1.Logica.Clases.Paquete;
 import main.java.taller1.Logica.DTOs.PaqueteDTO;
+import main.java.taller1.Logica.DTOs.UsuarioDTO;
 
 public interface IPaquete {
   
@@ -16,9 +19,9 @@ public interface IPaquete {
   Optional<Paquete> obtenerPaquete(String nombrePaquete);
   Map<String, Paquete> obtenerPaquetesDeEspectaculo(String nombreEspectaculo, String nombrePlataforma);
   Map<String, Espectaculo> obtenerEspectaculosDePaquete(String nombrePaquete);
-  Map<String, EspectadorPaquete> obtenerPaquetesPorEspectador(String nickname);
-  Map<String, EspectadorPaquete> obtenerEspectadoresDePaquete(String nombrePaquete);
-  void altaEspectaculoAPaquete(String nombrePaquete, String nombreEspectaculo, String nombrePlataforma);
-  void altaEspectadorAPaquete(String nombrePaquete, String nickname);
+  Map<String, Paquete> obtenerPaquetesPorEspectador(String nickname);
+  Map<String, Usuario> obtenerEspectadoresDePaquete(String nombrePaquete);
+  void altaEspectaculoAPaquete(AltaEspectaculoAPaqueteDTO altaEspectaculoAPaqueteDTO);
+  void altaEspectadorAPaquete(EspectadorPaqueteDTO nuevoEspectadorPaquete);
   
 }

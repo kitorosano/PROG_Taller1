@@ -1,7 +1,11 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.EspectadorRegistradoAFuncionDTO;
+import main.java.taller1.Logica.DTOs.FuncionDTO;
+import main.java.taller1.Logica.DTOs.UsuarioDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.Mappers.FuncionMapper;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -41,8 +45,8 @@ public class DetalleUsuario extends JInternalFrame {
     private JLabel sitioWebContenido;
     private JButton modificarUsuarioButton;
     private JLabel imagen;
-
-    Usuario usuario;
+    
+    UsuarioDTO usuario;
 
     Map<String, EspectadorRegistradoAFuncion> funcionesRegistradasDelEspectador;
 
@@ -50,7 +54,7 @@ public class DetalleUsuario extends JInternalFrame {
 
 
 
-    public DetalleUsuario(String title, Usuario usuario) {
+    public DetalleUsuario(String title, UsuarioDTO usuario) {
         super(title);
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -76,12 +80,12 @@ public class DetalleUsuario extends JInternalFrame {
         else{
             JOptionPane.showMessageDialog(null, "Error: no se pudo obtener la imagen!");
         }
-        if (this.usuario instanceof Artista) {
+        if (this.usuario.isEsArtista()) {
             createUIComponents(1);
             cargarTablaArtista();
-            descripcionContenido.setText(((Artista) usuario).getDescripcion());
-            biografiaContenido.setText(strToHtml(((Artista) usuario).getBiografia()));
-            sitioWebContenido.setText(((Artista) usuario).getSitioWeb());
+            descripcionContenido.setText(usuario.getDescripcion());
+            biografiaContenido.setText(strToHtml(usuario.getBiografia()));
+            sitioWebContenido.setText(usuario.getSitioWeb());
 
         } else {
             createUIComponents(2);
@@ -110,7 +114,7 @@ public class DetalleUsuario extends JInternalFrame {
 
                 if (e.getClickCount() == 2) {
 
-                    if (usuario instanceof Artista) {
+                    if (usuario.isEsArtista()) {
                         String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
                         String plataforma= table1.getValueAt(table1.getSelectedRow(), 2).toString();
 
@@ -128,8 +132,9 @@ public class DetalleUsuario extends JInternalFrame {
 
                         Funcion funcion = funcionesRegistradasDelEspectador.get(nombre_funcion+"-"+nombre_espectaculo+"-"+nombre_plataforma).getFuncion();
 
-                            System.out.println(funcion);
-                        JInternalFrame detalle = new DetalleFuncion("Detalle Funcion", funcion);
+                        FuncionDTO funcionDTO = FuncionMapper.toDTO(funcion);
+                        
+                        JInternalFrame detalle = new DetalleFuncion("Detalle Funcion", funcionDTO);
                         detalle.setIconifiable(true);
                         detalle.setClosable(true);
                         Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);

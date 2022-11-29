@@ -1,6 +1,8 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.EspectadorRegistradoAFuncion;
+import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.DTOs.AltaEspectadorRegistradoAFuncionDTO;
 import main.java.taller1.Logica.Interfaces.IEspectadorRegistradoAFuncion;
 import main.java.taller1.Logica.Servicios.EspectadorRegistradoAFuncionService;
 
@@ -21,14 +23,12 @@ public class EspectadorRegistradoAFuncionController implements IEspectadorRegist
     return instance;
   }
   
-  
-  
   @Override
-  public void registrarEspectadorAFuncion(EspectadorRegistradoAFuncion espectadorRegistradoAFuncion) {
+  public void registrarEspectadorAFuncion(AltaEspectadorRegistradoAFuncionDTO espectadorRegistradoAFuncion) {
     servicio.registrarEspectadorAFuncion(espectadorRegistradoAFuncion);
   }
   @Override
-  public void registrarEspectadoresAFunciones(Map<String, EspectadorRegistradoAFuncion> espectadoresFunciones) {
+  public void registrarEspectadoresAFunciones(Map<String, AltaEspectadorRegistradoAFuncionDTO> espectadoresFunciones) {
     servicio.registrarEspectadoresAFunciones(espectadoresFunciones);
   }
   
@@ -38,7 +38,7 @@ public class EspectadorRegistradoAFuncionController implements IEspectadorRegist
   }
   
   @Override
-  public Map<String, EspectadorRegistradoAFuncion> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion) {
+  public Map<String, Usuario> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion) {
     return servicio.obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
   }
 }

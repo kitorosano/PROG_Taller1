@@ -4,11 +4,12 @@ import java.util.Map;
 import java.util.Optional;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.AltaEspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoNuevoEstadoDTO;
 
 public interface IEspectaculo {
-    void altaEspectaculo(EspectaculoDTO nuevoEspectaculo);
+    void altaEspectaculo(AltaEspectaculoDTO nuevoEspectaculo);
     Map<String, Espectaculo> obtenerEspectaculos();
     Optional<Espectaculo> obtenerEspectaculo(String nombrePlataforma, String nombre);
     Map<String, Espectaculo> obtenerEspectaculosPorPlataforma(String nombrePlataforma);

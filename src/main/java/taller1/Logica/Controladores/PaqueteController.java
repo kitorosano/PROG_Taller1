@@ -1,18 +1,13 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.AltaEspectaculoAPaqueteDTO;
+import main.java.taller1.Logica.DTOs.EspectadorPaqueteDTO;
 import main.java.taller1.Logica.DTOs.PaqueteDTO;
+import main.java.taller1.Logica.DTOs.UsuarioDTO;
 import main.java.taller1.Logica.Interfaces.IPaquete;
 import main.java.taller1.Logica.Servicios.PaqueteService;
-import main.java.taller1.Persistencia.ConexionDB;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -90,7 +85,7 @@ public class PaqueteController implements IPaquete {
    * @return Mapa con todos los paquetes comprados del espectador
    */
   @Override
-  public Map<String, EspectadorPaquete> obtenerPaquetesPorEspectador(String nickname){
+  public Map<String, Paquete> obtenerPaquetesPorEspectador(String nickname){
     return servicio.obtenerPaquetesPorEspectador(nickname);
   }
   
@@ -101,33 +96,27 @@ public class PaqueteController implements IPaquete {
    * @return Mapa con todos los espectadores que compraron el paquete
    */
   @Override
-  public Map<String, EspectadorPaquete> obtenerEspectadoresDePaquete(String nombrePaquete){
+  public Map<String, Usuario> obtenerEspectadoresDePaquete(String nombrePaquete){
     return servicio.obtenerEspectadoresDePaquete(nombrePaquete);
   }
   
   /**
    * Ingresa un espectaculo a un paquete
-   * @param nombreEspectaculo Nombre del espectaculo
-   *                          que se quiere ingresar al paquete
-   * @param nombrePlataforma Nombre de la plataforma
-   *                         en la que se encuentra el espectaculo
-   * @param nombrePaquete Nombre del paquete
-   *                      al que se quiere ingresar el espectaculo
+   * @param altaEspectaculoAPaqueteDTO Objeto de tipo AltaEspectaculoAPaqueteDTO
+   *                                   con los datos del espectaculo, el paquete y la plataforma a ingresar
    */
   @Override
-  public void altaEspectaculoAPaquete(String nombreEspectaculo, String nombrePlataforma, String nombrePaquete) {
-    servicio.altaEspectaculoAPaquete(nombreEspectaculo, nombrePlataforma, nombrePaquete);
+  public void altaEspectaculoAPaquete(AltaEspectaculoAPaqueteDTO altaEspectaculoAPaqueteDTO) {
+    servicio.altaEspectaculoAPaquete(altaEspectaculoAPaqueteDTO);
   }
   
   /**
    * Ingresa un espectador a un paquete
-   * @param nombrePaquete Nombre del paquete
-   *                      al que se quiere ingresar el espectador
-   * @param nickname Nickname del espectador
-   *                           que se quiere ingresar al paquete
+   * @param espectadorPaquete Objeto de tipo EspectadorPaqueteDTO
+   *                          con los datos del espectador, el paquete y la fecha de compra(fechaRegistro)
    */
   @Override
-  public void altaEspectadorAPaquete(String nombrePaquete, String nickname){
-    servicio.altaEspectadorAPaquete(nombrePaquete, nickname);
+  public void altaEspectadorAPaquete(EspectadorPaqueteDTO espectadorPaquete) {
+    servicio.altaEspectadorAPaquete(espectadorPaquete);
   }
 }

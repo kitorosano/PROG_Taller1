@@ -5,20 +5,20 @@ import java.time.LocalDateTime;
 
 public class FuncionDTO {
     private String nombre;
-    //private EspectaculoDTO espectaculo;
+    private EspectaculoDTO espectaculo;
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaRegistro;
     String imagen;
 
     public FuncionDTO(){}
 
-   /* public EspectaculoDTO getEspectaculo() {
+   public EspectaculoDTO getEspectaculo() {
         return espectaculo;
     }
 
     public void setEspectaculo(EspectaculoDTO espectaculo) {
         this.espectaculo = espectaculo;
-    }*/
+    }
 
     public String getNombre() {
         return nombre;

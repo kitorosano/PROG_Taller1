@@ -53,9 +53,9 @@ public class PlataformaMapper {
         }
     }
     //rs2modelmap
-    public static HashMap<String,Plataforma> toModelMap(ResultSet rs) {
+    public static Map<String,Plataforma> toModelMap(ResultSet rs) {
         try {
-            HashMap<String,Plataforma> plataformas = new HashMap<>();
+            Map<String,Plataforma> plataformas = new HashMap<>();
             Plataforma plataforma = toModel(rs);
             while (plataforma != null) {
                 plataformas.put(plataforma.getNombre(),plataforma);
@@ -68,12 +68,12 @@ public class PlataformaMapper {
         }
     }
     //modelmap2ToDtoMap
-    public static HashMap<String,PlataformaDTO> toDTOMap(HashMap<String,Plataforma> plataformas) {
-        HashMap<String,PlataformaDTO> plataformaDTOMap = new HashMap<>();
+    public static Map<String,PlataformaDTO> toDTOMap(Map<String,Plataforma> plataformas) {
+        Map<String,PlataformaDTO> plataformaDTOMap = new HashMap<>();
 
         try {
             for (Map.Entry<String, Plataforma> entry : plataformas.entrySet()) {
-                plataformaDTOMap.put(entry.getValue().getNombre(),toDTO(entry.getValue()));
+                plataformaDTOMap.put(entry.getKey(),toDTO(entry.getValue()));
             }
         } catch (Exception e) {
             throw new RuntimeException("Error al mapear PlataformaMap a PlataformaDTOMap", e);

@@ -1,7 +1,11 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.EspectadorRegistradoAFuncionDTO;
+import main.java.taller1.Logica.DTOs.FuncionDTO;
+import main.java.taller1.Logica.DTOs.UsuarioDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.Mappers.UsuarioMapper;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -31,10 +35,10 @@ public class DetalleFuncion extends JInternalFrame {
     private JButton actualizarEspectadoresButton;
     private JLabel imagen;
 
-    Funcion funcion;
-    Map<String, EspectadorRegistradoAFuncion> espectadoresDeFuncion;
+    FuncionDTO funcion;
+    Map<String, Usuario> espectadoresDeFuncion;
 
-    public DetalleFuncion(String title, Funcion funcion) {
+    public DetalleFuncion(String title, FuncionDTO funcion) {
         super(title);
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -68,8 +72,9 @@ public class DetalleFuncion extends JInternalFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
-                    Espectador espectador=espectadoresDeFuncion.get(table1.getValueAt(table1.getSelectedRow(), 0).toString()).getEspectador();
-                    JInternalFrame detalle= new DetalleUsuario("Detalle Usuario",espectador);
+                    Usuario espectador=espectadoresDeFuncion.get(table1.getValueAt(table1.getSelectedRow(), 0).toString());
+                    UsuarioDTO espectadorDTO = UsuarioMapper.toDTO(espectador);
+                    JInternalFrame detalle= new DetalleUsuario("Detalle Usuario",espectadorDTO);
                     detalle.setIconifiable(true);
                     detalle.setClosable(true);
                     Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
@@ -116,8 +121,8 @@ public class DetalleFuncion extends JInternalFrame {
         try {
             this.espectadoresDeFuncion = Fabrica.getInstance().getIEspectadorRegistradoAFuncion().obtenerEspectadoresRegistradosAFuncion(this.funcion.getNombre());
 
-            for (Map.Entry<String, EspectadorRegistradoAFuncion> entry : espectadoresDeFuncion.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getEspectador().getNickname(), entry.getValue().getEspectador().getCorreo()});
+            for (Usuario entry : espectadoresDeFuncion.values()) {
+                model.addRow(new Object[]{entry.getNickname(), entry.getCorreo()});
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());

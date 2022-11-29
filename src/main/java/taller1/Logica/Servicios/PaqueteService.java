@@ -1,15 +1,18 @@
 package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.AltaEspectaculoAPaqueteDTO;
+import main.java.taller1.Logica.DTOs.EspectadorPaqueteDTO;
 import main.java.taller1.Logica.DTOs.PaqueteDTO;
+import main.java.taller1.Logica.Mappers.EspectaculoMapper;
+import main.java.taller1.Logica.Mappers.PaqueteMapper;
+import main.java.taller1.Logica.Mappers.UsuarioMapper;
 import main.java.taller1.Persistencia.ConexionDB;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -51,17 +54,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPaquetes);
-      while (resultSet.next()) {
-        String paq_nombre = resultSet.getString("paq_nombre");
-        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
-        String paq_descripcion = resultSet.getString("paq_descripcion");
-        double paq_descuento = resultSet.getDouble("paq_descuento");
-        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
-        String paq_imagen = resultSet.getString("paq_imagen");
-        Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-        
-        paquetes.put(paq_nombre, paquete);
-      }
+      paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -90,15 +83,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPaquete);
-      if (resultSet.next()) {
-        String paq_nombre = resultSet.getString("paq_nombre");
-        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
-        String paq_descripcion = resultSet.getString("paq_descripcion");
-        double paq_descuento = resultSet.getDouble("paq_descuento");
-        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
-        String paq_imagen = resultSet.getString("paq_imagen");
-        paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-      }
+      paquete = PaqueteMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -131,17 +116,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPaquetesByEspectaculo);
-      while (resultSet.next()) {
-        String paq_nombre = resultSet.getString("paq_nombre");
-        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
-        String paq_descripcion = resultSet.getString("paq_descripcion");
-        double paq_descuento = resultSet.getDouble("paq_descuento");
-        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
-        String paq_imagen = resultSet.getString("paq_imagen");
-        Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-        
-        paquetes.put(paq_nombre, paquete);
-      }
+      paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -177,37 +152,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectEspectaculosByPaquete);
-      while (resultSet.next()) {
-        String u_nickname = resultSet.getString("u_nickname");
-        String u_nombre = resultSet.getString("u_nombre");
-        String u_apellido = resultSet.getString("u_apellido");
-        String u_correo = resultSet.getString("u_correo");
-        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String u_contrasenia = resultSet.getString("u_contrasenia");
-        String u_imagen = resultSet.getString("u_imagen");
-        String ua_descripcion = resultSet.getString("ua_descripcion");
-        String ua_biografia = resultSet.getString("ua_biografia");
-        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-        Artista artistaOrganizador = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
-        
-        String pl_nombre = resultSet.getString("pl_nombre");
-        String pl_descripcion = resultSet.getString("pl_descripcion");
-        String pl_url = resultSet.getString("pl_url");
-        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
-        
-        String es_nombre = resultSet.getString("es_nombre");
-        String es_descripcion = resultSet.getString("es_descripcion");
-        Double es_duracion = resultSet.getDouble("es_duracion");
-        int es_minEspectadores = resultSet.getInt("es_minEspectadores");
-        int es_maxEspectadores = resultSet.getInt("es_maxEspectadores");
-        String es_url = resultSet.getString("es_url");
-        Double es_costo = resultSet.getDouble("es_costo");
-        E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
-        LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
-        String es_imagen = resultSet.getString("es_imagen");
-        Espectaculo espectaculo = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artistaOrganizador);
-        espectaculos.put(es_nombre+"-"+pl_nombre, espectaculo);
-      }
+      espectaculos.putAll(EspectaculoMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -226,8 +171,8 @@ public class PaqueteService {
     }
     return espectaculos;
   }
-  public Map<String, EspectadorPaquete> obtenerPaquetesPorEspectador(String nickname){
-    Map<String, EspectadorPaquete> paquetes = new HashMap<>();
+  public Map<String, Paquete> obtenerPaquetesPorEspectador(String nickname){
+    Map<String, Paquete> paquetes = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -241,29 +186,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPaquetesByEspectador);
-      while (resultSet.next()) {
-        String u_nickname = resultSet.getString("u_nickname");
-        String u_nombre = resultSet.getString("u_nombre");
-        String u_apellido = resultSet.getString("u_apellido");
-        String u_correo = resultSet.getString("u_correo");
-        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String u_contrasenia = resultSet.getString("u_contrasenia");
-        String u_imagen = resultSet.getString("u_imagen");
-        Espectador espectador = new Espectador(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen);
-        
-        String paq_nombre = resultSet.getString("paq_nombre");
-        String paq_descripcion = resultSet.getString("paq_descripcion");
-        Double paq_descuento = resultSet.getDouble("paq_descuento");
-        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
-        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
-        String paq_imagen = resultSet.getString("paq_imagen");
-        Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-        
-        LocalDateTime ue_paq_fechaRegistro = resultSet.getTimestamp("ue_paq_fechaRegistro").toLocalDateTime();
-        
-        EspectadorPaquete espectadorPaquete = new EspectadorPaquete(espectador, paquete, ue_paq_fechaRegistro);
-        paquetes.put(paq_nombre, espectadorPaquete);
-      }
+      paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -282,8 +205,8 @@ public class PaqueteService {
     }
     return paquetes;
   }
-  public Map<String, EspectadorPaquete> obtenerEspectadoresDePaquete(String nombrePaquete){
-    Map<String, EspectadorPaquete> espectadores = new HashMap<>();
+  public Map<String, Usuario> obtenerEspectadoresDePaquete(String nombrePaquete){
+    Map<String, Usuario> espectadores = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -297,30 +220,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectEspectadoresByPaquete);
-      while (resultSet.next()) {
-        
-        String u_nickname = resultSet.getString("u_nickname");
-        String u_nombre = resultSet.getString("u_nombre");
-        String u_apellido = resultSet.getString("u_apellido");
-        String u_correo = resultSet.getString("u_correo");
-        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String u_contrasenia = resultSet.getString("u_contrasenia");
-        String u_imagen = resultSet.getString("u_imagen");
-        Espectador espectador = new Espectador(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen);
-        
-        String paq_nombre = resultSet.getString("paq_nombre");
-        String paq_descripcion = resultSet.getString("paq_descripcion");
-        Double paq_descuento = resultSet.getDouble("paq_descuento");
-        LocalDateTime paq_fechaExpiracion = resultSet.getTimestamp("paq_fechaExpiracion").toLocalDateTime();
-        LocalDateTime paq_fechaRegistro = resultSet.getTimestamp("paq_fechaRegistro").toLocalDateTime();
-        String paq_imagen = resultSet.getString("paq_imagen");
-        Paquete paquete = new Paquete(paq_nombre, paq_descripcion, paq_descuento, paq_fechaExpiracion, paq_fechaRegistro, paq_imagen);
-        
-        LocalDateTime ue_paq_fechaRegistro = resultSet.getTimestamp("ue_paq_fechaRegistro").toLocalDateTime();
-        
-        EspectadorPaquete espectadorPaquete = new EspectadorPaquete(espectador, paquete, ue_paq_fechaRegistro);
-        espectadores.put(u_nickname, espectadorPaquete);
-      }
+      espectadores.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -339,11 +239,11 @@ public class PaqueteService {
     }
     return espectadores;
   }
-  public void altaEspectaculoAPaquete(String nombreEspectaculo, String nombrePlataforma, String nombrePaquete) {
+  public void altaEspectaculoAPaquete(AltaEspectaculoAPaqueteDTO altaEspectaculoAPaqueteDTO){
     Connection connection = null;
     Statement statement = null;
     String insertEspectaculosPaquetes = "INSERT INTO espectaculos_paquetes (es_paq_nombreEspectaculo, es_paq_plataformaAsociada, es_paq_nombrePaquete) " +
-        "                 VALUES ('" + nombreEspectaculo + "', '" + nombrePlataforma + "', '" + nombrePaquete + "') ";
+        "                 VALUES ('" + altaEspectaculoAPaqueteDTO.getNombreEspectaculo() + "', '" + altaEspectaculoAPaqueteDTO.getNombrePlataforma() + "', '" + altaEspectaculoAPaqueteDTO.getNombrePaquete() + "') ";
     
     try {
       connection = ConexionDB.getConnection();
@@ -365,11 +265,11 @@ public class PaqueteService {
       }
     }
   }
-  public void altaEspectadorAPaquete(String nombrePaquete, String nickname){
+  public void altaEspectadorAPaquete(EspectadorPaqueteDTO espectadorPaquete) {
     Connection connection = null;
     Statement statement = null;
     String insertEspectadoresPaquetes = "INSERT INTO espectadores_paquetes (ue_paq_nickname, ue_paq_nombrePaquete, ue_paq_fechaRegistro) " +
-        "                 VALUES ('" + nickname + "', '" + nombrePaquete + "', '" + LocalDateTime.now() + "') ";
+                          " VALUES ('" + espectadorPaquete.getEspectador().getNickname() + "', '" + espectadorPaquete.getPaquete().getNombre() + "', '" + espectadorPaquete.getFechaRegistro() + "') ";
     
     try {
       connection = ConexionDB.getConnection();

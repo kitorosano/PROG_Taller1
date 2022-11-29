@@ -43,7 +43,7 @@ public class ModificarUsuario extends JInternalFrame {
     String imagen=null;
     private String regexURL = "(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})";
 
-    public ModificarUsuario(String title, Usuario usuario){
+    public ModificarUsuario(String title, UsuarioDTO usuario){
         super(title);
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -76,7 +76,7 @@ public class ModificarUsuario extends JInternalFrame {
                     return;
                 }
                 //validate url with regex
-                if ((!txtURL.getText().matches(regexURL)) && (usuario instanceof Artista)) {
+                if ((!txtURL.getText().matches(regexURL)) && (usuario.isEsArtista())) {
                     JOptionPane.showMessageDialog(null, "La URL no es valida");
                     return;
                 }
@@ -128,9 +128,9 @@ public class ModificarUsuario extends JInternalFrame {
         });
     }
 
-    private void createUIComponents(Usuario usuario) {
+    private void createUIComponents(UsuarioDTO usuario) {
         // TODO: place custom component creation code here
-        if (usuario instanceof Espectador){
+        if (!usuario.isEsArtista()){
             txtDescripcion.setVisible(false);
             txtBiografia.setVisible(false);
             txtURL.setVisible(false);
@@ -138,14 +138,13 @@ public class ModificarUsuario extends JInternalFrame {
             lblBiografia.setVisible(false);
             lblURL.setVisible(false);
         }else{
-            Artista actual = (Artista) usuario;
-            txtDescripcion.setText(actual.getDescripcion());
-            txtBiografia.setText(actual.getBiografia());
-            txtURL.setText(actual.getSitioWeb());
+            txtDescripcion.setText(usuario.getDescripcion());
+            txtBiografia.setText(usuario.getBiografia());
+            txtURL.setText(usuario.getSitioWeb());
         }
     }
 
-    private void ActualizarUsuario(Usuario usuario){
+    private void ActualizarUsuario(UsuarioDTO usuario){
 //        usuario.setNombre(txtNombre.getText());
 //        usuario.setApellido(txtApellido.getText());
 //        LocalDate fechanac = LocalDate.parse(txtFechaNac.getText());
@@ -164,7 +163,7 @@ public class ModificarUsuario extends JInternalFrame {
         usuarioDTO.setCorreo(txtCorreo.getText());
         usuarioDTO.setFechaNacimiento(LocalDate.parse(txtFechaNac.getText()));
         usuarioDTO.setImagen(imagen);
-        if (usuario instanceof Artista) {
+        if (usuario.isEsArtista()) {
             usuarioDTO.setDescripcion(txtDescripcion.getText());
             usuarioDTO.setBiografia(txtBiografia.getText());
             usuarioDTO.setSitioWeb(txtURL.getText());
@@ -173,11 +172,11 @@ public class ModificarUsuario extends JInternalFrame {
         Fabrica.getInstance().getIUsuario().modificarUsuario(usuarioDTO);
     }
 
-    public boolean comprobarCamposNulos(Usuario usuario) {                //Devuelve true si hay campos nulos
+    public boolean comprobarCamposNulos(UsuarioDTO usuario) {                //Devuelve true si hay campos nulos
 
         if (txtNickname.getText().isEmpty() || txtNombre.getText().isEmpty() || txtApellido.getText().isEmpty() || txtCorreo.getText().isEmpty() || txtFechaNac.getText().isEmpty()) {
             return true;
-        } else if (usuario instanceof Artista && txtDescripcion.getText().isEmpty()){
+        } else if (usuario.isEsArtista() && txtDescripcion.getText().isEmpty()){
             return true;
         }
         return false;

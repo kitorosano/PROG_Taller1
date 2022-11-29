@@ -1,13 +1,16 @@
 package main.java.taller1.Logica.Interfaces;
 
 import main.java.taller1.Logica.Clases.EspectadorRegistradoAFuncion;
+import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.DTOs.AltaEspectadorRegistradoAFuncionDTO;
+import main.java.taller1.Logica.DTOs.EspectadorRegistradoAFuncionDTO;
 
 import java.util.Map;
 
 public interface IEspectadorRegistradoAFuncion {
   
-  void registrarEspectadorAFuncion(EspectadorRegistradoAFuncion espectadorRegistradoAFuncion);
-  void registrarEspectadoresAFunciones(Map<String, EspectadorRegistradoAFuncion> espectadoresFunciones);
+  void registrarEspectadorAFuncion(AltaEspectadorRegistradoAFuncionDTO espectadorRegistradoAFuncion);
+  void registrarEspectadoresAFunciones(Map<String, AltaEspectadorRegistradoAFuncionDTO> espectadoresFunciones);
   Map<String, EspectadorRegistradoAFuncion> obtenerFuncionesRegistradasDelEspectador(String nickname);
-  Map<String, EspectadorRegistradoAFuncion> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion);
+  Map<String, Usuario> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion);
 }

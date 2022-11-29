@@ -2,6 +2,7 @@ package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.E_EstadoEspectaculo;
 import main.java.taller1.Logica.Clases.Espectaculo;
+import main.java.taller1.Logica.DTOs.AltaEspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoNuevoEstadoDTO;
 import main.java.taller1.Logica.Mappers.EspectaculoMapper;
@@ -18,11 +19,11 @@ import java.util.Optional;
 public class EspectaculoService {
   
   
-  public void altaEspectaculo(EspectaculoDTO nuevoEspectaculo) {
+  public void altaEspectaculo(AltaEspectaculoDTO nuevoEspectaculo) {
     Connection connection = null;
     Statement statement = null;
     String insertEspectaculo = "INSERT INTO espectaculos (es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, es_plataformaAsociada, es_artistaOrganizador) " +
-        "VALUES ('" + nuevoEspectaculo.getNombre() + "', '" + nuevoEspectaculo.getDescripcion() + "', '" + nuevoEspectaculo.getDuracion() + "', '" + nuevoEspectaculo.getMinEspectadores() + "', '" + nuevoEspectaculo.getMaxEspectadores() + "', '" + nuevoEspectaculo.getUrl() + "', '" + nuevoEspectaculo.getCosto() + "', '" + nuevoEspectaculo.getEstado() + "', '" + nuevoEspectaculo.getFechaRegistro() + "', '" + nuevoEspectaculo.getImagen() + "', '" + nuevoEspectaculo.getPlataforma().getNombre() + "', '" + nuevoEspectaculo.getArtista().getNickname() + "')";
+        "VALUES ('" + nuevoEspectaculo.getNombre() + "', '" + nuevoEspectaculo.getDescripcion() + "', '" + nuevoEspectaculo.getDuracion() + "', '" + nuevoEspectaculo.getMinEspectadores() + "', '" + nuevoEspectaculo.getMaxEspectadores() + "', '" + nuevoEspectaculo.getUrl() + "', '" + nuevoEspectaculo.getCosto() + "', '" + nuevoEspectaculo.getEstado() + "', '" + nuevoEspectaculo.getFechaRegistro() + "', '" + nuevoEspectaculo.getImagen() + "', '" + nuevoEspectaculo.getPlataforma() + "', '" + nuevoEspectaculo.getArtista() + "')";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();

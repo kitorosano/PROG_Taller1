@@ -1,5 +1,8 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.AltaEspectadorRegistradoAFuncionDTO;
+import main.java.taller1.Logica.DTOs.EspectadorRegistradoAFuncionDTO;
+import main.java.taller1.Logica.DTOs.FuncionDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 
@@ -32,17 +35,17 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
     private Map<String, Funcion> funciones;
     private Map<String,Usuario>usuarios;
 
-    private Funcion funcionPredefinida;
+    private FuncionDTO funcionPredefinida;
 
     private int maximo;
 
-    private Map<String,EspectadorRegistradoAFuncion> espectadores=new HashMap<>();
+    private Map<String, AltaEspectadorRegistradoAFuncionDTO> espectadores=new HashMap<>();
 
     private DefaultListModel<String> modelAInvitar = new DefaultListModel<String>();
     private DefaultListModel<String> modelInvitados = new DefaultListModel<String>();
 
     private DefaultListModel<String> modelRegistros = new DefaultListModel<String>();
-    public FormularioRegistroEspectadorAFuncion(String title, Funcion funcion){
+    public FormularioRegistroEspectadorAFuncion(String title, FuncionDTO funcion){
         super(title);
         setContentPane(panel1);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -156,7 +159,14 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
             costo=espectaculo.getCosto();
         }
         //FALTA VER COMO ACTUALIZAR LOS DATOS DE LOS ESPECTACULOS CANJEADOS
-        espectadores.put(listaAinvitar.getSelectedValue().toString(), new EspectadorRegistradoAFuncion(nuevo,funcion,null, false,costo, LocalDateTime.now()));
+        AltaEspectadorRegistradoAFuncionDTO dto = new AltaEspectadorRegistradoAFuncionDTO();
+        dto.setEspectador(nuevo.getNombre());
+        dto.setFuncion(funcion.getNombre());
+        dto.setPaquete(null);
+        dto.setCanjeado(false);
+        dto.setCosto(costo);
+        dto.setFechaRegistro(LocalDateTime.now());
+        espectadores.put(listaAinvitar.getSelectedValue().toString(), dto);
     }
     private void cargarDatosComboBox() {
         try {
@@ -204,7 +214,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
     }
 
     public void cargarDatosListas(){
-        Map<String,EspectadorRegistradoAFuncion>invitados;
+        Map<String,Usuario>invitados;
         modelAInvitar.clear();
         modelInvitados.clear();
         try {

@@ -85,9 +85,12 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                for (Map.Entry<String, Espectaculo> entry : espectaculosNuevos.entrySet()) {
-                    AltaEspectaculoAPaqueteDTO datos= new AltaEspectaculoAPaqueteDTO(entry.getValue().getNombre(),entry.getValue().getPlataforma().getNombre(),(String)cbPaquete.getSelectedItem());
-                    Fabrica.getInstance().getIPaquete().altaEspectaculoAPaquete(datos);
+                for (Espectaculo espectaculo : espectaculosNuevos.values()) {
+                    AltaEspectaculoAPaqueteDTO dto = new AltaEspectaculoAPaqueteDTO();
+                    dto.setNombreEspectaculo(espectaculo.getNombre());
+                    dto.setNombrePlataforma(espectaculo.getPlataforma().getNombre());
+                    dto.setNombrePaquete((String)cbPaquete.getSelectedItem());
+                    Fabrica.getInstance().getIPaquete().altaEspectaculoAPaquete(dto);
                 }
                 JOptionPane.showMessageDialog(null,"Espectaculos agregados con exito");
                 dispose();

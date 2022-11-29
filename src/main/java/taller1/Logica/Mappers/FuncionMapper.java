@@ -5,7 +5,6 @@ import main.java.taller1.Logica.Clases.Funcion;
 import main.java.taller1.Logica.DTOs.FuncionDTO;
 
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,16 +53,15 @@ public class FuncionMapper {
             funcionDTO.setFechaRegistro(funcion.getFechaRegistro());
             funcionDTO.setImagen(funcion.getImagen());
             funcionDTO.setEspectaculo(EspectaculoMapper.toDTO(funcion.getEspectaculo()));
+            
+            return funcionDTO;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException("Error al mapear Funcion a FuncionDTO", e);
         }
-        return funcionDTO;
     }
 
-
     //Map<Funcion> -> Map<FuncionDTO>
-
     public static Map<String,FuncionDTO> toDTOMap(Map<String,Funcion> funciones) {
         Map<String,FuncionDTO> funcionesDTOMap = new HashMap<>();
         try {
@@ -71,11 +69,12 @@ public class FuncionMapper {
                 FuncionDTO dtoFuncion= toDTO(funcion);
                 funcionesDTOMap.put(dtoFuncion.getNombre(),dtoFuncion);
             }
+            
+            return funcionesDTOMap;
         } catch (Exception e) {
             throw new RuntimeException("Error al mapear FuncionMap a FuncionDTOMap", e);
         }
 
-        return funcionesDTOMap;
     }
 
 }

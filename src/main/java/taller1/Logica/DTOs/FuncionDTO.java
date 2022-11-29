@@ -5,21 +5,12 @@ import java.time.LocalDateTime;
 
 public class FuncionDTO {
     private String nombre;
-
     private EspectaculoDTO espectaculo;
     private LocalDateTime fechaHoraInicio;
     private LocalDateTime fechaRegistro;
     String imagen;
 
     public FuncionDTO(){}
-
-    public FuncionDTO(String nombre, EspectaculoDTO espectaculo, LocalDateTime fechaHoraInicio, LocalDateTime fechaRegistro, String imagen) {
-        this.nombre = nombre;
-        this.espectaculo = espectaculo;
-        this.fechaHoraInicio = fechaHoraInicio;
-        this.fechaRegistro = fechaRegistro;
-        this.imagen = imagen;
-    }
 
     public EspectaculoDTO getEspectaculo() {
         return espectaculo;

@@ -47,9 +47,9 @@ public class CategoriaMapper {
         }
     }
     //rs2modelmap
-    public static HashMap<String,Categoria> toModelMap(ResultSet rs) {
+    public static Map<String,Categoria> toModelMap(ResultSet rs) {
         try {
-            HashMap<String,Categoria> categorias = new HashMap<>();
+            Map<String,Categoria> categorias = new HashMap<>();
             Categoria categoria = toModel(rs);
             while (categoria != null) {
                 categorias.put(categoria.getNombre(),categoria);
@@ -62,12 +62,12 @@ public class CategoriaMapper {
         }
     }
     //modelmap2ToDtoMap
-    public static HashMap<String,CategoriaDTO> toDTOMap(HashMap<String,Categoria> categorias) {
-        HashMap<String,CategoriaDTO> categoriaDTOMap = new HashMap<>();
+    public static Map<String,CategoriaDTO> toDTOMap(Map<String,Categoria> categorias) {
+        Map<String,CategoriaDTO> categoriaDTOMap = new HashMap<>();
 
         try {
             for (Map.Entry<String, Categoria> entry : categorias.entrySet()) {
-                categoriaDTOMap.put(entry.getValue().getNombre(),toDTO(entry.getValue()));
+                categoriaDTOMap.put(entry.getKey(),toDTO(entry.getValue()));
             }
         } catch (Exception e) {
             throw new RuntimeException("Error al mapear CategoriaMap a CategoriaDTOMap", e);

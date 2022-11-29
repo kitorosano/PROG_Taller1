@@ -1,6 +1,7 @@
 package main.java.taller1.Presentacion;
 
 import main.java.taller1.Logica.DTOs.AltaCategoriaAEspectaculoDTO;
+import main.java.taller1.Logica.DTOs.AltaEspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
@@ -214,48 +215,31 @@ public class FormularioEspectaculo extends JInternalFrame {
         String nombre = tfNombre.getText(), descripcion = tfDescripcion.getText(), url = tfURL.getText();
         int minEspec = (int) spEspMinimos.getValue(), maxEspec = (int) spEspMaximos.getValue();
         double duracion = Double.parseDouble(tfDuracion.getText()), costo = Double.parseDouble(tfCosto.getText());
-        Plataforma plataforma = null;
-        Artista artista = null;
-        Map<String, Plataforma> plataformas = Fabrica.getInstance().getIPlataforma().obtenerPlataformas();
-        Map<String, Usuario> usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
-        for (Plataforma p : plataformas.values()) {
-            if (p.getNombre().equals((String) cbPlataforma.getSelectedItem())) {
-                plataforma = p;
-                break;
-            }
-        }
-        for (Usuario usu : usuarios.values()) {
-            if (usu instanceof Artista) {
-                if (usu.getNombre().equals((String) cbArtista.getSelectedItem())) {
-                    artista = (Artista) usu;
-                    break;
-                }
-            }
-        }
+
         if(imagen==null){
             imagen="https://i.imgur.com/BeJ3HuS.png";
         }
 
-        EspectaculoDTO espectaculoDTO = new EspectaculoDTO();
-        espectaculoDTO.setNombre(nombre);
-        espectaculoDTO.setDescripcion(descripcion);
-        espectaculoDTO.setDuracion(duracion);
-        espectaculoDTO.setMinEspectadores(minEspec);
-        espectaculoDTO.setMaxEspectadores(maxEspec);
-        espectaculoDTO.setUrl(url);
-        espectaculoDTO.setCosto(costo);
-        espectaculoDTO.setEstado(E_EstadoEspectaculo.INGRESADO);
-        espectaculoDTO.setFechaRegistro(LocalDateTime.now());
-        espectaculoDTO.setImagen(imagen);
-        espectaculoDTO.setPlataforma(PlataformaMapper.toDTO(plataforma));
-        espectaculoDTO.setArtista(UsuarioMapper.toDTO(artista));
-        Fabrica.getInstance().getIEspectaculo().altaEspectaculo(espectaculoDTO);
+        AltaEspectaculoDTO dto = new AltaEspectaculoDTO();
+        dto.setNombre(nombre);
+        dto.setDescripcion(descripcion);
+        dto.setDuracion(duracion);
+        dto.setMinEspectadores(minEspec);
+        dto.setMaxEspectadores(maxEspec);
+        dto.setUrl(url);
+        dto.setCosto(costo);
+        dto.setEstado(E_EstadoEspectaculo.INGRESADO);
+        dto.setFechaRegistro(LocalDateTime.now());
+        dto.setImagen(imagen);
+        dto.setPlataforma((String) cbPlataforma.getSelectedItem());
+        dto.setArtista((String) cbArtista.getSelectedItem());
+        Fabrica.getInstance().getIEspectaculo().altaEspectaculo(dto);
 
         for (String micategoria : categoriasAgregar.values()){
             AltaCategoriaAEspectaculoDTO altaCategoriaAEspectaculoDTO = new AltaCategoriaAEspectaculoDTO();
             altaCategoriaAEspectaculoDTO.setNombreCategoria(micategoria);
-            altaCategoriaAEspectaculoDTO.setNombreEspectaculo(espectaculoDTO.getNombre());
-            altaCategoriaAEspectaculoDTO.setNombrePlataforma(espectaculoDTO.getPlataforma().getNombre());
+            altaCategoriaAEspectaculoDTO.setNombreEspectaculo(dto.getNombre());
+            altaCategoriaAEspectaculoDTO.setNombrePlataforma(dto.getPlataforma());
             Fabrica.getInstance().getICategoria().altaCategoriaAEspectaculo(altaCategoriaAEspectaculoDTO);
         }
 

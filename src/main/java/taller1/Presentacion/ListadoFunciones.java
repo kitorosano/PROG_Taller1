@@ -1,9 +1,11 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.FuncionDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Funcion;
 import main.java.taller1.Logica.Clases.Plataforma;
+import main.java.taller1.Logica.Mappers.FuncionMapper;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -151,7 +153,8 @@ public class ListadoFunciones extends JInternalFrame {
         try {
             funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(cmbPlataforma.getSelectedItem().toString(), cmbEspectaculo.getSelectedItem().toString());
             Funcion funcion = funciones.get(listaFunciones.getSelectedValue()+"-"+cmbEspectaculo.getSelectedItem().toString()+"-"+cmbPlataforma.getSelectedItem().toString());  //Guardo la funcion seleccionada buscando en la lista por su nombre
-            JInternalFrame detalle = new DetalleFuncion("Detalle funcion", funcion);
+            FuncionDTO funcionDTO = FuncionMapper.toDTO(funcion);
+            JInternalFrame detalle = new DetalleFuncion("Detalle funcion", funcionDTO);
             detalle.setIconifiable(true);
             detalle.setClosable(true);
             Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);

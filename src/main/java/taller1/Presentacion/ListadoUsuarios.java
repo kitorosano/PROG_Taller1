@@ -1,9 +1,11 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.UsuarioDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Artista;
 import main.java.taller1.Logica.Clases.Espectador;
 import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.Mappers.UsuarioMapper;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -175,8 +177,10 @@ public class ListadoUsuarios extends JInternalFrame {
             }else if (tipo ==1) {
                 usuario = usuarios.get(listaArtistas.getSelectedValue());  //Guardo el usuario seleccionado buscando en la lista por su nickname
             }
+    
+            UsuarioDTO usuarioDTO = UsuarioMapper.toDTO(usuario);
             
-            JInternalFrame detalle = new DetalleUsuario("Detalle usuario", usuario);
+            JInternalFrame detalle = new DetalleUsuario("Detalle usuario", usuarioDTO);
             detalle.setIconifiable(true);
             detalle.setClosable(true);
             

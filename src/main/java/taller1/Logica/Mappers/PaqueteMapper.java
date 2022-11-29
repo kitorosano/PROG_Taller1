@@ -64,9 +64,7 @@ public class PaqueteMapper {
         return paqueteDTO;
     }
 
-
     //Map<Paquete> -> Map<PaqueteDTO>
-
     public static Map<String,PaqueteDTO> toDTOMap(Map<String,Paquete> paquetes) {
         Map<String,PaqueteDTO> paquetesDTOMap = new HashMap<>();
         try {
@@ -80,4 +78,5 @@ public class PaqueteMapper {
 
         return paquetesDTOMap;
     }
+    
 }

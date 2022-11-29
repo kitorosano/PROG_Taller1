@@ -20,6 +20,8 @@ public class FuncionMapper {
             funcion.setFechaHoraInicio(rs.getTimestamp("fn_fechaHoraInicio").toLocalDateTime());
             funcion.setFechaRegistro(rs.getTimestamp("fn_fechaRegistro").toLocalDateTime());
             funcion.setImagen(rs.getString("fn_imagen"));
+            
+            rs.previous();
             funcion.setEspectaculo(EspectaculoMapper.toModel(rs));
             return funcion;
         } catch (Exception e) {

@@ -16,8 +16,14 @@ public class EspectadorRegistradoAFuncionMapper {
       if (!rs.next()) return null;
       
       EspectadorRegistradoAFuncion espectadorfuncion = new EspectadorRegistradoAFuncion();
+      
+      rs.previous();
       espectadorfuncion.setEspectador((Espectador) UsuarioMapper.toModel(rs));
+      
+      rs.previous();
       espectadorfuncion.setFuncion(FuncionMapper.toModel(rs));
+      
+      rs.previous();
       espectadorfuncion.setPaquete(PaqueteMapper.toModel(rs));
       espectadorfuncion.setCanjeado(rs.getBoolean("ue_fn_canjeado"));
       espectadorfuncion.setCosto(rs.getDouble("ue_fn_costo"));

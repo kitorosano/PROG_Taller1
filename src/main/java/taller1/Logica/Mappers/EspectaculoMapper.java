@@ -27,7 +27,11 @@ public class EspectaculoMapper {
       espectaculo.setEstado(E_EstadoEspectaculo.valueOf(rs.getString("es_estado")));
       espectaculo.setFechaRegistro(rs.getTimestamp("es_fecha_registro").toLocalDateTime());
       espectaculo.setImagen(rs.getString("es_imagen"));
+      
+      rs.previous();
       espectaculo.setPlataforma(PlataformaMapper.toModel(rs));
+      
+      rs.previous();
       espectaculo.setArtista((Artista) UsuarioMapper.toModel(rs));
       return espectaculo;
     } catch (Exception e) {

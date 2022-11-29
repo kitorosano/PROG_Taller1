@@ -1,7 +1,10 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
+import main.java.taller1.Logica.DTOs.FuncionDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.Mappers.EspectaculoMapper;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -227,22 +230,22 @@ public class FormularioFuncion extends JInternalFrame {
             return false;
         }
     }
-    public Funcion crearFuncion(){
+    public FuncionDTO crearFuncion(){
         String nombre=tfNombre.getText();
         LocalDateTime fechahora= LocalDateTime.of(LocalDate.parse(tfFecha.getText()), LocalTime.parse(tfHora.getText()));
-        Espectaculo espectaculo = null;
+        EspectaculoDTO espectaculo = null;
         try {
             Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
             for (Espectaculo esp : espectaculos.values()) {
                 if(esp.getNombre().equals((String)cbEspectaculo.getSelectedItem())){
-                    espectaculo=esp;
+                    espectaculo= EspectaculoMapper.toDTO(esp);
                     break;
                 }
             }
             if(imagen==null){
                 imagen="https://i.imgur.com/EDotlnM.png";
             }
-            return new Funcion(nombre,espectaculo,fechahora,LocalDateTime.now(),imagen);
+            return new FuncionDTO(nombre,espectaculo,fechahora,LocalDateTime.now(),imagen);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

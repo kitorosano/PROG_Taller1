@@ -1,5 +1,6 @@
 package main.java.taller1.Logica.Mappers;
 
+import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Funcion;
 import main.java.taller1.Logica.DTOs.FuncionDTO;
 

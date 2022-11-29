@@ -12,7 +12,7 @@ public class FuncionDTO {
 
     public FuncionDTO(){}
 
-   public EspectaculoDTO getEspectaculo() {
+    public EspectaculoDTO getEspectaculo() {
         return espectaculo;
     }
 

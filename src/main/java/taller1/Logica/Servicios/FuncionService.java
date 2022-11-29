@@ -1,6 +1,8 @@
 package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.*;
+import main.java.taller1.Logica.DTOs.FuncionDTO;
+import main.java.taller1.Logica.Mappers.FuncionMapper;
 import main.java.taller1.Persistencia.ConexionDB;
 
 import java.sql.Connection;
@@ -16,11 +18,11 @@ import java.util.Optional;
 public class FuncionService {
   
   
-  public void altaFuncion(Funcion nuevaFuncion) {
+  public void altaFuncion(FuncionDTO funcionDTO) {
     Connection connection = null;
     Statement statement = null;
     String insertFuncion = "INSERT INTO funciones (fn_nombre, fn_espectaculoAsociado, fn_plataformaAsociada, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen) " +
-        "VALUES ('" + nuevaFuncion.getNombre() + "', '" + nuevaFuncion.getEspectaculo().getNombre() + "', '" + nuevaFuncion.getEspectaculo().getPlataforma().getNombre()+ "', '"+ nuevaFuncion.getFechaHoraInicio() + "', '" + nuevaFuncion.getFechaRegistro() + "', '" + nuevaFuncion.getImagen() + "')";
+        "VALUES ('" + funcionDTO.getNombre() + "', '" + funcionDTO.getEspectaculo().getNombre() + "', '" + funcionDTO.getEspectaculo().getPlataforma().getNombre()+ "', '"+ funcionDTO.getFechaHoraInicio() + "', '" + funcionDTO.getFechaRegistro() + "', '" + funcionDTO.getImagen() + "')";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -58,7 +60,7 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectFunciones);
-      while (resultSet.next()) {
+      /*while (resultSet.next()) {
         String pl_nombre = resultSet.getString("pl_nombre");
         String pl_descripcion = resultSet.getString("pl_descripcion");
         String pl_url = resultSet.getString("pl_url");
@@ -94,7 +96,8 @@ public class FuncionService {
         String fn_imagen = resultSet.getString("fn_imagen");
         Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
         funciones.put(fn_nombre+"-"+es_nombre+"-"+pl_nombre, funcion);
-      }
+      }*/
+      funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -133,7 +136,7 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectFuncion);
-      if (resultSet.next()) {
+      /*if (resultSet.next()) {
         String pl_nombre = resultSet.getString("pl_nombre");
         String pl_descripcion = resultSet.getString("pl_descripcion");
         String pl_url = resultSet.getString("pl_url");
@@ -168,7 +171,8 @@ public class FuncionService {
         LocalDateTime fn_fechaRegistro = resultSet.getTimestamp("fn_fechaRegistro").toLocalDateTime();
         String fn_imagen = resultSet.getString("fn_imagen");
         funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
-      }
+      }*/
+      funcion=FuncionMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -205,7 +209,7 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectFunciones);
-      while (resultSet.next()) {
+      /*while (resultSet.next()) {
         String pl_nombre = resultSet.getString("pl_nombre");
         String pl_descripcion = resultSet.getString("pl_descripcion");
         String pl_url = resultSet.getString("pl_url");
@@ -242,7 +246,8 @@ public class FuncionService {
         Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
         
         funciones.put(fn_nombre, funcion);
-      }
+      }*/
+      funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -281,7 +286,7 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectFunciones);
-      while (resultSet.next()) {
+      /*while (resultSet.next()) {
         String pl_nombre = resultSet.getString("pl_nombre");
         String pl_descripcion = resultSet.getString("pl_descripcion");
         String pl_url = resultSet.getString("pl_url");
@@ -318,7 +323,8 @@ public class FuncionService {
         Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
         
         funciones.put(fn_nombre+"-"+es_nombre+"-"+pl_nombre, funcion);
-      }
+      }*/
+      funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -417,7 +423,7 @@ public class FuncionService {
       
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectFunciones);
-      while (resultSet.next()) {
+      /*while (resultSet.next()) {
         String pl_nombre = resultSet.getString("pl_nombre");
         String pl_descripcion = resultSet.getString("pl_descripcion");
         String pl_url = resultSet.getString("pl_url");
@@ -453,7 +459,8 @@ public class FuncionService {
         String fn_imagen = resultSet.getString("fn_imagen");
         Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
         funciones.put(fn_nombre+"-"+es_nombre+"-"+pl_nombre, funcion);
-      }
+      }*/
+      funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

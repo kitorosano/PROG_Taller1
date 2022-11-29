@@ -84,6 +84,7 @@ public class PaqueteService {
       statement = connection.createStatement();
       resultSet = statement.executeQuery(selectPaquete);
       paquete = PaqueteMapper.toModel(resultSet);
+
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -239,7 +240,8 @@ public class PaqueteService {
     }
     return espectadores;
   }
-  public void altaEspectaculoAPaquete(AltaEspectaculoAPaqueteDTO altaEspectaculoAPaqueteDTO){
+  
+  public void altaEspectaculoAPaquete(AltaEspectaculoAPaqueteDTO altaEspectaculoAPaqueteDTO) {
     Connection connection = null;
     Statement statement = null;
     String insertEspectaculosPaquetes = "INSERT INTO espectaculos_paquetes (es_paq_nombreEspectaculo, es_paq_plataformaAsociada, es_paq_nombrePaquete) " +

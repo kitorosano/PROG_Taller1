@@ -34,12 +34,10 @@ public class CategoriaMapper {
     //rs2model
     public static Categoria toModel(ResultSet rs) {
         try {
-            if(rs.isBeforeFirst()){
-                rs.next();
-            }
+            if(rs.isBeforeFirst()) rs.next(); //Si el cursor esta antes del primer elemento, se mueve al primero
+            
             Categoria categoria = new Categoria();
             categoria.setNombre(rs.getString("cat_nombre"));
-
 
             return categoria;
         } catch (Exception e) {
@@ -51,7 +49,7 @@ public class CategoriaMapper {
     public static Map<String,Categoria> toModelMap(ResultSet rs) {
         try {
             Map<String,Categoria> categorias = new HashMap<>();
-            while (rs.next()) {
+            while (rs.next()) { // Mientras haya un siguiente elemento
                 Categoria categoria = toModel(rs);
                 categorias.put(categoria.getNombre(),categoria);
             }

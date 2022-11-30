@@ -13,16 +13,14 @@ public class EspectadorRegistradoAFuncionMapper {
   //ResultSet -> EspectadorRegistradoAFuncion
   public static EspectadorRegistradoAFuncion toModel(ResultSet rs){
     try {
-      if(rs.isBeforeFirst()){
-        rs.next();
-      }
+      if(rs.isBeforeFirst()) rs.next();  //Si el cursor esta antes del primer elemento, se mueve al primero
+      
       EspectadorRegistradoAFuncion espectadorfuncion = new EspectadorRegistradoAFuncion();
 
       espectadorfuncion.setEspectador((Espectador) UsuarioMapper.toModel(rs));
-
       espectadorfuncion.setFuncion(FuncionMapper.toModel(rs));
-
       espectadorfuncion.setPaquete(PaqueteMapper.toModel(rs));
+      
       espectadorfuncion.setCanjeado(rs.getBoolean("ue_fn_canjeado"));
       espectadorfuncion.setCosto(rs.getDouble("ue_fn_costo"));
       espectadorfuncion.setFechaRegistro(rs.getTimestamp("ue_fn_fechaRegistro").toLocalDateTime());
@@ -37,7 +35,7 @@ public class EspectadorRegistradoAFuncionMapper {
   public static Map<String,EspectadorRegistradoAFuncion> toModelMap(ResultSet rs) {
     try {
       Map<String,EspectadorRegistradoAFuncion> espectadorfunciones = new HashMap<String,EspectadorRegistradoAFuncion>();
-      while (rs.next()) {
+      while (rs.next()) { // Mientras haya un siguiente elemento en el ResultSet
         EspectadorRegistradoAFuncion espectadorfuncion = toModel(rs);
         espectadorfunciones.put(espectadorfuncion.getFuncion().getNombre()+"-"+espectadorfuncion.getFuncion().getEspectaculo().getNombre()+"-"+espectadorfuncion.getFuncion().getEspectaculo().getPlataforma().getNombre(), espectadorfuncion);;
       }

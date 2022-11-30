@@ -39,9 +39,8 @@ public class PlataformaMapper {
     //rs2model
     public static Plataforma toModel(ResultSet rs) {
         try {
-            if(rs.isBeforeFirst()){
-                rs.next();
-            }
+            if(rs.isBeforeFirst()) rs.next(); //Si el cursor esta antes del primer elemento, se mueve al primero
+            
             Plataforma plataforma = new Plataforma();
             plataforma.setNombre(rs.getString("pl_nombre"));
             plataforma.setDescripcion(rs.getString("pl_descripcion"));
@@ -57,10 +56,9 @@ public class PlataformaMapper {
     public static Map<String,Plataforma> toModelMap(ResultSet rs) {
         try {
             Map<String,Plataforma> plataformas = new HashMap<>();
-            while (rs.next()) {
+            while (rs.next()) { //Mientras haya un siguiente elemento
                 Plataforma plataforma = toModel(rs);
                 plataformas.put(plataforma.getNombre(),plataforma);
-                plataforma = toModel(rs);
             }
             return plataformas;
         } catch (Exception e) {

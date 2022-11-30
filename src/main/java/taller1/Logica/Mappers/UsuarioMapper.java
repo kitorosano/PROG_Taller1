@@ -16,12 +16,10 @@ public class UsuarioMapper {
   // ResultSet -> Usuario
   public static Usuario toModel(ResultSet rs) {
     try {
-      if(rs.isBeforeFirst()){
-        rs.next();
-      }
+      if(rs.isBeforeFirst()) rs.next(); //Si el cursor esta antes del primer elemento, se mueve al primero
       Usuario user;
       
-      if(existeColumnaEnResultSet("ua_descripcion",rs)) {
+      if(existeColumnaEnResultSet("ua_descripcion", rs)) {
         user = new Artista();
         ((Artista) user).setDescripcion(rs.getString("ua_descripcion"));
         ((Artista) user).setBiografia(rs.getString("ua_biografia"));
@@ -49,7 +47,6 @@ public class UsuarioMapper {
       while (rs.next()) {
         Usuario user = toModel(rs);
         users.put(user.getNickname(), user);
-        user = toModel(rs);
       }
       return users;
     } catch (Exception e) {

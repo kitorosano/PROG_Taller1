@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.FuncionDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
@@ -52,10 +53,10 @@ public class DetalleEspectaculo extends JInternalFrame {
     Map<String, Funcion> FuncionesDelEspectaculo;
 
     Map<String,Categoria> categoriasDelEspectaculo;
+    
+    EspectaculoDTO espectaculo;
 
-    Espectaculo espectaculo;
-
-    public DetalleEspectaculo(String title, Espectaculo espectaculo){
+    public DetalleEspectaculo(String title, EspectaculoDTO espectaculo){
         super(title);
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -129,7 +130,7 @@ public class DetalleEspectaculo extends JInternalFrame {
         agregarFuncionButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JInternalFrame formularioFuncion = new FormularioFuncion("Formulario de Funcion",espectaculo);
+                JInternalFrame formularioFuncion = new FormularioFuncion("Formulario de Funcion", espectaculo);
                 formularioFuncion.setIconifiable(true);
                 formularioFuncion.setClosable(true);
                 Dashboard.getInstance().getDashboardJDesktopPane().add(formularioFuncion);

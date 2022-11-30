@@ -99,4 +99,49 @@ public class EspectaculoMapper {
     
     return espectaculoDTOMap;
   }
+  
+  // ResultSet -> EspectaculoDTO
+  public static EspectaculoDTO toDTO(ResultSet rs) {
+    try {
+      if (!rs.next()) return null;
+  
+      EspectaculoDTO espectaculoDTO = new EspectaculoDTO();
+  
+      espectaculoDTO.setNombre(rs.getString("es_nombre"));
+      espectaculoDTO.setDescripcion(rs.getString("es_descripcion"));
+      espectaculoDTO.setDuracion(rs.getInt("es_duracion"));
+      espectaculoDTO.setMinEspectadores(rs.getInt("es_min_espectadores"));
+      espectaculoDTO.setMaxEspectadores(rs.getInt("es_max_espectadores"));
+      espectaculoDTO.setUrl(rs.getString("es_url"));
+      espectaculoDTO.setCosto(rs.getInt("es_costo"));
+      espectaculoDTO.setEstado(E_EstadoEspectaculo.valueOf(rs.getString("es_estado")));
+      espectaculoDTO.setFechaRegistro(rs.getTimestamp("es_fecha_registro").toLocalDateTime());
+      espectaculoDTO.setImagen(rs.getString("es_imagen"));
+      espectaculoDTO.setCantidadFavoritos(rs.getInt("cantidad_favoritos"));
+      
+      rs.previous();
+      espectaculoDTO.setPlataforma(PlataformaMapper.toDTO(PlataformaMapper.toModel(rs)));
+      
+      rs.previous();
+      espectaculoDTO.setArtista(UsuarioMapper.toDTO(UsuarioMapper.toModel(rs)));
+      return espectaculoDTO;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al mapear ResultSet a EspectaculoDTO", e);
+    }
+  }
+  public static Map<String, EspectaculoDTO> toDTOMap(ResultSet rs) {
+    try {
+      Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
+      EspectaculoDTO espectaculoDTO = toDTO(rs);
+      while (espectaculoDTO != null) {
+        espectaculos.put(espectaculoDTO.getNombre() +"-"+ espectaculoDTO.getPlataforma().getNombre(), espectaculoDTO);
+        espectaculoDTO = toDTO(rs);
+      }
+      return espectaculos;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al mapear ResultSet a EspectaculoDTOMap", e);
+    }
+  }
 }

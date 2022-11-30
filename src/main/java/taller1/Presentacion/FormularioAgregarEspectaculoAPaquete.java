@@ -137,11 +137,11 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
     }
 
     public void cargarDatosListaIngresados(){
-        Map<String, Espectaculo>espectaculos;
+        Map<String, EspectaculoDTO>espectaculos;
         modelAgregados.clear();
         try {
             espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPaquete((String)cbPaquete.getSelectedItem());
-            for (Espectaculo esp : espectaculos.values()) {
+            for (EspectaculoDTO esp : espectaculos.values()) {
                 modelAgregados.addElement(esp.getNombre());
                 if(modelAAgregar.contains(esp.getNombre())){
                     modelAAgregar.removeElement(esp.getNombre());

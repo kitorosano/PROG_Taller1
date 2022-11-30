@@ -49,7 +49,7 @@ public class EspectaculoService {
     Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
-    String selectEspectaculos = "SELECT ES.*, PL.pl_nombre, UA.ua_nickname, U.u_nickname, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
+    String selectEspectaculos = "SELECT ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
         "FROM espectaculos as ES " +
         " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
         " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
@@ -84,7 +84,7 @@ public class EspectaculoService {
     EspectaculoDTO espectaculo;
     Connection connection = null;
     Statement statement = null;
-    String selectEspectaculo = "SELECT ES.*, PL.pl_nombre, UA.ua_nickname, U.u_nickname, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
+    String selectEspectaculo = "SELECT ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
         "FROM espectaculos as ES " +
         " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
         " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
@@ -120,7 +120,7 @@ public class EspectaculoService {
     Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
-    String selectEspectaculos = "SELECT ES.*, PL.pl_nombre, UA.ua_nickname, U.u_nickname, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
+    String selectEspectaculos = "SELECT ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
         "FROM espectaculos as ES " +
         " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
         " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
@@ -156,7 +156,7 @@ public class EspectaculoService {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectEspectaculos = "SELECT ES.*, PL.pl_nombre, UA.ua_nickname, U.u_nickname, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
+    String selectEspectaculos = "SELECT ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
         "FROM espectaculos as ES " +
         " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
         " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
@@ -193,7 +193,7 @@ public class EspectaculoService {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectEspectaculos = "SELECT ES.*, PL.pl_nombre, UA.ua_nickname, U.u_nickname, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
+    String selectEspectaculos = "SELECT ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
         "FROM espectaculos as ES " +
         " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
         " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
@@ -231,7 +231,7 @@ public class EspectaculoService {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectEspectaculos = "SELECT ES.*, PL.pl_nombre, UA.ua_nickname, U.u_nickname, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
+    String selectEspectaculos = "SELECT ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
         "FROM espectaculos as ES " +
         " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
         " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
@@ -262,24 +262,25 @@ public class EspectaculoService {
     }
     return espectaculos;
   }
-  public Map<String, Espectaculo> obtenerEspectaculosPorPaquete(String nombrePaquete){
-    Map<String, Espectaculo> espectaculos = new HashMap<>();
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorPaquete(String nombrePaquete){
+    Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectEspectaculosByPaquete = "SELECT * " +
-        "FROM espectaculos_paquetes as ES_PAQ, espectaculos as ES, artistas as UA, usuarios as U, plataformas as PL " +
-        "WHERE ES_PAQ.es_paq_nombreEspectaculo = ES.es_nombre " +
-        "AND ES_PAQ.es_paq_plataformaAsociada = ES.es_plataformaAsociada " +
-        "AND ES.es_plataformaAsociada = PL.pl_nombre " +
-        "AND ES.es_artistaOrganizador = UA.ua_nickname " +
-        "AND UA.ua_nickname = U.u_nickname " +
-        "AND ES_PAQ.es_paq_nombrePaquete = '" + nombrePaquete + "' ";
+    String selectEspectaculos = "SELECT ES_PAQ.*, ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_espectaculoAsociado) AS cantidad_favoritos " +
+        "FROM espectaculos as ES " +
+        " LEFT JOIN espectaculos_paquetes as ES_PAQ ON ES_PAQ.es_paq_nombreEspectaculo = ES.es_nombre AND ES_PAQ.es_paq_plataformaAsociada = ES.es_plataformaAsociada AND " +
+        " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
+        " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
+        " LEFT JOIN usuarios as U ON UA.ua_nickname = U.u_nickname " +
+        " LEFT JOIN espectaculos_favoritos as ES_FAV ON ES.es_nombre = ES_FAV.es_fav_espectaculoAsociado AND ES.es_plataformaAsociada = ES_FAV.es_fav_plataformaAsociada " +
+        "WHERE ES_PAQ.es_paq_nombrePaquete = '" + nombrePaquete + "' " +
+        "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
-      resultSet = statement.executeQuery(selectEspectaculosByPaquete);
-      espectaculos.putAll(EspectaculoMapper.toModelMap(resultSet));
+      resultSet = statement.executeQuery(selectEspectaculos);
+      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -304,7 +305,7 @@ public class EspectaculoService {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectEspectaculos = "SELECT ES.*, PL.pl_nombre, UA.ua_nickname, U.u_nickname, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
+    String selectEspectaculos = "SELECT ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
         "FROM espectaculos as ES " +
         " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
         " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
@@ -341,7 +342,7 @@ public class EspectaculoService {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectEspectaculos = "SELECT ES.*, PL.pl_nombre, UA.ua_nickname, U.u_nickname, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
+    String selectEspectaculos = "SELECT ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
         "FROM espectaculos as ES " +
         " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
         " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +

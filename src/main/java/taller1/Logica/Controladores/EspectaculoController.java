@@ -60,7 +60,7 @@ public class EspectaculoController implements IEspectaculo {
    * @return Mapa con todos los espectáculos del paquete
    */
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorPaquete(String nombrePaquete){
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorPaquete(String nombrePaquete){
     return servicio.obtenerEspectaculosPorPaquete(nombrePaquete);
   }
   @Override

@@ -144,7 +144,7 @@ public class ModificarUsuario extends JInternalFrame {
         }
     }
 
-    private void ActualizarUsuario(UsuarioDTO usuario){
+    private void ActualizarUsuario(UsuarioDTO usuarioDTO){
 //        usuario.setNombre(txtNombre.getText());
 //        usuario.setApellido(txtApellido.getText());
 //        LocalDate fechanac = LocalDate.parse(txtFechaNac.getText());
@@ -157,13 +157,14 @@ public class ModificarUsuario extends JInternalFrame {
 //        }
 //        Fabrica.getInstance().getIUsuario().modificarUsuario(usuario);
     
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        //UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setNombre(txtNombre.getText());
         usuarioDTO.setApellido(txtApellido.getText());
         usuarioDTO.setCorreo(txtCorreo.getText());
         usuarioDTO.setFechaNacimiento(LocalDate.parse(txtFechaNac.getText()));
-        usuarioDTO.setImagen(imagen);
-        if (usuario.isEsArtista()) {
+        if(imagen!=null)
+            usuarioDTO.setImagen(imagen);
+        if (usuarioDTO.isEsArtista()) {
             usuarioDTO.setDescripcion(txtDescripcion.getText());
             usuarioDTO.setBiografia(txtBiografia.getText());
             usuarioDTO.setSitioWeb(txtURL.getText());

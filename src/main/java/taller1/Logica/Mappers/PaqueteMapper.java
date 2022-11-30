@@ -13,8 +13,9 @@ public class PaqueteMapper {
     //ResultSet -> Paquete
     public static Paquete toModel(ResultSet rs){
         try {
-            if (!rs.next()) return null;
-
+            if(rs.isBeforeFirst()){
+                rs.next();
+            }
             Paquete paquete = new Paquete();
 
             paquete.setNombre(rs.getString("paq_nombre"));
@@ -35,8 +36,8 @@ public class PaqueteMapper {
     public static Map<String,Paquete> toModelMap(ResultSet rs) {
         try {
             Map<String,Paquete> paquetes= new HashMap<>();
-            Paquete paquete = toModel(rs);
-            while (paquete != null) {
+            while (rs.next()) {
+                Paquete paquete = toModel(rs);
                 paquetes.put(paquete.getNombre(),paquete);
                 paquete = toModel(rs);
             }

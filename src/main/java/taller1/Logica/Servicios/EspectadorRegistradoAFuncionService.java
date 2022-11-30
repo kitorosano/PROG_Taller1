@@ -130,7 +130,7 @@ public class EspectadorRegistradoAFuncionService {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectEspectadores = "SELECT " +
+    String selectEspectadores = "SELECT *" +
         "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, paquetes as PAQ, funciones as FN, espectaculos as ES, plataformas as PL " +
         "WHERE UE_FN.ue_fn_nickname = UE.ue_nickname " +
         "  AND UE.ue_nickname = U.u_nickname " +

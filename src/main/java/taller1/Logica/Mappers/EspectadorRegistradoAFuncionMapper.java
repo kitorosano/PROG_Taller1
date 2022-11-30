@@ -13,17 +13,15 @@ public class EspectadorRegistradoAFuncionMapper {
   //ResultSet -> EspectadorRegistradoAFuncion
   public static EspectadorRegistradoAFuncion toModel(ResultSet rs){
     try {
-      if (!rs.next()) return null;
-      
+      if(rs.isBeforeFirst()){
+        rs.next();
+      }
       EspectadorRegistradoAFuncion espectadorfuncion = new EspectadorRegistradoAFuncion();
-      
-      rs.previous();
+
       espectadorfuncion.setEspectador((Espectador) UsuarioMapper.toModel(rs));
-      
-      rs.previous();
+
       espectadorfuncion.setFuncion(FuncionMapper.toModel(rs));
-      
-      rs.previous();
+
       espectadorfuncion.setPaquete(PaqueteMapper.toModel(rs));
       espectadorfuncion.setCanjeado(rs.getBoolean("ue_fn_canjeado"));
       espectadorfuncion.setCosto(rs.getDouble("ue_fn_costo"));
@@ -39,10 +37,9 @@ public class EspectadorRegistradoAFuncionMapper {
   public static Map<String,EspectadorRegistradoAFuncion> toModelMap(ResultSet rs) {
     try {
       Map<String,EspectadorRegistradoAFuncion> espectadorfunciones = new HashMap<String,EspectadorRegistradoAFuncion>();
-      EspectadorRegistradoAFuncion espectadorfuncion = toModel(rs);
-      while (espectadorfuncion != null) {
-        espectadorfunciones.put(espectadorfuncion.getFuncion().getNombre()+"-"+espectadorfuncion.getFuncion().getEspectaculo().getNombre()+"-"+espectadorfuncion.getFuncion().getEspectaculo().getPlataforma().getNombre(), espectadorfuncion);
-        espectadorfuncion = toModel(rs);
+      while (rs.next()) {
+        EspectadorRegistradoAFuncion espectadorfuncion = toModel(rs);
+        espectadorfunciones.put(espectadorfuncion.getFuncion().getNombre()+"-"+espectadorfuncion.getFuncion().getEspectaculo().getNombre()+"-"+espectadorfuncion.getFuncion().getEspectaculo().getPlataforma().getNombre(), espectadorfuncion);;
       }
       return espectadorfunciones;
     } catch (Exception e) {

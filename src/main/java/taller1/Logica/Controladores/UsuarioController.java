@@ -1,6 +1,7 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.DTOs.EspectaculoFavoritoDTO;
 import main.java.taller1.Logica.DTOs.UsuarioDTO;
 import main.java.taller1.Logica.Interfaces.IUsuario;
 import main.java.taller1.Logica.Servicios.UsuarioService;
@@ -69,5 +70,12 @@ public class UsuarioController implements IUsuario {
     @Override
     public void modificarUsuario(UsuarioDTO usuariodto) {
         servicio.modificarUsuario(usuariodto);
+    }
+
+    public void marcarFavorito(EspectaculoFavoritoDTO espectaculoFavoritoDTO){
+        servicio.marcarFavorito(espectaculoFavoritoDTO);
+    }
+    public void desmarcarFavorito(EspectaculoFavoritoDTO espectaculoFavoritoDTO){
+        servicio.desmarcarFavorito(espectaculoFavoritoDTO);
     }
 }

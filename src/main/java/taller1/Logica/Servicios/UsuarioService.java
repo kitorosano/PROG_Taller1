@@ -1,6 +1,7 @@
 package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.DTOs.EspectaculoFavoritoDTO;
 import main.java.taller1.Logica.DTOs.UsuarioDTO;
 import main.java.taller1.Logica.Mappers.UsuarioMapper;
 import main.java.taller1.Persistencia.ConexionDB;
@@ -196,4 +197,58 @@ public class UsuarioService {
       }
     }
   }
+
+  public void marcarFavorito (EspectaculoFavoritoDTO espectaculoFavoritoDTO){
+    Connection connection = null;
+    Statement statement = null;
+    String insertEspectaculo = "INSERT INTO espectaculos_favoritos (ue_es_nickname, ue_es_nombreEspectaculo, ue_es_nombrePlataforma) " +
+            "VALUES ('" + espectaculoFavoritoDTO.getNickname() + "', '" + espectaculoFavoritoDTO.getNombreEspectaculo() + "', '" + espectaculoFavoritoDTO.getNombrePlataforma() + "')";
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement();
+      statement.executeUpdate(insertEspectaculo);
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al narcar espectaculo favorito", e);
+    } finally {
+      try {
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+  }
+
+  public void desmarcarFavorito (EspectaculoFavoritoDTO espectaculoFavoritoDTO){
+    Connection connection = null;
+    Statement statement = null;
+    String deleteEspectaculo = "DELETE FROM espectaculos_favoritos WHERE ue_es_nickname = '" + espectaculoFavoritoDTO.getNickname() + "' " +
+            "AND ue_es_nombreEspectaculo = '" + espectaculoFavoritoDTO.getNombreEspectaculo() + "' " +
+            "AND ue_es_nombrePlataforma = '" + espectaculoFavoritoDTO.getNombrePlataforma() + "'";
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement();
+      statement.execute(deleteEspectaculo);
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al desmarcar espectaculo favorito", e);
+    } finally {
+      try {
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+  }
+
 }

@@ -3,8 +3,11 @@ package main.java.taller1.Logica.Mappers;
 import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.UsuarioDTO;
+import main.java.taller1.Persistencia.ConexionDB;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +35,12 @@ public class EspectaculoMapper {
 
       espectaculo.setPlataforma(PlataformaMapper.toModel(rs));
 
-      espectaculo.setArtista((Artista) UsuarioMapper.toModel(rs));
+      String artistaSelect= "SELECT * FROM usuarios as U, artistas as UA WHERE U.u_nickname=UA.ua_nickname and UA.ua_nickname="+"'"+rs.getString("es_artistaOrganizador")+"'";
+      Connection connection = ConexionDB.getConnection();
+      Statement statement = connection.createStatement();
+      ResultSet resultSet = statement.executeQuery(artistaSelect);
+      espectaculo.setArtista((Artista) UsuarioMapper.toModel(resultSet));
+
       return espectaculo;
     } catch (Exception e) {
       System.out.println(e.getMessage());

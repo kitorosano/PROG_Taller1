@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectadorRegistradoAFuncionDTO;
 import main.java.taller1.Logica.DTOs.FuncionDTO;
 import main.java.taller1.Logica.DTOs.UsuarioDTO;
@@ -50,7 +51,7 @@ public class DetalleUsuario extends JInternalFrame {
 
     Map<String, EspectadorRegistradoAFuncion> funcionesRegistradasDelEspectador;
 
-    Map<String, Espectaculo> espectaculosArtista;
+    Map<String, EspectaculoDTO> espectaculosArtista;
 
 
 
@@ -118,7 +119,7 @@ public class DetalleUsuario extends JInternalFrame {
                         String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString();
                         String plataforma= table1.getValueAt(table1.getSelectedRow(), 2).toString();
 
-                        Espectaculo espectaculo = espectaculosArtista.get(valor+"-"+plataforma);
+                        EspectaculoDTO espectaculo = espectaculosArtista.get(valor+"-"+plataforma);
                         System.out.println("el espectaculo es:"+espectaculo);
                         JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle Espectaculo", espectaculo);
                         detalleEspectaculo.setIconifiable(true);
@@ -194,10 +195,10 @@ public class DetalleUsuario extends JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
             this.espectaculosArtista = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorArtista(this.usuario.getNickname());
-            for (Map.Entry<String, Espectaculo> entry : espectaculosArtista.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getCosto(),entry.getValue().getPlataforma().getNombre()});
-                System.out.println("claves del espectaculo cuando se agregan:"+entry.getValue().getNombre());
-                System.out.println(" espectaculo cuando se agregan:"+entry.getValue().getNombre());
+            for (EspectaculoDTO entry : espectaculosArtista.values()) {
+                model.addRow(new Object[]{entry.getNombre(), entry.getCosto(),entry.getPlataforma().getNombre()});
+                System.out.println("claves del espectaculo cuando se agregan:"+entry.getNombre());
+                System.out.println(" espectaculo cuando se agregan:"+entry.getNombre());
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());

@@ -38,34 +38,39 @@ public class EspectaculoController implements IEspectaculo {
     servicio.altaEspectaculo(nuevoEspectaculo);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculos() {
-    //TODO: Desde aca llamar al servicio para obtener favoritos y devolver el DTO completo
+  public Map<String, EspectaculoDTO> obtenerEspectaculos() {
     return servicio.obtenerEspectaculos();
   }
   @Override
-  public Optional<Espectaculo> obtenerEspectaculo(String nombrePlataforma, String nombre){
+  public Optional<EspectaculoDTO> obtenerEspectaculo(String nombrePlataforma, String nombre){
     return servicio.obtenerEspectaculo(nombrePlataforma, nombre);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorEstado(E_EstadoEspectaculo estado) {
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorEstado(E_EstadoEspectaculo estado) {
     return servicio.obtenerEspectaculosPorEstado(estado);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorPlataforma(String nombrePlataforma) {
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorPlataforma(String nombrePlataforma) {
     return servicio.obtenerEspectaculosPorPlataforma(nombrePlataforma);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorPlataformaYEstado(String nombrePlataforma, E_EstadoEspectaculo estado) {
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorPlataformaYEstado(String nombrePlataforma, E_EstadoEspectaculo estado) {
     return servicio.obtenerEspectaculosPorPlataformaYEstado(nombrePlataforma, estado);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorArtista(String nickname) {
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorArtista(String nickname) {
     return servicio.obtenerEspectaculosPorArtista(nickname);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorArtistaYEstado(String nickname, E_EstadoEspectaculo estado) {
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorArtistaYEstado(String nickname, E_EstadoEspectaculo estado) {
     return servicio.obtenerEspectaculosPorArtistaYEstado(nickname, estado);
   }
+  
+  @Override
+  public Map<String, EspectaculoDTO> obtenerEspectaculosFavoritosDeEspectador(String nickname) {
+    return servicio.obtenerEspectaculosFavoritosDeEspectador(nickname);
+  }
+  
   @Override
   public void cambiarEstadoEspectaculo(EspectaculoNuevoEstadoDTO espectaculoNuevoEstadoDTO){
     servicio.cambiarEstadoEspectaculo(espectaculoNuevoEstadoDTO);

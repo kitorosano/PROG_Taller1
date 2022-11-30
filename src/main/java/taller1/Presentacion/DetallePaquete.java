@@ -1,9 +1,11 @@
 package main.java.taller1.Presentacion;
 
 import main.java.taller1.Logica.Clases.Categoria;
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Paquete;
+import main.java.taller1.Logica.Mappers.EspectaculoMapper;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -79,8 +81,8 @@ public class DetallePaquete extends JInternalFrame {
                 if (e.getClickCount() == 2) {
                     String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString()+"-"+table1.getValueAt(table1.getSelectedRow(), 1).toString();
                     Espectaculo espectaculo = EspectaculosPaquete.get(valor);
-
-                    JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle de espectaculo", espectaculo);
+                    EspectaculoDTO dto = EspectaculoMapper.toDTO(espectaculo);
+                    JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle de espectaculo", dto);
                     detalleEspectaculo.setIconifiable(true);
                     detalleEspectaculo.setClosable(true);
                     detalleEspectaculo.setSize(1260,700);

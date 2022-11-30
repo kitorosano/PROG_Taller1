@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.FuncionDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Espectaculo;
@@ -121,12 +122,12 @@ public class ListadoFunciones extends JInternalFrame {
         }
     }
     private void cargarEspectaculos(){
-        Map<String, Espectaculo> espectaculos = new HashMap<String, Espectaculo>();
+        Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
         cmbEspectaculo.removeAllItems();
         try {
             espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(cmbPlataforma.getSelectedItem().toString());
-            for (Map.Entry<String, Espectaculo> entry : espectaculos.entrySet()) {
-                cmbEspectaculo.addItem(entry.getValue().getNombre());           //guardo el espectaculo en el combo box
+            for (EspectaculoDTO entry : espectaculos.values()) {
+                cmbEspectaculo.addItem(entry.getNombre());           //guardo el espectaculo en el combo box
             }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al obtener los espectaculos" + e.toString());

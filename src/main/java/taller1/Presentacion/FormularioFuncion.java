@@ -2,6 +2,7 @@ package main.java.taller1.Presentacion;
 
 import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.FuncionDTO;
+import main.java.taller1.Logica.DTOs.PlataformaDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.Mappers.EspectaculoMapper;
@@ -41,7 +42,7 @@ public class FormularioFuncion extends JInternalFrame {
 
     String imagen=null;
 
-    public FormularioFuncion(String title, Espectaculo elegido) {
+    public FormularioFuncion(String title, EspectaculoDTO elegido) {
         super(title);
         System.out.println(LocalDateTime.now());
         setContentPane(panel1);
@@ -67,7 +68,7 @@ public class FormularioFuncion extends JInternalFrame {
             }
         });
         if(elegido!=null){
-            Plataforma plataforma=elegido.getPlataforma();
+            PlataformaDTO plataforma=elegido.getPlataforma();
             cbPlataforma.addItem(plataforma.getNombre());
             cbEspectaculo.addItem(elegido.getNombre());
             seleccionado=(String)cbPlataforma.getSelectedItem();
@@ -235,10 +236,10 @@ public class FormularioFuncion extends JInternalFrame {
         LocalDateTime fechahora= LocalDateTime.of(LocalDate.parse(tfFecha.getText()), LocalTime.parse(tfHora.getText()));
         EspectaculoDTO espectaculo = null;
         try {
-            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
-            for (Espectaculo esp : espectaculos.values()) {
+            Map<String,EspectaculoDTO> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
+            for (EspectaculoDTO esp : espectaculos.values()) {
                 if(esp.getNombre().equals((String)cbEspectaculo.getSelectedItem())){
-                    espectaculo= EspectaculoMapper.toDTO(esp);
+                    espectaculo= esp;
                     break;
                 }
             }
@@ -261,8 +262,8 @@ public class FormularioFuncion extends JInternalFrame {
         seleccionado=(String)cbPlataforma.getSelectedItem();
         try{
             cbEspectaculo.removeAllItems();
-            Map<String,Espectaculo> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
-            for (Espectaculo esp : espectaculos.values()) {
+            Map<String,EspectaculoDTO> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
+            for (EspectaculoDTO esp : espectaculos.values()) {
                     cbEspectaculo.addItem(esp.getNombre());
             }
         } catch (Exception ex) {

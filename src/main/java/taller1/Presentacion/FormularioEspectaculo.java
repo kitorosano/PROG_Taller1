@@ -174,7 +174,7 @@ public class FormularioEspectaculo extends JInternalFrame {
         }
         for (Usuario usu : usuarios.values()) {
             if (usu instanceof Artista) {
-                cbArtista.addItem(usu.getNombre());
+                cbArtista.addItem(usu.getNickname());
             }
         }
     }
@@ -201,8 +201,8 @@ public class FormularioEspectaculo extends JInternalFrame {
     }
 
     public boolean comprobarNombreUnico(String nombrePlataforma, String nombreEspectaculo) {       //Devuelve true si hay error
-        Map<String,Espectaculo> espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(nombrePlataforma);
-        for (Espectaculo esp : espectaculos.values()) {
+        Map<String,EspectaculoDTO> espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(nombrePlataforma);
+        for (EspectaculoDTO esp : espectaculos.values()) {
             if (esp.getNombre().equals(nombreEspectaculo)) {
                 JOptionPane.showMessageDialog(null, "El nombre elegido ya existe en la plataforma");
                 return true;
@@ -215,7 +215,6 @@ public class FormularioEspectaculo extends JInternalFrame {
         String nombre = tfNombre.getText(), descripcion = tfDescripcion.getText(), url = tfURL.getText();
         int minEspec = (int) spEspMinimos.getValue(), maxEspec = (int) spEspMaximos.getValue();
         double duracion = Double.parseDouble(tfDuracion.getText()), costo = Double.parseDouble(tfCosto.getText());
-
         if(imagen==null){
             imagen="https://i.imgur.com/BeJ3HuS.png";
         }

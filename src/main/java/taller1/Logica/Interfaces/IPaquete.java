@@ -19,7 +19,6 @@ public interface IPaquete {
   Map<String, Paquete> obtenerPaquetes();
   Optional<Paquete> obtenerPaquete(String nombrePaquete);
   Map<String, Paquete> obtenerPaquetesDeEspectaculo(String nombreEspectaculo, String nombrePlataforma);
-  Map<String, Espectaculo> obtenerEspectaculosDePaquete(String nombrePaquete);
   Map<String, Paquete> obtenerPaquetesPorEspectador(String nickname);
   Map<String, Usuario> obtenerEspectadoresDePaquete(String nombrePaquete);
   void altaEspectaculoAPaquete(AltaEspectaculoAPaqueteDTO altaEspectaculoAPaqueteDTO);

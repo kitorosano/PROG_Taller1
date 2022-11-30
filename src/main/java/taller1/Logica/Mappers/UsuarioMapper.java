@@ -6,6 +6,7 @@ import main.java.taller1.Logica.Clases.Usuario;
 import main.java.taller1.Logica.DTOs.UsuarioDTO;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,15 +16,16 @@ public class UsuarioMapper {
   // ResultSet -> Usuario
   public static Usuario toModel(ResultSet rs) {
     try {
-      if (!rs.next()) return null;
-      
+      if(rs.isBeforeFirst()){
+        rs.next();
+      }
       Usuario user;
       
-      if(rs.getString("ua_descripcion") != null) {
+      if(existeColumnaEnResultSet("ua_descripcion",rs)) {
         user = new Artista();
         ((Artista) user).setDescripcion(rs.getString("ua_descripcion"));
         ((Artista) user).setBiografia(rs.getString("ua_biografia"));
-        ((Artista) user).setSitioWeb(rs.getString("ua_sitio_web"));
+        ((Artista) user).setSitioWeb(rs.getString("ua_sitioWeb"));
       } else {
         user = new Espectador();
       }
@@ -44,8 +46,8 @@ public class UsuarioMapper {
   public static Map<String, Usuario> toModelMap(ResultSet rs) {
     try {
       Map<String, Usuario> users = new HashMap<>();
-      Usuario user = toModel(rs);
-      while (user != null) {
+      while (rs.next()) {
+        Usuario user = toModel(rs);
         users.put(user.getNickname(), user);
         user = toModel(rs);
       }
@@ -67,6 +69,7 @@ public class UsuarioMapper {
       userDTO.setCorreo(user.getCorreo());
       userDTO.setFechaNacimiento(user.getFechaNacimiento());
       userDTO.setImagen(user.getImagen());
+      userDTO.setContrasenia(user.getContrasenia());
       if(user instanceof Artista) {
         userDTO.setDescripcion(((Artista) user).getDescripcion());
         userDTO.setBiografia(((Artista) user).getBiografia());
@@ -93,5 +96,14 @@ public class UsuarioMapper {
     }
     
     return userDTOMap;
+  }
+
+  private static boolean existeColumnaEnResultSet(String nombreCol, ResultSet rs){
+    try{
+      rs.findColumn(nombreCol);
+      return true;
+    } catch (SQLException e) {
+      return false;
+    }
   }
 }

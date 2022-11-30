@@ -13,7 +13,6 @@ public interface ICategoria {
   void altaCategoria(CategoriaDTO nuevaCategoria);
   Map<String, Categoria> obtenerCategorias();
   Optional<Categoria> obtenerCategoria(String nombreCategoria);
-  Map<String, Espectaculo> obtenerEspectaculosDeCategoria(String nombreCategoria);
   Map<String, Categoria> obtenerCategoriasDeEspectaculo(String nombreEspectaculo);
   void altaCategoriaAEspectaculo(AltaCategoriaAEspectaculoDTO altaCategoriaAEspectaculoDTO);
 }

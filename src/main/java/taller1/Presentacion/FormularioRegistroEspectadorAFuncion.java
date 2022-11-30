@@ -1,6 +1,7 @@
 package main.java.taller1.Presentacion;
 
 import main.java.taller1.Logica.DTOs.AltaEspectadorRegistradoAFuncionDTO;
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectadorRegistradoAFuncionDTO;
 import main.java.taller1.Logica.DTOs.FuncionDTO;
 import main.java.taller1.Logica.Fabrica;
@@ -67,13 +68,13 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         cbPlataforma.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                Map<String, Espectaculo> espectaculos;
+                Map<String, EspectaculoDTO> espectaculos;
                 if (e.getSource() == cbPlataforma && funcion==null) {
                     plataformaSelect = (String) cbPlataforma.getSelectedItem();
                     try{
                         cbEspectaculo.removeAllItems();
                         espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(plataformaSelect);
-                        for (Espectaculo esp : espectaculos.values()) {
+                        for (EspectaculoDTO esp : espectaculos.values()) {
                             cbEspectaculo.addItem(esp.getNombre());
                         }
                     } catch (Exception ex) {
@@ -149,8 +150,8 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
     private void AgregarEspectadorAMapa(){
         Espectador nuevo;
         double costo;
-        Espectaculo espectaculo=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect).getEspectaculo();
         Funcion funcion=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect);
+        Espectaculo espectaculo=funcion.getEspectaculo();
         usuarios=Fabrica.getInstance().getIUsuario().obtenerUsuarios();
         nuevo= (Espectador) usuarios.get((String) listaAinvitar.getSelectedValue());
         if(listaRegistPrevios.getSelectedIndices().length == 3){
@@ -160,8 +161,10 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         }
         //FALTA VER COMO ACTUALIZAR LOS DATOS DE LOS ESPECTACULOS CANJEADOS
         AltaEspectadorRegistradoAFuncionDTO dto = new AltaEspectadorRegistradoAFuncionDTO();
-        dto.setEspectador(nuevo.getNombre());
+        dto.setEspectador(nuevo.getNickname());
         dto.setFuncion(funcion.getNombre());
+        dto.setEspectaculo(funcion.getEspectaculo().getNombre());
+        dto.setPlataforma(funcion.getEspectaculo().getPlataforma().getNombre());
         dto.setPaquete(null);
         dto.setCanjeado(false);
         dto.setCosto(costo);

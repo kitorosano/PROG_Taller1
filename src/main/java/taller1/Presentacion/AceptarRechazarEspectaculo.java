@@ -3,6 +3,7 @@ package main.java.taller1.Presentacion;
 import main.java.taller1.Logica.Clases.E_EstadoEspectaculo;
 import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Funcion;
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoNuevoEstadoDTO;
 import main.java.taller1.Logica.Fabrica;
 
@@ -19,7 +20,7 @@ public class AceptarRechazarEspectaculo extends  JInternalFrame {
     private JButton aceptarButton;
     private JButton button1;
 
-    Map<String, Espectaculo> espectaculosIngresados;
+    Map<String, EspectaculoDTO> espectaculosIngresados;
     public AceptarRechazarEspectaculo(String title){
         super(title);
         setContentPane(mainPanel);
@@ -34,7 +35,7 @@ public class AceptarRechazarEspectaculo extends  JInternalFrame {
                 if(tablaEspectaculos.getSelectedRow()==-1){
                     JOptionPane.showMessageDialog(mainPanel, "Error: ningun espectaculo seleccionado");
                 }else{
-                    Espectaculo seleccionado=espectaculosIngresados.get(tablaEspectaculos.getValueAt(tablaEspectaculos.getSelectedRow(), 0).toString()+"-"+tablaEspectaculos.getValueAt(tablaEspectaculos.getSelectedRow(), 1).toString());
+                    EspectaculoDTO seleccionado=espectaculosIngresados.get(tablaEspectaculos.getValueAt(tablaEspectaculos.getSelectedRow(), 0).toString()+"-"+tablaEspectaculos.getValueAt(tablaEspectaculos.getSelectedRow(), 1).toString());
                     int respuesta = JOptionPane.showConfirmDialog(mainPanel,"Deseas aceptar el espectaculo?","Confirmar",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
                     if(respuesta==0){
                         try{
@@ -67,7 +68,7 @@ public class AceptarRechazarEspectaculo extends  JInternalFrame {
                 if(tablaEspectaculos.getSelectedRow()==-1){
                     JOptionPane.showMessageDialog(mainPanel, "Error: ningun espectaculo seleccionado");
                 }else {
-                    Espectaculo seleccionado=espectaculosIngresados.get(tablaEspectaculos.getValueAt(tablaEspectaculos.getSelectedRow(), 0).toString()+"-"+tablaEspectaculos.getValueAt(tablaEspectaculos.getSelectedRow(), 1).toString());
+                    EspectaculoDTO seleccionado=espectaculosIngresados.get(tablaEspectaculos.getValueAt(tablaEspectaculos.getSelectedRow(), 0).toString()+"-"+tablaEspectaculos.getValueAt(tablaEspectaculos.getSelectedRow(), 1).toString());
                     int respuesta = JOptionPane.showConfirmDialog(mainPanel, "Deseas rechazar el espectaculo?", "Confirmar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                     if(respuesta==0){
                         try{
@@ -113,8 +114,8 @@ public class AceptarRechazarEspectaculo extends  JInternalFrame {
         try {
             this.espectaculosIngresados = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorEstado( E_EstadoEspectaculo.INGRESADO);
 
-            for (Map.Entry<String, Espectaculo> entry : this.espectaculosIngresados.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getNombre(),entry.getValue().getPlataforma().getNombre()});
+            for (EspectaculoDTO entry : this.espectaculosIngresados.values()) {
+                model.addRow(new Object[]{entry.getNombre(),entry.getPlataforma().getNombre()});
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());

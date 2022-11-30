@@ -39,8 +39,9 @@ public class PlataformaMapper {
     //rs2model
     public static Plataforma toModel(ResultSet rs) {
         try {
-            if (!rs.next()) return null;
-
+            if(rs.isBeforeFirst()){
+                rs.next();
+            }
             Plataforma plataforma = new Plataforma();
             plataforma.setNombre(rs.getString("pl_nombre"));
             plataforma.setDescripcion(rs.getString("pl_descripcion"));
@@ -56,8 +57,8 @@ public class PlataformaMapper {
     public static Map<String,Plataforma> toModelMap(ResultSet rs) {
         try {
             Map<String,Plataforma> plataformas = new HashMap<>();
-            Plataforma plataforma = toModel(rs);
-            while (plataforma != null) {
+            while (rs.next()) {
+                Plataforma plataforma = toModel(rs);
                 plataformas.put(plataforma.getNombre(),plataforma);
                 plataforma = toModel(rs);
             }

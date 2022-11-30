@@ -3,8 +3,11 @@ package main.java.taller1.Logica.Mappers;
 import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.UsuarioDTO;
+import main.java.taller1.Persistencia.ConexionDB;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,26 +16,31 @@ public class EspectaculoMapper {
   // ResultSet -> Espectaculo
   public static Espectaculo toModel(ResultSet rs) {
     try {
-      if (!rs.next()) return null;
-  
+      if(rs.isBeforeFirst()){
+        rs.next();
+      }
+
       Espectaculo espectaculo = new Espectaculo();
-  
+
       espectaculo.setNombre(rs.getString("es_nombre"));
       espectaculo.setDescripcion(rs.getString("es_descripcion"));
       espectaculo.setDuracion(rs.getInt("es_duracion"));
-      espectaculo.setMinEspectadores(rs.getInt("es_min_espectadores"));
-      espectaculo.setMaxEspectadores(rs.getInt("es_max_espectadores"));
+      espectaculo.setMinEspectadores(rs.getInt("es_minEspectadores"));
+      espectaculo.setMaxEspectadores(rs.getInt("es_maxEspectadores"));
       espectaculo.setUrl(rs.getString("es_url"));
       espectaculo.setCosto(rs.getInt("es_costo"));
       espectaculo.setEstado(E_EstadoEspectaculo.valueOf(rs.getString("es_estado")));
-      espectaculo.setFechaRegistro(rs.getTimestamp("es_fecha_registro").toLocalDateTime());
+      espectaculo.setFechaRegistro(rs.getTimestamp("es_fechaRegistro").toLocalDateTime());
       espectaculo.setImagen(rs.getString("es_imagen"));
-      
-      rs.previous();
+
       espectaculo.setPlataforma(PlataformaMapper.toModel(rs));
-      
-      rs.previous();
-      espectaculo.setArtista((Artista) UsuarioMapper.toModel(rs));
+
+      String artistaSelect= "SELECT * FROM usuarios as U, artistas as UA WHERE U.u_nickname=UA.ua_nickname and UA.ua_nickname="+"'"+rs.getString("es_artistaOrganizador")+"'";
+      Connection connection = ConexionDB.getConnection();
+      Statement statement = connection.createStatement();
+      ResultSet resultSet = statement.executeQuery(artistaSelect);
+      espectaculo.setArtista((Artista) UsuarioMapper.toModel(resultSet));
+
       return espectaculo;
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -42,10 +50,10 @@ public class EspectaculoMapper {
   public static Map<String, Espectaculo> toModelMap(ResultSet rs) {
     try {
       Map<String, Espectaculo> espectaculos = new HashMap<>();
-      Espectaculo espectaculo = toModel(rs);
-      while (espectaculo != null) {
+
+      while (rs.next()) {
+        Espectaculo espectaculo = toModel(rs);
         espectaculos.put(espectaculo.getNombre() +"-"+ espectaculo.getPlataforma().getNombre(), espectaculo);
-        espectaculo = toModel(rs);
       }
       return espectaculos;
     } catch (Exception e) {
@@ -90,5 +98,50 @@ public class EspectaculoMapper {
     }
     
     return espectaculoDTOMap;
+  }
+  
+  // ResultSet -> EspectaculoDTO
+  public static EspectaculoDTO toDTO(ResultSet rs) {
+    try {
+      if (!rs.next()) return null;
+  
+      EspectaculoDTO espectaculoDTO = new EspectaculoDTO();
+  
+      espectaculoDTO.setNombre(rs.getString("es_nombre"));
+      espectaculoDTO.setDescripcion(rs.getString("es_descripcion"));
+      espectaculoDTO.setDuracion(rs.getInt("es_duracion"));
+      espectaculoDTO.setMinEspectadores(rs.getInt("es_min_espectadores"));
+      espectaculoDTO.setMaxEspectadores(rs.getInt("es_max_espectadores"));
+      espectaculoDTO.setUrl(rs.getString("es_url"));
+      espectaculoDTO.setCosto(rs.getInt("es_costo"));
+      espectaculoDTO.setEstado(E_EstadoEspectaculo.valueOf(rs.getString("es_estado")));
+      espectaculoDTO.setFechaRegistro(rs.getTimestamp("es_fecha_registro").toLocalDateTime());
+      espectaculoDTO.setImagen(rs.getString("es_imagen"));
+      espectaculoDTO.setCantidadFavoritos(rs.getInt("cantidad_favoritos"));
+      
+      rs.previous();
+      espectaculoDTO.setPlataforma(PlataformaMapper.toDTO(PlataformaMapper.toModel(rs)));
+      
+      rs.previous();
+      espectaculoDTO.setArtista(UsuarioMapper.toDTO(UsuarioMapper.toModel(rs)));
+      return espectaculoDTO;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al mapear ResultSet a EspectaculoDTO", e);
+    }
+  }
+  public static Map<String, EspectaculoDTO> toDTOMap(ResultSet rs) {
+    try {
+      Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
+      EspectaculoDTO espectaculoDTO = toDTO(rs);
+      while (espectaculoDTO != null) {
+        espectaculos.put(espectaculoDTO.getNombre() +"-"+ espectaculoDTO.getPlataforma().getNombre(), espectaculoDTO);
+        espectaculoDTO = toDTO(rs);
+      }
+      return espectaculos;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al mapear ResultSet a EspectaculoDTOMap", e);
+    }
   }
 }

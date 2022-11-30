@@ -1,5 +1,6 @@
 package main.java.taller1.Presentacion;
 
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Plataforma;
@@ -109,12 +110,12 @@ public class ListadoEspectaculos extends JInternalFrame {
     }
 
     private void cargarLista(){
-        Map<String, Espectaculo> espectaculos = new HashMap<String, Espectaculo>();
+        Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
         model.clear();
         try {
             espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(cmbBox.getSelectedItem().toString());
-            for (Map.Entry<String, Espectaculo> entry : espectaculos.entrySet()) {
-                model.addElement(entry.getValue().getNombre());
+            for (EspectaculoDTO entry : espectaculos.values()) {
+                model.addElement(entry.getNombre());
             }
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al obtener los espectaculos" + e.toString());
@@ -122,11 +123,11 @@ public class ListadoEspectaculos extends JInternalFrame {
     }
 
     private void llamarDetalleEspectaculo(){
-        Map<String, Espectaculo> espectaculos = new HashMap<String, Espectaculo>();
+        Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
 
         try {
             espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(cmbBox.getSelectedItem().toString());
-            Espectaculo espectaculo = espectaculos.get(lista.getSelectedValue());  //Guardo el espectaculo seleccionado buscando en la lista por su nickname
+            EspectaculoDTO espectaculo = espectaculos.get(lista.getSelectedValue());  //Guardo el espectaculo seleccionado buscando en la lista por su nickname
             JInternalFrame detalle = new DetalleEspectaculo("Detalle espectaculo", espectaculo);
             detalle.setIconifiable(true);
             detalle.setClosable(true);

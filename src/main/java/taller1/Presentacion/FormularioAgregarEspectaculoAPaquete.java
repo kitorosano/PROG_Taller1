@@ -1,6 +1,7 @@
 package main.java.taller1.Presentacion;
 
 import main.java.taller1.Logica.DTOs.AltaEspectaculoAPaqueteDTO;
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.*;
 
@@ -26,7 +27,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
     DefaultListModel<String> modelAAgregar = new DefaultListModel<String>();
     DefaultListModel<String> modelAgregados = new DefaultListModel<String>();
 
-    Map<String,Espectaculo> espectaculosNuevos= new HashMap<>();
+    Map<String,EspectaculoDTO> espectaculosNuevos= new HashMap<>();
     public FormularioAgregarEspectaculoAPaquete(String title) {
         super(title);
         setContentPane(panel1);
@@ -64,11 +65,11 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
         agregarAlPaqueteButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Map<String, Espectaculo>espectaculos;
+                Map<String, EspectaculoDTO>espectaculos;
                 String elegido;
                 elegido=(String) lstEspectAingresar.getSelectedValue();
                 espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma((String)cbPlataforma.getSelectedItem());
-                Espectaculo nuevo = espectaculos.get(elegido);
+                EspectaculoDTO nuevo = espectaculos.get(elegido);
                 espectaculosNuevos.put(nuevo.getNombre(),nuevo);
                 modelAgregados.addElement(elegido);
                 modelAAgregar.remove(lstEspectAingresar.getSelectedIndex());
@@ -85,7 +86,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                for (Espectaculo espectaculo : espectaculosNuevos.values()) {
+                for (EspectaculoDTO espectaculo : espectaculosNuevos.values()) {
                     AltaEspectaculoAPaqueteDTO dto = new AltaEspectaculoAPaqueteDTO();
                     dto.setNombreEspectaculo(espectaculo.getNombre());
                     dto.setNombrePlataforma(espectaculo.getPlataforma().getNombre());
@@ -121,11 +122,11 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
     }
 
     public void cargarDatosListaAIngresar(){
-        Map<String, Espectaculo>espectaculos;
+        Map<String, EspectaculoDTO> espectaculos;
         modelAAgregar.clear();
         try {
             espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma((String)cbPlataforma.getSelectedItem());
-            for (Espectaculo esp : espectaculos.values()) {
+            for (EspectaculoDTO esp : espectaculos.values()) {
                 if(!modelAgregados.contains(esp.getNombre())) {
                     modelAAgregar.addElement(esp.getNombre());
                 }

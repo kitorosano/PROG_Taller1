@@ -126,7 +126,7 @@ public class ListadoEspectaculos extends JInternalFrame {
 
         try {
             espectaculos = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(cmbBox.getSelectedItem().toString());
-            Espectaculo espectaculo = espectaculos.get(lista.getSelectedValue());  //Guardo el espectaculo seleccionado buscando en la lista por su nickname
+            Espectaculo espectaculo = espectaculos.get(lista.getSelectedValue()+"-"+cmbBox.getSelectedItem().toString());  //Guardo el espectaculo seleccionado buscando en la lista por su nickname
             JInternalFrame detalle = new DetalleEspectaculo("Detalle espectaculo", espectaculo);
             detalle.setIconifiable(true);
             detalle.setClosable(true);

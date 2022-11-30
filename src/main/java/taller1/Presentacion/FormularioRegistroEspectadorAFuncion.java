@@ -149,8 +149,8 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
     private void AgregarEspectadorAMapa(){
         Espectador nuevo;
         double costo;
-        Espectaculo espectaculo=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect).getEspectaculo();
         Funcion funcion=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect);
+        Espectaculo espectaculo=funcion.getEspectaculo();
         usuarios=Fabrica.getInstance().getIUsuario().obtenerUsuarios();
         nuevo= (Espectador) usuarios.get((String) listaAinvitar.getSelectedValue());
         if(listaRegistPrevios.getSelectedIndices().length == 3){
@@ -160,8 +160,10 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         }
         //FALTA VER COMO ACTUALIZAR LOS DATOS DE LOS ESPECTACULOS CANJEADOS
         AltaEspectadorRegistradoAFuncionDTO dto = new AltaEspectadorRegistradoAFuncionDTO();
-        dto.setEspectador(nuevo.getNombre());
+        dto.setEspectador(nuevo.getNickname());
         dto.setFuncion(funcion.getNombre());
+        dto.setEspectaculo(funcion.getEspectaculo().getNombre());
+        dto.setPlataforma(funcion.getEspectaculo().getPlataforma().getNombre());
         dto.setPaquete(null);
         dto.setCanjeado(false);
         dto.setCosto(costo);

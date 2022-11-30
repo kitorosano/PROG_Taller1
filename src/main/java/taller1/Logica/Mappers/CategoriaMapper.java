@@ -34,8 +34,9 @@ public class CategoriaMapper {
     //rs2model
     public static Categoria toModel(ResultSet rs) {
         try {
-            if (!rs.next()) return null;
-
+            if(rs.isBeforeFirst()){
+                rs.next();
+            }
             Categoria categoria = new Categoria();
             categoria.setNombre(rs.getString("cat_nombre"));
 
@@ -50,10 +51,9 @@ public class CategoriaMapper {
     public static Map<String,Categoria> toModelMap(ResultSet rs) {
         try {
             Map<String,Categoria> categorias = new HashMap<>();
-            Categoria categoria = toModel(rs);
-            while (categoria != null) {
+            while (rs.next()) {
+                Categoria categoria = toModel(rs);
                 categorias.put(categoria.getNombre(),categoria);
-                categoria = toModel(rs);
             }
             return categorias;
         } catch (Exception e) {

@@ -13,25 +13,25 @@ public class EspectaculoMapper {
   // ResultSet -> Espectaculo
   public static Espectaculo toModel(ResultSet rs) {
     try {
-      if (!rs.next()) return null;
-  
+      if(rs.isBeforeFirst()){
+        rs.next();
+      }
+
       Espectaculo espectaculo = new Espectaculo();
-  
+
       espectaculo.setNombre(rs.getString("es_nombre"));
       espectaculo.setDescripcion(rs.getString("es_descripcion"));
       espectaculo.setDuracion(rs.getInt("es_duracion"));
-      espectaculo.setMinEspectadores(rs.getInt("es_min_espectadores"));
-      espectaculo.setMaxEspectadores(rs.getInt("es_max_espectadores"));
+      espectaculo.setMinEspectadores(rs.getInt("es_minEspectadores"));
+      espectaculo.setMaxEspectadores(rs.getInt("es_maxEspectadores"));
       espectaculo.setUrl(rs.getString("es_url"));
       espectaculo.setCosto(rs.getInt("es_costo"));
       espectaculo.setEstado(E_EstadoEspectaculo.valueOf(rs.getString("es_estado")));
-      espectaculo.setFechaRegistro(rs.getTimestamp("es_fecha_registro").toLocalDateTime());
+      espectaculo.setFechaRegistro(rs.getTimestamp("es_fechaRegistro").toLocalDateTime());
       espectaculo.setImagen(rs.getString("es_imagen"));
-      
-      rs.previous();
+
       espectaculo.setPlataforma(PlataformaMapper.toModel(rs));
-      
-      rs.previous();
+
       espectaculo.setArtista((Artista) UsuarioMapper.toModel(rs));
       return espectaculo;
     } catch (Exception e) {
@@ -42,10 +42,10 @@ public class EspectaculoMapper {
   public static Map<String, Espectaculo> toModelMap(ResultSet rs) {
     try {
       Map<String, Espectaculo> espectaculos = new HashMap<>();
-      Espectaculo espectaculo = toModel(rs);
-      while (espectaculo != null) {
+
+      while (rs.next()) {
+        Espectaculo espectaculo = toModel(rs);
         espectaculos.put(espectaculo.getNombre() +"-"+ espectaculo.getPlataforma().getNombre(), espectaculo);
-        espectaculo = toModel(rs);
       }
       return espectaculos;
     } catch (Exception e) {

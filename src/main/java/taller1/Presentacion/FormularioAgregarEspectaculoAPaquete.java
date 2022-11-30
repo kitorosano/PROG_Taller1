@@ -65,10 +65,11 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 Map<String, Espectaculo>espectaculos;
-                String elegido;
+                String elegido,plataforma;
                 elegido=(String) lstEspectAingresar.getSelectedValue();
-                espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma((String)cbPlataforma.getSelectedItem());
-                Espectaculo nuevo = espectaculos.get(elegido);
+                plataforma=(String) cbPlataforma.getSelectedItem();
+                espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(plataforma);
+                Espectaculo nuevo = espectaculos.get(elegido+"-"+plataforma);
                 espectaculosNuevos.put(nuevo.getNombre(),nuevo);
                 modelAgregados.addElement(elegido);
                 modelAAgregar.remove(lstEspectAingresar.getSelectedIndex());

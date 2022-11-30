@@ -174,7 +174,7 @@ public class FormularioEspectaculo extends JInternalFrame {
         }
         for (Usuario usu : usuarios.values()) {
             if (usu instanceof Artista) {
-                cbArtista.addItem(usu.getNombre());
+                cbArtista.addItem(usu.getNickname());
             }
         }
     }
@@ -215,7 +215,6 @@ public class FormularioEspectaculo extends JInternalFrame {
         String nombre = tfNombre.getText(), descripcion = tfDescripcion.getText(), url = tfURL.getText();
         int minEspec = (int) spEspMinimos.getValue(), maxEspec = (int) spEspMaximos.getValue();
         double duracion = Double.parseDouble(tfDuracion.getText()), costo = Double.parseDouble(tfCosto.getText());
-
         if(imagen==null){
             imagen="https://i.imgur.com/BeJ3HuS.png";
         }

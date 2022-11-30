@@ -140,7 +140,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
         Map<String, Espectaculo>espectaculos;
         modelAgregados.clear();
         try {
-            espectaculos=Fabrica.getInstance().getIPaquete().obtenerEspectaculosDePaquete((String)cbPaquete.getSelectedItem());
+            espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPaquete((String)cbPaquete.getSelectedItem());
             for (Espectaculo esp : espectaculos.values()) {
                 modelAgregados.addElement(esp.getNombre());
                 if(modelAAgregar.contains(esp.getNombre())){

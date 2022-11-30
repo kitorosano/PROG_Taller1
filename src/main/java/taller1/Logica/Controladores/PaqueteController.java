@@ -68,17 +68,6 @@ public class PaqueteController implements IPaquete {
   }
   
   /**
-   * Obtiene todos los espectáculos de un paquete
-   * @param nombrePaquete Nombre del paquete
-   *                      del que se quieren obtener los espectáculos
-   * @return Mapa con todos los espectáculos del paquete
-   */
-  @Override
-  public Map<String, Espectaculo> obtenerEspectaculosDePaquete(String nombrePaquete){
-    return servicio.obtenerEspectaculosDePaquete(nombrePaquete);
-  }
-  
-  /**
    * Obtiene todos los paquetes comprados de un espectador
    * @param nickname Nickname del espectador
    *                          del que se quieren obtener los paquetes

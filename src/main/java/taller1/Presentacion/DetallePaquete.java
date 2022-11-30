@@ -118,7 +118,7 @@ public class DetallePaquete extends JInternalFrame {
     private void cargarTabla() {
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
-            this.EspectaculosPaquete = Fabrica.getInstance().getIPaquete().obtenerEspectaculosDePaquete(this.paquete.getNombre());
+            this.EspectaculosPaquete = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPaquete(this.paquete.getNombre());
             for (Map.Entry<String, Espectaculo> entry : this.EspectaculosPaquete.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getPlataforma().getNombre(), entry.getValue().getCosto()});//se carga la lista de categorias mientras recorro los espectaculos
                 try {

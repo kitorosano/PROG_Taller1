@@ -6,15 +6,6 @@ import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoNuevoEstadoDTO;
 import main.java.taller1.Logica.Interfaces.IEspectaculo;
 import main.java.taller1.Logica.Servicios.EspectaculoService;
-import main.java.taller1.Persistencia.ConexionDB;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -60,6 +51,17 @@ public class EspectaculoController implements IEspectaculo {
   @Override
   public Map<String, EspectaculoDTO> obtenerEspectaculosPorArtista(String nickname) {
     return servicio.obtenerEspectaculosPorArtista(nickname);
+  }
+  
+  /**
+   * Obtiene todos los espectáculos de un paquete
+   * @param nombrePaquete Nombre del paquete
+   *                      del que se quieren obtener los espectáculos
+   * @return Mapa con todos los espectáculos del paquete
+   */
+  @Override
+  public Map<String, Espectaculo> obtenerEspectaculosPorPaquete(String nombrePaquete){
+    return servicio.obtenerEspectaculosPorPaquete(nombrePaquete);
   }
   @Override
   public Map<String, EspectaculoDTO> obtenerEspectaculosPorArtistaYEstado(String nickname, E_EstadoEspectaculo estado) {

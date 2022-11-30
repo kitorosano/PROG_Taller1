@@ -91,14 +91,15 @@ public class EspectadorRegistradoAFuncionService {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectFunciones = "SELECT * " +
-        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, funciones as FN, espectaculos as ES, plataformas as PL " +
-        "WHERE UE_FN.ue_fn_nickname = UE.ue_nickname " +
+        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, funciones as FN, espectaculos as ES, plataformas as PL, paquetes as PAQ" +
+        " WHERE UE_FN.ue_fn_nickname = UE.ue_nickname " +
         "  AND UE.ue_nickname = U.u_nickname " +
         "  AND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre " +
         "  AND UE_FN.ue_fn_espectaculoAsociado = FN.fn_espectaculoAsociado " +
         "  AND FN.fn_espectaculoAsociado = ES.es_nombre " +
         "  AND UE_FN.ue_fn_plataformaAsociada = FN.fn_plataformaAsociada " +
         "  AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada " +
+        "  AND (UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre OR UE_FN.ue_fn_nombrePaquete IS NULL)"+
         "  AND ES.es_plataformaAsociada = PL.pl_nombre " +
         "  AND UE_FN.ue_fn_nickname = '" + nickname + "'";
     try {

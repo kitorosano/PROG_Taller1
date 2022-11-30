@@ -14,6 +14,7 @@ import sun.misc.IOUtils;
 
 import java.io.*;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -30,7 +31,7 @@ public class DatabaseService {
     String deleteEspectadores = "DELETE FROM espectadores";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(deletePlataformas);
       statement.executeUpdate(deletePaquetes);
       statement.executeUpdate(deleteArtistas);

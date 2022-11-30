@@ -13,9 +13,7 @@ public class FuncionMapper {
     //ResultSet -> Funcion
     public static Funcion toModel(ResultSet rs){
         try {
-            if(rs.isBeforeFirst()){
-                rs.next();
-            }
+            if(rs.isBeforeFirst()) rs.next(); //Si el cursor esta antes del primer elemento, lo mueve al primero
 
             Funcion funcion = new Funcion();
             funcion.setNombre(rs.getString("fn_nombre"));
@@ -36,7 +34,7 @@ public class FuncionMapper {
         try {
             Map<String,Funcion> funciones= new HashMap<String,Funcion>();
 
-            while (rs.next()) {
+            while (rs.next()) { //Mientras haya un siguiente elemento en el ResultSet
                 Funcion funcion = toModel(rs);
                 funciones.put(funcion.getNombre()+"-"+funcion.getEspectaculo().getNombre()+"-"+funcion.getEspectaculo().getPlataforma().getNombre(),funcion);
             }

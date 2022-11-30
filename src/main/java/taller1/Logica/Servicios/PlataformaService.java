@@ -21,7 +21,7 @@ public class PlataformaService {
     String insertPlataforma = "INSERT INTO plataformas (pl_nombre, pl_descripcion, pl_url) VALUES ('" + plataformadto.getNombre() + "', '" + plataformadto.getDescripcion() + "', '" + plataformadto.getUrl() + "')";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertPlataforma);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -49,7 +49,7 @@ public class PlataformaService {
       connection = ConexionDB.getConnection();
       
       // Obtenemos todas las plataformas de la base de datos
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPlataformas);
       plataformas.putAll(PlataformaMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -80,7 +80,7 @@ public class PlataformaService {
       connection = ConexionDB.getConnection();
       
       // Obtenemos la plataforma de la base de datos
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPlataforma);
       plataforma = PlataformaMapper.toModel(resultSet);
     } catch (RuntimeException e) {

@@ -16,9 +16,7 @@ public class EspectaculoMapper {
   // ResultSet -> Espectaculo
   public static Espectaculo toModel(ResultSet rs) {
     try {
-      if(rs.isBeforeFirst()){
-        rs.next();
-      }
+      if(rs.isBeforeFirst()) rs.next(); //Si el cursor esta antes del primer elemento, se mueve al primero
 
       Espectaculo espectaculo = new Espectaculo();
 
@@ -35,11 +33,14 @@ public class EspectaculoMapper {
 
       espectaculo.setPlataforma(PlataformaMapper.toModel(rs));
 
-      String artistaSelect= "SELECT * FROM usuarios as U, artistas as UA WHERE U.u_nickname=UA.ua_nickname and UA.ua_nickname="+"'"+rs.getString("es_artistaOrganizador")+"'";
-      Connection connection = ConexionDB.getConnection();
-      Statement statement = connection.createStatement();
-      ResultSet resultSet = statement.executeQuery(artistaSelect);
-      espectaculo.setArtista((Artista) UsuarioMapper.toModel(resultSet));
+//      String artistaSelect= "SELECT * " +
+//          "FROM usuarios as U, artistas as UA " +
+//          "WHERE U.u_nickname=UA.ua_nickname " +
+//          " and UA.ua_nickname="+"'"+rs.getString("es_artistaOrganizador")+"'";
+//      Connection connection = ConexionDB.getConnection();
+//      Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+//      ResultSet resultSet = statement.executeQuery(artistaSelect);
+      espectaculo.setArtista((Artista) UsuarioMapper.toModel(rs));
 
       return espectaculo;
     } catch (Exception e) {
@@ -51,7 +52,7 @@ public class EspectaculoMapper {
     try {
       Map<String, Espectaculo> espectaculos = new HashMap<>();
 
-      while (rs.next()) {
+      while (rs.next()) { //Mientras haya un siguiente elemento
         Espectaculo espectaculo = toModel(rs);
         espectaculos.put(espectaculo.getNombre() +"-"+ espectaculo.getPlataforma().getNombre(), espectaculo);
       }
@@ -103,26 +104,23 @@ public class EspectaculoMapper {
   // ResultSet -> EspectaculoDTO
   public static EspectaculoDTO toDTO(ResultSet rs) {
     try {
-      if (!rs.next()) return null;
+      if(rs.isBeforeFirst()) rs.next(); // Si el cursor esta antes del primer elemento, lo mueve al primero
   
       EspectaculoDTO espectaculoDTO = new EspectaculoDTO();
   
       espectaculoDTO.setNombre(rs.getString("es_nombre"));
       espectaculoDTO.setDescripcion(rs.getString("es_descripcion"));
       espectaculoDTO.setDuracion(rs.getInt("es_duracion"));
-      espectaculoDTO.setMinEspectadores(rs.getInt("es_min_espectadores"));
-      espectaculoDTO.setMaxEspectadores(rs.getInt("es_max_espectadores"));
+      espectaculoDTO.setMinEspectadores(rs.getInt("es_minEspectadores"));
+      espectaculoDTO.setMaxEspectadores(rs.getInt("es_maxEspectadores"));
       espectaculoDTO.setUrl(rs.getString("es_url"));
       espectaculoDTO.setCosto(rs.getInt("es_costo"));
       espectaculoDTO.setEstado(E_EstadoEspectaculo.valueOf(rs.getString("es_estado")));
-      espectaculoDTO.setFechaRegistro(rs.getTimestamp("es_fecha_registro").toLocalDateTime());
+      espectaculoDTO.setFechaRegistro(rs.getTimestamp("es_fechaRegistro").toLocalDateTime());
       espectaculoDTO.setImagen(rs.getString("es_imagen"));
       espectaculoDTO.setCantidadFavoritos(rs.getInt("cantidad_favoritos"));
       
-      rs.previous();
       espectaculoDTO.setPlataforma(PlataformaMapper.toDTO(PlataformaMapper.toModel(rs)));
-      
-      rs.previous();
       espectaculoDTO.setArtista(UsuarioMapper.toDTO(UsuarioMapper.toModel(rs)));
       return espectaculoDTO;
     } catch (Exception e) {
@@ -133,10 +131,10 @@ public class EspectaculoMapper {
   public static Map<String, EspectaculoDTO> toDTOMap(ResultSet rs) {
     try {
       Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
-      EspectaculoDTO espectaculoDTO = toDTO(rs);
-      while (espectaculoDTO != null) {
+  
+      while (rs.next()) { // Mientras haya un siguiente elemento
+        EspectaculoDTO espectaculoDTO = toDTO(rs);
         espectaculos.put(espectaculoDTO.getNombre() +"-"+ espectaculoDTO.getPlataforma().getNombre(), espectaculoDTO);
-        espectaculoDTO = toDTO(rs);
       }
       return espectaculos;
     } catch (Exception e) {

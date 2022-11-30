@@ -2,7 +2,6 @@ package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.DTOs.AltaEspectadorRegistradoAFuncionDTO;
-import main.java.taller1.Logica.DTOs.EspectadorRegistradoAFuncionDTO;
 import main.java.taller1.Logica.Mappers.EspectadorRegistradoAFuncionMapper;
 import main.java.taller1.Logica.Mappers.UsuarioMapper;
 import main.java.taller1.Persistencia.ConexionDB;
@@ -31,7 +30,7 @@ public class EspectadorRegistradoAFuncionService {
     }
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertEspectadorFunciones);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -66,7 +65,7 @@ public class EspectadorRegistradoAFuncionService {
     
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertEspectadoresFunciones);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -104,7 +103,7 @@ public class EspectadorRegistradoAFuncionService {
         "  AND UE_FN.ue_fn_nickname = '" + nickname + "'";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
       funcionesRegistradas.putAll(EspectadorRegistradoAFuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -126,7 +125,7 @@ public class EspectadorRegistradoAFuncionService {
     return funcionesRegistradas;
   }
   
-  public Map<String, Usuario> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion) {
+  public Map<String, Usuario> obtenerEspectadoresRegistradosAFuncion(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {
     Map<String, Usuario> espectadoresRegistrados = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
@@ -142,10 +141,12 @@ public class EspectadorRegistradoAFuncionService {
         "  AND ES.es_plataformaAsociada = PL.pl_nombre " +
         "  AND (UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre OR UE_FN.ue_fn_nombrePaquete IS NULL)" +
         "  AND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre " +
-        "  AND FN.fn_nombre = '" + nombreFuncion + "' ";
+        "  AND FN.fn_nombre = '" + nombreFuncion + "' " +
+        "  AND FN.fn_espectaculoAsociado = '" + nombreEspectaculo + "' " +
+        " AND FN.fn_plataformaAsociada = '" + nombrePlataforma + "'";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectadores);
       espectadoresRegistrados.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {

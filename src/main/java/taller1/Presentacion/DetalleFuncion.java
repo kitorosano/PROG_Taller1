@@ -119,7 +119,10 @@ public class DetalleFuncion extends JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
 
         try {
-            this.espectadoresDeFuncion = Fabrica.getInstance().getIEspectadorRegistradoAFuncion().obtenerEspectadoresRegistradosAFuncion(this.funcion.getNombre());
+            String nombreFuncion = funcion.getNombre();
+            String nombreEspectaculo = funcion.getEspectaculo().getNombre();
+            String nombrePlataforma = funcion.getEspectaculo().getPlataforma().getNombre();
+            this.espectadoresDeFuncion = Fabrica.getInstance().getIEspectadorRegistradoAFuncion().obtenerEspectadoresRegistradosAFuncion(nombreFuncion, nombreEspectaculo, nombrePlataforma);
 
             for (Usuario entry : espectadoresDeFuncion.values()) {
                 model.addRow(new Object[]{entry.getNickname(), entry.getCorreo()});

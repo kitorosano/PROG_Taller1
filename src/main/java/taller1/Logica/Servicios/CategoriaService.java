@@ -4,15 +4,12 @@ import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.DTOs.AltaCategoriaAEspectaculoDTO;
 import main.java.taller1.Logica.DTOs.CategoriaDTO;
 import main.java.taller1.Logica.Mappers.CategoriaMapper;
-import main.java.taller1.Logica.Mappers.EspectaculoMapper;
 import main.java.taller1.Persistencia.ConexionDB;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -25,7 +22,7 @@ public class CategoriaService {
     String insertCategoria = "INSERT INTO categorias (cat_nombre) VALUES ('" + categoriadto.getNombre() + "')";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertCategoria);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -51,7 +48,7 @@ public class CategoriaService {
     String selectCategorias = "SELECT * FROM categorias";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectCategorias);
       categorias.putAll(CategoriaMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -80,7 +77,7 @@ public class CategoriaService {
     String selectCategoria = "SELECT * FROM categorias WHERE cat_nombre = '" + nombreCategoria + "'";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectCategoria);
       categoria = CategoriaMapper.toModel(resultSet);
     } catch (RuntimeException e) {
@@ -113,7 +110,7 @@ public class CategoriaService {
         "AND ES_CAT.es_cat_nombreEspectaculo = '" + nombreEspectaculo + "' ";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectCategoriasByEspectaculo);
       categorias = CategoriaMapper.toModelMap(resultSet);
     } catch (RuntimeException e) {
@@ -142,7 +139,7 @@ public class CategoriaService {
     
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertEspectaculoCategoria);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

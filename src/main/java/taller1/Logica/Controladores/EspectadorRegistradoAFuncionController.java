@@ -38,7 +38,7 @@ public class EspectadorRegistradoAFuncionController implements IEspectadorRegist
   }
   
   @Override
-  public Map<String, Usuario> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion) {
-    return servicio.obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
+  public Map<String, Usuario> obtenerEspectadoresRegistradosAFuncion(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {
+    return servicio.obtenerEspectadoresRegistradosAFuncion(nombrePlataforma, nombreEspectaculo, nombreFuncion);
   }
 }

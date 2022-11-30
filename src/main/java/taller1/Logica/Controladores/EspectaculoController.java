@@ -6,15 +6,6 @@ import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoNuevoEstadoDTO;
 import main.java.taller1.Logica.Interfaces.IEspectaculo;
 import main.java.taller1.Logica.Servicios.EspectaculoService;
-import main.java.taller1.Persistencia.ConexionDB;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -38,34 +29,61 @@ public class EspectaculoController implements IEspectaculo {
     servicio.altaEspectaculo(nuevoEspectaculo);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculos() {
-    //TODO: Desde aca llamar al servicio para obtener favoritos y devolver el DTO completo
+  public Map<String, EspectaculoDTO> obtenerEspectaculos() {
     return servicio.obtenerEspectaculos();
   }
   @Override
-  public Optional<Espectaculo> obtenerEspectaculo(String nombrePlataforma, String nombre){
+  public Optional<EspectaculoDTO> obtenerEspectaculo(String nombrePlataforma, String nombre){
     return servicio.obtenerEspectaculo(nombrePlataforma, nombre);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorEstado(E_EstadoEspectaculo estado) {
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorEstado(E_EstadoEspectaculo estado) {
     return servicio.obtenerEspectaculosPorEstado(estado);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorPlataforma(String nombrePlataforma) {
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorPlataforma(String nombrePlataforma) {
     return servicio.obtenerEspectaculosPorPlataforma(nombrePlataforma);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorPlataformaYEstado(String nombrePlataforma, E_EstadoEspectaculo estado) {
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorPlataformaYEstado(String nombrePlataforma, E_EstadoEspectaculo estado) {
     return servicio.obtenerEspectaculosPorPlataformaYEstado(nombrePlataforma, estado);
   }
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorArtista(String nickname) {
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorArtista(String nickname) {
     return servicio.obtenerEspectaculosPorArtista(nickname);
   }
+  
+  /**
+   * Metodo que permite obtener todos los espectaculos de una categoria
+   * @param nombreCategoria Nombre de la categoria de la que se desea obtener los espectaculos
+   *                        que pertenecen a ella
+   * @return Mapa con todos los espectaculos de la categoria
+   */
   @Override
-  public Map<String, Espectaculo> obtenerEspectaculosPorArtistaYEstado(String nickname, E_EstadoEspectaculo estado) {
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorCategoria(String nombreCategoria){
+    return servicio.obtenerEspectaculosPorCategoria(nombreCategoria);
+  }
+  
+  /**
+   * Obtiene todos los espectáculos de un paquete
+   * @param nombrePaquete Nombre del paquete
+   *                      del que se quieren obtener los espectáculos
+   * @return Mapa con todos los espectáculos del paquete
+   */
+  @Override
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorPaquete(String nombrePaquete){
+    return servicio.obtenerEspectaculosPorPaquete(nombrePaquete);
+  }
+  @Override
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorArtistaYEstado(String nickname, E_EstadoEspectaculo estado) {
     return servicio.obtenerEspectaculosPorArtistaYEstado(nickname, estado);
   }
+  
+  @Override
+  public Map<String, EspectaculoDTO> obtenerEspectaculosFavoritosDeEspectador(String nickname) {
+    return servicio.obtenerEspectaculosFavoritosDeEspectador(nickname);
+  }
+  
   @Override
   public void cambiarEstadoEspectaculo(EspectaculoNuevoEstadoDTO espectaculoNuevoEstadoDTO){
     servicio.cambiarEstadoEspectaculo(espectaculoNuevoEstadoDTO);

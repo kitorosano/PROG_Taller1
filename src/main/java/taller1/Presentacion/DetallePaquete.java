@@ -1,9 +1,11 @@
 package main.java.taller1.Presentacion;
 
 import main.java.taller1.Logica.Clases.Categoria;
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.Fabrica;
 import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Paquete;
+import main.java.taller1.Logica.Mappers.EspectaculoMapper;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -35,7 +37,7 @@ public class DetallePaquete extends JInternalFrame {
 
     Paquete paquete;
 
-    Map<String, Espectaculo> EspectaculosPaquete;
+    Map<String, EspectaculoDTO> EspectaculosPaquete;
 
     Map<String, Categoria> categoriasPaquete = new HashMap<>();
 
@@ -78,8 +80,7 @@ public class DetallePaquete extends JInternalFrame {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
                     String valor = table1.getValueAt(table1.getSelectedRow(), 0).toString()+"-"+table1.getValueAt(table1.getSelectedRow(), 1).toString();
-                    Espectaculo espectaculo = EspectaculosPaquete.get(valor);
-
+                    EspectaculoDTO espectaculo = EspectaculosPaquete.get(valor);
                     JInternalFrame detalleEspectaculo = new DetalleEspectaculo("Detalle de espectaculo", espectaculo);
                     detalleEspectaculo.setIconifiable(true);
                     detalleEspectaculo.setClosable(true);
@@ -116,11 +117,11 @@ public class DetallePaquete extends JInternalFrame {
     private void cargarTabla() {
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
-            this.EspectaculosPaquete = Fabrica.getInstance().getIPaquete().obtenerEspectaculosDePaquete(this.paquete.getNombre());
-            for (Map.Entry<String, Espectaculo> entry : this.EspectaculosPaquete.entrySet()) {
-                model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getPlataforma().getNombre(), entry.getValue().getCosto()});//se carga la lista de categorias mientras recorro los espectaculos
+            this.EspectaculosPaquete = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPaquete(this.paquete.getNombre());
+            for (EspectaculoDTO entry : this.EspectaculosPaquete.values()) {
+                model.addRow(new Object[]{entry.getNombre(), entry.getPlataforma().getNombre(), entry.getCosto()});//se carga la lista de categorias mientras recorro los espectaculos
                 try {
-                    Map<String, Categoria> categoriasdelEspectaulo = Fabrica.getInstance().getICategoria().obtenerCategoriasDeEspectaculo(entry.getValue().getNombre());
+                    Map<String, Categoria> categoriasdelEspectaulo = Fabrica.getInstance().getICategoria().obtenerCategoriasDeEspectaculo(entry.getNombre());
                     for (Map.Entry<String, Categoria> entry2 : categoriasdelEspectaulo.entrySet()) {
                         categoriasPaquete.put(entry2.getValue().getNombre(),entry2.getValue());
                     }

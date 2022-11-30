@@ -62,17 +62,6 @@ public class CategoriaController implements ICategoria {
   }
   
   /**
-   * Metodo que permite obtener todos los espectaculos de una categoria
-   * @param nombreCategoria Nombre de la categoria de la que se desea obtener los espectaculos
-   *                        que pertenecen a ella
-   * @return Mapa con todos los espectaculos de la categoria
-   */
-  @Override
-  public Map<String, Espectaculo> obtenerEspectaculosDeCategoria(String nombreCategoria){
-    return servicio.obtenerEspectaculosDeCategoria(nombreCategoria);
-  }
-  
-  /**
    * Metodo que permite obtener todas las categorias de un espectaculo
    * @param nombreEspectaculo Nombre del espectaculo del que se desea obtener las categorias
    * @return Mapa con todas las categorias de la base de datos

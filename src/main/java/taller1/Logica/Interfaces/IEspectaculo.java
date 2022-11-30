@@ -16,6 +16,7 @@ public interface IEspectaculo {
     Map<String, EspectaculoDTO> obtenerEspectaculosPorArtista(String nickname);
     Map<String, EspectaculoDTO> obtenerEspectaculosPorEstado(E_EstadoEspectaculo estado);
     Map<String, EspectaculoDTO> obtenerEspectaculosPorPaquete(String nombrePaquete);
+    Map<String, EspectaculoDTO> obtenerEspectaculosPorCategoria(String nombreCategoria);
     Map<String, EspectaculoDTO> obtenerEspectaculosPorPlataformaYEstado(String nombrePlataforma, E_EstadoEspectaculo estado);
     Map<String, EspectaculoDTO> obtenerEspectaculosPorArtistaYEstado(String nickname, E_EstadoEspectaculo estado);
     Map<String, EspectaculoDTO> obtenerEspectaculosFavoritosDeEspectador(String nickname);

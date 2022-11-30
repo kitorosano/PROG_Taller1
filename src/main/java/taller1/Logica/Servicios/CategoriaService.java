@@ -102,42 +102,6 @@ public class CategoriaService {
     return Optional.ofNullable(categoria);
   }
   
-  public Map<String, Espectaculo> obtenerEspectaculosDeCategoria(String nombreCategoria){
-    Map<String, Espectaculo> espectaculos = new HashMap<>();
-    Connection connection = null;
-    Statement statement = null;
-    ResultSet resultSet = null;
-    String selectEspectaculosByPaquete = "SELECT * " +
-        "FROM espectaculos_categorias ES_CAT, espectaculos ES, artistas UA, usuarios U, plataformas PL " +
-        "WHERE ES_CAT.es_cat_nombreEspectaculo = ES.es_nombre " +
-        "AND ES.es_artistaOrganizador = UA.ua_nickname " +
-        "AND UA.ua_nickname = U.u_nickname " +
-        "AND ES_CAT.es_cat_plataformaAsociada = ES.es_plataformaAsociada " +
-        "AND ES.es_plataformaAsociada = PL.pl_nombre " +
-        "AND ES_CAT.es_cat_nombreCategoria = '" + nombreCategoria + "' ";
-    try {
-      connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
-      resultSet = statement.executeQuery(selectEspectaculosByPaquete);
-      espectaculos.putAll(EspectaculoMapper.toModelMap(resultSet));
-    } catch (RuntimeException e) {
-      System.out.println(e.getMessage());
-      throw new RuntimeException("Error al conectar con la base de datos", e);
-    } catch (SQLException e) {
-      System.out.println(e.getMessage());
-      throw new RuntimeException("Error al obtener los espectáculos del paquete", e);
-    } finally {
-      try {
-        if (resultSet != null) resultSet.close();
-        if (statement != null) statement.close();
-        if (connection != null) connection.close();
-      } catch (SQLException e) {
-        System.out.println(e.getMessage());
-        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
-      }
-    }
-    return espectaculos;
-  }
   public Map<String, Categoria> obtenerCategoriasDeEspectaculo(String nombreEspectaculo){
     Map<String, Categoria> categorias = new HashMap<>();
     Connection connection = null;

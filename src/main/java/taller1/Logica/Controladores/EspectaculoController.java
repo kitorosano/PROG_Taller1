@@ -54,6 +54,17 @@ public class EspectaculoController implements IEspectaculo {
   }
   
   /**
+   * Metodo que permite obtener todos los espectaculos de una categoria
+   * @param nombreCategoria Nombre de la categoria de la que se desea obtener los espectaculos
+   *                        que pertenecen a ella
+   * @return Mapa con todos los espectaculos de la categoria
+   */
+  @Override
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorCategoria(String nombreCategoria){
+    return servicio.obtenerEspectaculosPorCategoria(nombreCategoria);
+  }
+  
+  /**
    * Obtiene todos los espectáculos de un paquete
    * @param nombrePaquete Nombre del paquete
    *                      del que se quieren obtener los espectáculos

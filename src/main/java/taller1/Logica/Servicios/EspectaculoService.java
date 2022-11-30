@@ -1,7 +1,6 @@
 package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.E_EstadoEspectaculo;
-import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.DTOs.AltaEspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoNuevoEstadoDTO;
@@ -250,6 +249,43 @@ public class EspectaculoService {
     } catch (SQLException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al obtener los espectaculos del artista", e);
+    } finally {
+      try {
+        if (resultSet != null) resultSet.close();
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+    return espectaculos;
+  }
+  public Map<String, EspectaculoDTO> obtenerEspectaculosPorCategoria(String nombreCategoria){
+    Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
+    Connection connection = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
+    String selectEspectaculos = "SELECT ES_CAT.*, ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_espectaculoAsociado) AS cantidad_favoritos " +
+        "FROM espectaculos as ES " +
+        " LEFT JOIN espectaculos_categorias as ES_CAT ON ES_CAT.es_cat_nombreEspectaculo = ES.es_nombre AND ES_CAT.es_cat_plataformaAsociada = ES.es_plataformaAsociada AND " +
+        " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
+        " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
+        " LEFT JOIN usuarios as U ON UA.ua_nickname = U.u_nickname " +
+        " LEFT JOIN espectaculos_favoritos as ES_FAV ON ES.es_nombre = ES_FAV.es_fav_espectaculoAsociado AND ES.es_plataformaAsociada = ES_FAV.es_fav_plataformaAsociada " +
+        "WHERE ES_CAT.es_cat_nombreCategoria = '" + nombreCategoria + "' " +
+        "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement();
+      resultSet = statement.executeQuery(selectEspectaculos);
+      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al obtener los espectáculos del paquete", e);
     } finally {
       try {
         if (resultSet != null) resultSet.close();

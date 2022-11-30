@@ -70,7 +70,7 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
                 elegido=(String) lstEspectAingresar.getSelectedValue();
                 plataforma=(String) cbPlataforma.getSelectedItem();
                 espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(plataforma);
-                Espectaculo nuevo = espectaculos.get(elegido+"-"+plataforma);
+                EspectaculoDTO nuevo = espectaculos.get(elegido+"-"+plataforma);
                 espectaculosNuevos.put(nuevo.getNombre(),nuevo);
                 modelAgregados.addElement(elegido);
                 modelAAgregar.remove(lstEspectAingresar.getSelectedIndex());

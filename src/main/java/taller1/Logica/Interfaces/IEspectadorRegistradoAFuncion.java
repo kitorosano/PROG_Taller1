@@ -11,5 +11,5 @@ public interface IEspectadorRegistradoAFuncion {
   void registrarEspectadorAFuncion(AltaEspectadorRegistradoAFuncionDTO espectadorRegistradoAFuncion);
   void registrarEspectadoresAFunciones(Map<String, AltaEspectadorRegistradoAFuncionDTO> espectadoresFunciones);
   Map<String, EspectadorRegistradoAFuncion> obtenerFuncionesRegistradasDelEspectador(String nickname);
-  Map<String, Usuario> obtenerEspectadoresRegistradosAFuncion(String nombreFuncion);
+  Map<String, Usuario> obtenerEspectadoresRegistradosAFuncion(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion);
 }

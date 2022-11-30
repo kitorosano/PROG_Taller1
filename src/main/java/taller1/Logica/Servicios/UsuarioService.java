@@ -32,12 +32,12 @@ public class UsuarioService {
       connection = ConexionDB.getConnection();
       
       // Obtenemos los espectadores
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectadores);
       usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
       
       // Obtenemos los artistas
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectArtistas);
       usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -68,7 +68,7 @@ public class UsuarioService {
         "WHERE UA.ua_nickname=U.u_nickname AND U.u_nickname = '" + nickname + "'";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuario);
       usuario = UsuarioMapper.toModel(resultSet);
     } catch (RuntimeException e) {
@@ -101,7 +101,7 @@ public class UsuarioService {
     
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuario);
       usuario = UsuarioMapper.toModel(resultSet);
     } catch (RuntimeException e) {
@@ -140,7 +140,7 @@ public class UsuarioService {
     
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertUsuario);
       statement.executeUpdate(insertUsuario2);
     } catch (RuntimeException e) {
@@ -175,7 +175,7 @@ public class UsuarioService {
     
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(updateUsuario);
       if (usuariodto.isEsArtista()) {
         statement.executeUpdate(updateUsuario2);

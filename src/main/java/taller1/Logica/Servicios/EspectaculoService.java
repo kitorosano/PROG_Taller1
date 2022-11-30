@@ -25,7 +25,7 @@ public class EspectaculoService {
         "VALUES ('" + nuevoEspectaculo.getNombre() + "', '" + nuevoEspectaculo.getDescripcion() + "', '" + nuevoEspectaculo.getDuracion() + "', '" + nuevoEspectaculo.getMinEspectadores() + "', '" + nuevoEspectaculo.getMaxEspectadores() + "', '" + nuevoEspectaculo.getUrl() + "', '" + nuevoEspectaculo.getCosto() + "', '" + nuevoEspectaculo.getEstado() + "', '" + nuevoEspectaculo.getFechaRegistro() + "', '" + nuevoEspectaculo.getImagen() + "', '" + nuevoEspectaculo.getPlataforma() + "', '" + nuevoEspectaculo.getArtista() + "')";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertEspectaculo);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -44,7 +44,7 @@ public class EspectaculoService {
     }
   }
   
-  public Map<String, EspectaculoDTO> obtenerEspectaculos() {
+  public Map<String, EspectaculoDTO> obtenerEspectaculos()    {
     Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
@@ -58,7 +58,7 @@ public class EspectaculoService {
     
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ResultSet resultSet = statement.executeQuery(selectEspectaculos);
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
@@ -94,7 +94,7 @@ public class EspectaculoService {
         "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ResultSet resultSet = statement.executeQuery(selectEspectaculo);
       espectaculo = EspectaculoMapper.toDTO(resultSet);
     } catch (RuntimeException e) {
@@ -129,7 +129,7 @@ public class EspectaculoService {
         "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ResultSet resultSet = statement.executeQuery(selectEspectaculos);
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
@@ -165,7 +165,7 @@ public class EspectaculoService {
         "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
@@ -203,7 +203,7 @@ public class EspectaculoService {
         "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
@@ -240,7 +240,7 @@ public class EspectaculoService {
         "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
@@ -277,7 +277,7 @@ public class EspectaculoService {
         "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
@@ -314,7 +314,7 @@ public class EspectaculoService {
         "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
@@ -352,7 +352,7 @@ public class EspectaculoService {
         "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
@@ -388,7 +388,7 @@ public class EspectaculoService {
         "GROUP BY ES.es_nombre, ES.es_plataformaAsociada";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
@@ -419,7 +419,7 @@ public class EspectaculoService {
         "AND es_plataformaAsociada='" + espectaculoNuevoEstadoDTO.getNombrePlataforma() + "'";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(updateEspectaculo);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

@@ -163,3 +163,13 @@ CREATE TABLE espectadores_paquetes (
     FOREIGN KEY (ue_paq_nickname) REFERENCES espectadores (ue_nickname) ON DELETE CASCADE,
     FOREIGN KEY (ue_paq_nombrePaquete) REFERENCES paquetes (paq_nombre) ON DELETE CASCADE
 );
+
+CREATE TABLE espectaculos_favoritos (
+    es_fav_espectaculoAsociado VARCHAR(50) NOT NULL,
+    es_fav_plataformaAsociada VARCHAR(30) NOT NULL,
+    es_fav_nickname VARCHAR(30) NOT NULL,
+
+    PRIMARY KEY (es_fav_espectaculoAsociado, es_fav_plataformaAsociada, es_fav_nickname),
+    FOREIGN KEY (es_fav_espectaculoAsociado, es_fav_plataformaAsociada) REFERENCES espectaculos (es_nombre, es_plataformaAsociada) ON DELETE CASCADE,
+    FOREIGN KEY (es_fav_nickname) REFERENCES espectadores (ue_nickname) ON DELETE CASCADE
+);

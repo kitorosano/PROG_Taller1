@@ -26,7 +26,7 @@ public class PaqueteService {
         "VALUES ('" + nuevoPaquete.getNombre() + "', '" + nuevoPaquete.getFechaExpiracion() + "', '" + nuevoPaquete.getDescripcion() + "', " + nuevoPaquete.getDescuento() + ", '" + nuevoPaquete.getFechaRegistro() + "', '" + nuevoPaquete.getImagen() + "')";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertPaquete);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -52,7 +52,7 @@ public class PaqueteService {
     String selectPaquetes = "SELECT * FROM paquetes";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquetes);
       paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -81,7 +81,7 @@ public class PaqueteService {
     String selectPaquete = "SELECT * FROM paquetes WHERE paq_nombre = '" + nombrePaquete + "'";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquete);
       paquete = PaqueteMapper.toModel(resultSet);
 
@@ -115,7 +115,7 @@ public class PaqueteService {
         "AND ES_PAQ.es_paq_plataformaAsociada = '" + nombrePlataforma + "'";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquetesByEspectaculo);
       paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -149,7 +149,7 @@ public class PaqueteService {
         "AND U.u_nickname = '" + nickname + "' ";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquetesByEspectador);
       paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -183,7 +183,7 @@ public class PaqueteService {
     
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectadoresByPaquete);
       espectadores.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -212,7 +212,7 @@ public class PaqueteService {
     
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertEspectaculosPaquetes);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -238,7 +238,7 @@ public class PaqueteService {
     
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertEspectadoresPaquetes);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -25,7 +24,7 @@ public class FuncionService {
         "VALUES ('" + funcionDTO.getNombre() + "', '" + funcionDTO.getEspectaculo().getNombre() + "', '" + funcionDTO.getEspectaculo().getPlataforma().getNombre()+ "', '"+ funcionDTO.getFechaHoraInicio() + "', '" + funcionDTO.getFechaRegistro() + "', '" + funcionDTO.getImagen() + "')";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       statement.executeUpdate(insertFuncion);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -58,7 +57,7 @@ public class FuncionService {
         " AND UA.ua_nickname = U.u_nickname";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
       /*while (resultSet.next()) {
         String pl_nombre = resultSet.getString("pl_nombre");
@@ -134,7 +133,7 @@ public class FuncionService {
         " AND PL.pl_nombre = '" + nombrePlataforma + "'";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFuncion);
       /*if (resultSet.next()) {
         String pl_nombre = resultSet.getString("pl_nombre");
@@ -207,7 +206,7 @@ public class FuncionService {
         " AND PL.pl_nombre = '" + nombrePlataforma + "'";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
       /*while (resultSet.next()) {
         String pl_nombre = resultSet.getString("pl_nombre");
@@ -284,7 +283,7 @@ public class FuncionService {
         " AND PL.pl_nombre = '" + nombrePlataforma + "'";
     try {
       connection = ConexionDB.getConnection();
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
       /*while (resultSet.next()) {
         String pl_nombre = resultSet.getString("pl_nombre");
@@ -365,7 +364,7 @@ public class FuncionService {
     try {
       connection = ConexionDB.getConnection();
       
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectArtistas);
       while (resultSet.next()) {
         String u_nickname = resultSet.getString("u_nickname");
@@ -421,7 +420,7 @@ public class FuncionService {
     try {
       connection = ConexionDB.getConnection();
       
-      statement = connection.createStatement();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
       /*while (resultSet.next()) {
         String pl_nombre = resultSet.getString("pl_nombre");

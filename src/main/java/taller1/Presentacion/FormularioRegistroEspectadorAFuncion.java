@@ -222,7 +222,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         modelInvitados.clear();
         try {
             usuarios = Fabrica.getInstance().getIUsuario().obtenerUsuarios();
-            invitados=Fabrica.getInstance().getIEspectadorRegistradoAFuncion().obtenerEspectadoresRegistradosAFuncion(nombreFuncion);
+            invitados=Fabrica.getInstance().getIEspectadorRegistradoAFuncion().obtenerEspectadoresRegistradosAFuncion(nombreFuncion,espectaculoSelect,plataformaSelect);
             Espectaculo espectaculo=funciones.get(nombreFuncion+"-"+espectaculoSelect+"-"+plataformaSelect).getEspectaculo();
             maximo=espectaculo.getMaxEspectadores()-invitados.size();
             for(Usuario u:usuarios.values()){

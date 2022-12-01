@@ -1,8 +1,8 @@
-# DROP DATABASE IF EXISTS PROG_Taller1;
-#
-# CREATE DATABASE PROG_Taller1;
+DROP DATABASE IF EXISTS PROG_Taller3;
 
-USE sql10536075;
+CREATE DATABASE PROG_Taller3;
+
+USE PROG_Taller3;
 
 CREATE TABLE usuarios (
   u_nickname VARCHAR(30) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE espectaculos (
   es_maxEspectadores INTEGER NOT NULL,
   es_url VARCHAR(50) NOT NULL,
   es_costo DOUBLE NOT NULL,
-  es_estado ENUM('INGRESADO', 'ACEPTADO', 'RECHAZADO') NOT NULL,
+  es_estado ENUM('INGRESADO', 'ACEPTADO', 'RECHAZADO', 'FINALIZADO') NOT NULL,
   es_fechaRegistro DATETIME NOT NULL,
   es_imagen VARCHAR(200),
   es_plataformaAsociada VARCHAR(30) NOT NULL,
@@ -131,7 +131,6 @@ CREATE TABLE espectadores_funciones (
   ue_fn_costo DOUBLE NOT NULL,
   ue_fn_fechaRegistro DATETIME NOT NULL,
 
-  
   PRIMARY KEY (ue_fn_nickname, ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada),
   FOREIGN KEY (ue_fn_nickname) REFERENCES espectadores (ue_nickname) ON DELETE CASCADE,
   FOREIGN KEY (ue_fn_nombreFuncion, ue_fn_espectaculoAsociado, ue_fn_plataformaAsociada) REFERENCES funciones (fn_nombre, fn_espectaculoAsociado, fn_plataformaAsociada) ON DELETE CASCADE,

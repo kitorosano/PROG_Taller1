@@ -31,6 +31,7 @@ public class UsuarioMapper {
       user.setApellido(rs.getString("u_apellido"));
       user.setCorreo(rs.getString("u_correo"));
       user.setFechaNacimiento(rs.getDate("u_fechaNacimiento").toLocalDate());
+      user.setFechaNacimiento(rs.getDate("u_contrasenia").toLocalDate());
       user.setImagen(rs.getString("u_imagen"));
       
       return user;
@@ -63,8 +64,8 @@ public class UsuarioMapper {
       userDTO.setApellido(user.getApellido());
       userDTO.setCorreo(user.getCorreo());
       userDTO.setFechaNacimiento(user.getFechaNacimiento());
-      userDTO.setImagen(user.getImagen());
       userDTO.setContrasenia(user.getContrasenia());
+      userDTO.setImagen(user.getImagen());
       if(user instanceof Artista) {
         userDTO.setDescripcion(((Artista) user).getDescripcion());
         userDTO.setBiografia(((Artista) user).getBiografia());

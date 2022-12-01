@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class EspectadorRegistradoAFuncionDTO {
   
-  private UsuarioDTO espectador;
+  private String espectador;
   private FuncionDTO funcion;
   private PaqueteDTO paquete;
   private boolean canjeado;
@@ -14,10 +14,10 @@ public class EspectadorRegistradoAFuncionDTO {
   public EspectadorRegistradoAFuncionDTO() {
   }
   
-  public UsuarioDTO getEspectador() {
+  public String getEspectador() {
     return espectador;
   }
-  public void setEspectador(UsuarioDTO espectador) {
+  public void setEspectador(String espectador) {
     this.espectador = espectador;
   }
   

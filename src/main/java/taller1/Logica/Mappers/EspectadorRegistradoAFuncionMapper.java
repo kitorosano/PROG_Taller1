@@ -34,10 +34,13 @@ public class EspectadorRegistradoAFuncionMapper {
   //ResultSet -> Map<EspectadorRegistradoAFuncion>
   public static Map<String,EspectadorRegistradoAFuncion> toModelMap(ResultSet rs) {
     try {
-      Map<String,EspectadorRegistradoAFuncion> espectadorfunciones = new HashMap<String,EspectadorRegistradoAFuncion>();
+      Map<String,EspectadorRegistradoAFuncion> espectadorfunciones = new HashMap<>();
       while (rs.next()) { // Mientras haya un siguiente elemento en el ResultSet
         EspectadorRegistradoAFuncion espectadorfuncion = toModel(rs);
-        espectadorfunciones.put(espectadorfuncion.getFuncion().getNombre()+"-"+espectadorfuncion.getFuncion().getEspectaculo().getNombre()+"-"+espectadorfuncion.getFuncion().getEspectaculo().getPlataforma().getNombre(), espectadorfuncion);;
+        String nombre_funcion = espectadorfuncion.getFuncion().getNombre();
+        String nombre_espectaculo = espectadorfuncion.getFuncion().getEspectaculo().getNombre();
+        String nombre_plataforma = espectadorfuncion.getFuncion().getEspectaculo().getPlataforma().getNombre();
+        espectadorfunciones.put(nombre_funcion+"-"+nombre_espectaculo+"-"+nombre_plataforma, espectadorfuncion);
       }
       return espectadorfunciones;
     } catch (Exception e) {
@@ -50,7 +53,7 @@ public class EspectadorRegistradoAFuncionMapper {
   public static EspectadorRegistradoAFuncionDTO toDTO(EspectadorRegistradoAFuncion espectadorfuncion){
     EspectadorRegistradoAFuncionDTO espectadorfuncionDTO = new EspectadorRegistradoAFuncionDTO();
     try {
-      espectadorfuncionDTO.setEspectador(UsuarioMapper.toDTO(espectadorfuncion.getEspectador()));
+      espectadorfuncionDTO.setEspectador(espectadorfuncion.getEspectador().getNombre());
       espectadorfuncionDTO.setFuncion(FuncionMapper.toDTO(espectadorfuncion.getFuncion()));
       espectadorfuncionDTO.setPaquete(PaqueteMapper.toDTO(espectadorfuncion.getPaquete()));
       espectadorfuncionDTO.setCanjeado(espectadorfuncion.isCanjeado());
@@ -70,12 +73,57 @@ public class EspectadorRegistradoAFuncionMapper {
     try {
       for (EspectadorRegistradoAFuncion espectadorfuncion : espectadorfunciones.values()) {
         EspectadorRegistradoAFuncionDTO dto = toDTO(espectadorfuncion);
-        espectadorfuncionesDTOMap.put(dto.getFuncion().getNombre()+"-"+dto.getFuncion().getEspectaculo().getNombre()+"-"+dto.getFuncion().getEspectaculo().getPlataforma().getNombre(),dto);
+        String nombre_funcion = espectadorfuncion.getFuncion().getNombre();
+        String nombre_espectaculo = espectadorfuncion.getFuncion().getEspectaculo().getNombre();
+        String nombre_plataforma = espectadorfuncion.getFuncion().getEspectaculo().getPlataforma().getNombre();
+        espectadorfuncionesDTOMap.put(nombre_funcion+"-"+nombre_espectaculo+"-"+nombre_plataforma, dto);
       }
     } catch (Exception e) {
       throw new RuntimeException("Error al mapear EspectadorRegistradoAFuncionMap a EspectadorRegistradoAFuncionDTOMap", e);
     }
     
     return espectadorfuncionesDTOMap;
+  }
+  
+  
+  //ResultSet -> EspectadorRegistradoAFuncionDTO
+  public static EspectadorRegistradoAFuncionDTO toDTO(ResultSet rs){
+    try {
+      if(rs.isBeforeFirst()) rs.next();  //Si el cursor esta antes del primer elemento, se mueve al primero
+  
+      EspectadorRegistradoAFuncionDTO dto = new EspectadorRegistradoAFuncionDTO();
+      
+      dto.setEspectador(rs.getString("ue_fn_nickname"));
+      dto.setFuncion(FuncionMapper.toDTO(FuncionMapper.toModel(rs)));
+      
+      if(rs.getString("ue_fn_nombrePaquete") != null)
+        dto.setPaquete(PaqueteMapper.toDTO(PaqueteMapper.toModel(rs)));
+      
+      dto.setCanjeado(rs.getBoolean("ue_fn_canjeado"));
+      dto.setCosto(rs.getDouble("ue_fn_costo"));
+      dto.setFechaRegistro(rs.getTimestamp("ue_fn_fechaRegistro").toLocalDateTime());
+      return dto;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al mapear ResultSet a EspectadorRegistradoAFuncionDTO", e);
+    }
+  }
+  
+  //ResultSet -> Map<String, EspectadorRegistradoAFuncionDTO>
+  public static Map<String,EspectadorRegistradoAFuncionDTO> toDTOMap(ResultSet rs) {
+    try {
+      Map<String,EspectadorRegistradoAFuncionDTO> espectadorfunciones = new HashMap<>();
+      while (rs.next()) { // Mientras haya un siguiente elemento en el ResultSet
+        EspectadorRegistradoAFuncionDTO espectadorfuncion = toDTO(rs);
+        String nombre_funcion = espectadorfuncion.getFuncion().getNombre();
+        String nombre_espectaculo = espectadorfuncion.getFuncion().getEspectaculo().getNombre();
+        String nombre_plataforma = espectadorfuncion.getFuncion().getEspectaculo().getPlataforma().getNombre();
+        espectadorfunciones.put(nombre_funcion+"-"+nombre_espectaculo+"-"+nombre_plataforma, espectadorfuncion);
+      }
+      return espectadorfunciones;
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al mapear ResultSet a EspectadorRegistradoAFuncionDTO", e);
+    }
   }
 }

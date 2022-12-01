@@ -2,6 +2,7 @@ package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.DTOs.AltaEspectaculoAPaqueteDTO;
+import main.java.taller1.Logica.DTOs.AltaEspectadorAPaqueteDTO;
 import main.java.taller1.Logica.DTOs.EspectadorPaqueteDTO;
 import main.java.taller1.Logica.DTOs.PaqueteDTO;
 import main.java.taller1.Logica.Mappers.EspectaculoMapper;
@@ -230,11 +231,11 @@ public class PaqueteService {
       }
     }
   }
-  public void altaEspectadorAPaquete(EspectadorPaqueteDTO espectadorPaquete) {
+  public void altaEspectadorAPaquete(AltaEspectadorAPaqueteDTO espectadorPaquete) {
     Connection connection = null;
     Statement statement = null;
     String insertEspectadoresPaquetes = "INSERT INTO espectadores_paquetes (ue_paq_nickname, ue_paq_nombrePaquete, ue_paq_fechaRegistro) " +
-                          " VALUES ('" + espectadorPaquete.getEspectador().getNickname() + "', '" + espectadorPaquete.getPaquete().getNombre() + "', '" + espectadorPaquete.getFechaRegistro() + "') ";
+                          " VALUES ('" + espectadorPaquete.getNickname() + "', '" + espectadorPaquete.getNombrePaquete() + "', '" + espectadorPaquete.getFechaRegistro() + "') ";
     
     try {
       connection = ConexionDB.getConnection();

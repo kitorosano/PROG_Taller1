@@ -19,7 +19,9 @@ public class UsuarioMapper {
       if(rs.isBeforeFirst()) rs.next(); //Si el cursor esta antes del primer elemento, se mueve al primero
       Usuario user;
       
-      if(existeColumnaEnResultSet("ua_descripcion", rs)) {
+      System.out.println(existeColumnaEnResultSet("ua_descripcion", rs));
+      
+      if(existeColumnaEnResultSet("ua_descripcion", rs) && rs.getString("ua_descripcion") != null) {
         user = new Artista();
         ((Artista) user).setDescripcion(rs.getString("ua_descripcion"));
         ((Artista) user).setBiografia(rs.getString("ua_biografia"));

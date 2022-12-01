@@ -67,8 +67,8 @@ public class CategoriaController implements ICategoria {
    * @return Mapa con todas las categorias de la base de datos
    */
   @Override
-  public Map<String, Categoria> obtenerCategoriasDeEspectaculo(String nombreEspectaculo){
-    return servicio.obtenerCategoriasDeEspectaculo(nombreEspectaculo);
+  public Map<String, Categoria> obtenerCategoriasDeEspectaculo(String nombreEspectaculo, String nombrePlataforma){
+    return servicio.obtenerCategoriasDeEspectaculo(nombreEspectaculo, nombrePlataforma);
   }
   
   /**

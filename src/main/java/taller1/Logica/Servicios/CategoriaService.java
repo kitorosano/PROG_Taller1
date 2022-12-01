@@ -103,7 +103,7 @@ public class CategoriaService {
     return Optional.ofNullable(categoria);
   }
   
-  public Map<String, Categoria> obtenerCategoriasDeEspectaculo(String nombreEspectaculo){
+  public Map<String, Categoria> obtenerCategoriasDeEspectaculo(String nombreEspectaculo, String nombrePlataforma){
     Map<String, Categoria> categorias = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
@@ -111,7 +111,8 @@ public class CategoriaService {
     String selectCategoriasByEspectaculo = "SELECT * " +
         "FROM espectaculos_categorias ES_CAT, categorias CAT " +
         "WHERE ES_CAT.es_cat_nombreCategoria = CAT.cat_nombre  " +
-        "AND ES_CAT.es_cat_nombreEspectaculo = '" + nombreEspectaculo + "' ";
+        "AND ES_CAT.es_cat_nombreEspectaculo = '" + nombreEspectaculo + "' " +
+        "AND ES_CAT.es_cat_plataformaAsociada = '" + nombrePlataforma + "'";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);

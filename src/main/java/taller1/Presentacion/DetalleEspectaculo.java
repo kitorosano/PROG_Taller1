@@ -213,7 +213,7 @@ public class DetalleEspectaculo extends JInternalFrame {
 
         DefaultTableModel model = (DefaultTableModel) tablaCategorias.getModel();
         try {
-            this.categoriasDelEspectaculo = Fabrica.getInstance().getICategoria().obtenerCategoriasDeEspectaculo(espectaculo.getNombre());
+            this.categoriasDelEspectaculo = Fabrica.getInstance().getICategoria().obtenerCategoriasDeEspectaculo(espectaculo.getNombre(),espectaculo.getPlataforma().getNombre());
 
             for (Map.Entry<String,Categoria> entry : this.categoriasDelEspectaculo.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre()});

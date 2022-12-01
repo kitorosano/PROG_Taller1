@@ -121,7 +121,7 @@ public class DetallePaquete extends JInternalFrame {
             for (EspectaculoDTO entry : this.EspectaculosPaquete.values()) {
                 model.addRow(new Object[]{entry.getNombre(), entry.getPlataforma().getNombre(), entry.getCosto()});//se carga la lista de categorias mientras recorro los espectaculos
                 try {
-                    Map<String, Categoria> categoriasdelEspectaulo = Fabrica.getInstance().getICategoria().obtenerCategoriasDeEspectaculo(entry.getNombre());
+                    Map<String, Categoria> categoriasdelEspectaulo = Fabrica.getInstance().getICategoria().obtenerCategoriasDeEspectaculo(entry.getNombre(), entry.getPlataforma().getNombre());
                     for (Map.Entry<String, Categoria> entry2 : categoriasdelEspectaulo.entrySet()) {
                         categoriasPaquete.put(entry2.getValue().getNombre(),entry2.getValue());
                     }

@@ -13,8 +13,6 @@ public class EspectadorRegistradoAFuncionMapper {
   //ResultSet -> EspectadorRegistradoAFuncion
   public static EspectadorRegistradoAFuncion toModel(ResultSet rs){
     try {
-      if(rs.isBeforeFirst()) rs.next();  //Si el cursor esta antes del primer elemento, se mueve al primero
-      
       EspectadorRegistradoAFuncion espectadorfuncion = new EspectadorRegistradoAFuncion();
 
       espectadorfuncion.setEspectador((Espectador) UsuarioMapper.toModel(rs));
@@ -35,13 +33,13 @@ public class EspectadorRegistradoAFuncionMapper {
   public static Map<String,EspectadorRegistradoAFuncion> toModelMap(ResultSet rs) {
     try {
       Map<String,EspectadorRegistradoAFuncion> espectadorfunciones = new HashMap<>();
-      while (rs.next()) { // Mientras haya un siguiente elemento en el ResultSet
+      do { // Mientras haya un siguiente elemento en el ResultSet
         EspectadorRegistradoAFuncion espectadorfuncion = toModel(rs);
         String nombre_funcion = espectadorfuncion.getFuncion().getNombre();
         String nombre_espectaculo = espectadorfuncion.getFuncion().getEspectaculo().getNombre();
         String nombre_plataforma = espectadorfuncion.getFuncion().getEspectaculo().getPlataforma().getNombre();
         espectadorfunciones.put(nombre_funcion+"-"+nombre_espectaculo+"-"+nombre_plataforma, espectadorfuncion);
-      }
+      } while (rs.next());
       return espectadorfunciones;
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -89,8 +87,6 @@ public class EspectadorRegistradoAFuncionMapper {
   //ResultSet -> EspectadorRegistradoAFuncionDTO
   public static EspectadorRegistradoAFuncionDTO toDTO(ResultSet rs){
     try {
-      if(rs.isBeforeFirst()) rs.next();  //Si el cursor esta antes del primer elemento, se mueve al primero
-  
       EspectadorRegistradoAFuncionDTO dto = new EspectadorRegistradoAFuncionDTO();
       
       dto.setEspectador(rs.getString("ue_fn_nickname"));
@@ -113,13 +109,13 @@ public class EspectadorRegistradoAFuncionMapper {
   public static Map<String,EspectadorRegistradoAFuncionDTO> toDTOMap(ResultSet rs) {
     try {
       Map<String,EspectadorRegistradoAFuncionDTO> espectadorfunciones = new HashMap<>();
-      while (rs.next()) { // Mientras haya un siguiente elemento en el ResultSet
+      do { // Mientras haya un siguiente elemento en el ResultSet
         EspectadorRegistradoAFuncionDTO espectadorfuncion = toDTO(rs);
         String nombre_funcion = espectadorfuncion.getFuncion().getNombre();
         String nombre_espectaculo = espectadorfuncion.getFuncion().getEspectaculo().getNombre();
         String nombre_plataforma = espectadorfuncion.getFuncion().getEspectaculo().getPlataforma().getNombre();
         espectadorfunciones.put(nombre_funcion+"-"+nombre_espectaculo+"-"+nombre_plataforma, espectadorfuncion);
-      }
+      } while (rs.next());
       return espectadorfunciones;
     } catch (Exception e) {
       System.out.println(e.getMessage());

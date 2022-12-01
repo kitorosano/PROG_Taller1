@@ -60,6 +60,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ResultSet resultSet = statement.executeQuery(selectEspectaculos);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -96,6 +98,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ResultSet resultSet = statement.executeQuery(selectEspectaculo);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectaculo = EspectaculoMapper.toDTO(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -131,6 +135,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ResultSet resultSet = statement.executeQuery(selectEspectaculos);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -167,6 +173,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -205,6 +213,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -242,6 +252,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -268,7 +280,7 @@ public class EspectaculoService {
     ResultSet resultSet = null;
     String selectEspectaculos = "SELECT ES_CAT.*, ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_espectaculoAsociado) AS cantidad_favoritos " +
         "FROM espectaculos as ES " +
-        " LEFT JOIN espectaculos_categorias as ES_CAT ON ES_CAT.es_cat_nombreEspectaculo = ES.es_nombre AND ES_CAT.es_cat_plataformaAsociada = ES.es_plataformaAsociada AND " +
+        " LEFT JOIN espectaculos_categorias as ES_CAT ON ES_CAT.es_cat_nombreEspectaculo = ES.es_nombre AND ES_CAT.es_cat_plataformaAsociada = ES.es_plataformaAsociada " +
         " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
         " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
         " LEFT JOIN usuarios as U ON UA.ua_nickname = U.u_nickname " +
@@ -279,6 +291,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -305,7 +319,7 @@ public class EspectaculoService {
     ResultSet resultSet = null;
     String selectEspectaculos = "SELECT ES_PAQ.*, ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_espectaculoAsociado) AS cantidad_favoritos " +
         "FROM espectaculos as ES " +
-        " LEFT JOIN espectaculos_paquetes as ES_PAQ ON ES_PAQ.es_paq_nombreEspectaculo = ES.es_nombre AND ES_PAQ.es_paq_plataformaAsociada = ES.es_plataformaAsociada AND " +
+        " LEFT JOIN espectaculos_paquetes as ES_PAQ ON ES_PAQ.es_paq_nombreEspectaculo = ES.es_nombre AND ES_PAQ.es_paq_plataformaAsociada = ES.es_plataformaAsociada " +
         " LEFT JOIN plataformas as PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
         " LEFT JOIN artistas as UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
         " LEFT JOIN usuarios as U ON UA.ua_nickname = U.u_nickname " +
@@ -316,6 +330,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -354,6 +370,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -390,6 +408,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

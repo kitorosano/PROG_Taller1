@@ -8,34 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CategoriaMapper {
-    public static Categoria toModel(CategoriaDTO categoriadto) {
-        try {
-            Categoria categoria = new Categoria();
-            if(categoriadto.getNombre() != null) categoria.setNombre(categoriadto.getNombre());
-            return categoria;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Error al mapear CategoriaDTO a Categoria", e);
-        }
-    }
-    //model to dto
-    public static CategoriaDTO toDTO(Categoria categoria){
-        CategoriaDTO categoriaDTO = new CategoriaDTO();
-        try {
-            categoriaDTO.setNombre(categoria.getNombre());
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Error al mapear la categoria a categoriaDTO", e);
-        }
-
-        return categoriaDTO;
-    }
-    //rs2model
+    // ResultSet -> Model
     public static Categoria toModel(ResultSet rs) {
         try {
-            if(rs.isBeforeFirst()) rs.next(); //Si el cursor esta antes del primer elemento, se mueve al primero
-            
             Categoria categoria = new Categoria();
             categoria.setNombre(rs.getString("cat_nombre"));
 
@@ -45,21 +20,33 @@ public class CategoriaMapper {
             throw new RuntimeException("Error al mapear ResultSet a Categoria", e);
         }
     }
-    //rs2modelmap
     public static Map<String,Categoria> toModelMap(ResultSet rs) {
         try {
             Map<String,Categoria> categorias = new HashMap<>();
-            while (rs.next()) { // Mientras haya un siguiente elemento
+            do { // Mientras haya un siguiente elemento
                 Categoria categoria = toModel(rs);
                 categorias.put(categoria.getNombre(),categoria);
-            }
+            } while (rs.next());
             return categorias;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw new RuntimeException("Error al mapear ResultSet a CategoriaMap", e);
         }
     }
-    //modelmap2ToDtoMap
+    
+    // Model -> DTO
+    public static CategoriaDTO toDTO(Categoria categoria){
+        CategoriaDTO categoriaDTO = new CategoriaDTO();
+        try {
+            categoriaDTO.setNombre(categoria.getNombre());
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Error al mapear la categoria a categoriaDTO", e);
+        }
+        
+        return categoriaDTO;
+    }
     public static Map<String,CategoriaDTO> toDTOMap(Map<String,Categoria> categorias) {
         Map<String,CategoriaDTO> categoriaDTOMap = new HashMap<>();
 
@@ -72,5 +59,17 @@ public class CategoriaMapper {
         }
 
         return categoriaDTOMap;
+    }
+    
+    // DTO -> Model
+    public static Categoria toModel(CategoriaDTO categoriadto) {
+        try {
+            Categoria categoria = new Categoria();
+            if(categoriadto.getNombre() != null) categoria.setNombre(categoriadto.getNombre());
+            return categoria;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Error al mapear CategoriaDTO a Categoria", e);
+        }
     }
 }

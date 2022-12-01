@@ -51,6 +51,8 @@ public class PlataformaService {
       // Obtenemos todas las plataformas de la base de datos
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPlataformas);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       plataformas.putAll(PlataformaMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -82,6 +84,8 @@ public class PlataformaService {
       // Obtenemos la plataforma de la base de datos
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPlataforma);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       plataforma = PlataformaMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

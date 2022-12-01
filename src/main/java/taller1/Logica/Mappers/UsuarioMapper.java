@@ -17,7 +17,7 @@ public class UsuarioMapper {
   public static Usuario toModel(ResultSet rs) {
     try {
       Usuario user;
-      if(rs.getString("ua_descripcion") != null) {
+      if(existeColumnaEnResultSet("ua_descripcion", rs) && rs.getString("ua_descripcion") != null) {
         user = new Artista();
         ((Artista) user).setDescripcion(rs.getString("ua_descripcion"));
         ((Artista) user).setBiografia(rs.getString("ua_biografia"));
@@ -93,9 +93,9 @@ public class UsuarioMapper {
     return userDTOMap;
   }
 
-  private static boolean existeValorEnResultSet(String nombreCol, ResultSet rs){
+  private static boolean existeColumnaEnResultSet(String nombreCol, ResultSet rs){
     try{
-      rs.getString(nombreCol);
+      rs.findColumn(nombreCol);
       return true;
     } catch (SQLException e) {
       return false;

@@ -13,8 +13,6 @@ public class PaqueteMapper {
     //ResultSet -> Paquete
     public static Paquete toModel(ResultSet rs){
         try {
-            if(rs.isBeforeFirst()) rs.next(); //Si el cursor está antes del primer elemento, se mueve al primer elemento
-            
             Paquete paquete = new Paquete();
 
             paquete.setNombre(rs.getString("paq_nombre"));
@@ -35,10 +33,10 @@ public class PaqueteMapper {
     public static Map<String,Paquete> toModelMap(ResultSet rs) {
         try {
             Map<String,Paquete> paquetes= new HashMap<>();
-            while (rs.next()) { //Mientras haya un siguiente elemento en el ResultSet
+            do { //Mientras haya un siguiente elemento en el ResultSet
                 Paquete paquete = toModel(rs);
                 paquetes.put(paquete.getNombre(),paquete);
-            }
+            } while (rs.next());
             return paquetes;
         } catch (Exception e) {
             System.out.println(e.getMessage());

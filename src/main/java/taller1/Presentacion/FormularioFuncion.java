@@ -61,8 +61,8 @@ public class FormularioFuncion extends JInternalFrame {
                         Fabrica.getInstance().getIFuncion().altaFuncion(crearFuncion());
                         JOptionPane.showMessageDialog(null,"Funcion creada con exito");
                         dispose();
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null,ex);
+                    } catch (RuntimeException ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
                 }
             }
@@ -141,8 +141,8 @@ public class FormularioFuncion extends JInternalFrame {
                         System.out.println(res);
                         imagen=res;
                     }
-                    catch (Exception exc) {
-                        JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+                    catch (RuntimeException exc) {
+                        JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
                     }
                 }
             }
@@ -155,8 +155,8 @@ public class FormularioFuncion extends JInternalFrame {
             for (Plataforma p : plataformas.values()) {
                 cbPlataforma.addItem(p.getNombre());
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
         }
     }
     public void cargarDatosListas(){
@@ -169,8 +169,8 @@ public class FormularioFuncion extends JInternalFrame {
                     modelAInvitar.addElement(u.getNombre());
                 }
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.toString());
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la lista; " + e.getMessage());
         }
         //HAY QUE VER COMO CARGAR LA LISTA DE INVITADOS
     }
@@ -204,8 +204,8 @@ public class FormularioFuncion extends JInternalFrame {
                 }
             }
             return true;
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
             return false;
         }
     }
@@ -235,27 +235,24 @@ public class FormularioFuncion extends JInternalFrame {
         String nombre=tfNombre.getText();
         LocalDateTime fechahora= LocalDateTime.of(LocalDate.parse(tfFecha.getText()), LocalTime.parse(tfHora.getText()));
         EspectaculoDTO espectaculo = null;
-        try {
-            Map<String,EspectaculoDTO> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
-            for (EspectaculoDTO esp : espectaculos.values()) {
-                if(esp.getNombre().equals((String)cbEspectaculo.getSelectedItem())){
-                    espectaculo= esp;
-                    break;
-                }
+        
+        Map<String,EspectaculoDTO> espectaculos=Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorPlataforma(seleccionado);
+        for (EspectaculoDTO esp : espectaculos.values()) {
+            if(esp.getNombre().equals((String)cbEspectaculo.getSelectedItem())){
+                espectaculo= esp;
+                break;
             }
-            if(imagen==null){
-                imagen="https://i.imgur.com/EDotlnM.png";
-            }
-            FuncionDTO dto = new FuncionDTO();
-            dto.setNombre(nombre);
-            dto.setEspectaculo(espectaculo);
-            dto.setFechaHoraInicio(fechahora);
-            dto.setFechaRegistro(fechahora);
-            dto.setImagen(imagen);
-            return dto;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
+        if(imagen==null){
+            imagen="https://i.imgur.com/EDotlnM.png";
+        }
+        FuncionDTO dto = new FuncionDTO();
+        dto.setNombre(nombre);
+        dto.setEspectaculo(espectaculo);
+        dto.setFechaHoraInicio(fechahora);
+        dto.setFechaRegistro(fechahora);
+        dto.setImagen(imagen);
+        return dto;
     }
 
     private void cargarEspectaculos(){
@@ -266,8 +263,8 @@ public class FormularioFuncion extends JInternalFrame {
             for (EspectaculoDTO esp : espectaculos.values()) {
                     cbEspectaculo.addItem(esp.getNombre());
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,ex);
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
 }

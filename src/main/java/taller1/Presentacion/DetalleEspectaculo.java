@@ -191,8 +191,8 @@ public class DetalleEspectaculo extends JInternalFrame {
             for (Map.Entry<String, Funcion> entry : this.FuncionesDelEspectaculo.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre(),entry.getValue().getFechaHoraInicio()});
             }
-        } catch (Exception exc) {
-           JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        } catch (RuntimeException exc) {
+           JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
         }
     }
     private void cargarTablaPaquetes() {
@@ -205,8 +205,8 @@ public class DetalleEspectaculo extends JInternalFrame {
             for (Map.Entry<String,Paquete> entry : this.PaquetesDelEspectaculo.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre(),entry.getValue().getFechaExpiracion()});
             }
-        } catch (Exception exc) {
-            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        } catch (RuntimeException exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
         }
     }
     private void cargarTablaCategorias() {
@@ -218,8 +218,8 @@ public class DetalleEspectaculo extends JInternalFrame {
             for (Map.Entry<String,Categoria> entry : this.categoriasDelEspectaculo.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre()});
             }
-        } catch (Exception exc) {
-            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        } catch (RuntimeException exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
         }
     }
     public void limpiartablaFunciones() {

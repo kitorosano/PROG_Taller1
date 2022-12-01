@@ -60,8 +60,8 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
                     Fabrica.getInstance().getIEspectadorRegistradoAFuncion().registrarEspectadoresAFunciones(espectadores);
                     JOptionPane.showMessageDialog(null,"Espectadores agregados");
                     dispose();
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null,ex);
+                } catch (RuntimeException ex) {
+                    JOptionPane.showMessageDialog(null,ex.getMessage());
                 }
             }
         });
@@ -77,8 +77,8 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
                         for (EspectaculoDTO esp : espectaculos.values()) {
                             cbEspectaculo.addItem(esp.getNombre());
                         }
-                    } catch (Exception ex) {
-                        JOptionPane.showMessageDialog(null,ex);
+                    } catch (RuntimeException ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
                 }
             }
@@ -177,8 +177,8 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
             for (Plataforma p : plataformas.values()) {
                 cbPlataforma.addItem(p.getNombre());
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
@@ -201,18 +201,19 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
             }
         });
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
-        if(funcionPredefinida==null) {
-            try {
+    
+        try {
+            if(funcionPredefinida==null) {
+                    funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(plataformaSelect, espectaculoSelect);
+                    for (Map.Entry<String, Funcion> entry : funciones.entrySet()) {
+                        model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getEspectaculo().getNombre(), entry.getValue().getFechaHoraInicio()});
+                    }
+            }else{
                 funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(plataformaSelect, espectaculoSelect);
-                for (Map.Entry<String, Funcion> entry : funciones.entrySet()) {
-                    model.addRow(new Object[]{entry.getValue().getNombre(), entry.getValue().getEspectaculo().getNombre(), entry.getValue().getFechaHoraInicio()});
-                }
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex);
+                model.addRow(new Object[]{funcionPredefinida.getNombre(),funcionPredefinida.getEspectaculo().getNombre(),funcionPredefinida.getFechaHoraInicio()});
             }
-        }else{
-            funciones = Fabrica.getInstance().getIFuncion().obtenerFuncionesDeEspectaculo(plataformaSelect, espectaculoSelect);
-            model.addRow(new Object[]{funcionPredefinida.getNombre(),funcionPredefinida.getEspectaculo().getNombre(),funcionPredefinida.getFechaHoraInicio()});
+        } catch (RuntimeException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
 
@@ -230,7 +231,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
                     modelAInvitar.addElement(u.getNickname());
                 }
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.toString());
         }
     }
@@ -246,8 +247,8 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
                     modelRegistros.addElement(esp.getFuncion().getNombre());
                 }
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
         }
     }
 }

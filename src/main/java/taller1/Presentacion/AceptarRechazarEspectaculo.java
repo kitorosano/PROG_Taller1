@@ -48,8 +48,8 @@ public class AceptarRechazarEspectaculo extends  JInternalFrame {
                             limpiartablaEspectaculos();
                             cargarTablaEspectaculo();
                             //dispose();
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(mainPanel,ex);
+                        } catch (RuntimeException ex) {
+                            JOptionPane.showMessageDialog(mainPanel,ex.getMessage());
                         }
                     }
                     else if(respuesta==1){
@@ -81,8 +81,8 @@ public class AceptarRechazarEspectaculo extends  JInternalFrame {
                             limpiartablaEspectaculos();
                             cargarTablaEspectaculo();
                             //dispose();
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(mainPanel,ex);
+                        } catch (RuntimeException ex) {
+                            JOptionPane.showMessageDialog(mainPanel,ex.getMessage());
                         }
                     }
                     else if(respuesta==1){
@@ -117,8 +117,8 @@ public class AceptarRechazarEspectaculo extends  JInternalFrame {
             for (EspectaculoDTO entry : this.espectaculosIngresados.values()) {
                 model.addRow(new Object[]{entry.getNombre(),entry.getPlataforma().getNombre()});
             }
-        } catch (Exception exc) {
-            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        } catch (RuntimeException exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
         }
     }
     public void limpiartablaEspectaculos() {

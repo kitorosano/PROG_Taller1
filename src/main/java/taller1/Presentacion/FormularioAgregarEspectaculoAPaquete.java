@@ -117,8 +117,8 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
                 cbPaquete.addItem(paq.getNombre());
             }
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e);
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
         }
     }
 
@@ -132,8 +132,8 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
                     modelAAgregar.addElement(esp.getNombre());
                 }
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.toString());
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.getMessage());
         }
     }
 
@@ -149,8 +149,8 @@ public class FormularioAgregarEspectaculoAPaquete extends JInternalFrame{
                 }
                 espectaculos.put(esp.getNombre(),esp);
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.toString());
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.getMessage());
         }
 
     }

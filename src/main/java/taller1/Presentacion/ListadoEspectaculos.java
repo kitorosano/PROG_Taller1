@@ -104,8 +104,8 @@ public class ListadoEspectaculos extends JInternalFrame {
             for (Map.Entry<String, Plataforma> entry : plataformas.entrySet()) {
                 cmbBox.addItem(entry.getValue().getNombre());           //guardo la plataforma en el combo box
             }
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al obtener las plataformas" + e.toString());
+        }catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Error al obtener las plataformas" + e.getMessage());
         }
     }
 
@@ -117,8 +117,8 @@ public class ListadoEspectaculos extends JInternalFrame {
             for (EspectaculoDTO entry : espectaculos.values()) {
                 model.addElement(entry.getNombre());
             }
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al obtener los espectaculos" + e.toString());
+        }catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Error al obtener los espectaculos" + e.getMessage());
         }
     }
 
@@ -134,8 +134,8 @@ public class ListadoEspectaculos extends JInternalFrame {
             detalle.setSize(1260,700);
             Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
             detalle.setVisible(true);
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al llamar al detalle espectaculo" + e.toString());
+        }catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Error al llamar al detalle espectaculo" + e.getMessage());
         }
     }
 }

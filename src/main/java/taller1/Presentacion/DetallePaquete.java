@@ -125,12 +125,12 @@ public class DetallePaquete extends JInternalFrame {
                     for (Map.Entry<String, Categoria> entry2 : categoriasdelEspectaulo.entrySet()) {
                         categoriasPaquete.put(entry2.getValue().getNombre(),entry2.getValue());
                     }
-                } catch (Exception exc) {
-                    JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+                } catch (RuntimeException exc) {
+                    JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
                 }
             }
-        } catch (Exception exc) {
-            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        } catch (RuntimeException exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
         }
     }
     private void cargarTablaCategorias(){
@@ -139,8 +139,8 @@ public class DetallePaquete extends JInternalFrame {
             for (Map.Entry<String, Categoria> entry : this.categoriasPaquete.entrySet()) {
                 model.addRow(new Object[]{entry.getValue().getNombre()});
             }
-        } catch (Exception exc) {
-            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        } catch (RuntimeException exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
         }
     }
 

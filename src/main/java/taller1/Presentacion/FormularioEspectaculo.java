@@ -83,8 +83,8 @@ public class FormularioEspectaculo extends JInternalFrame {
 
                             JOptionPane.showMessageDialog(null, "Espectaculo agregado con exito");
                             dispose();
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null, ex);
+                        } catch (RuntimeException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage());
                         }
                     }
                 }
@@ -134,8 +134,8 @@ public class FormularioEspectaculo extends JInternalFrame {
                         System.out.println(res);
                         imagen=res;
                     }
-                    catch (Exception exc) {
-                        JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+                    catch (RuntimeException exc) {
+                        JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
                     }
                 }
             }
@@ -268,8 +268,8 @@ public class FormularioEspectaculo extends JInternalFrame {
             for(Categoria c:categorias.values()){
                 modelAgregar.addElement(c.getNombre());
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.toString());
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.getMessage());
         }
     }
 

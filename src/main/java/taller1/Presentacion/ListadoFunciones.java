@@ -117,8 +117,8 @@ public class ListadoFunciones extends JInternalFrame {
             for (Map.Entry<String, Plataforma> entry : plataformas.entrySet()) {
                 cmbPlataforma.addItem(entry.getValue().getNombre());           //guardo la plataforma en el combo box
             }
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al obtener las plataformas" + e.toString());
+        }catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Error al obtener las plataformas" + e.getMessage());
         }
     }
     private void cargarEspectaculos(){
@@ -129,8 +129,8 @@ public class ListadoFunciones extends JInternalFrame {
             for (EspectaculoDTO entry : espectaculos.values()) {
                 cmbEspectaculo.addItem(entry.getNombre());           //guardo el espectaculo en el combo box
             }
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al obtener los espectaculos" + e.toString());
+        }catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Error al obtener los espectaculos" + e.getMessage());
         }
     }
     private void cargarFunciones(){
@@ -143,8 +143,8 @@ public class ListadoFunciones extends JInternalFrame {
             for (Map.Entry<String, Funcion> entry : funciones.entrySet()) {
                 model.addElement(entry.getValue().getNombre());           //guardo la funcion en la lista
             }
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al obtener las funciones" + e.toString());
+        }catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Error al obtener las funciones" + e.getMessage());
         }
     }
 
@@ -161,8 +161,8 @@ public class ListadoFunciones extends JInternalFrame {
             Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
             detalle.setVisible(true);
 
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al llamar al detalle funcion" + e.toString());
+        }catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Error al llamar al detalle funcion" + e.getMessage());
         }
     }
 }

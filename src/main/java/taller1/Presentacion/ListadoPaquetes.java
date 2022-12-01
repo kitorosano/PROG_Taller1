@@ -96,8 +96,8 @@ public class ListadoPaquetes extends JInternalFrame{
         for (Map.Entry<String, Paquete> entry : paquetes.entrySet()) {
                 model.addElement(entry.getValue().getNombre());           //guardo el paquete en la lista
             }
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al obtener los paquetes" + e.toString());
+        }catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Error al obtener los paquetes" + e.getMessage());
         }
     }
 
@@ -112,8 +112,8 @@ public class ListadoPaquetes extends JInternalFrame{
             detalle.setClosable(true);
             Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
             detalle.setVisible(true);
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error al llamar al detalle paquete" + e.toString());
+        }catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Error al llamar al detalle paquete" + e.getMessage());
         }
     }
 }

@@ -41,8 +41,8 @@ public class FormularioPlataforma extends JInternalFrame {
                             Fabrica.getInstance().getIPlataforma().altaPlataforma(plataformaDTO);
                             JOptionPane.showMessageDialog(null, "Plataforma agregada con exito");
                             dispose();
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null, ex);
+                        } catch (RuntimeException ex) {
+          JOptionPane.showMessageDialog(null, ex.getMessage());
                         }
                     }
                 }

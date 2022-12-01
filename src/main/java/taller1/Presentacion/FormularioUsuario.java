@@ -116,7 +116,7 @@ public class FormularioUsuario extends JInternalFrame {
                                 JOptionPane.showMessageDialog(null, "Artista creado con exito");
                                 dispose();
                             } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(null, ex);
+                                JOptionPane.showMessageDialog(null, ex.getMessage());
                             }
                         } else { // equal Espectador
                             try {
@@ -132,7 +132,7 @@ public class FormularioUsuario extends JInternalFrame {
                                 JOptionPane.showMessageDialog(null, "Espectador creado con exito");
                                 dispose();
                             } catch (Exception ex) {
-                                JOptionPane.showMessageDialog(null, ex);
+                                JOptionPane.showMessageDialog(null, ex.getMessage());
                             }
                         }
                     }
@@ -212,8 +212,8 @@ public class FormularioUsuario extends JInternalFrame {
                         imagen=res;
 
                     }
-                    catch (Exception exc) {
-                        JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+                    catch (RuntimeException exc) {
+                        JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
                     }
                 }
 

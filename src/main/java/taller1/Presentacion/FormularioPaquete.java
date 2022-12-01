@@ -45,20 +45,20 @@ public class FormularioPaquete extends JInternalFrame {
           if (!comprobarNombreUnico(tfNombre.getText())) {
             LocalDateTime fechaVencimiento = LocalDateTime.of(LocalDate.parse(tfFechaVenc.getText()), LocalTime.parse("00:00:00"));
             try {
-                String nombre = tfNombre.getText();
-                String descripcion = tfDescripcion.getText();
-                double descuento = Double.parseDouble(tfDescuento.getText());
-                LocalDateTime fechaRegistro = LocalDateTime.now();
-                //String imagen = "";
-               if(imagen==null){
-                  imagen="https://i.imgur.com/hHn0WrG.png";
-               }
+              String nombre = tfNombre.getText();
+              String descripcion = tfDescripcion.getText();
+              double descuento = Double.parseDouble(tfDescuento.getText());
+              LocalDateTime fechaRegistro = LocalDateTime.now();
+              //String imagen = "";
+              if (imagen == null) {
+                imagen = "https://i.imgur.com/hHn0WrG.png";
+              }
               PaqueteDTO paquete = new PaqueteDTO(nombre, descripcion, descuento, fechaRegistro, fechaVencimiento, imagen);
               Fabrica.getInstance().getIPaquete().altaPaquete(paquete);
               JOptionPane.showMessageDialog(null, "Paquete agregado exitosamente");
               dispose();
-            } catch (NumberFormatException ex) {
-              JOptionPane.showMessageDialog(null, ex);
+            } catch (RuntimeException ex) {
+              JOptionPane.showMessageDialog(null, ex.getMessage());
             }
           }
         }
@@ -107,7 +107,7 @@ public class FormularioPaquete extends JInternalFrame {
             System.out.println(res);
             imagen=res;
           }
-          catch (Exception exc) {
+          catch (RuntimeException exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());
           }
         }

@@ -182,8 +182,8 @@ public class DetalleUsuario extends JInternalFrame {
                 String nombre_plataforma = value.getFuncion().getEspectaculo().getPlataforma().getNombre();
                 model.addRow(new Object[]{ nombre_funcion, nombre_espectaculo, nombre_plataforma });
             }
-        } catch (Exception exc) {
-            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        } catch (RuntimeException exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
         }
     }
 
@@ -195,8 +195,8 @@ public class DetalleUsuario extends JInternalFrame {
             for (EspectaculoDTO entry : espectaculosArtista.values()) {
                 model.addRow(new Object[]{entry.getNombre(), entry.getCosto(),entry.getPlataforma().getNombre()});
             }
-        } catch (Exception exc) {
-            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        } catch (RuntimeException exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
         }
     }
 

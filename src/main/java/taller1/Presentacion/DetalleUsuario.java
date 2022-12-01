@@ -81,7 +81,14 @@ public class DetalleUsuario extends JInternalFrame {
             createUIComponents(1);
             cargarTablaArtista();
             descripcionContenido.setText(usuario.getDescripcion());
-            biografiaContenido.setText(strToHtml(usuario.getBiografia()));
+            System.out.println(usuario.getBiografia());
+            if(usuario.getBiografia()==null){
+                biografiaContenido.setText(strToHtml("Este artista no tiene biografia"));
+            }else{
+                biografiaContenido.setText(strToHtml(usuario.getBiografia()));
+            }
+
+
             sitioWebContenido.setText(usuario.getSitioWeb());
 
         } else {

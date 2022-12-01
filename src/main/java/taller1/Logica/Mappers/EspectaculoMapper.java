@@ -123,10 +123,10 @@ public class EspectaculoMapper {
     try {
       Map<String, EspectaculoDTO> espectaculos = new HashMap<>();
   
-      while (rs.next()) { // Mientras haya un siguiente elemento
+      do{ // Mientras haya un siguiente elemento
         EspectaculoDTO espectaculoDTO = toDTO(rs);
         espectaculos.put(espectaculoDTO.getNombre() +"-"+ espectaculoDTO.getPlataforma().getNombre(), espectaculoDTO);
-      }
+      }while (rs.next());
       return espectaculos;
     } catch (Exception e) {
       System.out.println(e.getMessage());

@@ -103,7 +103,7 @@ public class EspectadorRegistradoAFuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return funcionesRegistradas; // Si el result set está vacío retornamos null
   
       funcionesRegistradas.putAll(EspectadorRegistradoAFuncionMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
@@ -148,7 +148,7 @@ public class EspectadorRegistradoAFuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectadores);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return espectadoresRegistrados; // Si el result set está vacío retornamos null
   
       espectadoresRegistrados.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {

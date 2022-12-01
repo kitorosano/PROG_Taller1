@@ -55,7 +55,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquetes);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return paquetes; // Si el result set está vacío retornamos null
   
       paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -121,7 +121,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquetesByEspectaculo);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return paquetes; // Si el result set está vacío retornamos null
   
       paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -157,7 +157,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquetesByEspectador);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return paquetes; // Si el result set está vacío retornamos null
   
       paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -193,7 +193,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectadoresByPaquete);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return espectadores; // Si el result set está vacío retornamos null
   
       espectadores.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {

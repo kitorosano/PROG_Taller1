@@ -60,7 +60,7 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return funciones; // Si el result set está vacío retornamos null
   
       funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -140,7 +140,7 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return funciones; // Si el result set está vacío retornamos null
   
       funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -181,7 +181,7 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return funciones; // Si el result set está vacío retornamos null
   
       funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -226,7 +226,7 @@ public class FuncionService {
       
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectArtistas);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return artistas; // Si el result set está vacío retornamos null
   
       artistas.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
@@ -271,7 +271,7 @@ public class FuncionService {
       
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return funciones; // Si el result set está vacío retornamos null
   
       funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {

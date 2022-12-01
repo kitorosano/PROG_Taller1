@@ -31,7 +31,7 @@ public class UsuarioService {
       
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuarios);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) return usuarios; // Si el result set está vacío retornamos null
       
       usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {

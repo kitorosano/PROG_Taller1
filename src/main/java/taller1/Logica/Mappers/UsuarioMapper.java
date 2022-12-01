@@ -16,12 +16,8 @@ public class UsuarioMapper {
   // ResultSet -> Usuario
   public static Usuario toModel(ResultSet rs) {
     try {
-      if(rs.isBeforeFirst()) rs.next(); //Si el cursor esta antes del primer elemento, se mueve al primero
       Usuario user;
-      
-      System.out.println(existeColumnaEnResultSet("ua_descripcion", rs));
-      
-      if(existeColumnaEnResultSet("ua_descripcion", rs) && rs.getString("ua_descripcion") != null) {
+      if(rs.getString("ua_descripcion") != null) {
         user = new Artista();
         ((Artista) user).setDescripcion(rs.getString("ua_descripcion"));
         ((Artista) user).setBiografia(rs.getString("ua_biografia"));
@@ -46,10 +42,10 @@ public class UsuarioMapper {
   public static Map<String, Usuario> toModelMap(ResultSet rs) {
     try {
       Map<String, Usuario> users = new HashMap<>();
-      while (rs.next()) {
+      do {
         Usuario user = toModel(rs);
         users.put(user.getNickname(), user);
-      }
+      } while (rs.next());
       return users;
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -97,9 +93,9 @@ public class UsuarioMapper {
     return userDTOMap;
   }
 
-  private static boolean existeColumnaEnResultSet(String nombreCol, ResultSet rs){
+  private static boolean existeValorEnResultSet(String nombreCol, ResultSet rs){
     try{
-      rs.findColumn(nombreCol);
+      rs.getString(nombreCol);
       return true;
     } catch (SQLException e) {
       return false;

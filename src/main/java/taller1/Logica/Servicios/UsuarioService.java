@@ -35,11 +35,15 @@ public class UsuarioService {
       // Obtenemos los espectadores
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectadores);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
       
       // Obtenemos los artistas
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectArtistas);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -65,12 +69,15 @@ public class UsuarioService {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectUsuario = "SELECT * " +
-        "FROM usuarios as U, artistas as UA " +
-        "WHERE UA.ua_nickname=U.u_nickname AND U.u_nickname = '" + nickname + "'";
+        "FROM usuarios as U " +
+        "  LEFT JOIN artistas as UA ON UA.ua_nickname = U.u_nickname " +
+        "WHERE U.u_nickname = '" + nickname + "'";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuario);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       usuario = UsuarioMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -97,13 +104,16 @@ public class UsuarioService {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectUsuario = "SELECT * " +
-        "FROM usuarios as U, artistas as UA " +
-        "WHERE UA.ua_nickname=U.u_nickname AND U.u_correo = '" + correo + "'";
+        "FROM usuarios as U " +
+        "  LEFT JOIN artistas as UA ON UA.ua_nickname = U.u_nickname " +
+        "WHERE U.u_correo = '" + correo + "'";
     
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuario);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      
       usuario = UsuarioMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

@@ -3,6 +3,7 @@ package main.java.taller1.Logica.Servicios;
 import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.DTOs.FuncionDTO;
 import main.java.taller1.Logica.Mappers.FuncionMapper;
+import main.java.taller1.Logica.Mappers.UsuarioMapper;
 import main.java.taller1.Persistencia.ConexionDB;
 
 import java.sql.Connection;
@@ -59,43 +60,8 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      /*while (resultSet.next()) {
-        String pl_nombre = resultSet.getString("pl_nombre");
-        String pl_descripcion = resultSet.getString("pl_descripcion");
-        String pl_url = resultSet.getString("pl_url");
-        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
-        
-        String u_nickname = resultSet.getString("u_nickname");
-        String u_nombre = resultSet.getString("u_nombre");
-        String u_apellido = resultSet.getString("u_apellido");
-        String u_correo = resultSet.getString("u_correo");
-        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String u_contrasenia = resultSet.getString("u_contrasenia");
-        String u_imagen = resultSet.getString("u_imagen");
-        String ua_descripcion = resultSet.getString("ua_descripcion");
-        String ua_biografia = resultSet.getString("ua_biografia");
-        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-        Artista artista = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
-        
-        String es_nombre = resultSet.getString("es_nombre");
-        String es_descripcion = resultSet.getString("es_descripcion");
-        int es_duracion = resultSet.getInt("es_duracion");
-        int es_minEspectadores = resultSet.getInt("es_minEspectadores");
-        int es_maxEspectadores = resultSet.getInt("es_maxEspectadores");
-        String es_url = resultSet.getString("es_url");
-        int es_costo = resultSet.getInt("es_costo");
-        E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
-        LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
-        String es_imagen = resultSet.getString("es_imagen");
-        Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artista);
-        
-        String fn_nombre = resultSet.getString("fn_nombre");
-        LocalDateTime fn_fechaHoraInicio = resultSet.getTimestamp("fn_fechaHoraInicio").toLocalDateTime();
-        LocalDateTime fn_fechaRegistro = resultSet.getTimestamp("fn_fechaRegistro").toLocalDateTime();
-        String fn_imagen = resultSet.getString("fn_imagen");
-        Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
-        funciones.put(fn_nombre+"-"+es_nombre+"-"+pl_nombre, funcion);
-      }*/
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -135,42 +101,8 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFuncion);
-      /*if (resultSet.next()) {
-        String pl_nombre = resultSet.getString("pl_nombre");
-        String pl_descripcion = resultSet.getString("pl_descripcion");
-        String pl_url = resultSet.getString("pl_url");
-        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
-        
-        String u_nickname = resultSet.getString("u_nickname");
-        String u_nombre = resultSet.getString("u_nombre");
-        String u_apellido = resultSet.getString("u_apellido");
-        String u_correo = resultSet.getString("u_correo");
-        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String u_contrasenia = resultSet.getString("u_contrasenia");
-        String u_imagen = resultSet.getString("u_imagen");
-        String ua_descripcion = resultSet.getString("ua_descripcion");
-        String ua_biografia = resultSet.getString("ua_biografia");
-        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-        Artista artista = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
-        
-        String es_nombre = resultSet.getString("es_nombre");
-        String es_descripcion = resultSet.getString("es_descripcion");
-        int es_duracion = resultSet.getInt("es_duracion");
-        int es_minEspectadores = resultSet.getInt("es_minEspectadores");
-        int es_maxEspectadores = resultSet.getInt("es_maxEspectadores");
-        String es_url = resultSet.getString("es_url");
-        int es_costo = resultSet.getInt("es_costo");
-        E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
-        LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
-        String es_imagen = resultSet.getString("es_imagen");
-        Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artista);
-        
-        String fn_nombre = resultSet.getString("fn_nombre");
-        LocalDateTime fn_fechaHoraInicio = resultSet.getTimestamp("fn_fechaHoraInicio").toLocalDateTime();
-        LocalDateTime fn_fechaRegistro = resultSet.getTimestamp("fn_fechaRegistro").toLocalDateTime();
-        String fn_imagen = resultSet.getString("fn_imagen");
-        funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
-      }*/
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       funcion=FuncionMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -208,44 +140,8 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      /*while (resultSet.next()) {
-        String pl_nombre = resultSet.getString("pl_nombre");
-        String pl_descripcion = resultSet.getString("pl_descripcion");
-        String pl_url = resultSet.getString("pl_url");
-        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
-        
-        String u_nickname = resultSet.getString("u_nickname");
-        String u_nombre = resultSet.getString("u_nombre");
-        String u_apellido = resultSet.getString("u_apellido");
-        String u_correo = resultSet.getString("u_correo");
-        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String u_contrasenia = resultSet.getString("u_contrasenia");
-        String u_imagen = resultSet.getString("u_imagen");
-        String ua_descripcion = resultSet.getString("ua_descripcion");
-        String ua_biografia = resultSet.getString("ua_biografia");
-        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-        Artista artista = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
-        
-        String es_nombre = resultSet.getString("es_nombre");
-        String es_descripcion = resultSet.getString("es_descripcion");
-        int es_duracion = resultSet.getInt("es_duracion");
-        int es_minEspectadores = resultSet.getInt("es_minEspectadores");
-        int es_maxEspectadores = resultSet.getInt("es_maxEspectadores");
-        String es_url = resultSet.getString("es_url");
-        int es_costo = resultSet.getInt("es_costo");
-        E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
-        LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
-        String es_imagen = resultSet.getString("es_imagen");
-        Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artista);
-        
-        String fn_nombre = resultSet.getString("fn_nombre");
-        LocalDateTime fn_fechaHoraInicio = resultSet.getTimestamp("fn_fechaHoraInicio").toLocalDateTime();
-        LocalDateTime fn_fechaRegistro = resultSet.getTimestamp("fn_fechaRegistro").toLocalDateTime();
-        String fn_imagen = resultSet.getString("fn_imagen");
-        Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
-        
-        funciones.put(fn_nombre, funcion);
-      }*/
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -285,44 +181,8 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      /*while (resultSet.next()) {
-        String pl_nombre = resultSet.getString("pl_nombre");
-        String pl_descripcion = resultSet.getString("pl_descripcion");
-        String pl_url = resultSet.getString("pl_url");
-        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
-        
-        String u_nickname = resultSet.getString("u_nickname");
-        String u_nombre = resultSet.getString("u_nombre");
-        String u_apellido = resultSet.getString("u_apellido");
-        String u_correo = resultSet.getString("u_correo");
-        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String u_contrasenia = resultSet.getString("u_contrasenia");
-        String u_imagen = resultSet.getString("u_imagen");
-        String ua_descripcion = resultSet.getString("ua_descripcion");
-        String ua_biografia = resultSet.getString("ua_biografia");
-        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-        Artista artista = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
-        
-        String es_nombre = resultSet.getString("es_nombre");
-        String es_descripcion = resultSet.getString("es_descripcion");
-        int es_duracion = resultSet.getInt("es_duracion");
-        int es_minEspectadores = resultSet.getInt("es_minEspectadores");
-        int es_maxEspectadores = resultSet.getInt("es_maxEspectadores");
-        String es_url = resultSet.getString("es_url");
-        int es_costo = resultSet.getInt("es_costo");
-        E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
-        LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
-        String es_imagen = resultSet.getString("es_imagen");
-        Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artista);
-        
-        String fn_nombre = resultSet.getString("fn_nombre");
-        LocalDateTime fn_fechaHoraInicio = resultSet.getTimestamp("fn_fechaHoraInicio").toLocalDateTime();
-        LocalDateTime fn_fechaRegistro = resultSet.getTimestamp("fn_fechaRegistro").toLocalDateTime();
-        String fn_imagen = resultSet.getString("fn_imagen");
-        Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
-        
-        funciones.put(fn_nombre+"-"+es_nombre+"-"+pl_nombre, funcion);
-      }*/
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -343,8 +203,8 @@ public class FuncionService {
     return funciones;
   }
   
-  public Map<String, Artista> obtenerArtistasInvitadosAFuncion(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {
-    Map<String, Artista> artistas = new HashMap<>();
+  public Map<String, Usuario> obtenerArtistasInvitadosAFuncion(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {
+    Map<String, Usuario> artistas = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -366,20 +226,9 @@ public class FuncionService {
       
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectArtistas);
-      while (resultSet.next()) {
-        String u_nickname = resultSet.getString("u_nickname");
-        String u_nombre = resultSet.getString("u_nombre");
-        String u_apellido = resultSet.getString("u_apellido");
-        String u_correo = resultSet.getString("u_correo");
-        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String u_contrasenia = resultSet.getString("u_contrasenia");
-        String u_imagen = resultSet.getString("u_imagen");
-        String ua_descripcion = resultSet.getString("ua_descripcion");
-        String ua_biografia = resultSet.getString("ua_biografia");
-        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-        Artista artista = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
-        artistas.put(u_nickname, artista);
-      }
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
+      artistas.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -422,43 +271,8 @@ public class FuncionService {
       
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      /*while (resultSet.next()) {
-        String pl_nombre = resultSet.getString("pl_nombre");
-        String pl_descripcion = resultSet.getString("pl_descripcion");
-        String pl_url = resultSet.getString("pl_url");
-        Plataforma plataforma = new Plataforma(pl_nombre, pl_descripcion, pl_url);
-        
-        String u_nickname = resultSet.getString("u_nickname");
-        String u_nombre = resultSet.getString("u_nombre");
-        String u_apellido = resultSet.getString("u_apellido");
-        String u_correo = resultSet.getString("u_correo");
-        LocalDate u_fechaNacimiento = resultSet.getDate("u_fechaNacimiento").toLocalDate();
-        String u_contrasenia = resultSet.getString("u_contrasenia");
-        String u_imagen = resultSet.getString("u_imagen");
-        String ua_descripcion = resultSet.getString("ua_descripcion");
-        String ua_biografia = resultSet.getString("ua_biografia");
-        String ua_sitioWeb = resultSet.getString("ua_sitioWeb");
-        Artista artistaOrganizador = new Artista(u_nickname, u_nombre, u_apellido, u_correo, u_fechaNacimiento, u_contrasenia, u_imagen, ua_descripcion, ua_biografia, ua_sitioWeb);
-        
-        String es_nombre = resultSet.getString("es_nombre");
-        String es_descripcion = resultSet.getString("es_descripcion");
-        int es_duracion = resultSet.getInt("es_duracion");
-        int es_minEspectadores = resultSet.getInt("es_minEspectadores");
-        int es_maxEspectadores = resultSet.getInt("es_maxEspectadores");
-        String es_url = resultSet.getString("es_url");
-        int es_costo = resultSet.getInt("es_costo");
-        E_EstadoEspectaculo es_estado = E_EstadoEspectaculo.valueOf(resultSet.getString("es_estado"));
-        LocalDateTime es_fechaRegistro = resultSet.getTimestamp("es_fechaRegistro").toLocalDateTime();
-        String es_imagen = resultSet.getString("es_imagen");
-        Espectaculo es = new Espectaculo(es_nombre, es_descripcion, es_duracion, es_minEspectadores, es_maxEspectadores, es_url, es_costo, es_estado, es_fechaRegistro, es_imagen, plataforma, artistaOrganizador);
-        
-        String fn_nombre = resultSet.getString("fn_nombre");
-        LocalDateTime fn_fechaHoraInicio = resultSet.getTimestamp("fn_fechaHoraInicio").toLocalDateTime();
-        LocalDateTime fn_fechaRegistro = resultSet.getTimestamp("fn_fechaRegistro").toLocalDateTime();
-        String fn_imagen = resultSet.getString("fn_imagen");
-        Funcion funcion = new Funcion(fn_nombre, es, fn_fechaHoraInicio, fn_fechaRegistro, fn_imagen);
-        funciones.put(fn_nombre+"-"+es_nombre+"-"+pl_nombre, funcion);
-      }*/
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

@@ -194,8 +194,6 @@ public class DetalleUsuario extends JInternalFrame {
             this.espectaculosArtista = Fabrica.getInstance().getIEspectaculo().obtenerEspectaculosPorArtista(this.usuario.getNickname());
             for (EspectaculoDTO entry : espectaculosArtista.values()) {
                 model.addRow(new Object[]{entry.getNombre(), entry.getCosto(),entry.getPlataforma().getNombre()});
-                System.out.println("claves del espectaculo cuando se agregan:"+entry.getNombre());
-                System.out.println(" espectaculo cuando se agregan:"+entry.getNombre());
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());

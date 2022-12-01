@@ -62,7 +62,7 @@ public class DetallePaquete extends JInternalFrame {
             imagen.setIcon(icon);
         }
         else{
-            JOptionPane.showMessageDialog(null, "Error: no se pudo obtener la imagen!");
+            JOptionPane.showMessageDialog(null, "Alerta: no se pudo obtener la imagen!");
             imagen.setText("Imagen del espectaculo");
         }
 

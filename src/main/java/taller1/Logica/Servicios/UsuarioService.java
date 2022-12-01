@@ -21,25 +21,18 @@ public class UsuarioService {
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
-    String selectEspectadores = "SELECT * " +
-        "FROM usuarios as U, espectadores as UE " +
-        "WHERE UE.ue_nickname=U.u_nickname " +
-        "ORDER BY ue_nickname";
-    String selectArtistas = "SELECT * " +
-        "FROM usuarios as U, artistas as UA " +
-        "WHERE UA.ua_nickname=U.u_nickname " +
-        "ORDER BY UA.ua_nickname";
+    String selectUsuarios = "SELECT * " +
+        "FROM usuarios as U " +
+        "  LEFT JOIN espectadores as UE ON UE.ue_nickname = U.u_nickname " +
+        "  LEFT JOIN artistas as UA ON UA.ua_nickname = U.u_nickname " +
+        "ORDER BY u_nickname";
     try {
       connection = ConexionDB.getConnection();
       
-      // Obtenemos los espectadores
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-      resultSet = statement.executeQuery(selectEspectadores);
-      usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
+      resultSet = statement.executeQuery(selectUsuarios);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
       
-      // Obtenemos los artistas
-      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-      resultSet = statement.executeQuery(selectArtistas);
       usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -65,12 +58,15 @@ public class UsuarioService {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectUsuario = "SELECT * " +
-        "FROM usuarios as U, artistas as UA " +
-        "WHERE UA.ua_nickname=U.u_nickname AND U.u_nickname = '" + nickname + "'";
+        "FROM usuarios as U " +
+        "  LEFT JOIN artistas as UA ON UA.ua_nickname = U.u_nickname " +
+        "WHERE U.u_nickname = '" + nickname + "'";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuario);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       usuario = UsuarioMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -97,13 +93,16 @@ public class UsuarioService {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectUsuario = "SELECT * " +
-        "FROM usuarios as U, artistas as UA " +
-        "WHERE UA.ua_nickname=U.u_nickname AND U.u_correo = '" + correo + "'";
+        "FROM usuarios as U " +
+        "  LEFT JOIN artistas as UA ON UA.ua_nickname = U.u_nickname " +
+        "WHERE U.u_correo = '" + correo + "'";
     
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuario);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      
       usuario = UsuarioMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

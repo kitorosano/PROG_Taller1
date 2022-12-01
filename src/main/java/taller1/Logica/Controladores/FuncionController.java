@@ -54,7 +54,7 @@ public class FuncionController implements IFuncion {
     return servicio.obtenerFuncionesDeEspectaculo(nombrePlataforma, nombreEspectaculo);
   }
   @Override
-  public Map<String, Artista> obtenerArtistasInvitadosAFuncion(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {
+  public Map<String, Usuario> obtenerArtistasInvitadosAFuncion(String nombrePlataforma, String nombreEspectaculo, String nombreFuncion) {
     return servicio.obtenerArtistasInvitadosAFuncion(nombrePlataforma, nombreEspectaculo, nombreFuncion);
   }
   

@@ -9,20 +9,35 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PlataformaMapper {
-    //Dto2model
-    public static Plataforma toModel(PlataformaDTO plataformadto) {
+    // ResultSet -> Model
+    public static Plataforma toModel(ResultSet rs) {
         try {
             Plataforma plataforma = new Plataforma();
-            if(plataformadto.getNombre() != null) plataforma.setNombre(plataformadto.getNombre());
-            if(plataformadto.getDescripcion() != null) plataforma.setDescripcion(plataformadto.getDescripcion());
-            if(plataformadto.getUrl() != null) plataforma.setUrl(plataformadto.getUrl());
+            plataforma.setNombre(rs.getString("pl_nombre"));
+            plataforma.setDescripcion(rs.getString("pl_descripcion"));
+            plataforma.setUrl(rs.getString("pl_url"));
+            
             return plataforma;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            throw new RuntimeException("Error al mapear UserDTO a User", e);
+            throw new RuntimeException("Error al mapear ResultSet a Plataforma", e);
         }
     }
-    //model to dto
+    public static Map<String,Plataforma> toModelMap(ResultSet rs) {
+        try {
+            Map<String,Plataforma> plataformas = new HashMap<>();
+            do { //Mientras haya un siguiente elemento
+                Plataforma plataforma = toModel(rs);
+                plataformas.put(plataforma.getNombre(),plataforma);
+            } while (rs.next());
+            return plataformas;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Error al mapear ResultSet a UserList", e);
+        }
+    }
+    
+    // Model -> DTO
     public static PlataformaDTO toDTO(Plataforma plataforma){
         PlataformaDTO plataformaDTO = new PlataformaDTO();
         try {
@@ -36,40 +51,9 @@ public class PlataformaMapper {
 
         return plataformaDTO;
     }
-    //rs2model
-    public static Plataforma toModel(ResultSet rs) {
-        try {
-            if(rs.isBeforeFirst()) rs.next(); //Si el cursor esta antes del primer elemento, se mueve al primero
-            
-            Plataforma plataforma = new Plataforma();
-            plataforma.setNombre(rs.getString("pl_nombre"));
-            plataforma.setDescripcion(rs.getString("pl_descripcion"));
-            plataforma.setUrl(rs.getString("pl_url"));
-
-            return plataforma;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Error al mapear ResultSet a Plataforma", e);
-        }
-    }
-    //rs2modelmap
-    public static Map<String,Plataforma> toModelMap(ResultSet rs) {
-        try {
-            Map<String,Plataforma> plataformas = new HashMap<>();
-            while (rs.next()) { //Mientras haya un siguiente elemento
-                Plataforma plataforma = toModel(rs);
-                plataformas.put(plataforma.getNombre(),plataforma);
-            }
-            return plataformas;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new RuntimeException("Error al mapear ResultSet a UserList", e);
-        }
-    }
-    //modelmap2ToDtoMap
     public static Map<String,PlataformaDTO> toDTOMap(Map<String,Plataforma> plataformas) {
         Map<String,PlataformaDTO> plataformaDTOMap = new HashMap<>();
-
+        
         try {
             for (Map.Entry<String, Plataforma> entry : plataformas.entrySet()) {
                 plataformaDTOMap.put(entry.getKey(),toDTO(entry.getValue()));
@@ -77,8 +61,21 @@ public class PlataformaMapper {
         } catch (Exception e) {
             throw new RuntimeException("Error al mapear PlataformaMap a PlataformaDTOMap", e);
         }
-
+        
         return plataformaDTOMap;
     }
-
+    
+    // DTO -> Model
+    public static Plataforma toModel(PlataformaDTO plataformadto) {
+        try {
+            Plataforma plataforma = new Plataforma();
+            if(plataformadto.getNombre() != null) plataforma.setNombre(plataformadto.getNombre());
+            if(plataformadto.getDescripcion() != null) plataforma.setDescripcion(plataformadto.getDescripcion());
+            if(plataformadto.getUrl() != null) plataforma.setUrl(plataformadto.getUrl());
+            return plataforma;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new RuntimeException("Error al mapear UserDTO a User", e);
+        }
+    }
 }

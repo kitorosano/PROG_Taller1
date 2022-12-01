@@ -55,6 +55,8 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquetes);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -84,8 +86,9 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquete);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       paquete = PaqueteMapper.toModel(resultSet);
-
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -118,6 +121,8 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquetesByEspectaculo);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -152,6 +157,8 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPaquetesByEspectador);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       paquetes.putAll(PaqueteMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -186,6 +193,8 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectadoresByPaquete);
+      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+  
       espectadores.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

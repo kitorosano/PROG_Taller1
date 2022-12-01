@@ -16,8 +16,6 @@ public class EspectaculoMapper {
   // ResultSet -> Espectaculo
   public static Espectaculo toModel(ResultSet rs) {
     try {
-      if(rs.isBeforeFirst()) rs.next(); //Si el cursor esta antes del primer elemento, se mueve al primero
-
       Espectaculo espectaculo = new Espectaculo();
 
       espectaculo.setNombre(rs.getString("es_nombre"));
@@ -32,14 +30,7 @@ public class EspectaculoMapper {
       espectaculo.setImagen(rs.getString("es_imagen"));
 
       espectaculo.setPlataforma(PlataformaMapper.toModel(rs));
-
-//      String artistaSelect= "SELECT * " +
-//          "FROM usuarios as U, artistas as UA " +
-//          "WHERE U.u_nickname=UA.ua_nickname " +
-//          " and UA.ua_nickname="+"'"+rs.getString("es_artistaOrganizador")+"'";
-//      Connection connection = ConexionDB.getConnection();
-//      Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-//      ResultSet resultSet = statement.executeQuery(artistaSelect);
+      
       espectaculo.setArtista((Artista) UsuarioMapper.toModel(rs));
 
       return espectaculo;
@@ -52,10 +43,10 @@ public class EspectaculoMapper {
     try {
       Map<String, Espectaculo> espectaculos = new HashMap<>();
 
-      while (rs.next()) { //Mientras haya un siguiente elemento
+      do { //Mientras haya un siguiente elemento
         Espectaculo espectaculo = toModel(rs);
         espectaculos.put(espectaculo.getNombre() +"-"+ espectaculo.getPlataforma().getNombre(), espectaculo);
-      }
+      } while (rs.next());
       return espectaculos;
     } catch (Exception e) {
       System.out.println(e.getMessage());

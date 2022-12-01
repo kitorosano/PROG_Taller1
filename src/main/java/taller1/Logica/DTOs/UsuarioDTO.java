@@ -1,8 +1,9 @@
 package main.java.taller1.Logica.DTOs;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class UsuarioDTO {
+public class UsuarioDTO implements Serializable {
   
   private String nickname;
   private String nombre;

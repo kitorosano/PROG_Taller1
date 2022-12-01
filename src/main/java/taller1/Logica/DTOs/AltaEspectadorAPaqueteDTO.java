@@ -1,6 +1,8 @@
 package main.java.taller1.Logica.DTOs;
 
-public class AltaEspectadorAPaqueteDTO {
+import java.io.Serializable;
+
+public class AltaEspectadorAPaqueteDTO implements Serializable {
   String nickname;
   String nombrePaquete;
   String fechaRegistro;

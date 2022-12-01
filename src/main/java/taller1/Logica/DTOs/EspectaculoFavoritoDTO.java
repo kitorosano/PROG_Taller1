@@ -1,6 +1,8 @@
 package main.java.taller1.Logica.DTOs;
 
-public class EspectaculoFavoritoDTO {
+import java.io.Serializable;
+
+public class EspectaculoFavoritoDTO implements Serializable {
     private String nombrePlataforma;
     private String nombreEspectaculo;
     private String nickname;

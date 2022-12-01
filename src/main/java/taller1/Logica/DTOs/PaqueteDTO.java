@@ -1,8 +1,9 @@
 package main.java.taller1.Logica.DTOs;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class PaqueteDTO {
+public class PaqueteDTO implements Serializable {
     private String nombre;
     private String descripcion;
     private double descuento;

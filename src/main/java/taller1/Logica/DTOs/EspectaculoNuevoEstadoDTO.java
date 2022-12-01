@@ -2,7 +2,9 @@ package main.java.taller1.Logica.DTOs;
 
 import main.java.taller1.Logica.Clases.E_EstadoEspectaculo;
 
-public class EspectaculoNuevoEstadoDTO {
+import java.io.Serializable;
+
+public class EspectaculoNuevoEstadoDTO implements Serializable {
     private String nombrePlataforma;
     private String nombreEspectaculo;
     private E_EstadoEspectaculo nuevoEstado;

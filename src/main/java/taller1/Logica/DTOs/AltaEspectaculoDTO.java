@@ -2,9 +2,10 @@ package main.java.taller1.Logica.DTOs;
 
 import main.java.taller1.Logica.Clases.E_EstadoEspectaculo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class AltaEspectaculoDTO {
+public class AltaEspectaculoDTO implements Serializable {
   
   private String nombre;
   private String descripcion;

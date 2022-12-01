@@ -1,8 +1,9 @@
 package main.java.taller1.Logica.DTOs;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class EspectadorRegistradoAFuncionDTO {
+public class EspectadorRegistradoAFuncionDTO implements Serializable {
   
   private String espectador;
   private FuncionDTO funcion;

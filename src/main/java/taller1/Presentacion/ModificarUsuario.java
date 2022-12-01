@@ -63,26 +63,30 @@ public class ModificarUsuario extends JInternalFrame {
         btnAplicar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (comprobarCamposNulos(usuario)) {
-                    JOptionPane.showMessageDialog(null, "Los campos obligatorios no pueden estar vacios");
-                    return;
+                try {
+                    if (comprobarCamposNulos(usuario)) {
+                        JOptionPane.showMessageDialog(null, "Los campos obligatorios no pueden estar vacios");
+                        return;
+                    }
+                    if (comprobarExistencia(usuario.getNickname(),usuario.getCorreo()) == false) {
+                        JOptionPane.showMessageDialog(null, "El usuario que desea modificar no existe");
+                        return;
+                    }
+                    if (!validarFecha(txtFechaNac.getText())){
+                        JOptionPane.showMessageDialog(null, "La fecha no es valida. El formato es (año-mes-dia)");
+                        return;
+                    }
+                    //validate url with regex
+                    if ((!txtURL.getText().matches(regexURL)) && (usuario.isEsArtista())) {
+                        JOptionPane.showMessageDialog(null, "La URL no es valida");
+                        return;
+                    }
+                    ActualizarUsuario(usuario);
+                    JOptionPane.showMessageDialog(null, "Usuario modificado.");
+                    dispose();
+                } catch (RuntimeException exc) {
+                    JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
                 }
-                if (comprobarExistencia(usuario.getNickname(),usuario.getCorreo()) == false) {
-                    JOptionPane.showMessageDialog(null, "El usuario que desea modificar no existe");
-                    return;
-                }
-                if (!validarFecha(txtFechaNac.getText())){
-                    JOptionPane.showMessageDialog(null, "La fecha no es valida. El formato es (año-mes-dia)");
-                    return;
-                }
-                //validate url with regex
-                if ((!txtURL.getText().matches(regexURL)) && (usuario.isEsArtista())) {
-                    JOptionPane.showMessageDialog(null, "La URL no es valida");
-                    return;
-                }
-                ActualizarUsuario(usuario);
-                JOptionPane.showMessageDialog(null, "Usuario modificado.");
-                dispose();
             }
         });
         btnCancelar.addActionListener(new ActionListener() {
@@ -120,8 +124,8 @@ public class ModificarUsuario extends JInternalFrame {
                         System.out.println(res);
                         imagen=res;
                     }
-                    catch (Exception exc) {
-                        JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+                    catch (RuntimeException exc) {
+                        JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
                     }
                 }
             }
@@ -145,24 +149,11 @@ public class ModificarUsuario extends JInternalFrame {
     }
 
     private void ActualizarUsuario(UsuarioDTO usuarioDTO){
-//        usuario.setNombre(txtNombre.getText());
-//        usuario.setApellido(txtApellido.getText());
-//        LocalDate fechanac = LocalDate.parse(txtFechaNac.getText());
-//        usuario.setFechaNacimiento(fechanac);
-//        usuario.setImagen(imagen);
-//        if (usuario instanceof Artista){
-//            ((Artista) usuario).setDescripcion(txtDescripcion.getText());
-//            ((Artista) usuario).setBiografia(txtBiografia.getText());
-//            ((Artista) usuario).setSitioWeb(txtURL.getText());
-//        }
-//        Fabrica.getInstance().getIUsuario().modificarUsuario(usuario);
-    
-        //UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setNombre(txtNombre.getText());
         usuarioDTO.setApellido(txtApellido.getText());
         usuarioDTO.setCorreo(txtCorreo.getText());
         usuarioDTO.setFechaNacimiento(LocalDate.parse(txtFechaNac.getText()));
-        if(imagen!=null)
+        if (imagen != null)
             usuarioDTO.setImagen(imagen);
         if (usuarioDTO.isEsArtista()) {
             usuarioDTO.setDescripcion(txtDescripcion.getText());

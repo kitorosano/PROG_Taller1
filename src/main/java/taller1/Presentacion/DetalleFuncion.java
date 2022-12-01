@@ -127,8 +127,8 @@ public class DetalleFuncion extends JInternalFrame {
             for (Usuario entry : espectadoresDeFuncion.values()) {
                 model.addRow(new Object[]{entry.getNickname(), entry.getCorreo()});
             }
-        } catch (Exception exc) {
-            JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+        } catch (RuntimeException exc) {
+            JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
         }
     }
 

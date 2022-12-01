@@ -33,8 +33,8 @@ public class pruebaImagen extends JInternalFrame {
                         String res = Fabrica.getInstance().getIDatabase().guardarImagen(file);
                         System.out.println(res);
                     }
-                    catch (Exception exc) {
-                        JOptionPane.showMessageDialog(null, "Error" + exc.toString());
+                    catch (RuntimeException exc) {
+                        JOptionPane.showMessageDialog(null, "Error" + exc.getMessage());
                     }
                 }
             }

@@ -160,8 +160,8 @@ public class ListadoUsuarios extends JInternalFrame {
                 else if (entry.getValue() instanceof Artista)
                     modelArtistas.addElement(entry.getValue().getNickname());
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.toString());
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.getMessage());
         }
     }
 
@@ -186,8 +186,8 @@ public class ListadoUsuarios extends JInternalFrame {
             
             Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
             detalle.setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al llamar al detalle usuario" + e.toString());
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Error al llamar al detalle usuario" + e.getMessage());
         }
     }
 }

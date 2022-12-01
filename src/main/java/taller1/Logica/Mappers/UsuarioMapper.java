@@ -31,7 +31,7 @@ public class UsuarioMapper {
       user.setApellido(rs.getString("u_apellido"));
       user.setCorreo(rs.getString("u_correo"));
       user.setFechaNacimiento(rs.getDate("u_fechaNacimiento").toLocalDate());
-      user.setFechaNacimiento(rs.getDate("u_contrasenia").toLocalDate());
+      user.setContrasenia(rs.getString("u_contrasenia"));
       user.setImagen(rs.getString("u_imagen"));
       
       return user;

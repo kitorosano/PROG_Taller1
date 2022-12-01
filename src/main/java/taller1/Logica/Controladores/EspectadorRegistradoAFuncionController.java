@@ -3,6 +3,7 @@ package main.java.taller1.Logica.Controladores;
 import main.java.taller1.Logica.Clases.EspectadorRegistradoAFuncion;
 import main.java.taller1.Logica.Clases.Usuario;
 import main.java.taller1.Logica.DTOs.AltaEspectadorRegistradoAFuncionDTO;
+import main.java.taller1.Logica.DTOs.EspectadorRegistradoAFuncionDTO;
 import main.java.taller1.Logica.Interfaces.IEspectadorRegistradoAFuncion;
 import main.java.taller1.Logica.Servicios.EspectadorRegistradoAFuncionService;
 
@@ -33,7 +34,7 @@ public class EspectadorRegistradoAFuncionController implements IEspectadorRegist
   }
   
   @Override
-  public Map<String, EspectadorRegistradoAFuncion> obtenerFuncionesRegistradasDelEspectador(String nickname) {
+  public Map<String, EspectadorRegistradoAFuncionDTO> obtenerFuncionesRegistradasDelEspectador(String nickname) {
     return servicio.obtenerFuncionesRegistradasDelEspectador(nickname);
   }
   

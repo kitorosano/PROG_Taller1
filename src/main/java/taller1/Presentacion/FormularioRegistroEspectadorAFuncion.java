@@ -236,12 +236,12 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
     }
 
     public void cargarListaRegistros(){
-        Map<String,EspectadorRegistradoAFuncion> registros;
+        Map<String,EspectadorRegistradoAFuncionDTO> registros;
         modelRegistros.clear();
         String invitado=modelAInvitar.getElementAt(listaAinvitar.getSelectedIndex());
         try {
             registros= Fabrica.getInstance().getIEspectadorRegistradoAFuncion().obtenerFuncionesRegistradasDelEspectador(invitado);
-            for(EspectadorRegistradoAFuncion esp: registros.values()){
+            for(EspectadorRegistradoAFuncionDTO esp: registros.values()){
                 if(!esp.isCanjeado()){
                     modelRegistros.addElement(esp.getFuncion().getNombre());
                 }

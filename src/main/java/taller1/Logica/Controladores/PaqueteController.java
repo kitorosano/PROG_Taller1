@@ -1,10 +1,7 @@
 package main.java.taller1.Logica.Controladores;
 
 import main.java.taller1.Logica.Clases.*;
-import main.java.taller1.Logica.DTOs.AltaEspectaculoAPaqueteDTO;
-import main.java.taller1.Logica.DTOs.EspectadorPaqueteDTO;
-import main.java.taller1.Logica.DTOs.PaqueteDTO;
-import main.java.taller1.Logica.DTOs.UsuarioDTO;
+import main.java.taller1.Logica.DTOs.*;
 import main.java.taller1.Logica.Interfaces.IPaquete;
 import main.java.taller1.Logica.Servicios.PaqueteService;
 
@@ -105,7 +102,7 @@ public class PaqueteController implements IPaquete {
    *                          con los datos del espectador, el paquete y la fecha de compra(fechaRegistro)
    */
   @Override
-  public void altaEspectadorAPaquete(EspectadorPaqueteDTO espectadorPaquete) {
+  public void altaEspectadorAPaquete(AltaEspectadorAPaqueteDTO espectadorPaquete) {
     servicio.altaEspectadorAPaquete(espectadorPaquete);
   }
 }

@@ -11,7 +11,6 @@ import main.java.taller1.Logica.Mappers.FuncionMapper;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -20,9 +19,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.awt.Image;
-import java.io.IOException;
-import java.net.URL;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class DetalleUsuario extends JInternalFrame {
@@ -49,7 +45,7 @@ public class DetalleUsuario extends JInternalFrame {
     
     UsuarioDTO usuario;
 
-    Map<String, EspectadorRegistradoAFuncion> funcionesRegistradasDelEspectador;
+    Map<String, EspectadorRegistradoAFuncionDTO> funcionesRegistradasDelEspectador;
 
     Map<String, EspectaculoDTO> espectaculosArtista;
 
@@ -131,11 +127,9 @@ public class DetalleUsuario extends JInternalFrame {
                         String nombre_espectaculo = table1.getValueAt(table1.getSelectedRow(), 1).toString();
                         String nombre_plataforma = table1.getValueAt(table1.getSelectedRow(), 2).toString();
 
-                        Funcion funcion = funcionesRegistradasDelEspectador.get(nombre_funcion+"-"+nombre_espectaculo+"-"+nombre_plataforma).getFuncion();
-
-                        FuncionDTO funcionDTO = FuncionMapper.toDTO(funcion);
+                        FuncionDTO funcion = funcionesRegistradasDelEspectador.get(nombre_funcion+"-"+nombre_espectaculo+"-"+nombre_plataforma).getFuncion();
                         
-                        JInternalFrame detalle = new DetalleFuncion("Detalle Funcion", funcionDTO);
+                        JInternalFrame detalle = new DetalleFuncion("Detalle Funcion", funcion);
                         detalle.setIconifiable(true);
                         detalle.setClosable(true);
                         Dashboard.getInstance().getDashboardJDesktopPane().add(detalle);
@@ -182,8 +176,11 @@ public class DetalleUsuario extends JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
         try {
             this.funcionesRegistradasDelEspectador = Fabrica.getInstance().getIEspectadorRegistradoAFuncion().obtenerFuncionesRegistradasDelEspectador(this.usuario.getNickname());
-            for (Map.Entry<String, EspectadorRegistradoAFuncion> entry : this.funcionesRegistradasDelEspectador.entrySet()) {
-                model.addRow(new Object[]{ entry.getValue().getFuncion().getNombre(),entry.getValue().getFuncion().getEspectaculo().getNombre(),entry.getValue().getFuncion().getEspectaculo().getPlataforma().getNombre()});
+            for (EspectadorRegistradoAFuncionDTO value : this.funcionesRegistradasDelEspectador.values()) {
+                String nombre_funcion = value.getFuncion().getNombre();
+                String nombre_espectaculo = value.getFuncion().getEspectaculo().getNombre();
+                String nombre_plataforma = value.getFuncion().getEspectaculo().getPlataforma().getNombre();
+                model.addRow(new Object[]{ nombre_funcion, nombre_espectaculo, nombre_plataforma });
             }
         } catch (Exception exc) {
             JOptionPane.showMessageDialog(null, "Error" + exc.toString());

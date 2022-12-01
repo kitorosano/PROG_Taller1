@@ -2,6 +2,7 @@ package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.*;
 import main.java.taller1.Logica.DTOs.AltaEspectadorRegistradoAFuncionDTO;
+import main.java.taller1.Logica.DTOs.EspectadorRegistradoAFuncionDTO;
 import main.java.taller1.Logica.Mappers.EspectadorRegistradoAFuncionMapper;
 import main.java.taller1.Logica.Mappers.UsuarioMapper;
 import main.java.taller1.Persistencia.ConexionDB;
@@ -84,28 +85,25 @@ public class EspectadorRegistradoAFuncionService {
     }
   }
   
-  public Map<String, EspectadorRegistradoAFuncion> obtenerFuncionesRegistradasDelEspectador(String nickname) {
-    Map<String, EspectadorRegistradoAFuncion> funcionesRegistradas = new HashMap<>();
+  public Map<String, EspectadorRegistradoAFuncionDTO> obtenerFuncionesRegistradasDelEspectador(String nickname) {
+    Map<String, EspectadorRegistradoAFuncionDTO> funcionesRegistradas = new HashMap<>();
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
     String selectFunciones = "SELECT * " +
-        "FROM espectadores_funciones as UE_FN, espectadores as UE, usuarios as U, funciones as FN, espectaculos as ES, plataformas as PL, paquetes as PAQ" +
-        " WHERE UE_FN.ue_fn_nickname = UE.ue_nickname " +
-        "  AND UE.ue_nickname = U.u_nickname " +
-        "  AND UE_FN.ue_fn_nombreFuncion = FN.fn_nombre " +
-        "  AND UE_FN.ue_fn_espectaculoAsociado = FN.fn_espectaculoAsociado " +
-        "  AND FN.fn_espectaculoAsociado = ES.es_nombre " +
-        "  AND UE_FN.ue_fn_plataformaAsociada = FN.fn_plataformaAsociada " +
-        "  AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada " +
-        "  AND (UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre OR UE_FN.ue_fn_nombrePaquete IS NULL)"+
-        "  AND ES.es_plataformaAsociada = PL.pl_nombre " +
-        "  AND UE_FN.ue_fn_nickname = '" + nickname + "'";
+        "FROM espectadores_funciones as UE_FN " +
+        " LEFT JOIN funciones AS FN ON UE_FN.ue_fn_nombreFuncion = FN.fn_nombre AND UE_FN.ue_fn_espectaculoAsociado = FN.fn_espectaculoAsociado AND UE_FN.ue_fn_plataformaAsociada = FN.fn_plataformaAsociada " +
+        " LEFT JOIN paquetes AS PAQ ON UE_FN.ue_fn_nombrePaquete = PAQ.paq_nombre " +
+        " LEFT JOIN espectaculos AS ES ON FN.fn_espectaculoAsociado = ES.es_nombre AND FN.fn_plataformaAsociada = ES.es_plataformaAsociada " +
+        " LEFT JOIN plataformas AS PL ON ES.es_plataformaAsociada = PL.pl_nombre " +
+        " LEFT JOIN artistas AS UA ON ES.es_artistaOrganizador = UA.ua_nickname " +
+        " LEFT JOIN usuarios AS U ON UA.ua_nickname = U.u_nickname " +
+        "WHERE UE_FN.ue_fn_nickname = '" + nickname + "'";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      funcionesRegistradas.putAll(EspectadorRegistradoAFuncionMapper.toModelMap(resultSet));
+      funcionesRegistradas.putAll(EspectadorRegistradoAFuncionMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

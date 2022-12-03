@@ -80,7 +80,7 @@ public class CategoriaService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectCategoria);
-      if(!resultSet.next()) categoria = CategoriaMapper.toModel(resultSet);
+      if(resultSet.next()) categoria = CategoriaMapper.toModel(resultSet);
       
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
@@ -115,7 +115,7 @@ public class CategoriaService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectCategoriasByEspectaculo);
-      if(!resultSet.next()) categorias = CategoriaMapper.toModelMap(resultSet);
+      if(resultSet.next()) categorias = CategoriaMapper.toModelMap(resultSet);
   
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

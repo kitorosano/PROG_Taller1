@@ -99,7 +99,7 @@ public class UsuarioService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuario);
-      if(!resultSet.next()) usuario = UsuarioMapper.toModel(resultSet);
+      if(resultSet.next()) usuario = UsuarioMapper.toModel(resultSet);
       
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

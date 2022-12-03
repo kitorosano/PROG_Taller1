@@ -189,7 +189,7 @@ public class PaqueteService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectadoresByPaquete);
-      if(!resultSet.next()) espectadores.putAll(UsuarioMapper.toModelMap(resultSet));
+      if(resultSet.next()) espectadores.putAll(UsuarioMapper.toModelMap(resultSet));
   
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

@@ -84,7 +84,7 @@ public class PlataformaService {
       // Obtenemos la plataforma de la base de datos
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPlataforma);
-      if(!resultSet.next()) plataforma = PlataformaMapper.toModel(resultSet);
+      if(resultSet.next()) plataforma = PlataformaMapper.toModel(resultSet);
       
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

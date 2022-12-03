@@ -60,7 +60,7 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ResultSet resultSet = statement.executeQuery(selectEspectaculos);
-      if(!resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
+      if(resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
   
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());

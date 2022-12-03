@@ -51,9 +51,8 @@ public class PlataformaService {
       // Obtenemos todas las plataformas de la base de datos
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPlataformas);
-      if(!resultSet.next()) return plataformas; // Si el result set está vacío retornamos null
+      if(resultSet.next()) plataformas.putAll(PlataformaMapper.toModelMap(resultSet));
   
-      plataformas.putAll(PlataformaMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -78,15 +77,15 @@ public class PlataformaService {
     Statement statement = null;
     ResultSet resultSet = null;
     String selectPlataforma = "SELECT * FROM plataformas WHERE pl_nombre = '" + nombrePlataforma + "'";
+    
     try {
       connection = ConexionDB.getConnection();
       
       // Obtenemos la plataforma de la base de datos
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectPlataforma);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
-  
-      plataforma = PlataformaMapper.toModel(resultSet);
+      if(!resultSet.next()) plataforma = PlataformaMapper.toModel(resultSet);
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

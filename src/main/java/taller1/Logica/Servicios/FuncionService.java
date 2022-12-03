@@ -60,9 +60,8 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      if(!resultSet.next()) return funciones; // Si el result set está vacío retornamos null
+      if(resultSet.next()) funciones.putAll(FuncionMapper.toModelMap(resultSet));
   
-      funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -101,9 +100,8 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFuncion);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
-  
-      funcion=FuncionMapper.toModel(resultSet);
+      if(resultSet.next()) funcion = FuncionMapper.toModel(resultSet);
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -140,9 +138,8 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      if(!resultSet.next()) return funciones; // Si el result set está vacío retornamos null
-  
-      funciones.putAll(FuncionMapper.toModelMap(resultSet));
+      if(resultSet.next()) funciones.putAll(FuncionMapper.toModelMap(resultSet));
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -181,9 +178,8 @@ public class FuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      if(!resultSet.next()) return funciones; // Si el result set está vacío retornamos null
-  
-      funciones.putAll(FuncionMapper.toModelMap(resultSet));
+      if(resultSet.next()) funciones.putAll(FuncionMapper.toModelMap(resultSet));
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -226,9 +222,8 @@ public class FuncionService {
       
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectArtistas);
-      if(!resultSet.next()) return artistas; // Si el result set está vacío retornamos null
-  
-      artistas.putAll(UsuarioMapper.toModelMap(resultSet));
+      if(resultSet.next()) artistas.putAll(UsuarioMapper.toModelMap(resultSet));
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -271,9 +266,8 @@ public class FuncionService {
       
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      if(!resultSet.next()) return funciones; // Si el result set está vacío retornamos null
+      if(resultSet.next()) funciones.putAll(FuncionMapper.toModelMap(resultSet));
   
-      funciones.putAll(FuncionMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

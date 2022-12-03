@@ -31,9 +31,8 @@ public class UsuarioService {
       
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuarios);
-      if(!resultSet.next()) return usuarios; // Si el result set está vacío retornamos null
+      if(resultSet.next()) usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
       
-      usuarios.putAll(UsuarioMapper.toModelMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -53,7 +52,7 @@ public class UsuarioService {
     return usuarios;
   }
   public Optional<Usuario> obtenerUsuarioPorNickname(String nickname){
-    Usuario usuario;
+    Usuario usuario = null;
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -65,9 +64,8 @@ public class UsuarioService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuario);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(resultSet.next()) usuario = UsuarioMapper.toModel(resultSet);
   
-      usuario = UsuarioMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -88,7 +86,7 @@ public class UsuarioService {
   }
   
   public Optional<Usuario> obtenerUsuarioPorCorreo(String correo){
-    Usuario usuario;
+    Usuario usuario = null;
     Connection connection = null;
     Statement statement = null;
     ResultSet resultSet = null;
@@ -101,9 +99,8 @@ public class UsuarioService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectUsuario);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) usuario = UsuarioMapper.toModel(resultSet);
       
-      usuario = UsuarioMapper.toModel(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

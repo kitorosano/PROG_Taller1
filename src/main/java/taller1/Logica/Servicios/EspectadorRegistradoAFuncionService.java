@@ -103,9 +103,8 @@ public class EspectadorRegistradoAFuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectFunciones);
-      if(!resultSet.next()) return funcionesRegistradas; // Si el result set está vacío retornamos null
-  
-      funcionesRegistradas.putAll(EspectadorRegistradoAFuncionMapper.toDTOMap(resultSet));
+      if(resultSet.next()) funcionesRegistradas.putAll(EspectadorRegistradoAFuncionMapper.toDTOMap(resultSet));
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -148,9 +147,8 @@ public class EspectadorRegistradoAFuncionService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectadores);
-      if(!resultSet.next()) return espectadoresRegistrados; // Si el result set está vacío retornamos null
-  
-      espectadoresRegistrados.putAll(UsuarioMapper.toModelMap(resultSet));
+      if(resultSet.next()) espectadoresRegistrados.putAll(UsuarioMapper.toModelMap(resultSet));
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

@@ -60,9 +60,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ResultSet resultSet = statement.executeQuery(selectEspectaculos);
-      if(!resultSet.next()) return espectaculos; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
   
-      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -82,7 +81,7 @@ public class EspectaculoService {
   }
   
   public Optional<EspectaculoDTO> obtenerEspectaculo(String nombrePlataforma, String nombre){
-    EspectaculoDTO espectaculo;
+    EspectaculoDTO espectaculo = null;
     Connection connection = null;
     Statement statement = null;
     String selectEspectaculo = "SELECT ES.*, PL.*, UA.*, U.*, COUNT(ES_FAV.es_fav_nickname) AS cantidad_favoritos " +
@@ -98,9 +97,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ResultSet resultSet = statement.executeQuery(selectEspectaculo);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
-  
-      espectaculo = EspectaculoMapper.toDTO(resultSet);
+      if(resultSet.next()) espectaculo = EspectaculoMapper.toDTO(resultSet);
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -135,9 +133,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       ResultSet resultSet = statement.executeQuery(selectEspectaculos);
-      if(!resultSet.next()) return espectaculos; // Si el result set está vacío retornamos null
+      if(resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
   
-      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -173,9 +170,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
-      if(!resultSet.next()) return espectaculos; // Si el result set está vacío retornamos null
+      if(resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
   
-      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -213,9 +209,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
-      if(!resultSet.next()) return espectaculos; // Si el result set está vacío retornamos null
-  
-      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
+      if(resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -252,9 +247,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
-      if(!resultSet.next()) return espectaculos; // Si el result set está vacío retornamos null
-  
-      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
+      if(resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -291,9 +285,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
-      if(!resultSet.next()) return espectaculos; // Si el result set está vacío retornamos null
-  
-      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
+      if(resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -330,9 +323,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
-      if(!resultSet.next()) return espectaculos; // Si el result set está vacío retornamos null
-  
-      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
+      if(resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -370,9 +362,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
-      if(!resultSet.next()) return espectaculos; // Si el result set está vacío retornamos null
+      if(resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
   
-      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -408,9 +399,8 @@ public class EspectaculoService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectEspectaculos);
-      if(!resultSet.next()) return espectaculos; // Si el result set está vacío retornamos null
+      if(resultSet.next()) espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
   
-      espectaculos.putAll(EspectaculoMapper.toDTOMap(resultSet));
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

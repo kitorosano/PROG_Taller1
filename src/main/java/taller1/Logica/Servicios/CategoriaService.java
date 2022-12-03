@@ -50,9 +50,8 @@ public class CategoriaService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectCategorias);
-      if(!resultSet.next()) return categorias; // Si el result set está vacío retornamos null
-  
-      categorias.putAll(CategoriaMapper.toModelMap(resultSet));
+      if(resultSet.next()) categorias.putAll(CategoriaMapper.toModelMap(resultSet));
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -81,9 +80,8 @@ public class CategoriaService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectCategoria);
-      if(!resultSet.next()) return null; // Si el result set está vacío retornamos null
-  
-      categoria = CategoriaMapper.toModel(resultSet);
+      if(!resultSet.next()) categoria = CategoriaMapper.toModel(resultSet);
+      
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);
@@ -117,9 +115,8 @@ public class CategoriaService {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
       resultSet = statement.executeQuery(selectCategoriasByEspectaculo);
-      if(!resultSet.next()) return categorias; // Si el result set está vacío retornamos null
+      if(!resultSet.next()) categorias = CategoriaMapper.toModelMap(resultSet);
   
-      categorias = CategoriaMapper.toModelMap(resultSet);
     } catch (RuntimeException e) {
       System.out.println(e.getMessage());
       throw new RuntimeException("Error al conectar con la base de datos", e);

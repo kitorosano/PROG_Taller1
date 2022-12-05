@@ -78,4 +78,7 @@ public class UsuarioController implements IUsuario {
     public void desmarcarFavorito(EspectaculoFavoritoDTO espectaculoFavoritoDTO){
         servicio.desmarcarFavorito(espectaculoFavoritoDTO);
     }
+    public Map<String, String> obtenerEspectaculosFavoritos(String nickname){
+        return servicio.obtenerEspectaculosFavoritos(nickname);
+    }
 }

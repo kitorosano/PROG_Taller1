@@ -26,8 +26,8 @@ CREATE TABLE espectadores (
 
 CREATE TABLE artistas (
   ua_nickname VARCHAR(30) NOT NULL,
-  ua_descripcion VARCHAR(100) NOT NULL,
-  ua_biografia VARCHAR(200),
+  ua_descripcion VARCHAR(500) NOT NULL,
+  ua_biografia VARCHAR(500),
   ua_sitioWeb VARCHAR(50),
 
   PRIMARY KEY (ua_nickname),
@@ -44,7 +44,7 @@ CREATE TABLE plataformas (
 
 CREATE TABLE espectaculos (
   es_nombre VARCHAR(50) NOT NULL,
-  es_descripcion VARCHAR(100) NOT NULL,
+  es_descripcion VARCHAR(200) NOT NULL,
   es_duracion DOUBLE NOT NULL,
   es_minEspectadores INTEGER NOT NULL,
   es_maxEspectadores INTEGER NOT NULL,

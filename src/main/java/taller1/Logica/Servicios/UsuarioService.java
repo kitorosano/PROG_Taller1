@@ -197,7 +197,7 @@ public class UsuarioService {
   public void marcarFavorito (EspectaculoFavoritoDTO espectaculoFavoritoDTO){
     Connection connection = null;
     Statement statement = null;
-    String insertEspectaculo = "INSERT INTO espectaculos_favoritos (ue_es_nickname, ue_es_nombreEspectaculo, ue_es_nombrePlataforma) " +
+    String insertEspectaculo = "INSERT INTO espectaculos_favoritos (es_fav_nickname, es_fav_espectaculoAsociado, es_fav_plataformaAsociada) " +
             "VALUES ('" + espectaculoFavoritoDTO.getNickname() + "', '" + espectaculoFavoritoDTO.getNombreEspectaculo() + "', '" + espectaculoFavoritoDTO.getNombrePlataforma() + "')";
     try {
       connection = ConexionDB.getConnection();
@@ -223,7 +223,7 @@ public class UsuarioService {
   public void desmarcarFavorito (EspectaculoFavoritoDTO espectaculoFavoritoDTO){
     Connection connection = null;
     Statement statement = null;
-    String deleteEspectaculo = "DELETE FROM espectaculos_favoritos WHERE ue_es_nickname = '" + espectaculoFavoritoDTO.getNickname() + "' " +
+    String deleteEspectaculo = "DELETE FROM espectaculos_favoritos WHERE es_fav_nickname = '" + espectaculoFavoritoDTO.getNickname() + "' " +
             "AND ue_es_nombreEspectaculo = '" + espectaculoFavoritoDTO.getNombreEspectaculo() + "' " +
             "AND ue_es_nombrePlataforma = '" + espectaculoFavoritoDTO.getNombrePlataforma() + "'";
     try {

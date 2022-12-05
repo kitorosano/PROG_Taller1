@@ -19,7 +19,16 @@ INSERT INTO `usuarios` (`u_nickname`, `u_nombre`, `u_apellido`, `u_correo`, `u_f
 ('Voyatouch', 'Lexi', 'Orrum', 'lorruma@ask.com', '2022-05-23', '123456', 'https://i.imgur.com/UxfQgZ7.jpeg'),
 ('Wrapsafe', 'Benn', 'Reinbach', 'breinbach8@apache.org', '2022-05-29', '123456', 'https://i.imgur.com/UxfQgZ7.jpeg'),
 ('Y-find', 'Dieter', 'Camacho', 'dcamachof@globo.com', '2021-10-25', '123456', 'https://i.imgur.com/UxfQgZ7.jpeg'),
-('Zamit', 'Fancie', 'O\'Criane', 'focriane7@cornell.edu', '2022-01-03', '123456', 'https://i.imgur.com/UxfQgZ7.jpeg');
+('Zamit', 'Fancie', 'O\'Criane', 'focriane7@cornell.edu', '2022-01-03', '123456', 'https://i.imgur.com/UxfQgZ7.jpeg'),
+('eleven11', 'Eleven', 'Ten', 'eleven11@gmail.com', '1971-12-31', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('costas', 'Gerardo', 'Costas', 'gcostas@gmail.com', '1983-11-15', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('waston', 'Emma', 'Watson', 'e.watson@gmail.com', '1990-04-15', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('house', 'Greggory', 'House', 'greghouse@gmail.com', '1959-05-15', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('sergiop', 'Sergio', 'Puglia', 'puglia@alpanpan.com.uy', '1950-01-28', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('chino', 'Alvaro', 'Recoba', 'chino@trico.org.uy', '1976-03-17', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('tonyp', 'Antonio', 'Pacheco', 'eltony@manya.org.uy', '1955-02-14', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('lachiqui', 'Mirtha', 'Legrand', 'lachiqui@hotmail.com.ar', '1927-02-23', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('cbochinche', 'Cacho', 'Bochinche', 'cbochinche@vera.com.uy', '1937-05-08', '123456', 'https://i.imgur.com/e4W1PV0.png');
 
 INSERT INTO `espectadores`(`ue_nickname`) VALUES
 ('Cookley'),
@@ -40,7 +49,16 @@ INSERT INTO `espectadores`(`ue_nickname`) VALUES
 ('Voyatouch'),
 ('Wrapsafe'),
 ('Y-find'),
-('Zamit');
+('Zamit'),
+('eleven11'),
+('costas'),
+('waston'),
+('house'),
+('sergiop'),
+('chino'),
+('tonyp'),
+('lachiqui'),
+('cbochinche');
 
 
 -- INSERTAR USUARIOS ARTISTAS
@@ -63,7 +81,16 @@ INSERT INTO `usuarios` (`u_nickname`, `u_nombre`, `u_apellido`, `u_correo`, `u_f
 ('Transcof2', 'Britney', 'Reavell', 'breavellb@slideshare.net', '2021-10-16', '123456', 'https://i.imgur.com/6srYkSi.jpeg'),
 ('Treeflex2', 'Birdie', 'Tankus', 'btankus2@netlog.com', '2022-07-25', '123456', 'https://i.imgur.com/6srYkSi.jpeg'),
 ('Tresom2', 'Mamie', 'Burling', 'mburlingd@multiply.com', '2021-10-18', '123456', 'https://i.imgur.com/6srYkSi.jpeg'),
-('Veribet2', 'Cherida', 'Hover', 'chovere@i2i.jp', '2021-10-26', '123456', 'https://i.imgur.com/6srYkSi.jpeg');
+('Veribet2', 'Cherida', 'Hover', 'chovere@i2i.jp', '2021-10-26', '123456', 'https://i.imgur.com/6srYkSi.jpeg'),
+('vpeople', 'Village', 'People', 'vpeople@tuta.io', '1977-01-01', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('dmode', 'Depeche', 'Mode', 'dmode@tuta.io', '1980-06-14', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('clauper', 'Cyndi', 'Lauper', 'clauper@hotmail.com', '1953-06-22', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('bruceTheBoss', 'Bruce', 'Springsteen', 'bruceTheBoss@gmail.com', '1949-09-23', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('tripleNelson', 'La Triple', 'Nelson', 'tripleNelson@tuta.io', '1998-01-01', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('la_ley', 'La', 'Ley', 'la_ley@tuta.io', '1987-02-14', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('lospimpi', 'Pimpinela', 'Pimpinela', 'lospimpi@gmail.com', '1981-08-13', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('dyangounchained', 'Dyango', 'Ango', 'dyangounchained@gmail.com', '1940-03-05', '123456', 'https://i.imgur.com/e4W1PV0.png'),
+('alcides', 'Alcides', 'Violeta', 'alcides@tuta.io', '1952-07-17', '123456', 'https://i.imgur.com/e4W1PV0.png');
 
 INSERT INTO `artistas` (ua_nickname, ua_descripcion, ua_biografia, ua_sitioWeb) VALUES
 ('Domainer2', 'Jatri', 'Biostatistician I', 'www.virginia.edu'),
@@ -83,4 +110,16 @@ INSERT INTO `artistas` (ua_nickname, ua_descripcion, ua_biografia, ua_sitioWeb) 
 ('Transcof2', 'Zoonder', 'Research Assistant IV', 'www.diigo.com'),
 ('Treeflex2', 'Zoovu', 'VP Product Management', 'www.ycombinator.com'),
 ('Tresom2', 'Tagpad', 'Chief Design Engineer', 'www.alexa.com'),
-('Veribet2', 'Flipstorm', 'Automation Specialist II', 'www.bing.com');
+('Veribet2', 'Flipstorm', 'Automation Specialist II', 'www.bing.com'),
+('vpeople', 'Village People es una innovadora formación musical de estilo disco de finales de los años 70. Fue famosa tanto por sus peculiares disfraces, como por sus canciones pegadizas, con letras sugerentes y llenas de dobles sentidos.', 'Grupo americano del disco creado por Jacques Morali y Henry Belolo en 1977. Según Marjorie Burgess, todo comenzó cuando Morali fue a un bar gay de Nueva York una noche y notó al bailarín Felipe Rose vestido como un nativo americano.', 'www.officialvillagepeople.com'),
+('dmode', 'Depeche Mode es un grupo inglés de música electrónica formado en Basildon, Essex, en 1980 por Vicent Clarke y Andrew John Fletcher, a los que se unieron Martin Lee Gore y poco después David Gahan. Actualmente se le considera como grupo de música alternativa.', NULL, 'www.depechemode.com'),
+('clauper', 'Cynthia Ann Stephanie Lauper, conocida simplemente como Cyndi Lauper, es una cantautora, actriz y empresaria estadounidense. Después de participar en el grupo musical, Blue Angel, en 1983 firmó con Portrait Records (filial de Epic Records) y lanzó su exitoso álbum debut Shes So Unusual a finales de ese mismo año.', 'Cynthia Ann Stephanie Lauper (Brooklyn, Nueva York; 22 de junio de 1953).', 'www.cyndilauper.com');
+
+
+INSERT INTO `artistas` (ua_nickname, ua_descripcion, ua_biografia, ua_sitioWeb) VALUES
+('tripleNelson', 'La Triple Nelson es un grupo de rock uruguayo formado en enero de 1998 e integrado inicialmente por Christian Cary (guitarra y voz), Fernando "Paco" Pintos (bajo y coros) y Rubén Otonello (actualmente su nuevo baterista es Rafael Ugo)',NULL, 'www.latriplenelson.uy'),
+('la_ley', 'La Ley fue una banda chilena de rock formada en 1987 por iniciativa del tecladista y guitarrista. En un principio, La Ley tenía la aspiración de ser un grupo de música tecno. Este disco resulta ser un éxito de ventas y reciben una invitación al Festival Internacional de Viña del Mar de febrero de 1994.', NULL, 'www.lasleyesdenewton.com'),
+('bruceTheBoss', 'Bruce Frederick Joseph Springsteen (Long Branch, Nueva Jersey, 23 de septiembre de 1949), más conocido como Bruce Springsteen, es un cantante, músico y compositor estadounidense.', 'Nurse Practicioner', 'www.brucespringsteen.net'),
+('lospimpi', 'Pimpinela es un dúo musical argentino compuesto por los hermanos Lucía Galán y Joaquín Galán. Pimpinela ha editado veinticuatro discos', NULL, 'www.pimpinela.net'),
+('dyangounchained', 'José Gómez Romero, conocido artísticamente como Dyango es un cantante español de música romántica.',NULL, NULL),
+('alcides', 'Su carrera comienza en 1976 cuando forma la banda Los Playeros junto a su hermano Víctor. Al poco tiempo se mudan a San Luis donde comienzan a hacerse conocidos en la escena musical. Su éxito a nivel nacional llega a comienzos de los años 1990 cuando desembarca en Buenos Aires y graba el éxito "Violeta",originalmente compuesta e interpretada en 1985 por el músico brasileño Luiz Caldas bajo el título «Fricote».',NULL,NULL);

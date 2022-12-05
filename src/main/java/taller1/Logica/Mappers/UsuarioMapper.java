@@ -63,7 +63,7 @@ public class UsuarioMapper {
       userDTO.setNombre(user.getNombre());
       userDTO.setApellido(user.getApellido());
       userDTO.setCorreo(user.getCorreo());
-      userDTO.setFechaNacimiento(user.getFechaNacimiento());
+      userDTO.setFechaNacimiento(user.getFechaNacimiento().toString());
       userDTO.setContrasenia(user.getContrasenia());
       userDTO.setImagen(user.getImagen());
       if(user instanceof Artista) {

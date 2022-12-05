@@ -48,8 +48,8 @@ public class FuncionMapper {
         FuncionDTO funcionDTO = new FuncionDTO();
         try {
             funcionDTO.setNombre(funcion.getNombre());
-            funcionDTO.setFechaHoraInicio(funcion.getFechaHoraInicio());
-            funcionDTO.setFechaRegistro(funcion.getFechaRegistro());
+            funcionDTO.setFechaHoraInicio(funcion.getFechaHoraInicio().toString());
+            funcionDTO.setFechaRegistro(funcion.getFechaRegistro().toString());
             funcionDTO.setImagen(funcion.getImagen());
             funcionDTO.setEspectaculo(EspectaculoMapper.toDTO(funcion.getEspectaculo()));
             

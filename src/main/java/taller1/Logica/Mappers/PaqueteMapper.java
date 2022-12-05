@@ -51,8 +51,8 @@ public class PaqueteMapper {
             paqueteDTO.setNombre(paquete.getNombre());
             paqueteDTO.setDescripcion(paquete.getDescripcion());
             paqueteDTO.setDescuento(paquete.getDescuento());
-            paqueteDTO.setFechaExpiracion(paquete.getFechaExpiracion());
-            paqueteDTO.setFechaRegistro(paquete.getFechaRegistro());
+            paqueteDTO.setFechaExpiracion(paquete.getFechaExpiracion().toString());
+            paqueteDTO.setFechaRegistro(paquete.getFechaRegistro().toString());
             paqueteDTO.setImagen(paquete.getImagen());
         } catch (Exception e) {
             System.out.println(e.getMessage());

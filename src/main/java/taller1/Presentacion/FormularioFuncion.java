@@ -249,8 +249,8 @@ public class FormularioFuncion extends JInternalFrame {
         FuncionDTO dto = new FuncionDTO();
         dto.setNombre(nombre);
         dto.setEspectaculo(espectaculo);
-        dto.setFechaHoraInicio(fechahora);
-        dto.setFechaRegistro(fechahora);
+        dto.setFechaHoraInicio(fechahora.toString());
+        dto.setFechaRegistro(fechahora.toString());
         dto.setImagen(imagen);
         return dto;
     }

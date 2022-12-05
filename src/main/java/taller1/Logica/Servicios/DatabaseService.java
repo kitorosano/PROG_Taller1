@@ -85,6 +85,8 @@ public class DatabaseService {
       sr.runScript(reader);
       reader = new BufferedReader(new FileReader("src/main/resources/artistas_funciones.sql"));
       sr.runScript(reader);
+      reader = new BufferedReader(new FileReader("src/main/resources/espectadores_funciones_canjeados.sql"));
+      sr.runScript(reader);
     } catch (FileNotFoundException ex) {
       ex.printStackTrace();
     } catch (RuntimeException ex) {

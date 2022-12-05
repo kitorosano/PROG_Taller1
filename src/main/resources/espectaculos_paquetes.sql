@@ -13,4 +13,10 @@ INSERT INTO `espectaculos_paquetes` (`es_paq_nombrePaquete`, `es_paq_nombreEspec
 ('sixPack', 'La Ópera Metropolitana de Nueva York', 'Meta'),
 ('Nice and spicy', 'Luciana decora tu pelo', 'Youtube'),
 ('sixPack', 'Luciana decora tu pelo', 'Youtube'),
-('sixPack', 'Save or not to save', 'Meta');
+('sixPack', 'Save or not to save', 'Meta'),
+('Paquete de Bandas', 'Los Village Volvieron', 'Instagram Live'),
+('Paquete de Bandas', 'Global Spirit', 'Facebook Watch'),
+('Paquete Solistas', 'Memphis Blues World', 'Twitter Live'),
+('Paquete Solistas', 'Springsteen on Broadway', 'Youtube'),
+('Paquete Latino', 'Bien de Familia', 'Twitter Live'),
+('Paquete Latino', '30 años', 'Twitter Live');

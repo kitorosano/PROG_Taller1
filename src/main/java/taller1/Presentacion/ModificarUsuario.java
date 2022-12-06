@@ -152,7 +152,7 @@ public class ModificarUsuario extends JInternalFrame {
         usuarioDTO.setNombre(txtNombre.getText());
         usuarioDTO.setApellido(txtApellido.getText());
         usuarioDTO.setCorreo(txtCorreo.getText());
-        usuarioDTO.setFechaNacimiento(LocalDate.parse(txtFechaNac.getText()));
+        usuarioDTO.setFechaNacimiento(LocalDate.parse(txtFechaNac.getText()).toString());
         if (imagen != null)
             usuarioDTO.setImagen(imagen);
         if (usuarioDTO.isEsArtista()) {

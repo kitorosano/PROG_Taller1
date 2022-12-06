@@ -53,7 +53,7 @@ public class FormularioPaquete extends JInternalFrame {
               if (imagen == null) {
                 imagen = "https://i.imgur.com/hHn0WrG.png";
               }
-              PaqueteDTO paquete = new PaqueteDTO(nombre, descripcion, descuento, fechaRegistro, fechaVencimiento, imagen);
+              PaqueteDTO paquete = new PaqueteDTO(nombre, descripcion, descuento, fechaRegistro.toString(), fechaVencimiento.toString(), imagen);
               Fabrica.getInstance().getIPaquete().altaPaquete(paquete);
               JOptionPane.showMessageDialog(null, "Paquete agregado exitosamente");
               dispose();

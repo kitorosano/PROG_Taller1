@@ -228,7 +228,7 @@ public class FormularioEspectaculo extends JInternalFrame {
         dto.setUrl(url);
         dto.setCosto(costo);
         dto.setEstado(E_EstadoEspectaculo.INGRESADO);
-        dto.setFechaRegistro(LocalDateTime.now());
+        dto.setFechaRegistro(LocalDateTime.now().toString());
         dto.setImagen(imagen);
         dto.setPlataforma((String) cbPlataforma.getSelectedItem());
         dto.setArtista((String) cbArtista.getSelectedItem());

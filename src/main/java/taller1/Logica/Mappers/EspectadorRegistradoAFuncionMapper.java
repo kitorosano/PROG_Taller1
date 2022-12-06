@@ -56,7 +56,7 @@ public class EspectadorRegistradoAFuncionMapper {
       espectadorfuncionDTO.setPaquete(PaqueteMapper.toDTO(espectadorfuncion.getPaquete()));
       espectadorfuncionDTO.setCanjeado(espectadorfuncion.isCanjeado());
       espectadorfuncionDTO.setCosto(espectadorfuncion.getCosto());
-      espectadorfuncionDTO.setFechaRegistro(espectadorfuncion.getFechaRegistro());
+      espectadorfuncionDTO.setFechaRegistro(espectadorfuncion.getFechaRegistro().toString());
       
       return espectadorfuncionDTO;
     } catch (Exception e) {
@@ -97,7 +97,7 @@ public class EspectadorRegistradoAFuncionMapper {
       
       dto.setCanjeado(rs.getBoolean("ue_fn_canjeado"));
       dto.setCosto(rs.getDouble("ue_fn_costo"));
-      dto.setFechaRegistro(rs.getTimestamp("ue_fn_fechaRegistro").toLocalDateTime());
+      dto.setFechaRegistro(rs.getTimestamp("ue_fn_fechaRegistro").toLocalDateTime().toString());
       return dto;
     } catch (Exception e) {
       System.out.println(e.getMessage());

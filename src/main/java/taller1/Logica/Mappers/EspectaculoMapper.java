@@ -67,7 +67,7 @@ public class EspectaculoMapper {
       espectaculoDTO.setUrl(espectaculo.getUrl());
       espectaculoDTO.setCosto(espectaculo.getCosto());
       espectaculoDTO.setEstado(espectaculo.getEstado());
-      espectaculoDTO.setFechaRegistro(espectaculo.getFechaRegistro());
+      espectaculoDTO.setFechaRegistro(espectaculo.getFechaRegistro().toString());
       espectaculoDTO.setImagen(espectaculo.getImagen());
       espectaculoDTO.setPlataforma(PlataformaMapper.toDTO(espectaculo.getPlataforma()));
       espectaculoDTO.setArtista(UsuarioMapper.toDTO(espectaculo.getArtista()));
@@ -107,7 +107,7 @@ public class EspectaculoMapper {
       espectaculoDTO.setUrl(rs.getString("es_url"));
       espectaculoDTO.setCosto(rs.getInt("es_costo"));
       espectaculoDTO.setEstado(E_EstadoEspectaculo.valueOf(rs.getString("es_estado")));
-      espectaculoDTO.setFechaRegistro(rs.getTimestamp("es_fechaRegistro").toLocalDateTime());
+      espectaculoDTO.setFechaRegistro(rs.getTimestamp("es_fechaRegistro").toLocalDateTime().toString());
       espectaculoDTO.setImagen(rs.getString("es_imagen"));
       espectaculoDTO.setCantidadFavoritos(rs.getInt("cantidad_favoritos"));
       

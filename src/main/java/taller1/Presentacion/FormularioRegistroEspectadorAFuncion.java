@@ -168,7 +168,7 @@ public class FormularioRegistroEspectadorAFuncion extends JInternalFrame {
         dto.setPaquete(null);
         dto.setCanjeado(false);
         dto.setCosto(costo);
-        dto.setFechaRegistro(LocalDateTime.now());
+        dto.setFechaRegistro(LocalDateTime.now().toString());
         espectadores.put(listaAinvitar.getSelectedValue().toString(), dto);
     }
     private void cargarDatosComboBox() {

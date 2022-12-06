@@ -1,12 +1,11 @@
 package main.java.taller1.Logica.DTOs;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 public class EspectadorPaqueteDTO implements Serializable {
   private UsuarioDTO espectador;
   private PaqueteDTO paquete;
-  private LocalDateTime fechaRegistro;
+  private String fechaRegistro;
   
   public EspectadorPaqueteDTO(){}
   
@@ -25,10 +24,10 @@ public class EspectadorPaqueteDTO implements Serializable {
     this.paquete = paquete;
   }
   
-  public LocalDateTime getFechaRegistro() {
+  public String getFechaRegistro() {
     return fechaRegistro;
   }
-  public void setFechaRegistro(LocalDateTime fechaRegistro) {
+  public void setFechaRegistro(String fechaRegistro) {
     this.fechaRegistro = fechaRegistro;
   }
   

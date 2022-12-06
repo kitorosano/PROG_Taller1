@@ -106,7 +106,7 @@ public class FormularioUsuario extends JInternalFrame {
                                 usuarioDTO.setApellido(apellido);
                                 usuarioDTO.setCorreo(correo);
                                 usuarioDTO.setContrasenia(contrasenia);
-                                usuarioDTO.setFechaNacimiento(fechanac);
+                                usuarioDTO.setFechaNacimiento(fechanac.toString());
                                 usuarioDTO.setImagen(imagen);
                                 usuarioDTO.setDescripcion(descripcion);
                                 usuarioDTO.setBiografia(biografia);
@@ -126,7 +126,7 @@ public class FormularioUsuario extends JInternalFrame {
                                 usuarioDTO.setApellido(apellido);
                                 usuarioDTO.setCorreo(correo);
                                 usuarioDTO.setContrasenia(contrasenia);
-                                usuarioDTO.setFechaNacimiento(fechanac);
+                                usuarioDTO.setFechaNacimiento(fechanac.toString());
                                 usuarioDTO.setImagen(imagen);
                                 Fabrica.getInstance().getIUsuario().altaUsuario(usuarioDTO);
                                 JOptionPane.showMessageDialog(null, "Espectador creado con exito");

@@ -1,8 +1,11 @@
 package main.java.taller1.Logica.Servicios;
 
 import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoFavoritoDTO;
 import main.java.taller1.Logica.DTOs.UsuarioDTO;
+import main.java.taller1.Logica.Mappers.EspectaculoMapper;
+import main.java.taller1.Logica.Mappers.FuncionMapper;
 import main.java.taller1.Logica.Mappers.UsuarioMapper;
 import main.java.taller1.Persistencia.ConexionDB;
 
@@ -197,7 +200,7 @@ public class UsuarioService {
   public void marcarFavorito (EspectaculoFavoritoDTO espectaculoFavoritoDTO){
     Connection connection = null;
     Statement statement = null;
-    String insertEspectaculo = "INSERT INTO espectaculos_favoritos (es_fav_nickname, es_fav_espectaculoAsociado, es_fav_plataformaAsociada) " +
+    String insertEspectaculo = "INSERT INTO espectaculos_favoritos (`es_fav_nickname`, `es_fav_espectaculoAsociado`, `es_fav_plataformaAsociada`) " +
             "VALUES ('" + espectaculoFavoritoDTO.getNickname() + "', '" + espectaculoFavoritoDTO.getNombreEspectaculo() + "', '" + espectaculoFavoritoDTO.getNombrePlataforma() + "')";
     try {
       connection = ConexionDB.getConnection();
@@ -224,8 +227,8 @@ public class UsuarioService {
     Connection connection = null;
     Statement statement = null;
     String deleteEspectaculo = "DELETE FROM espectaculos_favoritos WHERE es_fav_nickname = '" + espectaculoFavoritoDTO.getNickname() + "' " +
-            "AND ue_es_nombreEspectaculo = '" + espectaculoFavoritoDTO.getNombreEspectaculo() + "' " +
-            "AND ue_es_nombrePlataforma = '" + espectaculoFavoritoDTO.getNombrePlataforma() + "'";
+            "AND es_fav_espectaculoAsociado = '" + espectaculoFavoritoDTO.getNombreEspectaculo() + "' " +
+            "AND es_fav_plataformaAsociada = '" + espectaculoFavoritoDTO.getNombrePlataforma() + "'";
     try {
       connection = ConexionDB.getConnection();
       statement = connection.createStatement();
@@ -245,6 +248,38 @@ public class UsuarioService {
         throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
       }
     }
+  }
+
+  public Map<String, String> obtenerEspectaculosFavoritos(String nickname){
+    Map<String, String> espectaculos = new HashMap<>();
+    Connection connection = null;
+    Statement statement = null;
+    String selectEspectaculo = "SELECT es_fav_espectaculoAsociado " +
+            "FROM `espectaculos_favoritos`" +
+            "WHERE es_fav_nickname = '" + nickname + "' ";
+    try {
+      connection = ConexionDB.getConnection();
+      statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      ResultSet resultSet = statement.executeQuery(selectEspectaculo);
+      while(resultSet.next()){
+          espectaculos.put(resultSet.getString(1), resultSet.getString(1));
+      }
+    } catch (RuntimeException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al conectar con la base de datos", e);
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      throw new RuntimeException("Error al obtener los espectaculos", e);
+    } finally {
+      try {
+        if (statement != null) statement.close();
+        if (connection != null) connection.close();
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+        throw new RuntimeException("Error al cerrar la conexión a la base de datos", e);
+      }
+    }
+    return espectaculos;
   }
 
 }

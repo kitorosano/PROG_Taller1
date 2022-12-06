@@ -3,7 +3,9 @@ package main.java.taller1.Logica.Interfaces;
 import java.util.Map;
 import java.util.Optional;
 
+import main.java.taller1.Logica.Clases.Espectaculo;
 import main.java.taller1.Logica.Clases.Usuario;
+import main.java.taller1.Logica.DTOs.EspectaculoDTO;
 import main.java.taller1.Logica.DTOs.EspectaculoFavoritoDTO;
 import main.java.taller1.Logica.DTOs.UsuarioDTO;
 
@@ -15,4 +17,5 @@ public interface IUsuario {
     void modificarUsuario(UsuarioDTO usuarioModificado);
     void marcarFavorito(EspectaculoFavoritoDTO espectaculoFavoritoDTO);
     void desmarcarFavorito(EspectaculoFavoritoDTO espectaculoFavoritoDTO);
+    Map<String, String> obtenerEspectaculosFavoritos(String nickname);
 }
